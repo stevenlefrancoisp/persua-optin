@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Persua — Les 22 leviers de décision de vos prospects</title>
+<title>Persua — Les 7 objections qui tuent vos ventes</title>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
@@ -60,6 +60,10 @@ h1,h2,h3{font-weight:700;letter-spacing:-.02em;color:var(--white);line-height:1.
 .hero h1{font-size:clamp(32px,5.2vw,58px); max-width:880px; margin:0 auto 24px}
 .hero .sub{font-size:clamp(17px,2.2vw,21px); color:var(--pearl); max-width:680px; margin:0 auto 38px; font-weight:400}
 
+/* ----- Aperçu du guide (mockup) ----- */
+.peek{display:flex; align-items:center; justify-content:center; gap:10px; color:var(--mist); font-size:13px; letter-spacing:.05em; margin:0 auto 30px}
+.peek b{color:var(--white)}
+
 /* ----- Formulaire ----- */
 .capture{background:rgba(19,19,58,.72); backdrop-filter:blur(18px); border:1px solid rgba(84,74,250,.32); border-radius:22px; padding:30px 28px; max-width:520px; margin:0 auto; box-shadow:0 24px 60px rgba(0,0,0,.5)}
 .capture .field{width:100%; background:rgba(10,10,20,.55); border:1px solid rgba(84,74,250,.3); color:#fff; border-radius:12px; padding:18px 16px; font-size:16px; font-family:inherit; margin-bottom:14px; transition:border-color .2s,box-shadow .2s}
@@ -67,12 +71,21 @@ h1,h2,h3{font-weight:700;letter-spacing:-.02em;color:var(--white);line-height:1.
 .capture .field:focus{outline:none; border-color:var(--indigo); box-shadow:0 0 0 3px rgba(84,74,250,.25); background:rgba(10,10,20,.82)}
 .capture .btn{width:100%}
 .capture .note{color:var(--mist); font-size:12px; margin-top:12px}
+/* L'embed systeme.io hérite de ce conteneur — voir bloc FORMULAIRE plus bas */
+#sysio-embed{max-width:520px; margin:0 auto}
 
 /* ----- Sections ----- */
 section{padding:60px 0}
 .eyebrow{color:var(--indigo); font-weight:700; font-size:13px; letter-spacing:.16em; text-transform:uppercase; text-align:center; margin-bottom:10px}
 .h-center{text-align:center; font-size:clamp(26px,4vw,40px); margin-bottom:14px}
 .role{text-align:center; color:var(--mist); font-weight:500; letter-spacing:.04em; text-transform:uppercase; font-size:14px}
+
+/* ----- Ce que tu vas apprendre (liste objections) ----- */
+.list{max-width:680px; margin:30px auto 0; display:grid; gap:12px}
+.li{display:flex; align-items:center; gap:14px; background:rgba(19,19,58,.55); border:1px solid rgba(84,74,250,.26); border-radius:14px; padding:15px 18px}
+.li .x{flex:0 0 30px; height:30px; width:30px; border-radius:8px; background:rgba(84,74,250,.18); border:1px solid rgba(84,74,250,.4); color:#fff; font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center}
+.li span{font-size:16px; color:var(--pearl)}
+.li b{color:#fff}
 
 /* ----- Portrait Steven (flottement subtil) ----- */
 .portrait{width:168px; height:168px; border-radius:50%; object-fit:cover; border:3px solid var(--indigo); box-shadow:0 16px 40px rgba(84,74,250,.42); margin:0 auto 24px; display:block; animation:floaty 5s ease-in-out infinite}
@@ -105,21 +118,48 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
 </head>
 <body>
 
-  <div class="alert">⚠️ CE SYSTÈME REND VOS ANCIENNES TECHNIQUES DE VENTE OBSOLÈTES</div>
+  <div class="alert">⚠️ CE QUE VOTRE PROSPECT DIT N'EST JAMAIS CE QU'IL PENSE VRAIMENT</div>
 
   <header class="hero wrap">
-    <span class="kicker reveal">Produit digital · Persua</span>
-    <h1 class="reveal">Activez les <span class="hl">22 leviers de décision</span> de vos prospects pour neuro-vendre.</h1>
-    <p class="sub reveal">Comment utiliser les neurosciences cognitives pour contourner le scepticisme, éteindre l'objection « c'est trop cher » et transformer un « je vais réfléchir » en un <span class="ink">oui immédiat</span>.</p>
+    <span class="kicker reveal">Guide gratuit · Persua</span>
+    <h1 class="reveal">Les <span class="hl">7 objections</span> qui tuent vos ventes — et la phrase exacte qui les fait tomber.</h1>
+    <p class="sub reveal">« C'est trop cher », « je vais réfléchir », « j'en parle à mon associé »… Découvre ce que ton prospect pense <span class="ink">vraiment</span> derrière chaque objection, et le script mot-à-mot qui débloque la vente — basé sur le fonctionnement réel de la décision.</p>
 
-    <!-- ⚠️ FORMULAIRE — remplacer par le bloc formulaire NATIF systeme.io (Route A). Sinon : aucune capture. -->
+    <p class="peek reveal">📕 Guide PDF · <b>10 pages</b> · 7 scripts prêts à l'emploi · <b>gratuit</b></p>
+
+    <!-- ============================================================= -->
+    <!-- ⚠️ FORMULAIRE — Étape capture.                                 -->
+    <!-- Remplacer TOUT le bloc <form> ci-dessous par le code d'embed    -->
+    <!-- du formulaire systeme.io (Tunnels → étape opt-in → Partager →   -->
+    <!-- "Code HTML à intégrer"). C'est lui qui capture l'email, pose    -->
+    <!-- le tag [PROSPECT] - Lead Magnet PDF et lance la séquence.       -->
+    <!-- Tant que ce bloc factice est en place : AUCUNE capture.         -->
+    <!-- <div id="sysio-embed"> … coller ici … </div>                    -->
+    <!-- ============================================================= -->
     <form class="capture reveal" action="#" method="post" onsubmit="return false">
       <input class="field" type="text"  name="first_name" placeholder="Ton prénom" required>
       <input class="field" type="email" name="email"      placeholder="Ton meilleur email" required>
-      <button class="btn btn--lg" type="submit">OUI, JE VEUX DES OUI IMMÉDIATS !</button>
-      <p class="note">Tu reçois le guide par email. Désinscription en 1 clic. Zéro spam.</p>
+      <button class="btn btn--lg" type="submit">JE REÇOIS LE GUIDE DES 7 OBJECTIONS</button>
+      <p class="note">Tu reçois le guide par email dans la minute. Désinscription en 1 clic. Zéro spam.</p>
     </form>
   </header>
+
+  <section class="wrap">
+    <p class="eyebrow reveal">Ce que tu vas débloquer</p>
+    <h2 class="h-center reveal" style="margin-bottom:6px">7 objections. 7 réponses prêtes.</h2>
+    <div class="list">
+      <div class="li reveal"><div class="x">1</div><span><b>« C'est trop cher »</b> — la vraie question qui fait sortir le blocage en 8 mots.</span></div>
+      <div class="li reveal"><div class="x">2</div><span><b>« Je vais réfléchir »</b> — la seule bonne réponse qui rouvre la vente.</span></div>
+      <div class="li reveal"><div class="x">3</div><span><b>« On n'a pas le budget »</b> — comment trancher vraie contrainte vs fausse excuse.</span></div>
+      <div class="li reveal"><div class="x">4</div><span><b>« J'en parle à mon associé »</b> — comment l'armer pour qu'il vende à ta place.</span></div>
+      <div class="li reveal"><div class="x">5</div><span><b>« On a déjà essayé »</b> — transformer un échec passé en argument pour toi.</span></div>
+      <div class="li reveal"><div class="x">6</div><span><b>« Votre concurrent est moins cher »</b> — sans te défendre ni baisser ton prix.</span></div>
+      <div class="li reveal"><div class="x">7</div><span><b>« Je n'ai pas le temps »</b> — déplacer le calcul vers le coût de l'inaction.</span></div>
+    </div>
+    <div class="center reveal">
+      <a class="btn btn--lg" href="#" onclick="document.querySelector('.capture .field, #sysio-embed input').focus();return false;">JE VEUX LES 7 RÉPONSES</a>
+    </div>
+  </section>
 
   <section class="wrap" style="text-align:center">
     <img class="portrait" src="assets/steven.png" alt="Steven Lefrançois">
@@ -132,15 +172,14 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
     <p class="eyebrow reveal">La vérité</p>
     <h2 class="h-center reveal" style="margin-bottom:34px">Il n'y a rien de magique.</h2>
     <div class="story reveal">
-      <p class="lead">Ce que je te livre dans ce guide — et plus tard dans l'Académie — ce n'est pas un don tombé du ciel.</p>
-      <p>C'est le résultat d'années d'essais, d'échecs, de tests et de corrections sur le terrain. Ça n'a pas été facile pour moi. J'ai dû déchiffrer le code des gens, pièce par pièce.</p>
-      <p>Mais voici ma garantie : ce qui m'a pris <span class="ink">10 ans à maîtriser</span>, tu vas l'absorber en quelques mois — et tu verras la différence en quelques semaines.</p>
-      <p>Je te sers sur un plateau mes propres protocoles, mes outils et mes techniques. C'est exactement comme si j'étais assis à côté de toi pendant tes appels. Moins d'efforts. Moins d'erreurs. Plus de résultats.</p>
-      <p>Tu ne seras jamais seul face à ton écran. Avec mon aide directe et la force du groupe privé, tu as un filet de sécurité total.</p>
+      <p class="lead">Ces 7 réponses, ce n'est pas un don tombé du ciel.</p>
+      <p>C'est le résultat d'années d'essais, d'échecs, de tests et de corrections sur le terrain. J'ai dû déchiffrer le code des gens, pièce par pièce — comprendre ce que le « non » cache vraiment.</p>
+      <p>Ma garantie : ce qui m'a pris <span class="ink">10 ans à maîtriser</span>, tu vas l'absorber en quelques mois — et tu verras la différence dès tes prochains appels.</p>
+      <p>Je te sers sur un plateau mes propres scripts, mes outils et mes mécanismes. C'est exactement comme si j'étais assis à côté de toi pendant ton closing. Moins d'efforts. Moins d'erreurs. Plus de oui.</p>
       <p>Mon but&nbsp;? Que tu copies cette science… pour créer <span class="ink">ton propre style</span>. Que tu deviennes le vendeur que tu as envie d'être — mais en version Persua.</p>
     </div>
     <div class="center reveal">
-      <a class="btn btn--lg" href="#" onclick="document.querySelector('.capture .field').focus();return false;">JE COMMENCE À VENDRE</a>
+      <a class="btn btn--lg" href="#" onclick="document.querySelector('.capture .field, #sysio-embed input').focus();return false;">JE COMMENCE À VENDRE</a>
     </div>
   </section>
 
@@ -186,7 +225,7 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
 
     </div>
     <div class="center reveal">
-      <a class="btn btn--lg" href="#" onclick="document.querySelector('.capture .field').focus();return false;">OUI, JE VEUX DES OUI IMMÉDIATS !</a>
+      <a class="btn btn--lg" href="#" onclick="document.querySelector('.capture .field, #sysio-embed input').focus();return false;">JE REÇOIS LE GUIDE DES 7 OBJECTIONS</a>
     </div>
   </section>
 
