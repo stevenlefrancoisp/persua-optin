@@ -116,7 +116,19 @@ section{padding:60px 0}
 footer{padding:40px 0 56px; text-align:center}
 footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; line-height:1.7}
 
-@media(max-width:680px){ .grid{grid-template-columns:1fr} .hero{padding:48px 0 36px} }
+/* ----- Cadre : 3 universelles + AIR ----- */
+.frame{ max-width:760px; margin:30px auto 0 }
+.uni3{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px }
+.uni3 .u{ text-align:center; background:rgba(84,74,250,.10); border:1px solid rgba(84,74,250,.32); border-radius:14px; padding:18px 10px }
+.uni3 .u .un{ color:#fff; font-weight:700; font-size:16px; letter-spacing:.04em }
+.uni3 .u .ud{ color:var(--mist); font-size:12.5px; margin-top:5px; line-height:1.35 }
+.air3{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px }
+.air3 .a{ display:flex; gap:12px; align-items:center; background:rgba(19,19,58,.5); border:1px solid rgba(84,74,250,.24); border-radius:14px; padding:14px 16px }
+.air3 .a .bdg{ flex:0 0 30px; height:30px; width:30px; border-radius:8px; background:var(--indigo); color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center; font-size:14px }
+.air3 .a .at b{ color:#fff; display:block; font-size:14.5px }
+.air3 .a .at span{ color:var(--mist); font-size:12px }
+
+@media(max-width:680px){ .grid{grid-template-columns:1fr} .hero{padding:48px 0 36px} .uni3,.air3{grid-template-columns:1fr} }
 @media(prefers-reduced-motion:reduce){ *{animation:none!important} .js .reveal{opacity:1!important;transform:none!important} }
 </style>
 </head>
@@ -127,9 +139,9 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
   <header class="hero wrap">
     <span class="kicker reveal">Guide gratuit · Persua</span>
     <h1 class="reveal">Les <span class="hl">7 objections</span> qui tuent vos ventes — et la phrase exacte qui les fait tomber.</h1>
-    <p class="sub reveal">« C'est trop cher », « je vais réfléchir », « j'en parle à mon associé »… Découvre ce que ton prospect pense <span class="ink">vraiment</span> derrière chaque objection, et le script mot-à-mot qui débloque la vente — basé sur le fonctionnement réel de la décision.</p>
+    <p class="sub reveal">« C'est trop cher », « je vais réfléchir », « j'en parle à mon associé »… En réalité, il n'existe que <span class="ink">3 vraies objections</span> : Temps, Argent, Effort. Le reste n'est qu'un écran de fumée. Dans ce guide : la <span class="ink">méthode AIR</span> pour les faire tomber, avec les scripts mot pour mot.</p>
 
-    <p class="peek reveal">📕 Guide PDF · <b>10 pages</b> · 7 scripts prêts à l'emploi · <b>gratuit</b></p>
+    <p class="peek reveal">📕 Guide PDF · <b>10 pages</b> · méthode AIR + 7 scripts prêts à l'emploi · <b>gratuit</b></p>
 
     <!-- ====== FORMULAIRE — embed systeme.io (iframe auto-resize) ====== -->
     <!-- L'apparence interne du formulaire se règle dans systeme.io       -->
@@ -141,16 +153,34 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
   </header>
 
   <section class="wrap">
+    <p class="eyebrow reveal">Le cadre</p>
+    <h2 class="h-center reveal" style="margin-bottom:6px">Il n'existe que 3 vraies objections.</h2>
+    <p class="role reveal" style="text-transform:none; letter-spacing:0; font-size:16px; color:var(--pearl)">Tout le reste — « je vais réfléchir », « j'en parle à mon associé »… — n'est qu'un <span class="ink">écran de fumée</span>.</p>
+    <div class="frame">
+      <div class="uni3 reveal">
+        <div class="u"><div class="un">⏳ TEMPS</div><div class="ud">« Pas le temps de m'en occuper. »</div></div>
+        <div class="u"><div class="un">💶 ARGENT</div><div class="ud">« Pas sûr d'en avoir pour mon argent. »</div></div>
+        <div class="u"><div class="un">⚡ EFFORT</div><div class="ud">« Est-ce que ça va marcher pour moi&nbsp;? »</div></div>
+      </div>
+      <div class="air3 reveal">
+        <div class="a"><div class="bdg">A</div><div class="at"><b>Accepter</b><span>désamorcer la tension</span></div></div>
+        <div class="a"><div class="bdg">I</div><div class="at"><b>Interroger</b><span>isoler la vraie objection</span></div></div>
+        <div class="a"><div class="bdg">R</div><div class="at"><b>Répondre</b><span>la solution, ensemble</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
     <p class="eyebrow reveal">Ce que tu vas débloquer</p>
-    <h2 class="h-center reveal" style="margin-bottom:6px">7 objections. 7 réponses prêtes.</h2>
+    <h2 class="h-center reveal" style="margin-bottom:6px">7 objections décodées avec la méthode AIR.</h2>
     <div class="list">
-      <div class="li reveal"><div class="x">1</div><span><b>« C'est trop cher »</b> — la vraie question qui fait sortir le blocage en 8 mots.</span></div>
-      <div class="li reveal"><div class="x">2</div><span><b>« Je vais réfléchir »</b> — la seule bonne réponse qui rouvre la vente.</span></div>
-      <div class="li reveal"><div class="x">3</div><span><b>« On n'a pas le budget »</b> — comment trancher vraie contrainte vs fausse excuse.</span></div>
-      <div class="li reveal"><div class="x">4</div><span><b>« J'en parle à mon associé »</b> — comment l'armer pour qu'il vende à ta place.</span></div>
-      <div class="li reveal"><div class="x">5</div><span><b>« On a déjà essayé »</b> — transformer un échec passé en argument pour toi.</span></div>
-      <div class="li reveal"><div class="x">6</div><span><b>« Votre concurrent est moins cher »</b> — sans te défendre ni baisser ton prix.</span></div>
-      <div class="li reveal"><div class="x">7</div><span><b>« Je n'ai pas le temps »</b> — déplacer le calcul vers le coût de l'inaction.</span></div>
+      <div class="li reveal"><div class="x">1</div><span><b>« C'est trop cher »</b> — la question qui sépare « pas de valeur » de « budget » (la vraie).</span></div>
+      <div class="li reveal"><div class="x">2</div><span><b>« Je vais réfléchir »</b> — la technique d'isolement qui fait tomber l'écran de fumée.</span></div>
+      <div class="li reveal"><div class="x">3</div><span><b>« On n'a pas le budget »</b> — retourner la « fausse économie » en coût de l'inaction.</span></div>
+      <div class="li reveal"><div class="x">4</div><span><b>« J'en parle à mon associé »</b> — lui faire verbaliser l'objection… qui revient toujours aux 3.</span></div>
+      <div class="li reveal"><div class="x">5</div><span><b>« On a déjà essayé »</b> — transformer l'échec passé en preuve de ton différenciateur.</span></div>
+      <div class="li reveal"><div class="x">6</div><span><b>« Votre concurrent est moins cher »</b> — l'effet miroir, sans te défendre ni casser ton prix.</span></div>
+      <div class="li reveal"><div class="x">7</div><span><b>« Je n'ai pas le temps »</b> — montrer que ton offre lui <i>rend</i> du temps.</span></div>
     </div>
     <div class="center reveal">
       <a class="btn btn--lg" href="#" onclick="document.querySelector('.capture .field, #sysio-embed input').focus();return false;">JE VEUX LES 7 RÉPONSES</a>
