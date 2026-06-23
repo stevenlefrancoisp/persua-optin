@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Persua — Ton diagnostic personnalisé</title>
+<!-- Si la page s'ouvre dans l'iframe systeme.io, on la force en plein écran -->
+<script>if(window.top!==window.self){try{window.top.location.replace(window.location.href);}catch(e){}}</script>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<style>
+:root{ --indigo:#544AFA; --electric:#4747FD; --deep:#13133A; --ink:#0A0A14; --pearl:#F4F2F8; --white:#FFFFFF; --mist:#9B96B8; --radius:16px; }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'General Sans',sans-serif; background-color:var(--deep);
+  background-image:radial-gradient(55vw 55vw at 80% -5%, rgba(84,74,250,.18), rgba(19,19,58,0) 60%),radial-gradient(50vw 50vw at 10% 30%, rgba(71,71,253,.10), rgba(19,19,58,0) 55%);
+  background-attachment:fixed; color:var(--pearl); line-height:1.55; -webkit-font-smoothing:antialiased; min-height:100vh}
+.wrap{max-width:680px; margin:0 auto; padding:0 22px}
+h1,h2,h3,h4{font-weight:700; letter-spacing:-.02em; color:var(--white); line-height:1.14}
+.ink{color:var(--indigo)}
+.hl{background:var(--indigo); color:#fff; padding:.02em .24em; border-radius:.16em}
+.alert{background:rgba(84,74,250,.12); border-bottom:1px solid rgba(84,74,250,.35); color:var(--pearl); text-align:center; font-weight:600; font-size:13.5px; letter-spacing:.04em; padding:11px 18px}
+.top{text-align:center; padding:40px 0 6px}
+.top .kicker{color:var(--mist); font-weight:600; font-size:13px; letter-spacing:.16em; text-transform:uppercase}
+.btn{display:inline-block; background:var(--indigo); color:#fff!important; font-weight:600; font-size:18px; text-decoration:none; border:none; border-radius:var(--radius); padding:18px 32px; cursor:pointer; box-shadow:0 12px 30px rgba(84,74,250,.4); transition:transform .2s,box-shadow .2s,filter .2s}
+.btn:hover{transform:translateY(-2px); box-shadow:0 18px 44px rgba(84,74,250,.55); filter:brightness(1.08)}
+
+.shell{max-width:640px; margin:14px auto 0}
+.card{background:rgba(19,19,58,.72); border:1px solid rgba(84,74,250,.32); border-radius:22px; padding:32px 30px; box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.res-badge{display:inline-block; background:var(--indigo); color:#fff; font-weight:700; font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; padding:7px 15px; border-radius:99px; margin-bottom:14px}
+.res-title{font-size:clamp(25px,4vw,34px); color:#fff; margin-bottom:6px}
+.res-sub{color:var(--mist); font-size:14.5px; margin-bottom:20px}
+.res-block{background:rgba(10,10,20,.4); border:1px solid rgba(84,74,250,.28); border-radius:16px; padding:20px 22px; margin:14px 0; text-align:left}
+.res-block .lbl{color:var(--indigo); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:8px}
+.res-block h4{color:#fff; font-size:19px; margin-bottom:10px}
+.res-block p{color:var(--pearl); font-size:15.5px; margin:0 0 10px}
+.res-block p:last-child{margin-bottom:0}
+.res-phrase{background:rgba(84,74,250,.12); border-left:3px solid var(--indigo); padding:14px 16px; border-radius:8px; color:#fff; font-style:italic; font-size:16px; margin-top:6px}
+.cta{text-align:center; margin-top:26px}
+.cta h3{font-size:clamp(20px,3vw,25px); margin-bottom:8px}
+.cta p{color:var(--pearl); font-size:15.5px; max-width:480px; margin:0 auto 18px}
+.mail{background:rgba(84,74,250,.10); border:1px solid rgba(84,74,250,.3); border-radius:14px; padding:16px 18px; color:var(--pearl); font-size:15px; max-width:480px; margin:0 auto 18px}
+.mail b{color:#fff}
+.restart{margin-top:18px; display:inline-block; background:none; border:none; color:var(--mist); font-family:inherit; font-size:13.5px; cursor:pointer; text-decoration:none}
+.restart:hover{color:var(--pearl)}
+.empty{text-align:center}
+.empty p{color:var(--pearl); font-size:16px; margin:0 auto 22px; max-width:440px}
+footer{padding:40px 0 56px; text-align:center}
+footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; line-height:1.7}
+@media(max-width:680px){ .card{padding:26px 20px} }
+</style>
+</head>
+<body>
+
+  <div class="alert">✅ TON DIAGNOSTIC EST PRÊT — ET TON GUIDE ARRIVE PAR EMAIL</div>
+
+  <div class="top wrap"><span class="kicker">Diagnostic Persua · neuro-vente</span></div>
+
+  <div class="shell wrap">
+    <div class="card" id="out"><!-- rempli par JS --></div>
+  </div>
+
+  <footer class="wrap">
+    <p>Copyright © 2022–2026 — Tous droits réservés · Persua SASU · SIRET 100 132 497 00015 · TVA FR46100132497 · APE 8559A (Organisme de formation)</p>
+  </footer>
+
+  <script src="quiz_data.js"></script>
+  <script>
+  (function(){
+    const out = document.getElementById('out');
+    let answers = null;
+    try{ answers = JSON.parse(localStorage.getItem('persua_quiz_v1')); }catch(e){}
+
+    if(!answers || !Array.isArray(answers) || !answers[0]){
+      out.innerHTML =
+        '<div class="empty">'+
+        '<div class="res-badge">Diagnostic</div>'+
+        '<h2 class="res-title">Fais d\'abord ton diagnostic.</h2>'+
+        '<p>On dirait que tu n\'as pas encore répondu au questionnaire — ou que ton navigateur a effacé tes réponses. Ça prend 2 minutes.</p>'+
+        '<a class="btn" href="index.html">FAIRE LE DIAGNOSTIC</a>'+
+        '</div>';
+      return;
+    }
+
+    const prof = QUIZ.getProfile(answers);
+    let h = '';
+    h += '<div class="res-badge">Ton diagnostic personnalisé</div>';
+    h += '<h2 class="res-title">'+prof.emoji+' Tu es… '+prof.titre+'.</h2>';
+    h += '<p class="res-sub">Ton profil de vendeur + l\'objection-reine de ton métier.</p>';
+    h += QUIZ.buildResultHTML(answers);
+    h += '<div class="cta">';
+    h += '<div class="mail">📩 <b>Ton guide complet arrive dans ta boîte mail</b> — les 7 objections décodées, la méthode <b>AIR</b> au complet et tes scripts mot pour mot. Pense à vérifier tes spams.</div>';
+    h += '<h3>Et si on regardait <span class="ink">ton</span> cas précis ?</h3>';
+    h += '<p>Tu veux qu\'on identifie ensemble ce qui bloque tes ventes — sans blabla, sans pression ? Réponds simplement à l\'email que tu viens de recevoir.</p>';
+    h += '<a class="restart" href="index.html">↺ Refaire le diagnostic</a>';
+    h += '</div>';
+    out.innerHTML = h;
+  })();
+  </script>
+
+</body>
+</html>

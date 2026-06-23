@@ -77,27 +77,23 @@ h1,h2,h3{font-weight:700;letter-spacing:-.02em;color:var(--white);line-height:1.
 .q-intro .pts div{display:flex; gap:12px; align-items:flex-start; color:var(--pearl); font-size:15.5px}
 .q-intro .pts .c{flex:0 0 22px; height:22px; width:22px; border-radius:6px; background:rgba(84,74,250,.2); border:1px solid rgba(84,74,250,.5); color:#fff; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; margin-top:1px}
 
-/* ----- Résultat ----- */
+/* ----- Étape capture / teaser ----- */
 .res-badge{display:inline-block; background:var(--indigo); color:#fff; font-weight:700; font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; padding:7px 15px; border-radius:99px; margin-bottom:14px}
-.res-title{font-size:clamp(25px,3.8vw,34px); color:#fff; margin-bottom:6px}
+.res-title{font-size:clamp(24px,3.7vw,33px); color:#fff; margin-bottom:6px}
 .res-sub{color:var(--mist); font-size:14.5px; margin-bottom:20px}
-.res-block{background:rgba(10,10,20,.4); border:1px solid rgba(84,74,250,.28); border-radius:16px; padding:20px 22px; margin:14px 0; text-align:left}
-.res-block .lbl{color:var(--indigo); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:8px}
-.res-block h4{color:#fff; font-size:19px; margin-bottom:10px}
-.res-block p{color:var(--pearl); font-size:15.5px; margin:0 0 10px}
-.res-block p:last-child{margin-bottom:0}
-.res-phrase{background:rgba(84,74,250,.12); border-left:3px solid var(--indigo); padding:14px 16px; border-radius:8px; color:#fff; font-style:italic; font-size:16px; margin-top:6px}
-.res-cta{text-align:center; margin-top:26px}
-.res-cta h3{font-size:clamp(20px,3vw,25px); margin-bottom:8px}
-.res-cta p{color:var(--pearl); font-size:15.5px; max-width:480px; margin:0 auto 18px}
-.res-restart{margin-top:16px; background:none; border:none; color:var(--mist); font-family:inherit; font-size:13px; cursor:pointer}
-.res-restart:hover{color:var(--pearl)}
-
-/* embed systeme.io */
+.lock{background:rgba(10,10,20,.4); border:1px solid rgba(84,74,250,.28); border-radius:16px; padding:18px 20px; margin:14px 0 22px; text-align:left}
+.lock .l{display:flex; gap:12px; align-items:flex-start; color:var(--pearl); font-size:15px; margin-bottom:10px}
+.lock .l:last-child{margin-bottom:0}
+.lock .l .k{flex:0 0 auto; font-size:17px; line-height:1.3}
+.lock .l b{color:#fff}
+.cap-h{font-size:clamp(19px,2.9vw,24px); color:#fff; text-align:center; margin-bottom:6px}
+.cap-p{color:var(--pearl); font-size:15px; text-align:center; max-width:460px; margin:0 auto 16px}
 #sysio-embed{max-width:520px; margin:6px auto 0}
 .capture-shell{background:transparent; border:0; border-radius:22px; padding:0; box-shadow:none; max-width:520px; margin:0 auto}
 .capture-shell iframe{display:block; width:100%!important}
 .note-out{color:var(--mist); font-size:12.5px; text-align:center; max-width:520px; margin:12px auto 0}
+.q-restart{margin-top:16px; background:none; border:none; color:var(--mist); font-family:inherit; font-size:13px; cursor:pointer; display:block; margin-left:auto; margin-right:auto}
+.q-restart:hover{color:var(--pearl)}
 
 /* ----- Sections ----- */
 section{padding:54px 0}
@@ -157,7 +153,6 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
   <div class="quizwrap wrap">
     <div class="quiz">
       <div class="q-card reveal" id="q-card">
-        <!-- Intro (rendu par défaut, remplacé par le JS) -->
         <div class="q-intro" id="q-intro">
           <h2>Quel vendeur es-tu face au <span class="ink">cerveau</span> de ton prospect&nbsp;?</h2>
           <p>La plupart des pros perdent des ventes sans comprendre pourquoi. La raison est presque toujours la même&nbsp;: <b>l'objection qu'on entend n'est pas la vraie.</b></p>
@@ -170,7 +165,7 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
         </div>
       </div>
       <noscript>
-        <p class="note-out" style="margin-top:20px">Le diagnostic nécessite JavaScript. Tu peux quand même recevoir le guide complet&nbsp;: <a href="#sysio-anchor" style="color:var(--indigo)">accède au formulaire</a>.</p>
+        <p class="note-out" style="margin-top:20px">Le diagnostic nécessite JavaScript pour fonctionner.</p>
       </noscript>
     </div>
   </div>
@@ -253,88 +248,12 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
   </footer>
 
   <!-- ===================== SCRIPTS ===================== -->
+  <script src="quiz_data.js"></script>
   <script>
-  /* ---------- Données du diagnostic ---------- */
-  const METIERS = [
-    { id:'coach', emoji:'🏋️', label:'Coach sportif / bien-être',
-      reine:'« Je vais réfléchir » — ou « c\'est cher pour du sport ».',
-      angle:'Tu ne vends pas des séances, tu vends une transformation. Le cerveau paie pour une projection de soi (l\'anticipation du résultat) et fuit le coût de l\'inaction — ici, sa santé.',
-      phrase:'« Qu\'est-ce qui change dans 6 mois si tu ne fais rien… et si, au contraire, on s\'y met maintenant ? »' },
-    { id:'consultant', emoji:'💼', label:'Consultant / freelance / prestataire',
-      reine:'« C\'est trop cher » — sur une offre immatérielle, au ROI flou.',
-      angle:'Ton offre est invisible : le cerveau ne sait pas où l\'ancrer. Vends le résultat chiffré, pas tes heures. Ramène toujours le prix à la douleur en euros.',
-      phrase:'« Trop cher par rapport à quoi exactement ? Et combien te coûte le problème, lui, chaque mois ? »' },
-    { id:'artisan', emoji:'🔧', label:'Artisan / commerçant / TPE',
-      reine:'« Je compare » — « je trouve moins cher ailleurs ».',
-      angle:'Le cerveau compare des prix tant qu\'il ne voit pas de différence. Pose ton ancre + l\'effet de halo de ton expertise pour sortir du simple tableau de prix.',
-      phrase:'« Moins cher, oui — mais on compare sur quels critères, au juste ? Voilà ce qui change chez moi. »' },
-    { id:'therapeute', emoji:'🌿', label:'Thérapeute / praticien',
-      reine:'Le malaise avec l\'argent — « je ne veux pas forcer ».',
-      angle:'Le vrai blocage n\'est pas le sien, c\'est le tien. Annoncer ton prix calmement est un acte de soin : la clarté apaise la menace. Aligne valeur et accompagnement.',
-      phrase:'« Mon accompagnement, c\'est X. Prends le temps qu\'il te faut — qu\'est-ce qui te retient, vraiment ? »' },
-    { id:'enseigne', emoji:'🏬', label:'Commerce spécialisé (literie, opticien, immo, luxe, auto…)',
-      reine:'« Je vais réfléchir / regarder ailleurs » — sur un achat important et rare.',
-      angle:'Trop d\'options = surcharge cognitive → le cerveau reporte la décision. Simplifie le choix, crée la projection (marqueur somatique) et rends visible le coût d\'attendre.',
-      phrase:'« Pour décider sereinement, il te manque quelle info précise : le budget, le modèle, ou le bon moment ? »' },
-    { id:'autre', emoji:'✨', label:'Autre activité',
-      reine:'« C\'est trop cher » / « je vais réfléchir ».',
-      angle:'Quel que soit ton métier, l\'objection dite n\'est jamais la vraie. Il n\'en existe que 3 : Temps, Argent, Effort. Le reste est un écran de fumée à dissiper.',
-      phrase:'« Quand tu dis ça, c\'est plutôt une question de budget, de timing, ou de "est-ce que ça va marcher pour moi" ? »' }
-  ];
-
-  const PROFILE_Q = [
-    { q:'Fin de rendez-vous. Un prospect clairement chaud te dit : « C\'est exactement ce qu\'il me faut, je valide avec mon associé et je reviens vers toi. » Tu fais quoi ?', opts:[
-      {t:'Je propose direct un point à trois cette semaine, tant que c\'est chaud.',          p:'F', em:'⚡'},
-      {t:'Je lui prépare un récap chiffré, carré, pour qu\'il le présente sans rien oublier.', p:'E', em:'📊'},
-      {t:'Je le remercie, je le laisse gérer à son rythme, je relance dans quelques jours.',   p:'R', em:'🤝'},
-      {t:'Je glisse un « si ça ne tenait qu\'à toi, tu signerais aujourd\'hui ? » pour le sentir.', p:'C', em:'🦎'} ]},
-    { q:'Le moment d\'annoncer ton prix. Concrètement, tu…', opts:[
-      {t:'Je l\'annonce net, je tiens, et j\'enchaîne direct sur la suite.', p:'F', em:'💪'},
-      {t:'Je déroule ce qui le justifie avant de lâcher le chiffre.',        p:'E', em:'📑'},
-      {t:'Je l\'annonce… en précisant qu\'on peut s\'arranger si c\'est trop.', p:'R', em:'😬'},
-      {t:'Je lis sa réaction en temps réel et j\'ajuste ma présentation.',    p:'C', em:'👀'} ]},
-    { q:'Le prospect sort une objection que tu n\'avais pas vue venir. Ton instinct :', opts:[
-      {t:'J\'ai du répondant : je réponds du tac au tac et je reprends la main.', p:'F', em:'🎯'},
-      {t:'Je démonte l\'objection, exemples et preuves à l\'appui.',              p:'E', em:'🧩'},
-      {t:'Je valide son ressenti, je dédramatise, je rassure.',                  p:'R', em:'☕'},
-      {t:'Je rebondis sur sa formulation et je la retourne à ma façon.',         p:'C', em:'🌀'} ]},
-    { q:'Sois honnête : ce qui te fait perdre le plus de deals, c\'est plutôt…', opts:[
-      {t:'Je vais trop vite vers la conclusion, je grille des étapes.',  p:'F', em:'🏃'},
-      {t:'Je donne trop d\'infos — le prospect sature et « réfléchit ».', p:'E', em:'🌊'},
-      {t:'Je n\'ose pas provoquer la décision, alors ça traîne et ça meurt.', p:'R', em:'🙈'},
-      {t:'Je m\'adapte tellement à lui que je perds le fil de MON offre.', p:'C', em:'🎭'} ]},
-    { q:'Tu prépares un rendez-vous qui compte. Ton vrai focus, c\'est :', opts:[
-      {t:'Mon plan pour décrocher un oui, vite.',                          p:'F', em:'🚀'},
-      {t:'Connaître le dossier sur le bout des doigts pour parer à tout.', p:'E', em:'⚙️'},
-      {t:'Installer un climat de confiance pour qu\'il se sente à l\'aise.', p:'R', em:'😌'},
-      {t:'Pouvoir m\'ajuster à qui j\'aurai vraiment en face le jour J.',  p:'C', em:'🧭'} ]}
-  ];
-
-  const PROFILS = {
-    F:{ titre:'Le Fonceur', emoji:'⚡',
-        desc:'Tu as l\'énergie et le cran d\'aller au closing — c\'est rare et précieux.',
-        piege:'Ton piège : la pression. Neurologiquement, quand tu pousses, le cerveau du client passe en mode menace… et se ferme.',
-        levier:'Ton levier Persua : le silence de 8 secondes après le prix. Tu as déjà le cran — il te manque la patience qui fait dire oui.' },
-    E:{ titre:'L\'Expert', emoji:'📊',
-        desc:'Tu maîtrises ton sujet à fond, et ça inspire confiance.',
-        piege:'Ton piège : sur-argumenter. Trop d\'arguments = surcharge cognitive → le client dit « je vais réfléchir » pour fuir l\'effort mental.',
-        levier:'Ton levier Persua : poser UNE question au lieu de donner trois réponses. Moins tu prouves, plus il se convainc lui-même.' },
-    R:{ titre:'Le Relationnel', emoji:'🤝',
-        desc:'Tu crées du lien et de la confiance comme personne — les clients t\'apprécient.',
-        piege:'Ton piège : la peur de déranger. Tu n\'oses pas demander la vente ni tenir tes prix… alors tu brades ou tu laisses filer.',
-        levier:'Ton levier Persua : demander la vente est un service, pas une agression. Le client t\'a fait confiance — va au bout pour lui.' },
-    C:{ titre:'Le Caméléon', emoji:'🦎',
-        desc:'Tu lis les gens et tu t\'adaptes à chacun — une arme redoutable en vente.',
-        piege:'Ton piège : te diluer. À force de t\'adapter, tu ne tranches pas et tu laisses le client décider seul (donc reporter).',
-        levier:'Ton levier Persua : garde ton cap. Adapte la forme, oui — mais guide fermement vers la décision.' }
-  };
-
-  /* ---------- Moteur du quiz ---------- */
-  const TOTAL = 1 + PROFILE_Q.length; // métier + questions profil
-  let answers = []; // answers[0]=metierId ; answers[1..]=lettre profil
-  let idx = 0;      // 0 = métier, 1..N = questions profil
-
   const card = document.getElementById('q-card');
+  const TOTAL = 1 + QUIZ.PROFILE_Q.length; // métier + questions profil
+  let answers = []; // answers[0]=metierId ; answers[1..]=lettre profil
+  let idx = 0;
 
   function progressBar(){
     const pct = Math.round((answers.filter(a=>a!=null).length) / TOTAL * 100);
@@ -347,15 +266,14 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
     h += '<div class="q-step">'+stepLabel()+'</div>';
     h += '<div class="q-title">Quel est ton métier ?</div>';
     h += '<div class="q-opts">';
-    METIERS.forEach((m,i)=>{ h += '<button class="opt" type="button" data-i="'+i+'"><span class="em">'+m.emoji+'</span><span>'+m.label+'</span></button>'; });
+    QUIZ.METIERS.forEach((m,i)=>{ h += '<button class="opt" type="button" data-i="'+i+'"><span class="em">'+m.emoji+'</span><span>'+m.label+'</span></button>'; });
     h += '</div>';
     card.innerHTML = h;
-    card.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{ answers[0]=METIERS[+b.dataset.i].id; idx=1; render(); }));
+    card.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{ answers[0]=QUIZ.METIERS[+b.dataset.i].id; idx=1; render(); }));
   }
 
   function renderQuestion(){
-    const qi = idx-1;
-    const Q = PROFILE_Q[qi];
+    const Q = QUIZ.PROFILE_Q[idx-1];
     let h = progressBar();
     h += '<div class="q-step">'+stepLabel()+'</div>';
     h += '<div class="q-title">'+Q.q+'</div>';
@@ -368,49 +286,32 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
     card.querySelector('.q-back').addEventListener('click',()=>{ idx--; render(); });
   }
 
-  function computeProfile(){
-    const sc={F:0,E:0,R:0,C:0};
-    for(let i=1;i<answers.length;i++){ if(answers[i]) sc[answers[i]]++; }
-    let best='F', bv=-1;
-    ['F','E','R','C'].forEach(k=>{ if(sc[k]>bv){ bv=sc[k]; best=k; } });
-    return best;
-  }
-
-  function renderResult(){
-    const metier = METIERS.find(m=>m.id===answers[0]);
-    const prof = PROFILS[computeProfile()];
+  // Fin du quiz : on enregistre les réponses et on affiche la CAPTURE (systeme.io).
+  // Le diagnostic complet est délivré sur resultat.html après soumission.
+  function renderCapture(){
+    try{ localStorage.setItem('persua_quiz_v1', JSON.stringify(answers)); }catch(e){}
+    const prof = QUIZ.getProfile(answers);
     let h = progressBar();
-    h += '<div class="res-badge">Ton diagnostic est prêt</div>';
-    h += '<h2 class="res-title">'+prof.emoji+' Tu es… '+prof.titre+'.</h2>';
-    h += '<p class="res-sub">Profil de vendeur + objection-reine de ton métier — analyse personnalisée.</p>';
-
-    h += '<div class="res-block"><div class="lbl">Ton profil de vendeur</div>';
-    h += '<h4>'+prof.emoji+' '+prof.titre+'</h4>';
-    h += '<p>'+prof.desc+'</p>';
-    h += '<p><b>⚠️ '+prof.piege+'</b></p>';
-    h += '<p>'+prof.levier+'</p></div>';
-
-    h += '<div class="res-block"><div class="lbl">L\'objection-reine de ton métier · '+metier.label+'</div>';
-    h += '<h4>'+metier.emoji+' '+metier.reine+'</h4>';
-    h += '<p>'+metier.angle+'</p>';
-    h += '<p style="margin-bottom:6px"><b>Ta phrase-réflexe à tester dès ton prochain rendez-vous :</b></p>';
-    h += '<div class="res-phrase">'+metier.phrase+'</div></div>';
-
-    h += '<div class="res-cta" id="sysio-anchor">';
-    h += '<h3>Reçois le <span class="ink">guide complet</span> par email.</h3>';
-    h += '<p>Les 7 objections décodées, la méthode <b>AIR</b> au complet et tes scripts mot pour mot — gratuit, dans ta boîte mail en 1 minute.</p>';
+    h += '<div class="res-badge">✅ Diagnostic terminé</div>';
+    h += '<h2 class="res-title">'+prof.emoji+' Ton profil : '+prof.titre+'.</h2>';
+    h += '<p class="res-sub">Voici ce que tu débloques en laissant tes coordonnées 👇</p>';
+    h += '<div class="lock">';
+    h += '<div class="l"><span class="k">🔓</span><span>Ce que ton profil <b>'+prof.titre+'</b> te coûte en rendez-vous — et comment l\'inverser.</span></div>';
+    h += '<div class="l"><span class="k">🎯</span><span>L\'<b>objection-reine de ton métier</b> + pourquoi le cerveau la déclenche.</span></div>';
+    h += '<div class="l"><span class="k">💬</span><span>Ta <b>phrase-réflexe</b> à tester dès ton prochain rendez-vous.</span></div>';
+    h += '<div class="l"><span class="k">📕</span><span>Le <b>guide complet</b> (7 objections + méthode AIR + scripts) par email.</span></div>';
+    h += '</div>';
+    h += '<h3 class="cap-h">Où je t\'envoie ton diagnostic ?</h3>';
+    h += '<p class="cap-p">Prénom, email et téléphone — et ton analyse complète s\'affiche tout de suite.</p>';
     h += '<div id="sysio-embed" class="capture-shell"></div>';
     h += '<p class="note-out">Désinscription en 1 clic. Zéro spam.</p>';
-    h += '<button class="res-restart" type="button" id="q-restart">↺ Refaire le diagnostic</button>';
-    h += '</div>';
-
+    h += '<button class="q-restart" type="button" id="q-restart">↺ Refaire le diagnostic</button>';
     card.innerHTML = h;
     loadSysioForm();
     const r=document.getElementById('q-restart');
     if(r) r.addEventListener('click',()=>{ answers=[]; idx=0; render(); card.scrollIntoView({behavior:'smooth',block:'center'}); });
   }
 
-  // Charge le formulaire systeme.io (capture email + livraison du PDF) dans l'écran résultat
   function loadSysioForm(){
     const host=document.getElementById('sysio-embed');
     if(!host || host.dataset.loaded) return;
@@ -423,8 +324,8 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
 
   function render(){
     if(idx===0) renderMetier();
-    else if(idx<=PROFILE_Q.length) renderQuestion();
-    else renderResult();
+    else if(idx<=QUIZ.PROFILE_Q.length) renderQuestion();
+    else renderCapture();
     card.scrollIntoView({behavior:'smooth',block:'nearest'});
   }
 
