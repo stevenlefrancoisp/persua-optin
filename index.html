@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Persua — Les 7 objections qui tuent vos ventes</title>
+<title>Persua — Quel vendeur es-tu face au cerveau de ton prospect ?</title>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
@@ -25,7 +25,6 @@ body{
   background-attachment:fixed;
   color:var(--pearl); line-height:1.55; -webkit-font-smoothing:antialiased;
 }
-/* Une seule lueur ambiante, lente et discrète (mouvement premium, pas néon) */
 body::before{
   content:''; position:fixed; z-index:-1; pointer-events:none;
   width:70vw; height:70vw; border-radius:50%; top:-25vw; left:52vw;
@@ -38,69 +37,93 @@ body::before{
 .wrap{max-width:920px;margin:0 auto;padding:0 22px}
 h1,h2,h3{font-weight:700;letter-spacing:-.02em;color:var(--white);line-height:1.12}
 
-/* ----- Révélation au scroll (fallback : visible si JS absent) ----- */
 .js .reveal{opacity:0; transform:translateY(20px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)}
 .js .reveal.in{opacity:1; transform:none}
 
-/* ----- Surlignage signature Persua ----- */
 .hl{background:var(--indigo); color:var(--white); padding:.02em .24em; border-radius:.16em; box-decoration-break:clone; -webkit-box-decoration-break:clone}
 .ink{color:var(--indigo)}
 
-/* ----- Barre d'alerte ----- */
 .alert{background:rgba(84,74,250,.12); border-bottom:1px solid rgba(84,74,250,.35); color:var(--pearl); text-align:center; font-weight:600; font-size:14px; letter-spacing:.02em; padding:12px 18px}
 
-/* ----- Boutons ----- */
 .btn{display:inline-block; background:var(--indigo); color:var(--white)!important; font-weight:600; font-size:18px; letter-spacing:.02em; text-decoration:none; border:none; border-radius:var(--radius); padding:20px 34px; cursor:pointer; box-shadow:0 12px 30px rgba(84,74,250,.4); transition:transform .2s ease, box-shadow .2s ease, filter .2s ease}
 .btn:hover{transform:translateY(-2px); box-shadow:0 18px 44px rgba(84,74,250,.55); filter:brightness(1.08)}
 .btn--lg{font-size:20px; padding:22px 40px}
 
 /* ----- Hero ----- */
-.hero{padding:70px 0 50px; text-align:center}
+.hero{padding:64px 0 26px; text-align:center}
 .kicker{display:inline-block; color:var(--mist); font-weight:600; font-size:13px; letter-spacing:.16em; text-transform:uppercase; margin-bottom:22px}
-.hero h1{font-size:clamp(32px,5.2vw,58px); max-width:880px; margin:0 auto 24px}
-.hero .sub{font-size:clamp(17px,2.2vw,21px); color:var(--pearl); max-width:680px; margin:0 auto 38px; font-weight:400}
+.hero h1{font-size:clamp(31px,5vw,54px); max-width:860px; margin:0 auto 22px}
+.hero .sub{font-size:clamp(16px,2.1vw,20px); color:var(--pearl); max-width:640px; margin:0 auto 14px; font-weight:400}
+.hero .meta{display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap; color:var(--mist); font-size:13px; letter-spacing:.04em; margin-bottom:8px}
+.hero .meta b{color:var(--white)}
 
-/* ----- Aperçu du guide (mockup) ----- */
-.peek{display:flex; align-items:center; justify-content:center; gap:10px; color:var(--mist); font-size:13px; letter-spacing:.05em; margin:0 auto 30px}
-.peek b{color:var(--white)}
+/* ===================== QUIZ ===================== */
+.quizwrap{padding:14px 0 30px}
+.quiz{max-width:640px; margin:0 auto}
+.q-card{background:rgba(19,19,58,.72); backdrop-filter:blur(18px); border:1px solid rgba(84,74,250,.32); border-radius:22px; padding:32px 30px; box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.q-progress{height:6px; background:rgba(84,74,250,.16); border-radius:99px; overflow:hidden; margin-bottom:22px}
+.q-progress>i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--electric),var(--indigo)); border-radius:99px; transition:width .45s cubic-bezier(.2,.7,.2,1)}
+.q-step{color:var(--mist); font-size:12px; letter-spacing:.14em; text-transform:uppercase; font-weight:600; margin-bottom:12px}
+.q-title{font-size:clamp(20px,3.1vw,27px); color:#fff; font-weight:700; line-height:1.22; margin-bottom:22px}
+.q-opts{display:grid; gap:12px}
+.opt{display:flex; align-items:center; gap:14px; text-align:left; width:100%; background:rgba(10,10,20,.45); border:1px solid rgba(84,74,250,.28); color:var(--pearl); border-radius:14px; padding:16px 18px; font-size:16px; font-family:inherit; cursor:pointer; transition:border-color .2s, background .2s, transform .15s}
+.opt:hover{border-color:var(--indigo); background:rgba(84,74,250,.14); transform:translateY(-1px)}
+.opt .em{flex:0 0 auto; font-size:20px; line-height:1}
+.q-back{margin-top:20px; background:none; border:none; color:var(--mist); font-family:inherit; font-size:13px; cursor:pointer; letter-spacing:.02em}
+.q-back:hover{color:var(--pearl)}
+.q-intro h2{font-size:clamp(23px,3.4vw,30px); margin-bottom:14px}
+.q-intro p{color:var(--pearl); font-size:16.5px; margin-bottom:8px}
+.q-intro .pts{display:grid; gap:10px; margin:22px 0 26px; text-align:left}
+.q-intro .pts div{display:flex; gap:12px; align-items:flex-start; color:var(--pearl); font-size:15.5px}
+.q-intro .pts .c{flex:0 0 22px; height:22px; width:22px; border-radius:6px; background:rgba(84,74,250,.2); border:1px solid rgba(84,74,250,.5); color:#fff; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; margin-top:1px}
 
-/* ----- Formulaire ----- */
-.capture{background:rgba(19,19,58,.72); backdrop-filter:blur(18px); border:1px solid rgba(84,74,250,.32); border-radius:22px; padding:30px 28px; max-width:520px; margin:0 auto; box-shadow:0 24px 60px rgba(0,0,0,.5)}
-.capture .field{width:100%; background:rgba(10,10,20,.55); border:1px solid rgba(84,74,250,.3); color:#fff; border-radius:12px; padding:18px 16px; font-size:16px; font-family:inherit; margin-bottom:14px; transition:border-color .2s,box-shadow .2s}
-.capture .field::placeholder{color:var(--mist)}
-.capture .field:focus{outline:none; border-color:var(--indigo); box-shadow:0 0 0 3px rgba(84,74,250,.25); background:rgba(10,10,20,.82)}
-.capture .btn{width:100%}
-.capture .note{color:var(--mist); font-size:12px; margin-top:12px}
-/* L'embed systeme.io (iframe) vit dans cet écrin — voir bloc FORMULAIRE plus bas */
-#sysio-embed{max-width:560px; margin:0 auto}
-/* écrin transparent : la carte Persua est désormais rendue par le CSS systeme.io (iframe) */
-.capture-shell{ background:transparent; border:0; border-radius:22px; padding:0; box-shadow:none; max-width:560px; margin:0 auto }
-.capture-shell iframe{ display:block; width:100%!important }
-.note-out{ color:var(--mist); font-size:12.5px; text-align:center; max-width:560px; margin:14px auto 0 }
+/* ----- Résultat ----- */
+.res-badge{display:inline-block; background:var(--indigo); color:#fff; font-weight:700; font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; padding:7px 15px; border-radius:99px; margin-bottom:14px}
+.res-title{font-size:clamp(25px,3.8vw,34px); color:#fff; margin-bottom:6px}
+.res-sub{color:var(--mist); font-size:14.5px; margin-bottom:20px}
+.res-block{background:rgba(10,10,20,.4); border:1px solid rgba(84,74,250,.28); border-radius:16px; padding:20px 22px; margin:14px 0; text-align:left}
+.res-block .lbl{color:var(--indigo); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:8px}
+.res-block h4{color:#fff; font-size:19px; margin-bottom:10px}
+.res-block p{color:var(--pearl); font-size:15.5px; margin:0 0 10px}
+.res-block p:last-child{margin-bottom:0}
+.res-phrase{background:rgba(84,74,250,.12); border-left:3px solid var(--indigo); padding:14px 16px; border-radius:8px; color:#fff; font-style:italic; font-size:16px; margin-top:6px}
+.res-cta{text-align:center; margin-top:26px}
+.res-cta h3{font-size:clamp(20px,3vw,25px); margin-bottom:8px}
+.res-cta p{color:var(--pearl); font-size:15.5px; max-width:480px; margin:0 auto 18px}
+.res-restart{margin-top:16px; background:none; border:none; color:var(--mist); font-family:inherit; font-size:13px; cursor:pointer}
+.res-restart:hover{color:var(--pearl)}
+
+/* embed systeme.io */
+#sysio-embed{max-width:520px; margin:6px auto 0}
+.capture-shell{background:transparent; border:0; border-radius:22px; padding:0; box-shadow:none; max-width:520px; margin:0 auto}
+.capture-shell iframe{display:block; width:100%!important}
+.note-out{color:var(--mist); font-size:12.5px; text-align:center; max-width:520px; margin:12px auto 0}
 
 /* ----- Sections ----- */
-section{padding:60px 0}
+section{padding:54px 0}
 .eyebrow{color:var(--indigo); font-weight:700; font-size:13px; letter-spacing:.16em; text-transform:uppercase; text-align:center; margin-bottom:10px}
 .h-center{text-align:center; font-size:clamp(26px,4vw,40px); margin-bottom:14px}
 .role{text-align:center; color:var(--mist); font-weight:500; letter-spacing:.04em; text-transform:uppercase; font-size:14px}
 
-/* ----- Ce que vous allez apprendre (liste objections) ----- */
-.list{max-width:680px; margin:30px auto 0; display:grid; gap:12px}
-.li{display:flex; align-items:center; gap:14px; background:rgba(19,19,58,.55); border:1px solid rgba(84,74,250,.26); border-radius:14px; padding:15px 18px}
-.li .x{flex:0 0 30px; height:30px; width:30px; border-radius:8px; background:rgba(84,74,250,.18); border:1px solid rgba(84,74,250,.4); color:#fff; font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center}
-.li span{font-size:16px; color:var(--pearl)}
-.li b{color:#fff}
-
-/* ----- Portrait Steven (flottement subtil) ----- */
-.portrait{width:168px; height:168px; border-radius:50%; object-fit:cover; border:3px solid var(--indigo); box-shadow:0 16px 40px rgba(84,74,250,.42); margin:0 auto 24px; display:block; animation:floaty 5s ease-in-out infinite}
+.portrait{width:150px; height:150px; border-radius:50%; object-fit:cover; border:3px solid var(--indigo); box-shadow:0 16px 40px rgba(84,74,250,.42); margin:0 auto 22px; display:block; animation:floaty 5s ease-in-out infinite}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-
 .story{max-width:680px; margin:0 auto; font-size:18px}
 .story p{margin:0 0 18px; color:var(--pearl)}
 .story .lead{font-size:21px; color:var(--white); font-weight:500}
-.center{text-align:center; margin-top:40px}
 
-/* ----- Témoignages vidéo ----- */
+/* ----- Cadre : 3 universelles + AIR ----- */
+.frame{max-width:760px; margin:30px auto 0}
+.uni3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+.uni3 .u{text-align:center; background:rgba(84,74,250,.10); border:1px solid rgba(84,74,250,.32); border-radius:14px; padding:18px 10px}
+.uni3 .u .un{color:#fff; font-weight:700; font-size:16px; letter-spacing:.04em}
+.uni3 .u .ud{color:var(--mist); font-size:12.5px; margin-top:5px; line-height:1.35}
+.air3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px}
+.air3 .a{display:flex; gap:12px; align-items:center; background:rgba(19,19,58,.5); border:1px solid rgba(84,74,250,.24); border-radius:14px; padding:14px 16px}
+.air3 .a .bdg{flex:0 0 30px; height:30px; width:30px; border-radius:8px; background:var(--indigo); color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center; font-size:14px}
+.air3 .a .at b{color:#fff; display:block; font-size:14.5px}
+.air3 .a .at span{color:var(--mist); font-size:12px}
+
+/* ----- Témoignages ----- */
 .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px; max-width:860px; margin:34px auto 0; align-items:start}
 .card{background:rgba(19,19,58,.6); border:1px solid rgba(84,74,250,.28); border-radius:18px; padding:18px; transition:transform .25s ease,border-color .25s ease}
 .card:hover{transform:translateY(-4px); border-color:rgba(84,74,250,.55)}
@@ -112,23 +135,10 @@ section{padding:60px 0}
 .card .who{font-weight:600; color:var(--white); margin:0 4px}
 @media(min-width:681px){ .grid > .card:last-child:nth-child(odd){grid-column:1 / -1; justify-self:center; max-width:430px} }
 
-/* ----- Footer ----- */
 footer{padding:40px 0 56px; text-align:center}
 footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; line-height:1.7}
 
-/* ----- Cadre : 3 universelles + AIR ----- */
-.frame{ max-width:760px; margin:30px auto 0 }
-.uni3{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px }
-.uni3 .u{ text-align:center; background:rgba(84,74,250,.10); border:1px solid rgba(84,74,250,.32); border-radius:14px; padding:18px 10px }
-.uni3 .u .un{ color:#fff; font-weight:700; font-size:16px; letter-spacing:.04em }
-.uni3 .u .ud{ color:var(--mist); font-size:12.5px; margin-top:5px; line-height:1.35 }
-.air3{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px }
-.air3 .a{ display:flex; gap:12px; align-items:center; background:rgba(19,19,58,.5); border:1px solid rgba(84,74,250,.24); border-radius:14px; padding:14px 16px }
-.air3 .a .bdg{ flex:0 0 30px; height:30px; width:30px; border-radius:8px; background:var(--indigo); color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center; font-size:14px }
-.air3 .a .at b{ color:#fff; display:block; font-size:14.5px }
-.air3 .a .at span{ color:var(--mist); font-size:12px }
-
-@media(max-width:680px){ .grid{grid-template-columns:1fr} .hero{padding:48px 0 36px} .uni3,.air3{grid-template-columns:1fr} }
+@media(max-width:680px){ .grid{grid-template-columns:1fr} .hero{padding:44px 0 20px} .uni3,.air3{grid-template-columns:1fr} .q-card{padding:26px 20px} }
 @media(prefers-reduced-motion:reduce){ *{animation:none!important} .js .reveal{opacity:1!important;transform:none!important} }
 </style>
 </head>
@@ -137,23 +147,37 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
   <div class="alert">⚠️ CE QUE VOTRE PROSPECT DIT N'EST JAMAIS CE QU'IL PENSE VRAIMENT</div>
 
   <header class="hero wrap">
-    <span class="kicker reveal">Guide gratuit · Persua</span>
-    <h1 class="reveal">Les <span class="hl">7 objections</span> qui tuent vos ventes — et la phrase exacte qui les fait tomber.</h1>
-    <p class="sub reveal">« C'est trop cher », « je vais réfléchir », « j'en parle à mon associé »… En réalité, il n'existe que <span class="ink">3 vraies objections</span> : Temps, Argent, Effort. Le reste n'est qu'un écran de fumée. Dans ce guide : la <span class="ink">méthode AIR</span> pour les faire tomber, avec les scripts mot pour mot.</p>
-
-    <p class="peek reveal">📕 Guide PDF · <b>10 pages</b> · méthode AIR + 7 scripts prêts à l'emploi · <b>gratuit</b></p>
-
-    <!-- ====== FORMULAIRE — embed systeme.io (iframe auto-resize) ====== -->
-    <!-- L'apparence interne du formulaire se règle dans systeme.io       -->
-    <!-- (Tunnels → Formulaire 7 objections → Modifier la page).          -->
-    <div id="sysio-embed" class="capture-shell reveal">
-      <script id="form-script-tag-24376291" src="https://mentorat.persua-neurovente.com/public/remote/page/417225238bd142cc33dc819bf7d1c6699a1cc23e.js"></script>
-    </div>
-    <p class="note-out reveal">Vous recevez le guide par email dans la minute. Désinscription en 1 clic. Zéro spam.</p>
+    <span class="kicker reveal">Diagnostic gratuit · Persua</span>
+    <h1 class="reveal">Découvre <span class="hl">l'objection</span> qui te fait perdre le plus de ventes — et la phrase exacte pour la désamorcer.</h1>
+    <p class="sub reveal">En 2 minutes, ce diagnostic révèle ton <span class="ink">profil de vendeur</span> et l'<span class="ink">objection-reine de ton métier</span> — avec une phrase à tester dès ton prochain rendez-vous.</p>
+    <div class="meta reveal"><span>⏱️ <b>2 min</b></span><span>•</span><span>🧠 <b>6 questions</b></span><span>•</span><span>🎯 résultat <b>personnalisé</b></span></div>
   </header>
 
+  <!-- ===================== QUIZ ===================== -->
+  <div class="quizwrap wrap">
+    <div class="quiz">
+      <div class="q-card reveal" id="q-card">
+        <!-- Intro (rendu par défaut, remplacé par le JS) -->
+        <div class="q-intro" id="q-intro">
+          <h2>Quel vendeur es-tu face au <span class="ink">cerveau</span> de ton prospect&nbsp;?</h2>
+          <p>La plupart des pros perdent des ventes sans comprendre pourquoi. La raison est presque toujours la même&nbsp;: <b>l'objection qu'on entend n'est pas la vraie.</b></p>
+          <div class="pts">
+            <div><span class="c">1</span><span>Ton <b>profil de vendeur</b> (et le piège qui te coûte des deals).</span></div>
+            <div><span class="c">2</span><span>L'<b>objection-reine de ton métier</b> — et pourquoi le cerveau la déclenche.</span></div>
+            <div><span class="c">3</span><span>Une <b>phrase-réflexe</b> prête à dégainer à ton prochain rendez-vous.</span></div>
+          </div>
+          <button class="btn btn--lg" id="q-start" type="button">DÉMARRER LE DIAGNOSTIC</button>
+        </div>
+      </div>
+      <noscript>
+        <p class="note-out" style="margin-top:20px">Le diagnostic nécessite JavaScript. Tu peux quand même recevoir le guide complet&nbsp;: <a href="#sysio-anchor" style="color:var(--indigo)">accède au formulaire</a>.</p>
+      </noscript>
+    </div>
+  </div>
+
+  <!-- ===================== CADRE 3 UNIVERSELLES + AIR ===================== -->
   <section class="wrap">
-    <p class="eyebrow reveal">Le cadre</p>
+    <p class="eyebrow reveal">Le cadre Persua</p>
     <h2 class="h-center reveal" style="margin-bottom:6px">Il n'existe que 3 vraies objections.</h2>
     <p class="role reveal" style="text-transform:none; letter-spacing:0; font-size:16px; color:var(--pearl)">Tout le reste — « je vais réfléchir », « j'en parle à mon associé »… — n'est qu'un <span class="ink">écran de fumée</span>.</p>
     <div class="frame">
@@ -170,88 +194,57 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
     </div>
   </section>
 
-  <section class="wrap">
-    <p class="eyebrow reveal">Ce que vous allez débloquer</p>
-    <h2 class="h-center reveal" style="margin-bottom:6px">7 objections décodées avec la méthode AIR.</h2>
-    <div class="list">
-      <div class="li reveal"><div class="x">1</div><span><b>« C'est trop cher »</b> — la question qui sépare « pas de valeur » de « budget » (la vraie).</span></div>
-      <div class="li reveal"><div class="x">2</div><span><b>« Je vais réfléchir »</b> — la technique d'isolement qui fait tomber l'écran de fumée.</span></div>
-      <div class="li reveal"><div class="x">3</div><span><b>« On n'a pas le budget »</b> — retourner la « fausse économie » en coût de l'inaction.</span></div>
-      <div class="li reveal"><div class="x">4</div><span><b>« J'en parle à mon associé »</b> — lui faire verbaliser l'objection… qui revient toujours aux 3.</span></div>
-      <div class="li reveal"><div class="x">5</div><span><b>« On a déjà essayé »</b> — transformer l'échec passé en preuve de votre différenciateur.</span></div>
-      <div class="li reveal"><div class="x">6</div><span><b>« Votre concurrent est moins cher »</b> — l'effet miroir, sans vous défendre ni casser votre prix.</span></div>
-      <div class="li reveal"><div class="x">7</div><span><b>« Je n'ai pas le temps »</b> — montrer que votre offre lui <i>rend</i> du temps.</span></div>
-    </div>
-    <div class="center reveal">
-      <a class="btn btn--lg" href="#" onclick="document.getElementById('sysio-embed').scrollIntoView({behavior:'smooth',block:'center'});return false;">JE VEUX LES 7 RÉPONSES</a>
-    </div>
-  </section>
-
+  <!-- ===================== STEVEN ===================== -->
   <section class="wrap" style="text-align:center">
     <img class="portrait" src="assets/steven.png" alt="Steven Lefrançois">
     <p class="eyebrow reveal">Qui est Steven Lefrançois&nbsp;?</p>
     <h2 class="h-center reveal">Formateur en <span class="hl">neuro-vente</span> & performance commerciale.</h2>
     <p class="role reveal">Persua — neurosciences appliquées à la vente</p>
-  </section>
-
-  <section class="wrap">
-    <p class="eyebrow reveal">La vérité</p>
-    <h2 class="h-center reveal" style="margin-bottom:34px">Il n'y a rien de magique.</h2>
-    <div class="story reveal">
-      <p class="lead">Ces 7 réponses, ce n'est pas un don tombé du ciel.</p>
-      <p>C'est le résultat d'années d'essais, d'échecs, de tests et de corrections sur le terrain. J'ai dû déchiffrer le code des gens, pièce par pièce — comprendre ce que le « non » cache vraiment.</p>
-      <p>Ma garantie : ce qui m'a pris <span class="ink">10 ans à maîtriser</span>, vous allez l'absorber en quelques mois — et vous verrez la différence dès vos prochains appels.</p>
-      <p>Je vous sers sur un plateau mes propres scripts, mes outils et mes mécanismes. C'est exactement comme si j'étais assis à côté de vous pendant votre closing. Moins d'efforts. Moins d'erreurs. Plus de oui.</p>
-      <p>Mon but&nbsp;? Que vous copiiez cette science… pour créer <span class="ink">votre propre style</span>. Que vous deveniez le vendeur que vous avez envie d'être — mais en version Persua.</p>
-    </div>
-    <div class="center reveal">
-      <a class="btn btn--lg" href="#" onclick="document.getElementById('sysio-embed').scrollIntoView({behavior:'smooth',block:'center'});return false;">JE COMMENCE À VENDRE</a>
+    <div class="story reveal" style="margin-top:30px">
+      <p class="lead">Ces réponses, ce n'est pas un don tombé du ciel.</p>
+      <p>C'est le résultat d'années d'essais, d'échecs et de corrections sur le terrain. J'ai dû déchiffrer le code des gens, pièce par pièce — comprendre ce que le « non » cache vraiment.</p>
+      <p>Ce qui m'a pris <span class="ink">10 ans à maîtriser</span>, je te le sers sur un plateau&nbsp;: mes scripts, mes outils, mes mécanismes. Comme si j'étais assis à côté de toi pendant ton closing. Moins d'efforts, moins d'erreurs, plus de oui.</p>
     </div>
   </section>
 
+  <!-- ===================== TÉMOIGNAGES ===================== -->
   <section class="wrap">
     <p class="eyebrow reveal">Ils ont commencé à vendre</p>
     <h2 class="h-center reveal">Ils parlent de leurs résultats.</h2>
     <div class="grid">
-
       <div class="card reveal">
         <div class="video"><iframe src="https://www.youtube.com/embed/H8B6p4pBrA8" title="Témoignage Jack" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         <div class="stars">★★★★★</div>
         <blockquote>« J'étais catastrophique… Aujourd'hui j'avoisine les 61–70&nbsp;% de taux de réussite. »</blockquote>
         <div class="who">Jack</div>
       </div>
-
       <div class="card reveal">
         <div class="video"><iframe src="https://www.youtube.com/embed/piUvEw0Je4A" title="Témoignage Aymeric MB" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         <div class="stars">★★★★★</div>
         <blockquote>« Au départ j'étais réticent. Il a été là pour m'accompagner et a apporté une solution à chaque problème. »</blockquote>
         <div class="who">Aymeric MB</div>
       </div>
-
       <div class="card reveal">
         <div class="video video--vertical"><iframe src="https://www.youtube.com/embed/fZR9xKvQ6e4" title="Témoignage Zak" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         <div class="stars">★★★★★</div>
         <blockquote>« J'ai rejoint Persua il y a quelques mois et je vois déjà la différence… Valeur, process, CA. Avoir quelqu'un au quotidien. »</blockquote>
         <div class="who">ZAK GMO</div>
       </div>
-
       <div class="card reveal">
         <div class="video video--vertical"><iframe src="https://www.youtube.com/embed/OyUyio3uOsE" title="Témoignage Ibrahim Chauvin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         <div class="stars">★★★★★</div>
         <blockquote>« En moins de deux semaines, j'ai signé 25&nbsp;000&nbsp;€. »</blockquote>
         <div class="who">Ibrahim Chauvin</div>
       </div>
-
       <div class="card reveal">
         <div class="video"><iframe src="https://www.youtube.com/embed/_-itOd0mNAw" title="Témoignage Massimo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         <div class="stars">★★★★★</div>
         <blockquote>« Tu vas au-delà de ce qu'on te demande. Tu donnes plus, et tu es prêt à donner. Franchement, c'est hyper positif. »</blockquote>
         <div class="who">Massimo</div>
       </div>
-
     </div>
-    <div class="center reveal">
-      <a class="btn btn--lg" href="#" onclick="document.getElementById('sysio-embed').scrollIntoView({behavior:'smooth',block:'center'});return false;">JE REÇOIS LE GUIDE DES 7 OBJECTIONS</a>
+    <div class="center reveal" style="text-align:center; margin-top:40px">
+      <button class="btn btn--lg" type="button" onclick="document.getElementById('q-card').scrollIntoView({behavior:'smooth',block:'center'})">JE FAIS MON DIAGNOSTIC</button>
     </div>
   </section>
 
@@ -259,14 +252,187 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
     <p>Copyright © 2022–2026 — Tous droits réservés · Persua SASU · SIRET 100 132 497 00015 · TVA FR46100132497 · APE 8559A (Organisme de formation)</p>
   </footer>
 
+  <!-- ===================== SCRIPTS ===================== -->
   <script>
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: .12 });
-    document.querySelectorAll('.reveal').forEach((el, i) => {
-      el.style.transitionDelay = (Math.min(i, 6) * 60) + 'ms';
-      io.observe(el);
-    });
+  /* ---------- Données du diagnostic ---------- */
+  const METIERS = [
+    { id:'coach', emoji:'🏋️', label:'Coach sportif / bien-être',
+      reine:'« Je vais réfléchir » — ou « c\'est cher pour du sport ».',
+      angle:'Tu ne vends pas des séances, tu vends une transformation. Le cerveau paie pour une projection de soi (l\'anticipation du résultat) et fuit le coût de l\'inaction — ici, sa santé.',
+      phrase:'« Qu\'est-ce qui change dans 6 mois si tu ne fais rien… et si, au contraire, on s\'y met maintenant ? »' },
+    { id:'consultant', emoji:'💼', label:'Consultant / freelance / prestataire',
+      reine:'« C\'est trop cher » — sur une offre immatérielle, au ROI flou.',
+      angle:'Ton offre est invisible : le cerveau ne sait pas où l\'ancrer. Vends le résultat chiffré, pas tes heures. Ramène toujours le prix à la douleur en euros.',
+      phrase:'« Trop cher par rapport à quoi exactement ? Et combien te coûte le problème, lui, chaque mois ? »' },
+    { id:'artisan', emoji:'🔧', label:'Artisan / commerçant / TPE',
+      reine:'« Je compare » — « je trouve moins cher ailleurs ».',
+      angle:'Le cerveau compare des prix tant qu\'il ne voit pas de différence. Pose ton ancre + l\'effet de halo de ton expertise pour sortir du simple tableau de prix.',
+      phrase:'« Moins cher, oui — mais on compare sur quels critères, au juste ? Voilà ce qui change chez moi. »' },
+    { id:'therapeute', emoji:'🌿', label:'Thérapeute / praticien',
+      reine:'Le malaise avec l\'argent — « je ne veux pas forcer ».',
+      angle:'Le vrai blocage n\'est pas le sien, c\'est le tien. Annoncer ton prix calmement est un acte de soin : la clarté apaise la menace. Aligne valeur et accompagnement.',
+      phrase:'« Mon accompagnement, c\'est X. Prends le temps qu\'il te faut — qu\'est-ce qui te retient, vraiment ? »' },
+    { id:'enseigne', emoji:'🏬', label:'Commerce spécialisé (literie, opticien, immo, luxe, auto…)',
+      reine:'« Je vais réfléchir / regarder ailleurs » — sur un achat important et rare.',
+      angle:'Trop d\'options = surcharge cognitive → le cerveau reporte la décision. Simplifie le choix, crée la projection (marqueur somatique) et rends visible le coût d\'attendre.',
+      phrase:'« Pour décider sereinement, il te manque quelle info précise : le budget, le modèle, ou le bon moment ? »' },
+    { id:'autre', emoji:'✨', label:'Autre activité',
+      reine:'« C\'est trop cher » / « je vais réfléchir ».',
+      angle:'Quel que soit ton métier, l\'objection dite n\'est jamais la vraie. Il n\'en existe que 3 : Temps, Argent, Effort. Le reste est un écran de fumée à dissiper.',
+      phrase:'« Quand tu dis ça, c\'est plutôt une question de budget, de timing, ou de "est-ce que ça va marcher pour moi" ? »' }
+  ];
+
+  const PROFILE_Q = [
+    { q:'Un client te dit « je vais réfléchir ». Ton réflexe ?', opts:[
+      {t:'Je relance vite, pour ne pas perdre le momentum.', p:'F', em:'⚡'},
+      {t:'Je reprends mes arguments, point par point.',       p:'E', em:'📊'},
+      {t:'Je le laisse tranquille, je ne veux pas le braquer.',p:'R', em:'🤝'},
+      {t:'Je sens son hésitation et je m\'adapte à ce qu\'il ressent.', p:'C', em:'🦎'} ]},
+    { q:'Au moment d\'annoncer ton prix, tu…', opts:[
+      {t:'Je l\'annonce cash, sans trembler.',                 p:'F', em:'💪'},
+      {t:'Je le justifie avant même qu\'on me le demande.',    p:'E', em:'📑'},
+      {t:'J\'ai la boule au ventre, je l\'annonce du bout des lèvres.', p:'R', em:'😬'},
+      {t:'Je jauge sa réaction et j\'ajuste mon discours.',    p:'C', em:'👀'} ]},
+    { q:'Face à une objection, ton premier mouvement :', opts:[
+      {t:'Je contre, j\'ai une réponse à tout.',               p:'F', em:'🎯'},
+      {t:'J\'explique, je prouve, je démontre.',               p:'E', em:'🧩'},
+      {t:'Je rassure, je tempère, je crée du lien.',           p:'R', em:'☕'},
+      {t:'Je pose une question pour comprendre ce qu\'il y a derrière.', p:'C', em:'❓'} ]},
+    { q:'Ton plus gros point bloquant, honnêtement :', opts:[
+      {t:'Je vais trop vite, je brusque parfois.',             p:'F', em:'🏃'},
+      {t:'Je noie le client sous les arguments.',              p:'E', em:'🌊'},
+      {t:'Je n\'ose pas relancer ni demander la vente.',       p:'R', em:'🙈'},
+      {t:'Je m\'adapte tellement que je ne tranche pas.',      p:'C', em:'🌀'} ]},
+    { q:'Ton objectif n°1 :', opts:[
+      {t:'Closer plus, et plus vite.',                         p:'F', em:'🚀'},
+      {t:'Avoir un process carré et fiable.',                  p:'E', em:'⚙️'},
+      {t:'Être à l\'aise et serein en rendez-vous.',           p:'R', em:'😌'},
+      {t:'Vendre sans me trahir, rester moi-même.',            p:'C', em:'🧭'} ]}
+  ];
+
+  const PROFILS = {
+    F:{ titre:'Le Fonceur', emoji:'⚡',
+        desc:'Tu as l\'énergie et le cran d\'aller au closing — c\'est rare et précieux.',
+        piege:'Ton piège : la pression. Neurologiquement, quand tu pousses, le cerveau du client passe en mode menace… et se ferme.',
+        levier:'Ton levier Persua : le silence de 8 secondes après le prix. Tu as déjà le cran — il te manque la patience qui fait dire oui.' },
+    E:{ titre:'L\'Expert', emoji:'📊',
+        desc:'Tu maîtrises ton sujet à fond, et ça inspire confiance.',
+        piege:'Ton piège : sur-argumenter. Trop d\'arguments = surcharge cognitive → le client dit « je vais réfléchir » pour fuir l\'effort mental.',
+        levier:'Ton levier Persua : poser UNE question au lieu de donner trois réponses. Moins tu prouves, plus il se convainc lui-même.' },
+    R:{ titre:'Le Relationnel', emoji:'🤝',
+        desc:'Tu crées du lien et de la confiance comme personne — les clients t\'apprécient.',
+        piege:'Ton piège : la peur de déranger. Tu n\'oses pas demander la vente ni tenir tes prix… alors tu brades ou tu laisses filer.',
+        levier:'Ton levier Persua : demander la vente est un service, pas une agression. Le client t\'a fait confiance — va au bout pour lui.' },
+    C:{ titre:'Le Caméléon', emoji:'🦎',
+        desc:'Tu lis les gens et tu t\'adaptes à chacun — une arme redoutable en vente.',
+        piege:'Ton piège : te diluer. À force de t\'adapter, tu ne tranches pas et tu laisses le client décider seul (donc reporter).',
+        levier:'Ton levier Persua : garde ton cap. Adapte la forme, oui — mais guide fermement vers la décision.' }
+  };
+
+  /* ---------- Moteur du quiz ---------- */
+  const TOTAL = 1 + PROFILE_Q.length; // métier + questions profil
+  let answers = []; // answers[0]=metierId ; answers[1..]=lettre profil
+  let idx = 0;      // 0 = métier, 1..N = questions profil
+
+  const card = document.getElementById('q-card');
+
+  function progressBar(){
+    const pct = Math.round((answers.filter(a=>a!=null).length) / TOTAL * 100);
+    return '<div class="q-progress"><i style="width:'+pct+'%"></i></div>';
+  }
+  function stepLabel(){ return 'Question '+(idx+1)+' / '+TOTAL; }
+
+  function renderMetier(){
+    let h = progressBar();
+    h += '<div class="q-step">'+stepLabel()+'</div>';
+    h += '<div class="q-title">Quel est ton métier ?</div>';
+    h += '<div class="q-opts">';
+    METIERS.forEach((m,i)=>{ h += '<button class="opt" type="button" data-i="'+i+'"><span class="em">'+m.emoji+'</span><span>'+m.label+'</span></button>'; });
+    h += '</div>';
+    card.innerHTML = h;
+    card.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{ answers[0]=METIERS[+b.dataset.i].id; idx=1; render(); }));
+  }
+
+  function renderQuestion(){
+    const qi = idx-1;
+    const Q = PROFILE_Q[qi];
+    let h = progressBar();
+    h += '<div class="q-step">'+stepLabel()+'</div>';
+    h += '<div class="q-title">'+Q.q+'</div>';
+    h += '<div class="q-opts">';
+    Q.opts.forEach((o,i)=>{ h += '<button class="opt" type="button" data-i="'+i+'"><span class="em">'+o.em+'</span><span>'+o.t+'</span></button>'; });
+    h += '</div>';
+    h += '<button class="q-back" type="button">← Question précédente</button>';
+    card.innerHTML = h;
+    card.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{ answers[idx]=Q.opts[+b.dataset.i].p; idx++; render(); }));
+    card.querySelector('.q-back').addEventListener('click',()=>{ idx--; render(); });
+  }
+
+  function computeProfile(){
+    const sc={F:0,E:0,R:0,C:0};
+    for(let i=1;i<answers.length;i++){ if(answers[i]) sc[answers[i]]++; }
+    let best='F', bv=-1;
+    ['F','E','R','C'].forEach(k=>{ if(sc[k]>bv){ bv=sc[k]; best=k; } });
+    return best;
+  }
+
+  function renderResult(){
+    const metier = METIERS.find(m=>m.id===answers[0]);
+    const prof = PROFILS[computeProfile()];
+    let h = progressBar();
+    h += '<div class="res-badge">Ton diagnostic est prêt</div>';
+    h += '<h2 class="res-title">'+prof.emoji+' Tu es… '+prof.titre+'.</h2>';
+    h += '<p class="res-sub">Profil de vendeur + objection-reine de ton métier — analyse personnalisée.</p>';
+
+    h += '<div class="res-block"><div class="lbl">Ton profil de vendeur</div>';
+    h += '<h4>'+prof.emoji+' '+prof.titre+'</h4>';
+    h += '<p>'+prof.desc+'</p>';
+    h += '<p><b>⚠️ '+prof.piege+'</b></p>';
+    h += '<p>'+prof.levier+'</p></div>';
+
+    h += '<div class="res-block"><div class="lbl">L\'objection-reine de ton métier · '+metier.label+'</div>';
+    h += '<h4>'+metier.emoji+' '+metier.reine+'</h4>';
+    h += '<p>'+metier.angle+'</p>';
+    h += '<p style="margin-bottom:6px"><b>Ta phrase-réflexe à tester dès ton prochain rendez-vous :</b></p>';
+    h += '<div class="res-phrase">'+metier.phrase+'</div></div>';
+
+    h += '<div class="res-cta" id="sysio-anchor">';
+    h += '<h3>Reçois le <span class="ink">guide complet</span> par email.</h3>';
+    h += '<p>Les 7 objections décodées, la méthode <b>AIR</b> au complet et tes scripts mot pour mot — gratuit, dans ta boîte mail en 1 minute.</p>';
+    h += '<div id="sysio-embed" class="capture-shell"></div>';
+    h += '<p class="note-out">Désinscription en 1 clic. Zéro spam.</p>';
+    h += '<button class="res-restart" type="button" id="q-restart">↺ Refaire le diagnostic</button>';
+    h += '</div>';
+
+    card.innerHTML = h;
+    loadSysioForm();
+    const r=document.getElementById('q-restart');
+    if(r) r.addEventListener('click',()=>{ answers=[]; idx=0; render(); card.scrollIntoView({behavior:'smooth',block:'center'}); });
+  }
+
+  // Charge le formulaire systeme.io (capture email + livraison du PDF) dans l'écran résultat
+  function loadSysioForm(){
+    const host=document.getElementById('sysio-embed');
+    if(!host || host.dataset.loaded) return;
+    host.dataset.loaded='1';
+    const s=document.createElement('script');
+    s.id='form-script-tag-24376291';
+    s.src='https://mentorat.persua-neurovente.com/public/remote/page/417225238bd142cc33dc819bf7d1c6699a1cc23e.js';
+    host.appendChild(s);
+  }
+
+  function render(){
+    if(idx===0) renderMetier();
+    else if(idx<=PROFILE_Q.length) renderQuestion();
+    else renderResult();
+    card.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+
+  document.getElementById('q-start').addEventListener('click',()=>{ answers=[]; idx=0; render(); });
+
+  /* ---------- Révélation au scroll ---------- */
+  const io = new IntersectionObserver((entries)=>{ entries.forEach((e)=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold:.12 });
+  document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay=(Math.min(i,6)*60)+'ms'; io.observe(el); });
   </script>
 
 </body>
