@@ -7,27 +7,27 @@ window.QUIZ = (function () {
     { id:'coach', emoji:'🏋️', label:'Coach sportif / bien-être',
       reine:'« Je vais réfléchir » — ou « c\'est cher pour du sport ».',
       angle:'Tu ne vends pas des séances, tu vends une transformation. Le cerveau paie pour une projection de soi (l\'anticipation du résultat) et fuit le coût de l\'inaction — ici, sa santé.',
-      phrase:'« Qu\'est-ce qui change dans 6 mois si tu ne fais rien… et si, au contraire, on s\'y met maintenant ? »' },
+      phrase:'« C\'est normal d\'hésiter sur un engagement comme ça (A). Dis-moi : c\'est le budget, le bon moment, ou un doute sur le fait que ça marche pour toi (I) ? Voyons ensemble comment on cale ça (R). »' },
     { id:'consultant', emoji:'💼', label:'Consultant / freelance / prestataire',
       reine:'« C\'est trop cher » — sur une offre immatérielle, au ROI flou.',
       angle:'Ton offre est invisible : le cerveau ne sait pas où l\'ancrer. Vends le résultat chiffré, pas tes heures. Ramène toujours le prix à la douleur en euros.',
-      phrase:'« Trop cher par rapport à quoi exactement ? Et combien te coûte le problème, lui, chaque mois ? »' },
+      phrase:'« C\'est normal de regarder le budget (A). C\'est cher par rapport à la valeur que tu perçois, ou tu avais un montant précis en tête (I) ? Regardons comment on rentabilise ça ensemble (R). »' },
     { id:'artisan', emoji:'🔧', label:'Artisan / commerçant / TPE',
       reine:'« Je compare » — « je trouve moins cher ailleurs ».',
       angle:'Le cerveau compare des prix tant qu\'il ne voit pas de différence. Pose ton ancre + l\'effet de halo de ton expertise pour sortir du simple tableau de prix.',
-      phrase:'« Moins cher, oui — mais on compare sur quels critères, au juste ? Voilà ce qui change chez moi. »' },
+      phrase:'« C\'est sain de comparer, fais-le (A). Tu compares sur le prix seul, ou sur ce que tu obtiens vraiment derrière (I) ? Voilà ce qui change concrètement chez moi (R). »' },
     { id:'therapeute', emoji:'🌿', label:'Thérapeute / praticien',
       reine:'Le malaise avec l\'argent — « je ne veux pas forcer ».',
       angle:'Le vrai blocage n\'est pas le sien, c\'est le tien. Annoncer ton prix calmement est un acte de soin : la clarté apaise la menace. Aligne valeur et accompagnement.',
-      phrase:'« Mon accompagnement, c\'est X. Prends le temps qu\'il te faut — qu\'est-ce qui te retient, vraiment ? »' },
+      phrase:'« C\'est normal de prendre le temps (A). Qu\'est-ce qui te retient, là — le budget, ou un doute sur l\'accompagnement (I) ? Voyons ce qui t\'aiderait à te lancer sereinement (R). »' },
     { id:'enseigne', emoji:'🏬', label:'Commerce spécialisé (literie, opticien, immo, luxe, auto…)',
       reine:'« Je vais réfléchir / regarder ailleurs » — sur un achat important et rare.',
       angle:'Trop d\'options = surcharge cognitive → le cerveau reporte la décision. Simplifie le choix, crée la projection (marqueur somatique) et rends visible le coût d\'attendre.',
-      phrase:'« Pour décider sereinement, il te manque quelle info précise : le budget, le modèle, ou le bon moment ? »' },
+      phrase:'« C\'est un achat qui compte, normal d\'y réfléchir (A). Il te manque quoi pour décider — le budget, le bon modèle, ou le bon moment (I) ? Trouvons l\'info qui te débloque (R). »' },
     { id:'autre', emoji:'✨', label:'Autre activité',
       reine:'« C\'est trop cher » / « je vais réfléchir ».',
       angle:'Quel que soit ton métier, l\'objection dite n\'est jamais la vraie. Il n\'en existe que 3 : Temps, Argent, Effort. Le reste est un écran de fumée à dissiper.',
-      phrase:'« Quand tu dis ça, c\'est plutôt une question de budget, de timing, ou de "est-ce que ça va marcher pour moi" ? »' }
+      phrase:'« C\'est normal d\'hésiter, tout le monde le fait (A). C\'est plutôt le budget, le timing, ou "est-ce que ça va marcher pour moi" (I) ? Voyons comment on avance ensemble (R). »' }
   ];
 
   const PROFILE_Q = [
@@ -100,7 +100,7 @@ window.QUIZ = (function () {
     h += '<div class="res-block"><div class="lbl">L\'objection-reine de ton métier · '+metier.label+'</div>';
     h += '<h4>'+metier.emoji+' '+metier.reine+'</h4>';
     h += '<p>'+metier.angle+'</p>';
-    h += '<p style="margin-bottom:6px"><b>Ta phrase-réflexe à tester dès ton prochain rendez-vous :</b></p>';
+    h += '<p style="margin-bottom:6px"><b>Ta phrase-réflexe — méthode AIR (Accepte → Interroge → Réponds) — à tester dès ton prochain rendez-vous :</b></p>';
     h += '<div class="res-phrase">'+metier.phrase+'</div></div>';
     return h;
   }

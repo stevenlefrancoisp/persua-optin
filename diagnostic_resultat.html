@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Persua — Ton diagnostic de vente /100</title>
+<script>if(window.top!==window.self){try{window.top.location.replace(window.location.href);}catch(e){}}</script>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<style>
+:root{ --indigo:#544AFA; --electric:#4747FD; --deep:#13133A; --ink:#0A0A14; --pearl:#F4F2F8; --white:#FFFFFF; --mist:#9B96B8; --radius:16px; --good:#3DD68C; --warn:#F4B740; --bad:#F4607A; }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'General Sans',sans-serif; background-color:var(--deep);
+  background-image:radial-gradient(55vw 55vw at 80% -5%, rgba(84,74,250,.18), rgba(19,19,58,0) 60%),radial-gradient(50vw 50vw at 10% 30%, rgba(71,71,253,.10), rgba(19,19,58,0) 55%);
+  background-attachment:fixed; color:var(--pearl); line-height:1.55; -webkit-font-smoothing:antialiased; min-height:100vh}
+.wrap{max-width:680px; margin:0 auto; padding:0 22px}
+h1,h2,h3,h4{font-weight:700; letter-spacing:-.02em; color:var(--white); line-height:1.14}
+.ink{color:var(--indigo)}
+.alert{background:rgba(84,74,250,.12); border-bottom:1px solid rgba(84,74,250,.35); color:var(--pearl); text-align:center; font-weight:600; font-size:13.5px; letter-spacing:.04em; padding:11px 18px}
+.top{text-align:center; padding:34px 0 6px}
+.top .kicker{color:var(--mist); font-weight:600; font-size:13px; letter-spacing:.16em; text-transform:uppercase}
+.btn{display:inline-block; background:var(--indigo); color:#fff!important; font-weight:600; font-size:18px; text-decoration:none; border:none; border-radius:var(--radius); padding:18px 32px; cursor:pointer; box-shadow:0 12px 30px rgba(84,74,250,.4); transition:transform .2s,box-shadow .2s,filter .2s}
+.btn:hover{transform:translateY(-2px); box-shadow:0 18px 44px rgba(84,74,250,.55); filter:brightness(1.08)}
+.shell{max-width:640px; margin:14px auto 0}
+.card{background:rgba(19,19,58,.72); border:1px solid rgba(84,74,250,.32); border-radius:22px; padding:32px 30px; box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.sec-lbl{color:var(--mist); font-weight:700; font-size:12px; letter-spacing:.14em; text-transform:uppercase; text-align:center; margin:30px 0 4px}
+
+.gauge{text-align:center; margin-bottom:8px}
+.gauge .kick{color:var(--mist); font-weight:600; font-size:13px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:8px}
+.gauge .num{font-size:clamp(54px,12vw,82px); font-weight:700; color:#fff; line-height:1; letter-spacing:-.03em}
+.gauge .num small{font-size:.34em; color:var(--mist); font-weight:600}
+.gauge .ring{width:100%; height:12px; background:rgba(255,255,255,.10); border-radius:99px; overflow:hidden; margin:18px 0 6px}
+.gauge .ring i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--electric),var(--indigo)); border-radius:99px; transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+.band-title{font-size:clamp(20px,3.4vw,27px); margin:14px 0 6px}
+.band-sub{color:var(--pearl); font-size:15.5px; max-width:500px; margin:0 auto}
+
+.dims{margin:14px 0 6px}
+.dimrow{margin:14px 0}
+.dimrow .head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px}
+.dimrow .nm{color:#fff; font-weight:600; font-size:15px}
+.dimrow .pc{font-weight:700; font-size:14px}
+.dimrow .bar{height:9px; background:rgba(255,255,255,.09); border-radius:99px; overflow:hidden}
+.dimrow .bar i{display:block; height:100%; width:0; border-radius:99px; transition:width .9s cubic-bezier(.2,.7,.2,1)}
+.tag-faible{font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--bad); margin-left:8px}
+
+.block{background:rgba(10,10,20,.4); border:1px solid rgba(84,74,250,.28); border-radius:16px; padding:20px 22px; margin:14px 0; text-align:left}
+.block .lbl{color:var(--indigo); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:8px}
+.block h4{color:#fff; font-size:19px; margin-bottom:10px}
+.block p{color:var(--pearl); font-size:15.5px; margin:0 0 10px}
+.block p:last-child{margin-bottom:0}
+.block.force{border-color:rgba(61,214,140,.35)}
+.block.force .lbl{color:var(--good)}
+/* blocs profil (réutilise res-block de l'étage 1) */
+.res-block{background:rgba(10,10,20,.4); border:1px solid rgba(84,74,250,.28); border-radius:16px; padding:20px 22px; margin:14px 0; text-align:left}
+.res-block .lbl{color:var(--indigo); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:8px}
+.res-block h4{color:#fff; font-size:19px; margin-bottom:10px}
+.res-block p{color:var(--pearl); font-size:15.5px; margin:0 0 10px}
+.res-block p:last-child{margin-bottom:0}
+.res-phrase{background:rgba(84,74,250,.12); border-left:3px solid var(--indigo); padding:14px 16px; border-radius:8px; color:#fff; font-style:italic; font-size:16px; margin-top:6px}
+
+.cta{text-align:center; margin-top:28px}
+.cta h3{font-size:clamp(20px,3vw,26px); margin-bottom:8px}
+.cta p{color:var(--pearl); font-size:15.5px; max-width:480px; margin:0 auto 18px}
+.restart{margin-top:18px; display:inline-block; background:none; border:none; color:var(--mist); font-family:inherit; font-size:13.5px; cursor:pointer; text-decoration:none}
+.restart:hover{color:var(--pearl)}
+.empty{text-align:center}
+.empty p{color:var(--pearl); font-size:16px; margin:0 auto 22px; max-width:440px}
+footer{padding:40px 0 56px; text-align:center}
+footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; line-height:1.7}
+@media(max-width:680px){ .card{padding:26px 20px} }
+</style>
+</head>
+<body>
+
+  <div class="alert">✅ TON DIAGNOSTIC COMPLET EST PRÊT</div>
+  <div class="top wrap"><span class="kicker">Diagnostic Persua · neuro-vente</span></div>
+
+  <div class="shell wrap">
+    <div class="card" id="out"><!-- rempli par JS --></div>
+  </div>
+
+  <footer class="wrap">
+    <p>Copyright © 2022–2026 — Tous droits réservés · Persua SASU · SIRET 100 132 497 00015 · TVA FR46100132497 · APE 8559A (Organisme de formation)</p>
+  </footer>
+
+  <script src="quiz_data.js"></script>
+  <script src="audit_data.js"></script>
+  <script>
+  (function(){
+    const out = document.getElementById('out');
+    let quizAns=null, auditAns=null, lead=null;
+    try{ quizAns = JSON.parse(localStorage.getItem('persua_quiz_v1')); }catch(e){}
+    try{ auditAns = JSON.parse(localStorage.getItem('persua_audit_v1')); }catch(e){}
+    try{ lead = JSON.parse(localStorage.getItem('persua_audit_lead')); }catch(e){}
+
+    const auditOk = Array.isArray(auditAns) && auditAns.filter(a=>a && typeof a.s==='number').length === AUDIT.Q.length;
+    const quizOk  = Array.isArray(quizAns) && quizAns[0];
+
+    if(!auditOk || !quizOk){
+      out.innerHTML = '<div class="empty"><h2 class="band-title">Ton diagnostic n\'est pas terminé.</h2>'+
+        '<p>Il te manque quelques réponses (ou ton navigateur les a effacées). Reprends, ça prend ~6 minutes.</p>'+
+        '<a class="btn" href="diagnostic.html">REPRENDRE MON DIAGNOSTIC</a></div>';
+      return;
+    }
+    // Score verrouillé derrière la capture
+    if(!lead || !lead.prenom){ window.location.replace('diagnostic.html'); return; }
+
+    const r = AUDIT.score(auditAns);
+    const b = AUDIT.band(r.global);
+    const prof = QUIZ.getProfile(quizAns);
+    const prenom = (lead.prenom||'').trim();
+    const weakIds = r.weakest.map(d=>d.id);
+    function barColor(p){ return p<=40 ? 'var(--bad)' : (p<=70 ? 'var(--warn)' : 'var(--good)'); }
+
+    let h = '';
+    /* 1 — Jauge globale */
+    h += '<div class="gauge">';
+    if(prenom){ h += '<div class="kick">'+prenom+', voici ton score</div>'; }
+    h += '<div class="num" id="gnum">0<small>/100</small></div>';
+    h += '<div class="ring"><i id="gring"></i></div>';
+    h += '<h2 class="band-title">'+b.titre+'</h2>';
+    h += '<p class="band-sub">'+b.sub+'</p>';
+    h += '</div>';
+
+    /* 2 — Détail par dimension */
+    h += '<div class="sec-lbl">Le détail de tes 7 leviers</div>';
+    h += '<div class="dims">';
+    AUDIT.DIMS.forEach(d=>{
+      const dim = r.dims.find(x=>x.id===d.id);
+      const isWeak = weakIds.indexOf(d.id)>-1;
+      h += '<div class="dimrow"><div class="head"><span class="nm">'+d.emoji+' '+d.label+(isWeak?'<span class="tag-faible">à muscler</span>':'')+'</span>';
+      h += '<span class="pc" style="color:'+barColor(dim.pct)+'">'+dim.pct+'%</span></div>';
+      h += '<div class="bar"><i data-w="'+dim.pct+'" style="background:'+barColor(dim.pct)+'"></i></div></div>';
+    });
+    h += '</div>';
+
+    /* 3 — Leviers prioritaires (faibles) */
+    r.weakest.forEach(d=>{
+      const full = AUDIT.getDim(d.id);
+      h += '<div class="block"><div class="lbl">Ton levier prioritaire · '+full.label+' ('+d.pct+'%)</div>';
+      h += '<h4>'+full.emoji+' '+full.court.charAt(0).toUpperCase()+full.court.slice(1)+'</h4>';
+      h += '<p>'+full.faible+'</p></div>';
+    });
+    /* Force */
+    const sFull = AUDIT.getDim(r.strongest.id);
+    h += '<div class="block force"><div class="lbl">Ton point fort · '+sFull.label+' ('+r.strongest.pct+'%)</div>';
+    h += '<h4>'+sFull.emoji+' On s\'appuie dessus</h4><p>'+sFull.fort+'</p></div>';
+
+    /* 4 — Profil de vendeur + objection-reine métier + phrase-réflexe (étage 1) */
+    h += '<div class="sec-lbl">Ton profil & ton métier</div>';
+    h += '<div class="res-block" style="margin-bottom:0;border:none;background:none;padding:0;text-align:center">';
+    h += '<h3 style="font-size:clamp(20px,3.4vw,26px)">'+prof.emoji+' Tu vends en mode… '+prof.titre+'.</h3></div>';
+    h += QUIZ.buildResultHTML(quizAns);
+
+    /* 5 — CTA WhatsApp + appel */
+    const wDim = r.weakest[0] ? AUDIT.getDim(r.weakest[0].id) : null;
+    const waLevier = (wDim && wDim.wa) ? wDim.wa : 'ton point faible';
+    h += '<div class="cta">';
+    h += '<div class="block" style="border-color:rgba(37,211,102,.32);background:rgba(37,211,102,.08);text-align:left">';
+    h += '<div class="lbl" style="color:#3DD68C">📲 La suite</div>';
+    h += '<p>'+(prenom?prenom+', je':'Je')+' t\'envoie un petit message sur <b style="color:#fff">WhatsApp</b> dans les prochains jours — pour voir, en 2 lignes, si mon approche peut t\'aider sur <b style="color:#fff">'+waLevier+'</b>. Sans blabla, sans pression.</p></div>';
+    h += '<h3>Tu préfères ne pas attendre ?</h3>';
+    h += '<p>On regarde <span class="ink">ton</span> cas ensemble en 15 min. Ton score te dit OÙ ça fuit — l\'appel te dit COMMENT le réparer en premier, sur ton activité précise.</p>';
+    h += '<a class="btn" href="https://diagnostic.persua-neurovente.com">RÉSERVER MON APPEL (15 MIN)</a>';
+    h += '<br><a class="restart" href="diagnostic.html">↺ Refaire le diagnostic</a>';
+    h += '</div>';
+
+    out.innerHTML = h;
+
+    requestAnimationFrame(()=>{
+      document.getElementById('gring').style.width = r.global+'%';
+      document.querySelectorAll('.bar i').forEach(el=>{ el.style.width = el.getAttribute('data-w')+'%'; });
+      const gnum = document.getElementById('gnum');
+      let n=0; const step = Math.max(1, Math.round(r.global/40));
+      const iv = setInterval(()=>{ n+=step; if(n>=r.global){ n=r.global; clearInterval(iv); } gnum.innerHTML = n+'<small>/100</small>'; }, 26);
+    });
+  })();
+  </script>
+
+</body>
+</html>
