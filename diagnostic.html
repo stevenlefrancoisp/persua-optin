@@ -44,10 +44,18 @@ h1,h2,h3{font-weight:700; letter-spacing:-.02em; color:var(--white); line-height
 .opt:active{transform:scale(.99)}
 .opt.sel{border-color:var(--indigo); background:rgba(84,74,250,.18); color:#fff}
 .opt .em{font-size:18px; line-height:1.3}
-/* Capture */
+/* Révélations (temps 1 & 2) */
 .res-badge{display:inline-block; background:var(--indigo); color:#fff; font-weight:700; font-size:12px; letter-spacing:.08em; text-transform:uppercase; padding:7px 14px; border-radius:99px; margin-bottom:14px}
+.res-badge.free{background:rgba(84,74,250,.18); color:var(--pearl); border:1px solid rgba(84,74,250,.4)}
 .cap-h{font-size:clamp(22px,4vw,29px); margin-bottom:8px}
 .cap-sub{color:var(--pearl); font-size:15.5px; margin-bottom:16px}
+.res-block{background:rgba(10,10,20,.4); border:1px solid rgba(84,74,250,.28); border-radius:16px; padding:20px 22px; margin:14px 0; text-align:left}
+.res-block .lbl{color:var(--indigo); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:8px}
+.res-block h4{color:#fff; font-size:19px; margin-bottom:10px}
+.res-block p{color:var(--pearl); font-size:15.5px; margin:0 0 10px}
+.res-block p:last-child{margin-bottom:0}
+.res-phrase{background:rgba(84,74,250,.12); border-left:3px solid var(--indigo); padding:14px 16px; border-radius:8px; color:#fff; font-style:italic; font-size:16px; margin-top:6px}
+/* Capture */
 .lock .l{display:flex; gap:11px; align-items:flex-start; background:rgba(10,10,20,.4); border:1px solid rgba(84,74,250,.22); border-radius:12px; padding:12px 14px; margin:9px 0; font-size:14.5px}
 .lock .l .k{font-size:18px}
 .lock .l b{color:#fff}
@@ -103,15 +111,15 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
   <script src="quiz_data.js"></script>
   <script src="audit_data.js"></script>
   <script>
-  /* ====== À BRANCHER : webhook Make (lead → systeme.io + Notion + WhatsApp). Vide = test sans envoi. ====== */
-  const LEAD_WEBHOOK = 'https://hook.eu2.make.com/l27k4pclyo9u4xjtbgdmt5ibhrpe2fc6';
-  /* ===================================================================================================== */
+  /* ====== Webhook Make (lead → systeme.io + Notion + WhatsApp). Tiré 1× à la capture. Vide = test sans envoi. ====== */
+  const LEAD_WEBHOOK  = 'https://hook.eu2.make.com/l27k4pclyo9u4xjtbgdmt5ibhrpe2fc6';
+  /* ====== Fin d'audit : 2e alerte avec score /100 (même scénario Make). Sert aussi de base à l'app-sync Phase 2. ====== */
+  const SCORE_WEBHOOK = 'https://hook.eu2.make.com/l27k4pclyo9u4xjtbgdmt5ibhrpe2fc6';
+  /* ========================================================================================================= */
 
   (function(){
-    // Séquence unifiée : 0 = métier · 1..5 = profil F/E/R/C · 6..55 = audit (50)
-    const NQ_PROFILE = QUIZ.PROFILE_Q.length;          // 5
-    const NQ_AUDIT   = AUDIT.Q.length;                 // 50
-    const TOTAL      = 1 + NQ_PROFILE + NQ_AUDIT;       // 56
+    const NT1 = 1 + QUIZ.PROFILE_Q.length;   // 6  (métier + 5 profil)  -> Temps 1
+    const NT2 = AUDIT.Q.length;              // 14 (audit raccourci)    -> Temps 2
     const card = document.getElementById('card');
     const pbar = document.getElementById('pbar');
     const nav  = document.getElementById('nav');
@@ -120,100 +128,105 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
     const back = document.getElementById('back');
 
     let quizAns  = [];  // [metierId, L,L,L,L,L]  -> persua_quiz_v1
-    let auditAns = [];  // [{i,s} x50]            -> persua_audit_v1
-    let idx = 0;        // 0..TOTAL-1 (puis TOTAL = capture)
-
-    function phase(i){ if(i===0) return 'metier'; if(i<=NQ_PROFILE) return 'profile'; return 'audit'; }
-    function dimLabel(id){ const d = AUDIT.DIMS.find(x=>x.id===id); return d ? (d.emoji+' '+d.label) : ''; }
-
-    function showChrome(on){ pbar.classList.toggle('on', on); nav.style.display = on ? 'flex' : 'none'; }
-
-    function renderIntro(){
-      showChrome(false);
-      card.innerHTML =
-        '<div class="intro">'+
-        '<h1>Découvre ton <span class="ink">score de vente</span> sur 100.</h1>'+
-        '<p class="lead">Un diagnostic neuro-vente complet : ton profil de vendeur, l\'objection-reine de ton métier, et tes 7 leviers passés au crible. Tu sauras exactement où tu perds des deals — et quoi réparer en premier.</p>'+
-        '<ul>'+
-        '<li><span class="em">🧠</span><span>Ton <b>profil de vendeur</b> + l\'objection-reine de ton métier.</span></li>'+
-        '<li><span class="em">📊</span><span>Ton <b>score /100</b> et le détail de tes 7 leviers (prospection, découverte, prix, closing…).</span></li>'+
-        '<li><span class="em">🎯</span><span>Ta <b>fuite n°1</b> + ton plan concret pour la réparer.</span></li>'+
-        '</ul>'+
-        '<p class="meta-line">⏱️ ~6 minutes · 100% gratuit · résultat immédiat</p>'+
-        '<button class="btn" id="start">COMMENCER MON DIAGNOSTIC →</button>'+
-        '</div>';
-      document.getElementById('start').addEventListener('click', ()=>{ idx=0; render(); });
-    }
-
-    function pick(optIndex){
-      const ph = phase(idx);
-      if(ph==='metier'){ quizAns[0] = QUIZ.METIERS[optIndex].id; }
-      else if(ph==='profile'){ const q = QUIZ.PROFILE_Q[idx-1]; quizAns[idx] = q.opts[optIndex].p; }
-      else { const q = AUDIT.Q[idx-1-NQ_PROFILE]; auditAns[idx-1-NQ_PROFILE] = { i:optIndex, s:q.opts[optIndex].s }; }
-      persist();
-      if(idx < TOTAL-1){ idx++; setTimeout(render, 150); }
-      else { renderCapture(); }
-    }
+    let auditAns = [];  // [{i,s} x14]            -> persua_audit_v1
+    let stage = 'intro';  // intro | t1 | reveal1 | capture | reveal2 | t2
+    let i1 = 0;           // 0..NT1-1
+    let i2 = 0;           // 0..NT2-1
 
     function persist(){
       try{ localStorage.setItem('persua_quiz_v1', JSON.stringify(quizAns)); }catch(e){}
       try{ localStorage.setItem('persua_audit_v1', JSON.stringify(auditAns)); }catch(e){}
     }
+    function showChrome(on, label){
+      pbar.classList.toggle('on', !!on);
+      nav.style.display = on ? 'flex' : 'none';
+      if(label) ptxt.textContent = label;
+    }
+    function toTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
 
-    function selectedIndex(){
-      const ph = phase(idx);
-      if(ph==='metier'){ return QUIZ.METIERS.findIndex(m=>m.id===quizAns[0]); }
-      if(ph==='profile'){ const q=QUIZ.PROFILE_Q[idx-1]; return q.opts.findIndex(o=>o.p===quizAns[idx]); }
-      const a = auditAns[idx-1-NQ_PROFILE]; return a ? a.i : -1;
+    /* ---------- INTRO ---------- */
+    function renderIntro(){
+      stage='intro'; showChrome(false);
+      card.innerHTML =
+        '<div class="intro">'+
+        '<h1>Quel <span class="ink">vendeur</span> es-tu vraiment&nbsp;?</h1>'+
+        '<p class="lead">Un diagnostic neuro-vente en deux temps. D\'abord ton profil de vendeur et l\'objection-reine de ton métier (90 secondes). Puis, si tu veux aller au bout, ton score /100 sur tes 7 leviers — pour savoir exactement où tu perds des deals.</p>'+
+        '<ul>'+
+        '<li><span class="em">🧠</span><span><b>Temps 1 · gratuit, immédiat</b> — ton profil de vendeur + ta phrase-réflexe pour ton prochain rendez-vous.</span></li>'+
+        '<li><span class="em">📊</span><span><b>Temps 2 · ton score /100</b> — tes 7 leviers passés au crible, ta fuite n°1 et quoi réparer en premier.</span></li>'+
+        '</ul>'+
+        '<p class="meta-line">⏱️ 90 sec pour le profil · 100% gratuit · résultat à l\'écran</p>'+
+        '<button class="btn" id="start">DÉCOUVRIR MON PROFIL →</button>'+
+        '</div>';
+      document.getElementById('start').addEventListener('click', ()=>{ stage='t1'; i1=0; renderT1(); });
     }
 
-    function render(){
-      showChrome(true);
-      const ph = phase(idx);
-      fill.style.width = (idx/TOTAL*100)+'%';
-      ptxt.textContent = (idx+1)+' / '+TOTAL;
-      back.disabled = (idx===0);
-      let h = '', opts = [], qtext = '', tag = '';
-      if(ph==='metier'){ tag='Pour commencer'; qtext='Quel est ton métier ?'; opts = QUIZ.METIERS.map(m=>({em:m.emoji, t:m.label})); }
-      else if(ph==='profile'){ const q=QUIZ.PROFILE_Q[idx-1]; tag='Ton profil de vendeur'; qtext=q.q; opts=q.opts.map(o=>({em:o.em, t:o.t})); }
-      else { const q=AUDIT.Q[idx-1-NQ_PROFILE]; tag=dimLabel(q.d); qtext=q.q; opts=q.opts.map(o=>({em:'', t:o.t})); }
-      h += '<div class="dim-tag">'+tag+'</div>';
-      h += '<div class="qtext">'+qtext+'</div>';
-      const sel = selectedIndex();
+    /* ---------- TEMPS 1 : métier + profil (6 q) ---------- */
+    function renderT1(){
+      stage='t1';
+      showChrome(true, (i1+1)+' / '+NT1+' · Ton profil');
+      fill.style.width = (i1/NT1*100)+'%';
+      back.disabled = false;
+      let tag, qtext, opts;
+      if(i1===0){ tag='Pour commencer'; qtext='Quel est ton métier ?'; opts = QUIZ.METIERS.map(m=>({em:m.emoji, t:m.label})); }
+      else { const q=QUIZ.PROFILE_Q[i1-1]; tag='Ton profil de vendeur'; qtext=q.q; opts=q.opts.map(o=>({em:o.em, t:o.t})); }
+      let h = '<div class="dim-tag">'+tag+'</div><div class="qtext">'+qtext+'</div>';
+      const sel = i1===0 ? QUIZ.METIERS.findIndex(m=>m.id===quizAns[0])
+                         : (QUIZ.PROFILE_Q[i1-1].opts.findIndex(o=>o.p===quizAns[i1]));
       opts.forEach((o,i)=>{ h += '<button class="opt'+(i===sel?' sel':'')+'" data-i="'+i+'">'+(o.em?'<span class="em">'+o.em+'</span>':'')+'<span>'+o.t+'</span></button>'; });
       card.innerHTML = h;
-      card.querySelectorAll('.opt').forEach(b=>b.addEventListener('click', ()=>pick(+b.getAttribute('data-i'))));
-      window.scrollTo({top:0, behavior:'smooth'});
+      card.querySelectorAll('.opt').forEach(b=>b.addEventListener('click', ()=>pickT1(+b.getAttribute('data-i'))));
+      toTop();
+    }
+    function pickT1(optIndex){
+      if(i1===0){ quizAns[0] = QUIZ.METIERS[optIndex].id; }
+      else { quizAns[i1] = QUIZ.PROFILE_Q[i1-1].opts[optIndex].p; }
+      persist();
+      if(i1 < NT1-1){ i1++; setTimeout(renderT1, 150); }
+      else { renderReveal1(); }
     }
 
-    function renderCapture(){
-      showChrome(false);
-      persist();
-      fill.style.width='100%';
-      const r = AUDIT.score(auditAns);
-      const weak = r.weakest[0];
+    /* ---------- RÉVÉLATION 1 (gratuite) : profil + piège ---------- */
+    function renderReveal1(){
+      stage='reveal1'; showChrome(false);
       const prof = QUIZ.getProfile(quizAns);
       let h = '';
-      h += '<div class="res-badge">✅ Diagnostic terminé</div>';
-      h += '<h2 class="cap-h">'+prof.emoji+' Ton profil : '+prof.titre+'. Ton score est prêt.</h2>';
-      h += '<p class="cap-sub">Laisse-moi où te l\'envoyer — et ton rapport complet s\'affiche aussitôt.</p>';
+      h += '<div class="res-badge free">🎁 Temps 1 · ton profil de vendeur</div>';
+      h += '<h2 class="cap-h">'+prof.emoji+' Tu vends en mode… '+prof.titre+'.</h2>';
+      h += '<div class="res-block"><p>'+prof.desc+'</p>';
+      h += '<p><b>⚠️ '+prof.piege+'</b></p></div>';
+      h += '<p class="cap-sub">Il te manque une chose : <b>comment</b> transformer ce piège en levier — et l\'objection-reine que ton métier t\'envoie sans arrêt. Je te donne les deux tout de suite.</p>';
+      h += '<button class="btn" id="next">RECEVOIR LA SUITE DE MON DIAGNOSTIC →</button>';
+      card.innerHTML = h;
+      document.getElementById('next').addEventListener('click', renderCapture);
+      toTop();
+    }
+
+    /* ---------- CAPTURE (email) ---------- */
+    function renderCapture(){
+      stage='capture'; showChrome(false); persist();
+      const prof = QUIZ.getProfile(quizAns);
+      let h = '';
+      h += '<div class="res-badge">🔓 Débloque la suite</div>';
+      h += '<h2 class="cap-h">Où je t\'envoie la suite de ton diagnostic ?</h2>';
+      h += '<p class="cap-sub">Ta phrase-réflexe s\'affiche à l\'écran juste après. Et tu pourras enchaîner sur ton score /100 si tu veux aller au bout.</p>';
       h += '<div class="lock">';
-      h += '<div class="l"><span class="k">📊</span><span>Ton <b>score /100</b> + le détail de tes 7 leviers de vente.</span></div>';
-      h += '<div class="l"><span class="k">🎯</span><span>Ta fuite n°1 (<b>'+weak.emoji+' '+weak.label+'</b>) + ton plan pour la réparer.</span></div>';
-      h += '<div class="l"><span class="k">💬</span><span>Ton <b>profil '+prof.titre+'</b> + l\'objection-reine de ton métier + ta phrase-réflexe.</span></div>';
+      h += '<div class="l"><span class="k">🎯</span><span>Ton <b>levier Persua</b> : comment retourner le piège du '+prof.titre+' à ton avantage.</span></div>';
+      h += '<div class="l"><span class="k">💬</span><span>L\'<b>objection-reine de ton métier</b> + ta <b>phrase-réflexe</b> (méthode AIR) à tester dès ton prochain RDV.</span></div>';
+      h += '<div class="l"><span class="k">📊</span><span>L\'accès à ton <b>audit /100</b> sur tes 7 leviers de vente.</span></div>';
       h += '</div>';
-      h += '<div class="wa-note"><span class="k">📲</span><span>Et après ? <b>Je t\'envoie un petit message sur WhatsApp</b> pour voir, en 2 lignes, si mon approche peut vraiment t\'aider sur ton point faible. <b>Sans blabla, sans pression</b> — tu me dis stop quand tu veux.</span></div>';
+      h += '<div class="wa-note"><span class="k">📲</span><span>Et après ? <b>Je t\'envoie un petit message sur WhatsApp</b> pour voir, en 2 lignes, si mon approche peut vraiment t\'aider. <b>Sans blabla, sans pression</b> — tu me dis stop quand tu veux.</span></div>';
       h += '<form id="leadform" novalidate>';
       h += '<div class="row2"><div class="field"><label>Prénom</label><input id="f-prenom" type="text" autocomplete="given-name" placeholder="Ton prénom"></div>';
       h += '<div class="field"><label>Nom</label><input id="f-nom" type="text" autocomplete="family-name" placeholder="Ton nom"></div></div>';
       h += '<div class="field"><label>Email</label><input id="f-email" type="email" autocomplete="email" placeholder="ton@email.com"></div>';
       h += '<div class="field"><label>Téléphone (WhatsApp)</label><input id="f-tel" type="tel" autocomplete="tel" placeholder="06 12 34 56 78"></div>';
-      h += '<button class="btn" id="submit" type="submit">VOIR MON SCORE /100 →</button>';
+      h += '<button class="btn" id="submit" type="submit">VOIR LA SUITE DE MON DIAGNOSTIC →</button>';
       h += '<div class="errmsg" id="err"></div>';
       h += '<p class="note-out">Tes infos restent entre nous. Désinscription en 1 clic, zéro spam.</p>';
       h += '</form>';
       card.innerHTML = h;
-      window.scrollTo({top:0, behavior:'smooth'});
+      toTop();
 
       const F = id => document.getElementById(id);
       const err = F('err'), btn = F('submit');
@@ -229,29 +242,98 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
         else if(!isEmail(email)){ F('f-email').classList.add('err'); bad='Un email valide pour t\'envoyer ton rapport.'; }
         else if(!isTel(tel)){ F('f-tel').classList.add('err'); bad='Un numéro valide (c\'est là que je t\'écris sur WhatsApp).'; }
         if(bad){ err.textContent=bad; return; }
-        err.textContent=''; btn.disabled=true; btn.textContent='Un instant…';
         const metier = QUIZ.getMetier(quizAns);
         const lead = {
           prenom, nom, email, tel,
-          score: r.global,
           profil: prof.titre,
           metier: metier.label,
           objection_reine: metier.reine,
-          leviers_faibles: r.weakest.map(d=>d.label+' ('+d.pct+'%)'),
-          point_fort: r.strongest.label+' ('+r.strongest.pct+'%)',
-          dimensions: r.dims.map(d=>({dim:d.label, pct:d.pct})),
-          source: 'diagnostic_persua'
+          source: 'diagnostic_persua',
+          stage: 'lead'
         };
         try{ localStorage.setItem('persua_audit_lead', JSON.stringify(lead)); }catch(e){}
-        function go(){ window.location.href='diagnostic_resultat.html'; }
-        if(LEAD_WEBHOOK){
-          fetch(LEAD_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)}).then(go).catch(go);
-          setTimeout(go, 2500);
-        } else { go(); }
+        // Lead sécurisé : on tire le webhook en tâche de fond, sans faire attendre l'utilisateur.
+        if(LEAD_WEBHOOK){ try{ fetch(LEAD_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)}); }catch(e){} }
+        renderReveal2();
       });
     }
 
-    back.addEventListener('click', ()=>{ if(idx>0){ idx--; render(); } });
+    /* ---------- RÉVÉLATION 2 (post-capture) : levier + objection-reine + phrase AIR ---------- */
+    function renderReveal2(){
+      stage='reveal2'; showChrome(false);
+      const prof = QUIZ.getProfile(quizAns);
+      const metier = QUIZ.getMetier(quizAns);
+      let h = '';
+      h += '<div class="res-badge">✅ Ton diagnostic · temps 2</div>';
+      h += '<h2 class="cap-h">Voilà ce qui va changer tes rendez-vous.</h2>';
+      h += '<div class="res-block"><div class="lbl">Ton levier Persua · '+prof.titre+'</div>';
+      h += '<p>'+prof.levier+'</p></div>';
+      h += '<div class="res-block"><div class="lbl">L\'objection-reine de ton métier · '+metier.label+'</div>';
+      h += '<h4>'+metier.emoji+' '+metier.reine+'</h4>';
+      h += '<p>'+metier.angle+'</p>';
+      h += '<p style="margin-bottom:6px"><b>Ta phrase-réflexe — méthode AIR (Accepte → Interroge → Réponds) — à tester dès ton prochain rendez-vous :</b></p>';
+      h += '<div class="res-phrase">'+metier.phrase+'</div></div>';
+      h += '<p class="cap-sub" style="margin-top:18px">Tu sais <b>comment</b> tu vends. Reste à savoir <b>où</b> tu perds des deals, précisément. 14 questions, ~2 minutes, et tu as ton score /100 sur tes 7 leviers.</p>';
+      h += '<button class="btn" id="startaudit">LANCER MON AUDIT /100 →</button>';
+      card.innerHTML = h;
+      document.getElementById('startaudit').addEventListener('click', ()=>{ stage='t2'; i2=0; renderT2(); });
+      toTop();
+    }
+
+    /* ---------- TEMPS 2 : audit (14 q) ---------- */
+    function dimLabel(id){ const d = AUDIT.DIMS.find(x=>x.id===id); return d ? (d.emoji+' '+d.label) : ''; }
+    function renderT2(){
+      stage='t2';
+      showChrome(true, (i2+1)+' / '+NT2+' · Ton score');
+      fill.style.width = (i2/NT2*100)+'%';
+      back.disabled = false;
+      const q = AUDIT.Q[i2];
+      let h = '<div class="dim-tag">'+dimLabel(q.d)+'</div><div class="qtext">'+q.q+'</div>';
+      const a = auditAns[i2]; const sel = a ? a.i : -1;
+      q.opts.forEach((o,i)=>{ h += '<button class="opt'+(i===sel?' sel':'')+'" data-i="'+i+'"><span>'+o.t+'</span></button>'; });
+      card.innerHTML = h;
+      card.querySelectorAll('.opt').forEach(b=>b.addEventListener('click', ()=>pickT2(+b.getAttribute('data-i'))));
+      toTop();
+    }
+    function pickT2(optIndex){
+      const q = AUDIT.Q[i2];
+      auditAns[i2] = { i:optIndex, s:q.opts[optIndex].s };
+      persist();
+      if(i2 < NT2-1){ i2++; setTimeout(renderT2, 150); }
+      else { finish(); }
+    }
+
+    /* ---------- FIN : calcule le score, enrichit le lead, → page résultat ---------- */
+    function finish(){
+      persist();
+      const r = AUDIT.score(auditAns);
+      const prof = QUIZ.getProfile(quizAns);
+      const metier = QUIZ.getMetier(quizAns);
+      let lead = {};
+      try{ lead = JSON.parse(localStorage.getItem('persua_audit_lead')) || {}; }catch(e){}
+      Object.assign(lead, {
+        profil: prof.titre,
+        metier: metier.label,
+        objection_reine: metier.reine,
+        score: r.global,
+        leviers_faibles: r.weakest.map(d=>d.label+' ('+d.pct+'%)'),
+        point_fort: r.strongest.label+' ('+r.strongest.pct+'%)',
+        dimensions: r.dims.map(d=>({dim:d.label, pct:d.pct})),
+        source: 'diagnostic_persua',
+        stage: 'complete'
+      });
+      try{ localStorage.setItem('persua_audit_lead', JSON.stringify(lead)); }catch(e){}
+      // Phase 2 (enrichissement score, sans email) — inactif tant que SCORE_WEBHOOK est vide.
+      if(SCORE_WEBHOOK){ try{ fetch(SCORE_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)}); }catch(e){} }
+      window.location.href='diagnostic_resultat.html';
+    }
+
+    /* ---------- Bouton Précédent (contextuel) ---------- */
+    back.addEventListener('click', ()=>{
+      if(stage==='t1'){ if(i1>0){ i1--; renderT1(); } else { renderIntro(); } }
+      else if(stage==='t2'){ if(i2>0){ i2--; renderT2(); } else { renderReveal2(); } }
+    });
+
     renderIntro();
   })();
   </script>

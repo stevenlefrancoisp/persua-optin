@@ -37,8 +37,8 @@ window.AUDIT = (function () {
       fort:'Tu es au clair avec ta légitimité à vendre. Tu ne portes pas la vente comme un fardeau — c\'est ton plus gros levier silencieux.' }
   ];
 
-  /* --- Les 50 questions. d = dimension. opts: t=texte, s=score de maturité 0..3 --- */
-  const Q = [
+  /* --- Les 50 questions (banque complète, conservée). d = dimension. opts: t=texte, s=score de maturité 0..3 --- */
+  const Q_FULL = [
     /* ===== PROSPECTION (7) ===== */
     { d:'prospection', q:'Pour décrocher de nouveaux rendez-vous, ton vrai moteur aujourd\'hui :', opts:[
       {t:'Surtout le bouche-à-oreille — j\'attends qu\'on me recommande.', s:1},
@@ -303,6 +303,11 @@ window.AUDIT = (function () {
       {t:'Un investissement direct sur mon chiffre.', s:3},
       {t:'Quelque chose à faire « un jour ».', s:1} ]}
   ];
+
+  /* --- Version courte (v2.7 · deux temps) : 2 questions les plus discriminantes par levier.
+     Indices dans Q_FULL. 7 leviers × 2 = 14 questions. Score /100 conservé (max 6/levier). --- */
+  const SHORT_IDX = [1,2, 7,10, 15,16, 22,23, 31,32, 37,38, 43,48];
+  const Q = SHORT_IDX.map(i => Q_FULL[i]);
 
   /* --- Scoring : % par dimension + score global /100 --- */
   function score(answers){
