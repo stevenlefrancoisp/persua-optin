@@ -114,7 +114,7 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
     function barColor(p){ return p<=40 ? 'var(--bad)' : (p<=70 ? 'var(--warn)' : 'var(--good)'); }
 
     let h = '';
-    /* 1 — Jauge globale */
+    /* 1 · Jauge globale */
     h += '<div class="gauge">';
     if(prenom){ h += '<div class="kick">'+prenom+', voici ton score</div>'; }
     h += '<div class="num" id="gnum">0<small>/100</small></div>';
@@ -123,7 +123,7 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
     h += '<p class="band-sub">'+b.sub+'</p>';
     h += '</div>';
 
-    /* 2 — Détail par dimension */
+    /* 2 · Détail par dimension */
     h += '<div class="sec-lbl">Le détail de tes 7 leviers</div>';
     h += '<div class="dims">';
     AUDIT.DIMS.forEach(d=>{
@@ -135,7 +135,7 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
     });
     h += '</div>';
 
-    /* 3 — Leviers prioritaires (faibles) */
+    /* 3 · Leviers prioritaires (faibles) */
     r.weakest.forEach(d=>{
       const full = AUDIT.getDim(d.id);
       h += '<div class="block"><div class="lbl">Ton levier prioritaire · '+full.label+' ('+d.pct+'%)</div>';
@@ -147,13 +147,13 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
     h += '<div class="block force"><div class="lbl">Ton point fort · '+sFull.label+' ('+r.strongest.pct+'%)</div>';
     h += '<h4>'+sFull.emoji+' On s\'appuie dessus</h4><p>'+sFull.fort+'</p></div>';
 
-    /* 4 — Profil de vendeur + objection-reine métier + phrase-réflexe (étage 1) */
+    /* 4 · Profil de vendeur + objection-reine métier + phrase-réflexe (étage 1) */
     h += '<div class="sec-lbl">Ton profil & ton métier</div>';
     h += '<div class="res-block" style="margin-bottom:0;border:none;background:none;padding:0;text-align:center">';
     h += '<h3 style="font-size:clamp(20px,3.4vw,26px)">'+prof.emoji+' Tu vends en mode… '+prof.titre+'.</h3></div>';
     h += QUIZ.buildResultHTML(quizAns);
 
-    /* 5 — CTA WhatsApp + appel */
+    /* 5 · CTA WhatsApp + appel */
     const wDim = r.weakest[0] ? AUDIT.getDim(r.weakest[0].id) : null;
     const waLevier = (wDim && wDim.wa) ? wDim.wa : 'ton point faible';
     h += '<div class="cta">';
