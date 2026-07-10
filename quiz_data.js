@@ -1,29 +1,29 @@
 /* ============================================================
-   Persua — données & logique du diagnostic (partagé index + resultat)
+   Persua · données & logique du diagnostic (partagé index + resultat)
    ============================================================ */
 window.QUIZ = (function () {
 
   const METIERS = [
     { id:'coach', emoji:'🏋️', label:'Coach sportif / bien-être',
-      reine:'« Je vais réfléchir » — ou « c\'est cher pour du sport ».',
-      angle:'Tu ne vends pas des séances, tu vends une transformation. Le cerveau paie pour une projection de soi (l\'anticipation du résultat) et fuit le coût de l\'inaction — ici, sa santé.',
+      reine:'« Je vais réfléchir », ou « c\'est cher pour du sport ».',
+      angle:'Tu ne vends pas des séances, tu vends une transformation. Le cerveau paie pour une projection de soi (l\'anticipation du résultat) et fuit le coût de l\'inaction : ici, sa santé.',
       phrase:'« C\'est normal d\'hésiter sur un engagement comme ça (A). Dis-moi : c\'est le budget, le bon moment, ou un doute sur le fait que ça marche pour toi (I) ? Voyons ensemble comment on cale ça (R). »' },
     { id:'consultant', emoji:'💼', label:'Consultant / freelance / prestataire',
-      reine:'« C\'est trop cher » — sur une offre immatérielle, au ROI flou.',
+      reine:'« C\'est trop cher », sur une offre immatérielle, au ROI flou.',
       angle:'Ton offre est invisible : le cerveau ne sait pas où l\'ancrer. Vends le résultat chiffré, pas tes heures. Ramène toujours le prix à la douleur en euros.',
       phrase:'« C\'est normal de regarder le budget (A). C\'est cher par rapport à la valeur que tu perçois, ou tu avais un montant précis en tête (I) ? Regardons comment on rentabilise ça ensemble (R). »' },
     { id:'artisan', emoji:'🔧', label:'Artisan / commerçant / TPE',
-      reine:'« Je compare » — « je trouve moins cher ailleurs ».',
+      reine:'« Je compare », ou « je trouve moins cher ailleurs ».',
       angle:'Le cerveau compare des prix tant qu\'il ne voit pas de différence. Pose ton ancre + l\'effet de halo de ton expertise pour sortir du simple tableau de prix.',
       phrase:'« C\'est sain de comparer, fais-le (A). Tu compares sur le prix seul, ou sur ce que tu obtiens vraiment derrière (I) ? Voilà ce qui change concrètement chez moi (R). »' },
     { id:'therapeute', emoji:'🌿', label:'Thérapeute / praticien',
-      reine:'Le malaise avec l\'argent — « je ne veux pas forcer ».',
+      reine:'Le malaise avec l\'argent : « je ne veux pas forcer ».',
       angle:'Le vrai blocage n\'est pas le sien, c\'est le tien. Annoncer ton prix calmement est un acte de soin : la clarté apaise la menace. Aligne valeur et accompagnement.',
-      phrase:'« C\'est normal de prendre le temps (A). Qu\'est-ce qui te retient, là — le budget, ou un doute sur l\'accompagnement (I) ? Voyons ce qui t\'aiderait à te lancer sereinement (R). »' },
+      phrase:'« C\'est normal de prendre le temps (A). Qu\'est-ce qui te retient, là : le budget, ou un doute sur l\'accompagnement (I) ? Voyons ce qui t\'aiderait à te lancer sereinement (R). »' },
     { id:'enseigne', emoji:'🏬', label:'Commerce spécialisé (literie, opticien, immo, luxe, auto…)',
-      reine:'« Je vais réfléchir / regarder ailleurs » — sur un achat important et rare.',
+      reine:'« Je vais réfléchir / regarder ailleurs », sur un achat important et rare.',
       angle:'Trop d\'options = surcharge cognitive → le cerveau reporte la décision. Simplifie le choix, crée la projection (marqueur somatique) et rends visible le coût d\'attendre.',
-      phrase:'« C\'est un achat qui compte, normal d\'y réfléchir (A). Il te manque quoi pour décider — le budget, le bon modèle, ou le bon moment (I) ? Trouvons l\'info qui te débloque (R). »' },
+      phrase:'« C\'est un achat qui compte, normal d\'y réfléchir (A). Il te manque quoi pour décider : le budget, le bon modèle, ou le bon moment (I) ? Trouvons l\'info qui te débloque (R). »' },
     { id:'autre', emoji:'✨', label:'Autre activité',
       reine:'« C\'est trop cher » / « je vais réfléchir ».',
       angle:'Quel que soit ton métier, l\'objection dite n\'est jamais la vraie. Il n\'en existe que 3 : Temps, Argent, Effort. Le reste est un écran de fumée à dissiper.',
@@ -48,7 +48,7 @@ window.QUIZ = (function () {
       {t:'Je rebondis sur sa formulation et je la retourne à ma façon.',         p:'C', em:'🌀'} ]},
     { q:'Sois honnête : ce qui te fait perdre le plus de deals, c\'est plutôt…', opts:[
       {t:'Je vais trop vite vers la conclusion, je grille des étapes.',  p:'F', em:'🏃'},
-      {t:'Je donne trop d\'infos — le prospect sature et « réfléchit ».', p:'E', em:'🌊'},
+      {t:'Je donne trop d\'infos : le prospect sature et « réfléchit ».', p:'E', em:'🌊'},
       {t:'Je n\'ose pas provoquer la décision, alors ça traîne et ça meurt.', p:'R', em:'🙈'},
       {t:'Je m\'adapte tellement à lui que je perds le fil de MON offre.', p:'C', em:'🎭'} ]},
     { q:'Tu prépares un rendez-vous qui compte. Ton vrai focus, c\'est :', opts:[
@@ -60,21 +60,21 @@ window.QUIZ = (function () {
 
   const PROFILS = {
     F:{ titre:'Le Fonceur', emoji:'⚡',
-        desc:'Tu as l\'énergie et le cran d\'aller au closing — c\'est rare et précieux.',
+        desc:'Tu as l\'énergie et le cran d\'aller au closing. C\'est rare et précieux.',
         piege:'Ton piège : la pression. Neurologiquement, quand tu pousses, le cerveau du client passe en mode menace… et se ferme.',
-        levier:'Ton levier Persua : le silence de 8 secondes après le prix. Tu as déjà le cran — il te manque la patience qui fait dire oui.' },
+        levier:'Ton levier Persua : le silence de 8 secondes après le prix. Tu as déjà le cran. Il te manque la patience qui fait dire oui.' },
     E:{ titre:'L\'Expert', emoji:'📊',
         desc:'Tu maîtrises ton sujet à fond, et ça inspire confiance.',
         piege:'Ton piège : sur-argumenter. Trop d\'arguments = surcharge cognitive → le client dit « je vais réfléchir » pour fuir l\'effort mental.',
         levier:'Ton levier Persua : poser UNE question au lieu de donner trois réponses. Moins tu prouves, plus il se convainc lui-même.' },
     R:{ titre:'Le Relationnel', emoji:'🤝',
-        desc:'Tu crées du lien et de la confiance comme personne — les clients t\'apprécient.',
+        desc:'Tu crées du lien et de la confiance comme personne : les clients t\'apprécient.',
         piege:'Ton piège : la peur de déranger. Tu n\'oses pas demander la vente ni tenir tes prix… alors tu brades ou tu laisses filer.',
-        levier:'Ton levier Persua : demander la vente est un service, pas une agression. Le client t\'a fait confiance — va au bout pour lui.' },
+        levier:'Ton levier Persua : demander la vente est un service, pas une agression. Le client t\'a fait confiance : va au bout pour lui.' },
     C:{ titre:'Le Caméléon', emoji:'🦎',
-        desc:'Tu lis les gens et tu t\'adaptes à chacun — une arme redoutable en vente.',
+        desc:'Tu lis les gens et tu t\'adaptes à chacun : une arme redoutable en vente.',
         piege:'Ton piège : te diluer. À force de t\'adapter, tu ne tranches pas et tu laisses le client décider seul (donc reporter).',
-        levier:'Ton levier Persua : garde ton cap. Adapte la forme, oui — mais guide fermement vers la décision.' }
+        levier:'Ton levier Persua : garde ton cap. Adapte la forme, oui, mais guide fermement vers la décision.' }
   };
 
   function computeProfile(answers){
@@ -100,7 +100,7 @@ window.QUIZ = (function () {
     h += '<div class="res-block"><div class="lbl">L\'objection-reine de ton métier · '+metier.label+'</div>';
     h += '<h4>'+metier.emoji+' '+metier.reine+'</h4>';
     h += '<p>'+metier.angle+'</p>';
-    h += '<p style="margin-bottom:6px"><b>Ta phrase-réflexe — méthode AIR (Accepte → Interroge → Réponds) — à tester dès ton prochain rendez-vous :</b></p>';
+    h += '<p style="margin-bottom:6px"><b>Ta phrase-réflexe, méthode AIR (Accepte → Interroge → Réponds), à tester dès ton prochain rendez-vous :</b></p>';
     h += '<div class="res-phrase">'+metier.phrase+'</div></div>';
     return h;
   }

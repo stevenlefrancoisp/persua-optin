@@ -1,5 +1,5 @@
 /* ============================================================
-   Persua — Audit profond de vente (étage 2 du quiz funnel)
+   Persua · Audit profond de vente (étage 2 du quiz funnel)
    50 questions · 7 dimensions · score /100 global + par dimension
    Partagé entre audit.html (quiz) et audit_resultat.html (rapport)
    ============================================================ */
@@ -9,39 +9,39 @@ window.AUDIT = (function () {
   const DIMS = [
     { id:'prospection',   emoji:'🎯', label:'Prospection',
       court:'générer des RDV qualifiés sans forcer', wa:'ta prospection',
-      faible:'Ta machine à RDV est ton goulot. Quand l\'agenda est vide, tu vends sous pression — et la pression bascule le cerveau du client en mode menace (il se ferme). Priorité : UN canal, UN message centré sur la douleur du prospect (pas sur toi), une routine tenable. Un flux régulier enlève la peur de « rater » ce deal… donc enlève la pression.',
-      fort:'Tu remplis ton agenda avec méthode. Ça te donne le luxe de vendre détendu — l\'arme la plus sous-estimée.' },
+      faible:'Ta machine à RDV est ton goulot. Quand l\'agenda est vide, tu vends sous pression, et la pression bascule le cerveau du client en mode menace (il se ferme). Priorité : UN canal, UN message centré sur la douleur du prospect (pas sur toi), une routine tenable. Un flux régulier enlève la peur de « rater » ce deal… donc enlève la pression.',
+      fort:'Tu remplis ton agenda avec méthode. Ça te donne le luxe de vendre détendu : l\'arme la plus sous-estimée.' },
     { id:'decouverte',    emoji:'🔍', label:'Découverte',
       court:'questionner avant de proposer', wa:'ta phase de découverte',
-      faible:'C\'est LA fuite n°1. La vente se gagne ici : 60-70 % du temps devrait être des questions. Tu présentes ta solution avant d\'avoir fait RESSENTIR le problème — or le cerveau décide sur une sensation (marqueur somatique), pas sur une fiche technique. Plan : 3 questions de douleur chiffrée avant toute solution. « Combien ça te coûte, ce problème, chaque mois ? »',
+      faible:'C\'est LA fuite n°1. La vente se gagne ici : 60-70 % du temps devrait être des questions. Tu présentes ta solution avant d\'avoir fait RESSENTIR le problème. Or le cerveau décide sur une sensation (marqueur somatique), pas sur une fiche technique. Plan : 3 questions de douleur chiffrée avant toute solution. « Combien ça te coûte, ce problème, chaque mois ? »',
       fort:'Tu creuses avant de proposer. C\'est rare, et c\'est précisément ce qui fait que le client se vend l\'offre tout seul.' },
     { id:'argumentation', emoji:'🗣️', label:'Argumentation',
       court:'convaincre sans saturer', wa:'ta façon d\'argumenter',
       faible:'Tu sur-argumentes. Trop d\'arguments = surcharge cognitive (la mémoire de travail tient ~4 éléments) → le client « va réfléchir » pour fuir l\'effort mental. Plan : UN message clé par échange, relié à SA douleur. Moins tu prouves, plus il se convainc lui-même.',
-      fort:'Tu vas à l\'essentiel et tu relies tes arguments à sa douleur. Tu ne noies pas le poisson — tu le ferres.' },
+      fort:'Tu vas à l\'essentiel et tu relies tes arguments à sa douleur. Tu ne noies pas le poisson, tu le ferres.' },
     { id:'prix',          emoji:'💶', label:'Prix & objections',
       court:'tenir ton prix et désamorcer les objections', wa:'ta gestion du prix et des objections',
-      faible:'Face au prix, tu te justifies — et te justifier confirme qu\'il y a un problème. Le cerveau ne compare pas ton prix à ta valeur, il le compare à une référence (ancrage), et perdre fait ~1,7× plus mal que gagner (aversion à la perte). Plan : la méthode AIR. Accepte (« c\'est normal de regarder le budget »), Interroge (sépare la valeur perçue du budget réel), Réponds (« comment on avance ensemble ? »). Tu désamorces au lieu de te justifier.',
+      faible:'Face au prix, tu te justifies, et te justifier confirme qu\'il y a un problème. Le cerveau ne compare pas ton prix à ta valeur, il le compare à une référence (ancrage), et perdre fait ~1,7× plus mal que gagner (aversion à la perte). Plan : la méthode AIR. Accepte (« c\'est normal de regarder le budget »), Interroge (sépare la valeur perçue du budget réel), Réponds (« comment on avance ensemble ? »). Tu désamorces au lieu de te justifier.',
       fort:'Tu annonces ton prix sans trembler et tu recadres les objections au lieu de les subir. C\'est de la posture, pas de la technique.' },
     { id:'closing',       emoji:'🤝', label:'Closing',
       court:'provoquer la décision', wa:'ton closing',
-      faible:'Tu ne provoques pas la décision — alors elle traîne et meurt. Demander la vente n\'est pas une agression, c\'est un service : le client t\'a fait confiance, va au bout pour lui. Plan : UNE seule prochaine étape claire à chaque rendez-vous + le silence de 8 secondes après le prix (le cerveau lit le silence comme de l\'assurance).',
+      faible:'Tu ne provoques pas la décision, alors elle traîne et meurt. Demander la vente n\'est pas une agression, c\'est un service : le client t\'a fait confiance, va au bout pour lui. Plan : UNE seule prochaine étape claire à chaque rendez-vous + le silence de 8 secondes après le prix (le cerveau lit le silence comme de l\'assurance).',
       fort:'Tu oses provoquer la décision et tu tiens le silence. C\'est ce qui transforme un « intéressé » en client.' },
     { id:'suivi',         emoji:'📌', label:'Suivi / relance',
       court:'ne pas laisser mourir un deal chaud', wa:'ton suivi et tes relances',
-      faible:'Tu laisses filer des deals déjà chauds. Un « je vais réfléchir » sans relance structurée = deal perdu par défaut. Plan : une séquence de relance qui APPORTE (une info, un angle, une preuve) — jamais le « alors, vous avez réfléchi ? » qui réveille la menace. La constance vaut le talent ici.',
+      faible:'Tu laisses filer des deals déjà chauds. Un « je vais réfléchir » sans relance structurée = deal perdu par défaut. Plan : une séquence de relance qui APPORTE (une info, un angle, une preuve). Jamais le « alors, vous avez réfléchi ? » qui réveille la menace. La constance vaut le talent ici.',
       fort:'Tu relances avec méthode et avec valeur. Tu ne laisses pas l\'argent sur la table par simple négligence.' },
     { id:'posture',       emoji:'🧠', label:'Posture mentale',
       court:'ton rapport à la vente', wa:'ta posture face à la vente',
-      faible:'Le vrai blocage est dans ta tête, pas dans ta technique. La peur de « déranger » ou de « forcer » te fait brader, raccourcir, ou ne pas oser conclure. Plan : recadre la vente comme un acte de soin — tu déplaces le client d\'une chaise inconfortable vers un fauteuil. Vendre proprement, c\'est aider quelqu\'un à dire oui à son propre intérêt.',
-      fort:'Tu es au clair avec ta légitimité à vendre. Tu ne portes pas la vente comme un fardeau — c\'est ton plus gros levier silencieux.' }
+      faible:'Le vrai blocage est dans ta tête, pas dans ta technique. La peur de « déranger » ou de « forcer » te fait brader, raccourcir, ou ne pas oser conclure. Plan : recadre la vente comme un acte de soin : tu déplaces le client d\'une chaise inconfortable vers un fauteuil. Vendre proprement, c\'est aider quelqu\'un à dire oui à son propre intérêt.',
+      fort:'Tu es au clair avec ta légitimité à vendre. Tu ne portes pas la vente comme un fardeau. C\'est ton plus gros levier silencieux.' }
   ];
 
   /* --- Les 50 questions (banque complète, conservée). d = dimension. opts: t=texte, s=score de maturité 0..3 --- */
   const Q_FULL = [
     /* ===== PROSPECTION (7) ===== */
     { d:'prospection', q:'Pour décrocher de nouveaux rendez-vous, ton vrai moteur aujourd\'hui :', opts:[
-      {t:'Surtout le bouche-à-oreille — j\'attends qu\'on me recommande.', s:1},
+      {t:'Surtout le bouche-à-oreille : j\'attends qu\'on me recommande.', s:1},
       {t:'Un canal que je travaille exprès, avec un message centré sur la douleur de ma cible.', s:3},
       {t:'Je poste du contenu et j\'espère qu\'on me contacte.', s:2},
       {t:'Du volume : un max de messages, le plus large possible.', s:0} ]},
@@ -51,10 +51,10 @@ window.AUDIT = (function () {
       {t:'Une douleur précise et reconnaissable que vit sa cible.', s:3},
       {t:'Une question ouverte sur sa situation actuelle.', s:2} ]},
     { d:'prospection', q:'Le nombre de RDV que tu obtiens chaque semaine est plutôt :', opts:[
-      {t:'Quasi nul — je galère à remplir mon agenda.', s:0},
-      {t:'Irrégulier — je subis les périodes creuses.', s:1},
-      {t:'Stable — j\'ai un système qui tourne tout seul.', s:3},
-      {t:'Élevé mais mal qualifié — beaucoup de RDV pour rien.', s:2} ]},
+      {t:'Quasi nul : je galère à remplir mon agenda.', s:0},
+      {t:'Irrégulier : je subis les périodes creuses.', s:1},
+      {t:'Stable : j\'ai un système qui tourne tout seul.', s:3},
+      {t:'Élevé mais mal qualifié : beaucoup de RDV pour rien.', s:2} ]},
     { d:'prospection', q:'Avant un premier échange, tu qualifies le prospect (besoin, budget, décideur) :', opts:[
       {t:'Non, je prends tout le monde, on verra bien.', s:0},
       {t:'Un peu, au feeling.', s:1},
@@ -66,7 +66,7 @@ window.AUDIT = (function () {
       {t:'Je les garde dans une liste et je relance par vagues.', s:2},
       {t:'J\'ai une séquence de valeur qui les nourrit jusqu\'à ce qu\'ils soient mûrs.', s:3} ]},
     { d:'prospection', q:'Ta visibilité auprès de ta cible (réseau, LinkedIn, recommandations) :', opts:[
-      {t:'Quasi inexistante — on ne pense pas à moi.', s:0},
+      {t:'Quasi inexistante : on ne pense pas à moi.', s:0},
       {t:'Sporadique, quand j\'ai le temps.', s:1},
       {t:'Active, mais sans cible vraiment définie.', s:2},
       {t:'Régulière et alignée précisément sur qui je veux attirer.', s:3} ]},
@@ -78,14 +78,14 @@ window.AUDIT = (function () {
 
     /* ===== DÉCOUVERTE (8) ===== */
     { d:'decouverte', q:'Dans un premier rendez-vous, le temps que TU passes à parler, c\'est environ :', opts:[
-      {t:'70 % — j\'ai beaucoup à présenter.', s:0},
-      {t:'50/50 — je présente puis je l\'écoute.', s:1},
-      {t:'30 % — surtout des questions, je le laisse parler.', s:3},
+      {t:'70 % : j\'ai beaucoup à présenter.', s:0},
+      {t:'50/50 : je présente puis je l\'écoute.', s:1},
+      {t:'30 % : surtout des questions, je le laisse parler.', s:3},
       {t:'Ça dépend, je ne mesure pas vraiment.', s:1} ]},
     { d:'decouverte', q:'Ta première vraie question à un prospect ressemble plutôt à :', opts:[
       {t:'« Laisse-moi te présenter ce que je fais. »', s:0},
       {t:'« Qu\'est-ce qui t\'amène à me parler aujourd\'hui ? »', s:2},
-      {t:'« C\'est quoi, concrètement, le problème — et depuis quand ? »', s:3},
+      {t:'« C\'est quoi, concrètement, le problème, et depuis quand ? »', s:3},
       {t:'« Quel est ton budget pour ça ? »', s:1} ]},
     { d:'decouverte', q:'Quand un prospect décrit son problème, ton réflexe :', opts:[
       {t:'Je rebondis vite avec ma solution, j\'ai la réponse.', s:0},
@@ -96,7 +96,7 @@ window.AUDIT = (function () {
       {t:'Jamais, ce n\'est pas mon rôle.', s:0},
       {t:'Parfois, si le sujet vient.', s:1},
       {t:'Souvent, j\'essaie d\'avoir un ordre de grandeur.', s:2},
-      {t:'Toujours — je lui fais dire le coût de son inaction.', s:3} ]},
+      {t:'Toujours : je lui fais dire le coût de son inaction.', s:3} ]},
     { d:'decouverte', q:'Tu présentes ton offre…', opts:[
       {t:'Dès le début, pour cadrer le rendez-vous.', s:0},
       {t:'Au milieu, une fois la glace brisée.', s:1},
@@ -111,7 +111,7 @@ window.AUDIT = (function () {
       {t:'Rarement, je fonce.', s:0},
       {t:'De temps en temps.', s:1},
       {t:'Presque toujours.', s:2},
-      {t:'Systématiquement — « si je résume, ton enjeu c\'est… c\'est ça ? »', s:3} ]},
+      {t:'Systématiquement : « si je résume, ton enjeu c\'est… c\'est ça ? »', s:3} ]},
     { d:'decouverte', q:'Quand le prospect est flou sur son besoin, tu :', opts:[
       {t:'Je propose quand même mon offre standard.', s:0},
       {t:'Je l\'aide à clarifier avec des questions ciblées.', s:3},
@@ -120,7 +120,7 @@ window.AUDIT = (function () {
 
     /* ===== ARGUMENTATION (7) ===== */
     { d:'argumentation', q:'Pour convaincre, ton réflexe :', opts:[
-      {t:'J\'empile les arguments — plus j\'en donne, mieux c\'est.', s:0},
+      {t:'J\'empile les arguments : plus j\'en donne, mieux c\'est.', s:0},
       {t:'Je sors mes 2-3 meilleurs arguments.', s:1},
       {t:'Je relie UN bénéfice clé à SA douleur précise.', s:3},
       {t:'Je montre des preuves et des chiffres en rafale.', s:1} ]},
@@ -138,7 +138,7 @@ window.AUDIT = (function () {
       {t:'Absents, je vais droit au but.', s:0},
       {t:'Rares.', s:1},
       {t:'Présents quand j\'y pense.', s:2},
-      {t:'Au cœur de mon approche — je fais projeter le résultat.', s:3} ]},
+      {t:'Au cœur de mon approche : je fais projeter le résultat.', s:3} ]},
     { d:'argumentation', q:'Tu adaptes tes arguments au profil de la personne en face :', opts:[
       {t:'Non, même présentation pour tous.', s:0},
       {t:'Un peu, à l\'instinct.', s:1},
@@ -168,7 +168,7 @@ window.AUDIT = (function () {
       {t:'Je rappelle tout ce qui est inclus.', s:1} ]},
     { d:'prix', q:'Tes prix, par rapport à ta valeur réelle, tu les trouves :', opts:[
       {t:'Sûrement trop bas, mais je n\'ose pas augmenter.', s:1},
-      {t:'Bas, et je le sais — je brade pour signer.', s:0},
+      {t:'Bas, et je le sais : je brade pour signer.', s:0},
       {t:'Justes, et je les assume.', s:3},
       {t:'Je ne sais pas trop où me situer.', s:1} ]},
     { d:'prix', q:'Quand tu poses la première référence de prix dans l\'échange :', opts:[
@@ -177,9 +177,9 @@ window.AUDIT = (function () {
       {t:'Je pose une ancre haute consciemment, tôt.', s:3},
       {t:'Au hasard, selon le feeling.', s:1} ]},
     { d:'prix', q:'Face à une objection, ton ressenti dominant :', opts:[
-      {t:'Du stress — j\'ai peur de perdre le deal.', s:0},
+      {t:'Du stress : j\'ai peur de perdre le deal.', s:0},
       {t:'Je me mets en mode défense.', s:1},
-      {t:'De la curiosité — une objection = un signal d\'intérêt à creuser.', s:3},
+      {t:'De la curiosité : une objection = un signal d\'intérêt à creuser.', s:3},
       {t:'De l\'agacement, mais je gère.', s:1} ]},
     { d:'prix', q:'« Je vais réfléchir. » Pour toi, ça veut surtout dire :', opts:[
       {t:'Qu\'il a besoin de temps, c\'est normal, je le laisse.', s:1},
@@ -204,7 +204,7 @@ window.AUDIT = (function () {
       {t:'Je lui envoie un récap et j\'attends.', s:1},
       {t:'Je lui demande ce qu\'il en pense.', s:2} ]},
     { d:'closing', q:'Demander explicitement la vente (« on y va ? »), pour toi c\'est :', opts:[
-      {t:'Gênant — j\'ai peur de paraître insistant.', s:0},
+      {t:'Gênant : j\'ai peur de paraître insistant.', s:0},
       {t:'Pas naturel, je tourne autour.', s:1},
       {t:'Un service que je rends au client.', s:3},
       {t:'À faire seulement s\'il est à 100 %.', s:1} ]},
@@ -224,10 +224,10 @@ window.AUDIT = (function () {
       {t:'Je fais ressortir l\'objection cachée et je la traite.', s:3},
       {t:'Je relance dans quelques jours.', s:1} ]},
     { d:'closing', q:'Ton taux de transformation (RDV qualifiés → signatures) :', opts:[
-      {t:'Faible — beaucoup de RDV pour peu de ventes.', s:0},
+      {t:'Faible : beaucoup de RDV pour peu de ventes.', s:0},
       {t:'Moyen et imprévisible.', s:1},
       {t:'Correct, je sais à peu près où je vais.', s:2},
-      {t:'Bon et régulier — je maîtrise ma fin de cycle.', s:3} ]},
+      {t:'Bon et régulier : je maîtrise ma fin de cycle.', s:3} ]},
     { d:'closing', q:'Quand tu es SÛR que le prospect va signer, tu :', opts:[
       {t:'Je relâche et je le laisse venir.', s:0},
       {t:'Je traite quand même chaque objection à fond.', s:3},
@@ -237,7 +237,7 @@ window.AUDIT = (function () {
     /* ===== SUIVI / RELANCE (6) ===== */
     { d:'suivi', q:'Après un RDV sans décision, ta relance arrive :', opts:[
       {t:'Quand j\'y pense, sans vrai timing.', s:1},
-      {t:'Rarement — je n\'aime pas relancer.', s:0},
+      {t:'Rarement : je n\'aime pas relancer.', s:0},
       {t:'À un moment prévu, avec un prétexte de valeur.', s:3},
       {t:'Le lendemain : « alors, vous avez réfléchi ? »', s:1} ]},
     { d:'suivi', q:'Le contenu de tes relances :', opts:[
@@ -275,10 +275,10 @@ window.AUDIT = (function () {
     { d:'posture', q:'Quand tu dois parler d\'argent / annoncer un prix, ton corps :', opts:[
       {t:'Se crispe, je n\'aime pas ce moment.', s:0},
       {t:'Est un peu tendu mais ça passe.', s:1},
-      {t:'Est calme — j\'ai fait la paix avec le sujet.', s:3},
+      {t:'Est calme : j\'ai fait la paix avec le sujet.', s:3},
       {t:'Ça dépend des jours.', s:1} ]},
     { d:'posture', q:'L\'idée d\'« insister » auprès d\'un prospect te fait :', opts:[
-      {t:'Très peur — je préfère lâcher.', s:0},
+      {t:'Très peur : je préfère lâcher.', s:0},
       {t:'Hésiter souvent.', s:1},
       {t:'Aucun souci si je crois à la valeur que j\'apporte.', s:3},
       {t:'Un peu mal à l\'aise.', s:1} ]},
@@ -288,17 +288,17 @@ window.AUDIT = (function () {
       {t:'La fierté d\'avoir aidé quelqu\'un à avancer.', s:3},
       {t:'De la satisfaction pour le chiffre.', s:2} ]},
     { d:'posture', q:'Ta confiance en TES résultats commerciaux :', opts:[
-      {t:'Faible — je doute beaucoup.', s:0},
+      {t:'Faible : je doute beaucoup.', s:0},
       {t:'Variable selon les semaines.', s:1},
-      {t:'Solide — je sais ce que je vaux et ce que je livre.', s:3},
+      {t:'Solide : je sais ce que je vaux et ce que je livre.', s:3},
       {t:'Correcte, mais fragile face à un refus.', s:1} ]},
     { d:'posture', q:'Un « non » d\'un prospect, ça t\'atteint :', opts:[
       {t:'Beaucoup, je le prends personnellement.', s:0},
       {t:'Un peu, ça plombe ma journée.', s:1},
-      {t:'Peu — c\'est une info, pas un jugement sur moi.', s:3},
+      {t:'Peu : c\'est une info, pas un jugement sur moi.', s:3},
       {t:'Ça dépend de l\'enjeu.', s:1} ]},
     { d:'posture', q:'Te former à la vente, tu le vois comme :', opts:[
-      {t:'Un aveu de faiblesse — je devrais déjà savoir.', s:0},
+      {t:'Un aveu de faiblesse : je devrais déjà savoir.', s:0},
       {t:'Utile mais pas prioritaire.', s:1},
       {t:'Un investissement direct sur mon chiffre.', s:3},
       {t:'Quelque chose à faire « un jour ».', s:1} ]}
@@ -331,7 +331,7 @@ window.AUDIT = (function () {
   /* --- Bande de score globale --- */
   function band(g){
     if (g <= 40) return { titre:'Tu laisses beaucoup d\'argent sur la table.', sub:'Bonne nouvelle : ce ne sont pas tes capacités, ce sont des fuites précises et réparables.' };
-    if (g <= 70) return { titre:'Des bases solides — et des fuites identifiées.', sub:'Tu vends déjà, mais quelques points te coûtent des deals que tu pourrais signer.' };
+    if (g <= 70) return { titre:'Des bases solides, et des fuites identifiées.', sub:'Tu vends déjà, mais quelques points te coûtent des deals que tu pourrais signer.' };
     return { titre:'Tu vends déjà bien. On passe en mode optimisation.', sub:'Le gros est là. Il reste des marges fines, mais à fort effet de levier.' };
   }
 
