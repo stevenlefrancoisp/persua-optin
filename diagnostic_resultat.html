@@ -115,8 +115,8 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
     /* ====== WhatsApp direct (F9 audit) : numéro au format international sans + ni espaces, ex '33612345678'.
        VIDE = bouton masqué, bloc passif affiché à la place. ====== */
     const WA_NUMBER = '33749554615';
-    /* ====== Tracking (F1 audit) : même logique qu'index.html. VIDE = OFF. ====== */
-    const TRACK_WEBHOOK = '';
+    /* ====== Tracking (F1 audit) : même webhook que les leads, routé par `stage` dans Make. ====== */
+    const TRACK_WEBHOOK = 'https://hook.eu2.make.com/l27k4pclyo9u4xjtbgdmt5ibhrpe2fc6';
     function ping(stage){
       if(!TRACK_WEBHOOK) return;
       try{ fetch(TRACK_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({source:'diagnostic_persua', tracking:true, stage:stage})}).catch(()=>{}); }catch(e){}

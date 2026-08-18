@@ -128,9 +128,9 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
   const LEAD_WEBHOOK  = 'https://hook.eu2.make.com/l27k4pclyo9u4xjtbgdmt5ibhrpe2fc6';
   /* ====== Fin d'audit : 2e alerte avec score /100 (même scénario Make). Sert aussi de base à l'app-sync Phase 2. ====== */
   const SCORE_WEBHOOK = 'https://hook.eu2.make.com/l27k4pclyo9u4xjtbgdmt5ibhrpe2fc6';
-  /* ====== Tracking funnel (F1 audit) : pings view / start / cta_click, sans données perso. VIDE = OFF.
-     Avant d'activer : ajouter un routeur sur `stage` dans Make (lead|complete → scénario actuel ; le reste → compteur). ====== */
-  const TRACK_WEBHOOK = '';
+  /* ====== Tracking funnel (F1 audit) : pings view / start / cta_click, sans données perso.
+     Même webhook que les leads — le routeur Make (ajouté 18/08) route sur `stage` : lead|complete → chaîne systeme.io, le reste → data store « Funnel diagnostic — tracking ». ====== */
+  const TRACK_WEBHOOK = 'https://hook.eu2.make.com/l27k4pclyo9u4xjtbgdmt5ibhrpe2fc6';
   /* ========================================================================================================= */
 
   (function(){
