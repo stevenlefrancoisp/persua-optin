@@ -72,6 +72,19 @@ h1,h2,h3{font-weight:700; letter-spacing:-.02em; color:var(--white); line-height
 .row2 .field{flex:1}
 .errmsg{color:#F4607A; font-size:13px; margin-top:8px; text-align:center; min-height:1px}
 .note-out{color:var(--mist); font-size:12.5px; text-align:center; margin-top:12px; line-height:1.5}
+.rgpd{display:flex; gap:10px; align-items:flex-start; margin:14px 0 2px; font-size:13px; color:var(--mist); text-align:left; cursor:pointer; line-height:1.5}
+.rgpd input{width:18px; height:18px; margin-top:2px; accent-color:var(--indigo); flex:none}
+.rgpd a{color:#a5a0ff}
+/* Waiting page */
+.loaders{padding:22px 4px 6px; text-align:left; max-width:400px; margin:0 auto}
+.ldr{display:flex; gap:12px; align-items:center; margin:16px 0; color:var(--mist); font-size:15.5px}
+.ldr .dot{width:22px; height:22px; border-radius:99px; border:2.5px solid rgba(84,74,250,.4); flex:none; display:flex; align-items:center; justify-content:center; font-size:12px; color:#fff}
+.ldr.on{color:#fff}
+.ldr.on .dot{border-color:var(--indigo); animation:ldrpulse 1s infinite}
+.ldr.done{color:#fff}
+.ldr.done .dot{background:var(--indigo); border-color:var(--indigo)}
+@keyframes ldrpulse{0%,100%{border-color:rgba(84,74,250,.4)}50%{border-color:var(--indigo)}}
+@media (prefers-reduced-motion: reduce){ .ldr.on .dot{animation:none} }
 /* Boutons */
 .btn{display:inline-block; width:100%; background:var(--indigo); color:#fff!important; font-weight:600; font-size:17px; text-align:center; text-decoration:none; border:none; border-radius:var(--radius); padding:17px 26px; margin-top:16px; cursor:pointer; box-shadow:0 12px 30px rgba(84,74,250,.4); transition:transform .2s,box-shadow .2s,filter .2s; font-family:inherit}
 .btn:hover{transform:translateY(-2px); box-shadow:0 18px 44px rgba(84,74,250,.55); filter:brightness(1.08)}
@@ -115,6 +128,9 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
   const LEAD_WEBHOOK  = 'https://hook.eu2.make.com/l27k4pclyo9u4xjtbgdmt5ibhrpe2fc6';
   /* ====== Fin d'audit : 2e alerte avec score /100 (même scénario Make). Sert aussi de base à l'app-sync Phase 2. ====== */
   const SCORE_WEBHOOK = 'https://hook.eu2.make.com/l27k4pclyo9u4xjtbgdmt5ibhrpe2fc6';
+  /* ====== Tracking funnel (F1 audit) : pings view / start / cta_click, sans données perso. VIDE = OFF.
+     Avant d'activer : ajouter un routeur sur `stage` dans Make (lead|complete → scénario actuel ; le reste → compteur). ====== */
+  const TRACK_WEBHOOK = '';
   /* ========================================================================================================= */
 
   (function(){
@@ -137,11 +153,16 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
       try{ localStorage.setItem('persua_quiz_v1', JSON.stringify(quizAns)); }catch(e){}
       try{ localStorage.setItem('persua_audit_v1', JSON.stringify(auditAns)); }catch(e){}
     }
-    function showChrome(on, label){
+    function showChrome(on, label, navOn){
       pbar.classList.toggle('on', !!on);
-      nav.style.display = on ? 'flex' : 'none';
+      nav.style.display = (on && navOn!==false) ? 'flex' : 'none';
       if(label) ptxt.textContent = label;
     }
+    function ping(stage){
+      if(!TRACK_WEBHOOK) return;
+      try{ fetch(TRACK_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({source:'diagnostic_persua', tracking:true, stage:stage})}).catch(()=>{}); }catch(e){}
+    }
+    try{ if(!sessionStorage.getItem('persua_viewed')){ sessionStorage.setItem('persua_viewed','1'); ping('view'); } }catch(e){ ping('view'); }
     function toTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
 
     /* ---------- INTRO ---------- */
@@ -158,7 +179,7 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
         '<p class="meta-line">⏱️ 90 sec pour le profil · 100% gratuit · résultat à l\'écran</p>'+
         '<button class="btn" id="start">DÉCOUVRIR MON PROFIL →</button>'+
         '</div>';
-      document.getElementById('start').addEventListener('click', ()=>{ stage='t1'; i1=0; renderT1(); });
+      document.getElementById('start').addEventListener('click', ()=>{ ping('start'); stage='t1'; i1=0; renderT1(); });
     }
 
     /* ---------- TEMPS 1 : métier + profil (6 q) ---------- */
@@ -204,23 +225,23 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
 
     /* ---------- CAPTURE (email) ---------- */
     function renderCapture(){
-      stage='capture'; showChrome(false); persist();
+      stage='capture'; showChrome(true, 'Ton diagnostic · 65 %', false); fill.style.width='65%'; persist();
       const prof = QUIZ.getProfile(quizAns);
       let h = '';
       h += '<div class="res-badge">🔓 Débloque la suite</div>';
       h += '<h2 class="cap-h">Où je t\'envoie la suite de ton diagnostic ?</h2>';
       h += '<p class="cap-sub">Ta phrase-réflexe s\'affiche à l\'écran juste après. Et tu pourras enchaîner sur ton score /100 si tu veux aller au bout.</p>';
       h += '<div class="lock">';
-      h += '<div class="l"><span class="k">🎯</span><span>Ton <b>levier Persua</b> : comment retourner le piège du '+prof.titre+' à ton avantage.</span></div>';
+      h += '<div class="l"><span class="k">🎯</span><span>Ton <b>levier Persua</b> : comment retourner le piège '+prof.titre.replace(/^Le /,'du ').replace(/^L\'/,'de l\'')+' à ton avantage.</span></div>';
       h += '<div class="l"><span class="k">💬</span><span>L\'<b>objection-reine de ton métier</b> + ta <b>phrase-réflexe</b> (méthode AIR) à tester dès ton prochain RDV.</span></div>';
       h += '<div class="l"><span class="k">📊</span><span>L\'accès à ton <b>audit /100</b> sur tes 7 leviers de vente.</span></div>';
       h += '</div>';
-      h += '<div class="wa-note"><span class="k">📲</span><span>Et après ? <b>Je t\'envoie un petit message sur WhatsApp</b> pour voir, en 2 lignes, si mon approche peut vraiment t\'aider. <b>Sans blabla, sans pression</b>. Tu me dis stop quand tu veux.</span></div>';
+      h += '<div class="wa-note"><span class="k">📲</span><span>Et après ? <b>Je t\'écris personnellement sur WhatsApp dans la journée</b>, en 2 lignes, pour voir si mon approche peut vraiment t\'aider. <b>Sans blabla, sans pression</b>. Tu me dis stop quand tu veux.</span></div>';
       h += '<form id="leadform" novalidate>';
-      h += '<div class="row2"><div class="field"><label>Prénom</label><input id="f-prenom" type="text" autocomplete="given-name" placeholder="Ton prénom"></div>';
-      h += '<div class="field"><label>Nom</label><input id="f-nom" type="text" autocomplete="family-name" placeholder="Ton nom"></div></div>';
+      h += '<div class="field"><label>Prénom</label><input id="f-prenom" type="text" autocomplete="given-name" placeholder="Ton prénom"></div>';
       h += '<div class="field"><label>Email</label><input id="f-email" type="email" autocomplete="email" placeholder="ton@email.com"></div>';
       h += '<div class="field"><label>Téléphone (WhatsApp)</label><input id="f-tel" type="tel" autocomplete="tel" placeholder="06 12 34 56 78"></div>';
+      h += '<label class="rgpd"><input type="checkbox" id="f-rgpd"><span>J\'accepte que Persua utilise mes réponses pour m\'envoyer mon diagnostic et me recontacter (email / WhatsApp). <a href="confidentialite.html" target="_blank">Politique de confidentialité</a> · désinscription en 1 clic.</span></label>';
       h += '<button class="btn" id="submit" type="submit">VOIR LA SUITE DE MON DIAGNOSTIC →</button>';
       h += '<div class="errmsg" id="err"></div>';
       h += '<p class="note-out">Tes infos restent entre nous. Désinscription en 1 clic, zéro spam.</p>';
@@ -234,13 +255,13 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
       const isTel = v => (v.replace(/[^0-9+]/g,'').length >= 9);
       F('leadform').addEventListener('submit', function(e){
         e.preventDefault();
-        ['f-prenom','f-nom','f-email','f-tel'].forEach(id=>F(id).classList.remove('err'));
-        const prenom=F('f-prenom').value.trim(), nom=F('f-nom').value.trim(), email=F('f-email').value.trim(), tel=F('f-tel').value.trim();
+        ['f-prenom','f-email','f-tel'].forEach(id=>F(id).classList.remove('err'));
+        const prenom=F('f-prenom').value.trim(), nom='', email=F('f-email').value.trim(), tel=F('f-tel').value.trim();
         let bad=null;
         if(!prenom){ F('f-prenom').classList.add('err'); bad='Ton prénom, s\'il te plaît.'; }
-        else if(!nom){ F('f-nom').classList.add('err'); bad='Ton nom, s\'il te plaît.'; }
         else if(!isEmail(email)){ F('f-email').classList.add('err'); bad='Un email valide pour t\'envoyer ton rapport.'; }
         else if(!isTel(tel)){ F('f-tel').classList.add('err'); bad='Un numéro valide (c\'est là que je t\'écris sur WhatsApp).'; }
+        else if(!F('f-rgpd').checked){ bad='Coche la case de consentement pour recevoir ton diagnostic.'; }
         if(bad){ err.textContent=bad; return; }
         const metier = QUIZ.getMetier(quizAns);
         const lead = {
@@ -253,7 +274,7 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
         };
         try{ localStorage.setItem('persua_audit_lead', JSON.stringify(lead)); }catch(e){}
         // Lead sécurisé : on tire le webhook en tâche de fond, sans faire attendre l'utilisateur.
-        if(LEAD_WEBHOOK){ try{ fetch(LEAD_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)}); }catch(e){} }
+        if(LEAD_WEBHOOK){ try{ fetch(LEAD_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)}).catch(()=>{}); }catch(e){} }
         renderReveal2();
       });
     }
@@ -324,8 +345,30 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
       });
       try{ localStorage.setItem('persua_audit_lead', JSON.stringify(lead)); }catch(e){}
       // Phase 2 (enrichissement score, sans email) : inactif tant que SCORE_WEBHOOK est vide.
-      if(SCORE_WEBHOOK){ try{ fetch(SCORE_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)}); }catch(e){} }
-      window.location.href='diagnostic_resultat.html';
+      if(SCORE_WEBHOOK){ try{ fetch(SCORE_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)}).catch(()=>{}); }catch(e){} }
+      renderWaiting();
+    }
+
+    /* ---------- WAITING PAGE : loaders séquencés (~3,6 s), puis résultat ---------- */
+    function renderWaiting(){
+      stage='waiting'; showChrome(false);
+      const prof = QUIZ.getProfile(quizAns);
+      const steps = [
+        'Analyse de tes '+(NT1+NT2)+' réponses…',
+        'Croisement avec ton profil '+prof.titre+'…',
+        'Calcul de tes 7 leviers…',
+        'Identification de ta fuite n°1…'
+      ];
+      let h = '<div style="text-align:center"><h2 class="cap-h">Une seconde, j\'analyse tes réponses.</h2><div class="loaders">';
+      steps.forEach((s,i)=>{ h += '<div class="ldr" id="ldr'+i+'"><span class="dot"></span><span>'+s+'</span></div>'; });
+      h += '</div></div>';
+      card.innerHTML = h; toTop();
+      let i = 0;
+      (function step(){
+        if(i>0){ const p=document.getElementById('ldr'+(i-1)); p.classList.remove('on'); p.classList.add('done'); p.querySelector('.dot').textContent='✓'; }
+        if(i < steps.length){ document.getElementById('ldr'+i).classList.add('on'); i++; setTimeout(step, 900); }
+        else { window.location.href='diagnostic_resultat.html'; }
+      })();
     }
 
     /* ---------- Bouton Précédent (contextuel) ---------- */

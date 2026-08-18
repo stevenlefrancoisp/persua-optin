@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
 <style>
-:root{ --indigo:#544AFA; --electric:#4747FD; --deep:#13133A; --ink:#0A0A14; --pearl:#F4F2F8; --white:#FFFFFF; --mist:#9B96B8; --radius:16px; --good:#3DD68C; --warn:#F4B740; --bad:#F4607A; }
+:root{ --indigo:#544AFA; --electric:#4747FD; --deep:#13133A; --ink:#0A0A14; --pearl:#F4F2F8; --white:#FFFFFF; --mist:#9B96B8; --radius:16px; --good:#3DD68C; --warn:#F4B740; --bad:#F4607A; --wa:#25D366; }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'General Sans',sans-serif; background-color:var(--deep);
@@ -66,6 +66,30 @@ h1,h2,h3,h4{font-weight:700; letter-spacing:-.02em; color:var(--white); line-hei
 .restart:hover{color:var(--pearl)}
 .empty{text-align:center}
 .empty p{color:var(--pearl); font-size:16px; margin:0 auto 22px; max-width:440px}
+/* Additions v2 (audit Matis) : vidéo, preuve sociale, parcours, WhatsApp, à propos */
+.btn.main{width:100%; text-align:center}
+.btn.wa{background:var(--wa); box-shadow:0 12px 30px rgba(37,211,102,.35); width:100%; text-align:center; font-size:16px; margin-top:12px}
+.note-out{color:var(--mist); font-size:12.5px; text-align:center; margin-top:10px; line-height:1.5}
+.video-wrap{position:relative; border-radius:16px; overflow:hidden; border:1px solid rgba(84,74,250,.3); margin:14px 0; cursor:pointer; background:#000}
+.video-wrap img{width:100%; display:block; aspect-ratio:16/9; object-fit:cover; opacity:.85}
+.video-wrap .play{position:absolute; inset:0; display:flex; align-items:center; justify-content:center}
+.video-wrap .play i{width:64px; height:64px; border-radius:99px; background:var(--indigo); display:flex; align-items:center; justify-content:center; font-style:normal; color:#fff; font-size:22px; box-shadow:0 12px 30px rgba(84,74,250,.5)}
+.video-wrap iframe{width:100%; aspect-ratio:16/9; border:0; display:block}
+.temoin{background:rgba(10,10,20,.4); border:1px solid rgba(84,74,250,.28); border-radius:16px; padding:18px 20px; margin:12px 0; text-align:left}
+.temoin p{color:var(--pearl); font-size:14.5px; font-style:italic; margin:0 0 10px}
+.temoin .who{display:flex; gap:10px; align-items:center; color:var(--mist); font-size:13px; line-height:1.4}
+.temoin .who i{width:34px; height:34px; border-radius:99px; background:rgba(84,74,250,.25); display:flex; align-items:center; justify-content:center; font-style:normal; flex:none}
+.temoin .who b{color:#fff; display:block; font-size:13.5px}
+.steps3{display:flex; gap:10px; margin:14px 0; text-align:left}
+.steps3 .st{flex:1; background:rgba(10,10,20,.4); border:1px solid rgba(84,74,250,.28); border-radius:14px; padding:16px 14px}
+.steps3 .st i{font-style:normal; display:block; font-size:20px; margin-bottom:8px}
+.steps3 .st b{color:#fff; font-size:13.5px; display:block; margin-bottom:4px}
+.steps3 .st span{color:var(--mist); font-size:12.5px; line-height:1.45; display:block}
+.apropos{display:flex; gap:16px; align-items:center; background:rgba(10,10,20,.4); border:1px solid rgba(84,74,250,.28); border-radius:16px; padding:18px 20px; margin:22px 0 0; text-align:left}
+.apropos img{width:72px; height:72px; border-radius:99px; object-fit:cover; border:2px solid rgba(84,74,250,.5); flex:none}
+.apropos p{color:var(--pearl); font-size:14px; margin:0}
+.apropos b{color:#fff}
+@media(max-width:640px){ .steps3{flex-direction:column} }
 footer{padding:40px 0 56px; text-align:center}
 footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; line-height:1.7}
 @media(max-width:680px){ .card{padding:26px 20px} }
@@ -88,6 +112,15 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
   <script src="audit_data.js"></script>
   <script>
   (function(){
+    /* ====== WhatsApp direct (F9 audit) : numéro au format international sans + ni espaces, ex '33612345678'.
+       VIDE = bouton masqué, bloc passif affiché à la place. ====== */
+    const WA_NUMBER = '33749554615';
+    /* ====== Tracking (F1 audit) : même logique qu'index.html. VIDE = OFF. ====== */
+    const TRACK_WEBHOOK = '';
+    function ping(stage){
+      if(!TRACK_WEBHOOK) return;
+      try{ fetch(TRACK_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({source:'diagnostic_persua', tracking:true, stage:stage})}).catch(()=>{}); }catch(e){}
+    }
     const out = document.getElementById('out');
     let quizAns=null, auditAns=null, lead=null;
     try{ quizAns = JSON.parse(localStorage.getItem('persua_quiz_v1')); }catch(e){}
@@ -100,11 +133,11 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
     if(!auditOk || !quizOk){
       out.innerHTML = '<div class="empty"><h2 class="band-title">Ton diagnostic n\'est pas terminé.</h2>'+
         '<p>Il te manque quelques réponses (ou ton navigateur les a effacées). Reprends, ça prend ~6 minutes.</p>'+
-        '<a class="btn" href="diagnostic.html">REPRENDRE MON DIAGNOSTIC</a></div>';
+        '<a class="btn" href="index.html">REPRENDRE MON DIAGNOSTIC</a></div>';
       return;
     }
     // Score verrouillé derrière la capture
-    if(!lead || !lead.prenom){ window.location.replace('diagnostic.html'); return; }
+    if(!lead || !lead.prenom){ window.location.replace('index.html'); return; }
 
     const r = AUDIT.score(auditAns);
     const b = AUDIT.band(r.global);
@@ -153,20 +186,50 @@ footer p{color:var(--mist); font-size:12.5px; max-width:680px; margin:0 auto; li
     h += '<h3 style="font-size:clamp(20px,3.4vw,26px)">'+prof.emoji+' Tu vends en mode… '+prof.titre+'.</h3></div>';
     h += QUIZ.buildResultHTML(quizAns);
 
-    /* 5 · CTA WhatsApp + appel */
+    /* 5 · Vidéo (règle des 4 h : du temps de contact avant l'appel) */
+    h += '<div class="sec-lbl">3 minutes pour voir comment je travaille</div>';
+    h += '<div class="video-wrap" id="vid" data-yt="H-x0lw9eYrY"><img src="https://img.youtube.com/vi/H-x0lw9eYrY/hqdefault.jpg" alt="Vidéo Persua — garder le contrôle quand le client s\'énerve" loading="lazy"><span class="play"><i>▶</i></span></div>';
+
+    /* 6 · Preuve sociale */
+    h += '<div class="sec-lbl">Ils sont passés par là</div>';
+    h += '<div class="temoin"><p>« Même quand on s\'intéresse au sujet et qu\'on a de l\'expérience, il y a toujours énormément de choses à apprendre. »</p><div class="who"><i>📈</i><span><b>Stéphane · entrepreneur B2B</b>taux de closing passé de 30 % à 60-65 %</span></div></div>';
+    h += '<div class="temoin"><p>« Depuis que je travaille avec lui j\'ai pris confiance en moi et je me suis réconcilié avec la vente. »</p><div class="who"><i>🤝</i><span><b>Maxime Gillot</b>avis Google · accompagnement Persua</span></div></div>';
+
+    /* 7 · Comment ça marche */
+    h += '<div class="sec-lbl">Et maintenant ?</div>';
+    h += '<div class="steps3">';
+    h += '<div class="st"><i>📊</i><b>1 · Ton score</b><span>Tu sais OÙ ça fuit : tes leviers faibles sont identifiés ci-dessus.</span></div>';
+    h += '<div class="st"><i>📞</i><b>2 · L\'appel 15 min</b><span>On regarde TON cas, tu repars avec ta première correction, applicable direct.</span></div>';
+    h += '<div class="st"><i>🧠</i><b>3 · La Méthode CALME™</b><span>Si ça matche entre nous, je te montre comment on répare le reste.</span></div>';
+    h += '</div>';
+
+    /* 8 · CTA appel + WhatsApp premier pas (F9) */
     const wDim = r.weakest[0] ? AUDIT.getDim(r.weakest[0].id) : null;
-    const waLevier = (wDim && wDim.wa) ? wDim.wa : 'ton point faible';
+    const waLevier = (wDim && wDim.wa) ? wDim.wa : 'mon levier faible';
     h += '<div class="cta">';
-    h += '<div class="block" style="border-color:rgba(37,211,102,.32);background:rgba(37,211,102,.08);text-align:left">';
-    h += '<div class="lbl" style="color:#3DD68C">📲 La suite</div>';
-    h += '<p>'+(prenom?prenom+', je':'Je')+' t\'envoie un petit message sur <b style="color:#fff">WhatsApp</b> dans les prochains jours, pour voir, en 2 lignes, si mon approche peut t\'aider sur <b style="color:#fff">'+waLevier+'</b>. Sans blabla, sans pression.</p></div>';
-    h += '<h3>Tu préfères ne pas attendre ?</h3>';
-    h += '<p>On regarde <span class="ink">ton</span> cas ensemble en 15 min. Ton score te dit OÙ ça fuit. L\'appel te dit COMMENT le réparer en premier, avec la <b style="color:#fff">Méthode CALME™</b>, sur ton activité précise.</p>';
-    h += '<a class="btn" href="https://cal.com/steven-lfrs-persua/diagnostic" target="_blank" rel="noopener">RÉSERVER MON APPEL (15 MIN)</a>';
-    h += '<br><a class="restart" href="diagnostic.html">↺ Refaire le diagnostic</a>';
+    h += '<h3>On regarde ton cas ensemble ?</h3>';
+    h += '<p>15 minutes sur <span class="ink">ton</span> activité. Ton score te dit OÙ ça fuit. L\'appel te dit COMMENT le réparer en premier, avec la <b style="color:#fff">Méthode CALME™</b>.</p>';
+    h += '<a class="btn main" id="ctacal" href="https://cal.com/steven-lfrs-persua/diagnostic" target="_blank" rel="noopener">RÉSERVER MON APPEL (15 MIN)</a>';
+    if(WA_NUMBER){
+      const waMsg = encodeURIComponent('Salut Steven, je viens de faire le diagnostic (score '+r.global+'/100, fuite n°1 : '+waLevier+'). On en parle ?');
+      h += '<a class="btn wa" id="ctawa" href="https://wa.me/'+WA_NUMBER+'?text='+waMsg+'" target="_blank" rel="noopener">📲 OU ÉCRIS-MOI SUR WHATSAPP</a>';
+      h += '<p class="note-out">Je te réponds personnellement dans la journée.</p>';
+    } else {
+      h += '<div class="block" style="border-color:rgba(37,211,102,.32);background:rgba(37,211,102,.08);text-align:left;margin-top:14px">';
+      h += '<div class="lbl" style="color:#3DD68C">📲 La suite</div>';
+      h += '<p>'+(prenom?prenom+', je':'Je')+' t\'écris personnellement sur <b style="color:#fff">WhatsApp dans la journée</b>, en 2 lignes, pour voir si mon approche peut t\'aider sur <b style="color:#fff">'+waLevier+'</b>. Sans blabla, sans pression.</p></div>';
+    }
+    h += '<div class="apropos"><img src="assets/steven.png" alt="Steven Lefrançois" loading="lazy"><p><b>Steven Lefrançois</b> · fondateur de Persua, organisme de formation en neurovente. J\'apprends aux dirigeants qui vendent eux-mêmes à faire décider le cerveau de leurs clients — calmement, sans forcer.</p></div>';
+    h += '<br><a class="restart" href="index.html">↺ Refaire le diagnostic</a>';
     h += '</div>';
 
     out.innerHTML = h;
+
+    // Vidéo : l'iframe YouTube ne se charge qu'au clic (perf + RGPD)
+    const vid = document.getElementById('vid');
+    if(vid){ vid.addEventListener('click', ()=>{ vid.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/'+vid.getAttribute('data-yt')+'?autoplay=1" title="Vidéo Persua" allow="autoplay; encrypted-media" allowfullscreen></iframe>'; }, {once:true}); }
+    const ctacal = document.getElementById('ctacal');
+    if(ctacal){ ctacal.addEventListener('click', ()=>ping('cta_click')); }
 
     requestAnimationFrame(()=>{
       document.getElementById('gring').style.width = r.global+'%';

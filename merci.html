@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Persua · Ton appel est réservé</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<style>
+:root{ --indigo:#544AFA; --electric:#4747FD; --deep:#13133A; --ink:#0A0A14; --pearl:#F4F2F8; --white:#FFFFFF; --mist:#9B96B8; --radius:16px; --wa:#25D366; --good:#3DD68C; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'General Sans',sans-serif; background-color:var(--deep);
+  background-image:radial-gradient(55vw 55vw at 80% -5%, rgba(84,74,250,.18), rgba(19,19,58,0) 60%),radial-gradient(50vw 50vw at 10% 30%, rgba(71,71,253,.10), rgba(19,19,58,0) 55%);
+  background-attachment:fixed; color:var(--pearl); line-height:1.55; -webkit-font-smoothing:antialiased; min-height:100vh}
+.wrap{max-width:640px; margin:0 auto; padding:0 22px}
+h1,h2,h3,h4{font-weight:700; letter-spacing:-.02em; color:var(--white); line-height:1.16}
+.top{text-align:center; padding:30px 0 4px}
+.top .kicker{color:var(--mist); font-weight:600; font-size:12px; letter-spacing:.16em; text-transform:uppercase}
+.card{background:rgba(19,19,58,.72); border:1px solid rgba(84,74,250,.30); border-radius:22px; padding:30px 26px; box-shadow:0 24px 60px rgba(0,0,0,.5); margin:18px auto 0; text-align:center}
+.res-badge{display:inline-block; background:var(--good); color:#0A0A14; font-weight:700; font-size:12px; letter-spacing:.08em; text-transform:uppercase; padding:7px 14px; border-radius:99px; margin-bottom:14px}
+.cap-h{font-size:clamp(22px,4vw,29px); margin-bottom:8px}
+.res-block{background:rgba(10,10,20,.4); border:1px solid rgba(84,74,250,.28); border-radius:16px; padding:20px 22px; margin:14px 0; text-align:left}
+.res-block .lbl{color:var(--indigo); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:8px}
+.res-block p{color:var(--pearl); font-size:15.5px; margin:0 0 10px}
+.res-block p:last-child{margin-bottom:0}
+.res-block b{color:#fff}
+.video-wrap{position:relative; border-radius:16px; overflow:hidden; border:1px solid rgba(84,74,250,.3); margin:14px 0; cursor:pointer; background:#000}
+.video-wrap img{width:100%; display:block; aspect-ratio:16/9; object-fit:cover; opacity:.85}
+.video-wrap .play{position:absolute; inset:0; display:flex; align-items:center; justify-content:center}
+.video-wrap .play i{width:64px; height:64px; border-radius:99px; background:var(--indigo); display:flex; align-items:center; justify-content:center; font-style:normal; color:#fff; font-size:22px; box-shadow:0 12px 30px rgba(84,74,250,.5)}
+.video-wrap iframe{width:100%; aspect-ratio:16/9; border:0; display:block}
+.lock .l{display:flex; gap:11px; align-items:flex-start; background:rgba(10,10,20,.4); border:1px solid rgba(84,74,250,.22); border-radius:12px; padding:12px 14px; margin:9px 0; font-size:14.5px; text-align:left}
+.lock .l .k{font-size:18px}
+.lock .l b{color:#fff}
+.lock .l a{color:#a5a0ff}
+.btn{display:inline-block; width:100%; background:var(--indigo); color:#fff!important; font-weight:600; font-size:17px; text-align:center; text-decoration:none; border:none; border-radius:var(--radius); padding:17px 26px; margin-top:16px; cursor:pointer; box-shadow:0 12px 30px rgba(84,74,250,.4); font-family:inherit}
+.btn.wa{background:var(--wa); box-shadow:0 12px 30px rgba(37,211,102,.35); font-size:16px}
+.note-out{color:var(--mist); font-size:12.5px; text-align:center; margin-top:10px; line-height:1.5}
+footer{padding:36px 0 50px; text-align:center}
+footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line-height:1.7}
+@media(max-width:640px){ .card{padding:24px 18px} }
+</style>
+</head>
+<body>
+
+  <div class="top wrap"><span class="kicker">Diagnostic Persua · neuro-vente</span></div>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="res-badge">✅ C'est réservé</div>
+      <h1 class="cap-h" id="merci-h">Ton appel est calé. Deux choses avant qu'on se parle.</h1>
+
+      <div class="res-block"><div class="lbl">1 · Ce que cet appel est (et n'est pas)</div>
+      <p>15 minutes sur TON cas : ton score, ta fuite n°1, ta première correction. Ce n'est pas une démo. <b>Il est réservé à ceux qui sont prêts à travailler leur vente maintenant</b> — si ce n'est pas ton moment, libère le créneau, quelqu'un d'autre le prendra.</p></div>
+
+      <div class="res-block"><div class="lbl">2 · Arrive avec 10 minutes d'avance sur moi</div>
+      <p>Regarde ça avant l'appel — tu comprendras comment je travaille et on ira deux fois plus vite :</p></div>
+
+      <div class="video-wrap" id="vid" data-yt="H-x0lw9eYrY"><img src="https://img.youtube.com/vi/H-x0lw9eYrY/hqdefault.jpg" alt="Vidéo Persua — garder le contrôle quand le client s'énerve" loading="lazy"><span class="play"><i>▶</i></span></div>
+
+      <div class="lock">
+        <div class="l"><span class="k">📄</span><span><b><a href="Persua_7_objections.pdf" target="_blank" rel="noopener">Les 7 objections qui tuent tes ventes</a></b> — le guide PDF, 5 minutes de lecture.</span></div>
+        <div class="l"><span class="k">💬</span><span><b><a href="https://www.linkedin.com/in/stevenlfrs" target="_blank" rel="noopener">Mon LinkedIn</a></b> — je publie chaque semaine sur ce qui fait décider (ou fuir) un client.</span></div>
+      </div>
+
+      <a class="btn wa" id="ctawa" href="#" style="display:none">📲 UNE QUESTION AVANT L'APPEL ? Écris-moi sur WhatsApp</a>
+      <p class="note-out" id="wanote" style="display:none">Je te réponds personnellement dans la journée.</p>
+    </div>
+  </div>
+
+  <footer class="wrap">
+    <p>Copyright © 2022–2026 · Tous droits réservés · Persua SASU · SIRET 100 132 497 00015 · TVA FR46100132497 · APE 8559A (Organisme de formation)</p>
+  </footer>
+
+  <script>
+  (function(){
+    /* ====== WhatsApp direct (F3/F15 audit) : numéro international sans + ni espaces, ex '33612345678'. VIDE = bouton masqué. ====== */
+    const WA_NUMBER = '33749554615';
+    // Personnalisation avec le prénom si le lead vient du diagnostic
+    try{
+      const lead = JSON.parse(localStorage.getItem('persua_audit_lead'));
+      if(lead && lead.prenom){ document.getElementById('merci-h').textContent = lead.prenom+', ton appel est calé. Deux choses avant qu\'on se parle.'; }
+    }catch(e){}
+    if(WA_NUMBER){
+      const wa = document.getElementById('ctawa');
+      wa.href = 'https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent('Salut Steven, je viens de réserver mon appel diagnostic. Il paraît que tu as quelque chose pour moi ?');
+      wa.style.display = 'inline-block';
+      document.getElementById('wanote').style.display = 'block';
+    }
+    const vid = document.getElementById('vid');
+    if(vid){ vid.addEventListener('click', ()=>{ vid.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/'+vid.getAttribute('data-yt')+'?autoplay=1" title="Vidéo Persua" allow="autoplay; encrypted-media" allowfullscreen></iframe>'; }, {once:true}); }
+  })();
+  </script>
+
+</body>
+</html>
