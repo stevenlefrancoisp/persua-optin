@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>P-SCORE · Votre audit vente et IA offert</title>
-<meta name="description" content="7 questions, 2 minutes. Votre P-SCORE sur 100, l'endroit où votre entreprise perd du temps et des ventes, et vos 3 leviers : vente, équipe ou agents IA.">
+<meta name="description" content="7 questions, 2 minutes. Votre P-SCORE sur 100, l'endroit où votre entreprise perd du temps et des ventes, et vos 3 priorités : vente, équipe ou agents IA.">
 <meta property="og:title" content="P-SCORE · Votre audit vente et IA offert">
-<meta property="og:description" content="7 questions, 2 minutes. Votre score sur 100 et vos 3 leviers prioritaires.">
+<meta property="og:description" content="7 questions, 2 minutes. Votre score sur 100 et vos 3 priorités.">
 <meta name="theme-color" content="#0A0A14">
 <link rel="icon" href="../assets/steven.png">
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
@@ -314,7 +314,7 @@ form{display:grid;gap:12px}
       <p class="bascule">Il vous manque un cadre de vente et un système qui tourne sans vous. On mesure les deux.</p>
       <ol class="promesses">
         <li><span class="n">1</span><span>Votre <b>P-SCORE sur 100</b>, et l'endroit exact où votre entreprise perd du temps et des ventes.</span></li>
-        <li><span class="n">2</span><span>Vos <b>3 leviers</b> prioritaires : vente, équipe ou agents IA.</span></li>
+        <li><span class="n">2</span><span>Vos <b>3 priorités</b> : vente, équipe ou agents IA.</span></li>
         <li><span class="n">3</span><span>Votre plan, <b>affiché tout de suite</b> et à enregistrer en PDF.</span></li>
         <li class="pied">7 questions. 2 minutes. Aucune préparation.</li>
       </ol>
@@ -374,7 +374,7 @@ form{display:grid;gap:12px}
         <strong>${echap(ax.nom)}</strong>
         <p>${echap(ax.rupture)}</p>
       </div>
-      <p class="annonce">Votre <b>score sur 100</b>, votre radar et vos <b>3 leviers</b> s'affichent sur l'écran suivant, calculés sur vos réponses.</p>
+      <p class="annonce">Votre <b>score sur 100</b>, votre radar et vos <b>3 priorités</b> s'affichent sur l'écran suivant, calculés sur vos réponses.</p>
       <form id="form" novalidate>
         <div class="champ"><label for="prenom">Votre prénom</label><input id="prenom" name="prenom" autocomplete="given-name" required value="${echap(S.lead.prenom || '')}"></div>
         <div id="suite" hidden>
@@ -429,7 +429,7 @@ form{display:grid;gap:12px}
 
   function attente() {
     app.innerHTML = `<section class="ecran attente"><div class="anneau" aria-hidden="true"></div><p id="phase">On croise vos 7 réponses…</p></section>`;
-    const phases = ['On calcule vos 5 axes…', 'On choisit vos 3 leviers…'];
+    const phases = ['On calcule vos 5 axes…', 'On choisit vos 3 priorités…'];
     phases.forEach((t, k) => setTimeout(() => { const p = document.getElementById('phase'); if (p) p.textContent = t; }, 900 * (k + 1)));
     setTimeout(() => aller({ e: 'resultat' }, true), 2700);
   }
@@ -475,12 +475,12 @@ form{display:grid;gap:12px}
       <div class="carte"><h3>Vos 5 axes</h3>${radar(c.axes)}
         <div class="axes">${ORDRE.map((a) => `<div><span>${AXES[a].nom}</span><b>${c.axes[a]}</b></div>`).join('')}</div></div>
       <div class="rupture"><div class="k">${ICO.cible}Votre point de rupture</div><strong>${echap(AXES[c.rupture].nom)}</strong><p>${echap(AXES[c.rupture].rupture)}</p></div>
-      <div class="carte"><h3>Vos 3 leviers</h3><div class="leviers">${leviers}</div></div>
-      ${objectif ? `<p class="objectif">Vous voulez <b>${echap(objectif)}</b>. Commencez par le levier 1 : c'est celui qui vous en rapproche le plus vite.</p>` : ''}
+      <div class="carte"><h3>Vos 3 priorités</h3><div class="leviers">${leviers}</div></div>
+      ${objectif ? `<p class="objectif">Vous voulez <b>${echap(objectif)}</b>. Commencez par la priorité 1 : c'est elle qui vous en rapproche le plus vite.</p>` : ''}
       <div class="appel">
         <img src="${PHOTO}" alt="Steven Lefrançois" width="72" height="72">
         <h3>On regarde votre P-SCORE ensemble ?</h3>
-        <p>45 minutes avec Steven, offertes. On valide vos 3 leviers, dans quel ordre les poser, et ce que ça coûte. Si ça ne vaut pas le coup pour vous, il vous le dit.</p>
+        <p>45 minutes avec Steven, offertes. On valide vos 3 priorités, dans quel ordre les traiter, et ce que ça coûte. Si ça ne vaut pas le coup pour vous, il vous le dit.</p>
         <div class="btns"><a class="btn plein" href="${cal}" target="_blank" rel="noopener">Réserver mon appel ${ICO.fleche}</a><button class="btn second plein" id="pdf">Enregistrer mon plan en PDF</button></div>
       </div>
       <p class="pied-page">Persua · Steven Lefrançois · <a href="../confidentialite.html">Confidentialité</a></p>
