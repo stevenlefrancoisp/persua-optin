@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>P-SCORE · Votre audit vente et IA offert</title>
-<meta name="description" content="7 questions, 2 minutes. Votre P-SCORE sur 100, l'endroit où votre entreprise perd du temps et des ventes, et vos 3 priorités : vente, équipe ou agents IA.">
-<meta property="og:title" content="P-SCORE · Votre audit vente et IA offert">
-<meta property="og:description" content="7 questions, 2 minutes. Votre score sur 100 et vos 3 priorités.">
+<title>Pilote automatique · Votre audit vente et IA offert</title>
+<meta name="description" content="7 questions, 2 minutes. La part de votre entreprise qui tourne sans vous, l'endroit où elle perd du temps et des ventes, et vos 3 priorités : vente, équipe ou agents IA.">
+<meta property="og:title" content="Pilote automatique · Votre audit vente et IA offert">
+<meta property="og:description" content="7 questions, 2 minutes. Votre entreprise tourne-t-elle sans vous ? Votre résultat et vos 3 priorités, tout de suite.">
 <meta name="theme-color" content="#0A0A14">
-<link rel="icon" href="../assets/steven.png">
+<link rel="icon" href="../assets/steven-profil.webp">
+<link rel="preload" as="image" href="../assets/steven-profil.webp">
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,145 +17,233 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Chivo:wght@700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --indigo:#544AFA; --electric:#4747FD; --accent:#8B83FF; --deep:#13133A; --ink:#0A0A14; --nuit:#06060F;
+  --indigo:#544AFA; --electric:#4747FD; --accent:#8B83FF; --deep:#13133A; --ink:#0A0A14; --nuit:#06060F; --orange:#F7931E;
   --blanc:#FFFFFF; --texte:#ECEBF7; --brume:#A9A5C9; --brume-2:#8B87AD; --ligne:rgba(139,131,255,.18); --carte:rgba(255,255,255,.035);
-  --ok:#3DD68C; --err:#FF8A8A; --r:16px;
+  --err:#FF8A8A; --r:16px;
   --display:'Archivo Black','Arial Black',system-ui,sans-serif; --label:'Chivo',system-ui,sans-serif;
-  --ease:cubic-bezier(.22,1,.36,1);
+  --ease:cubic-bezier(.22,1,.36,1); --spring:cubic-bezier(.34,1.56,.64,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;background:var(--nuit)}
-body{min-height:100vh;min-height:100svh;color:var(--texte);font:16px/1.55 'General Sans',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;
-  background:radial-gradient(900px 520px at 50% -80px,rgba(84,74,250,.30),transparent 70%),linear-gradient(180deg,var(--ink) 0,var(--nuit) 900px) no-repeat,var(--nuit)}
+body{min-height:100vh;min-height:100svh;color:var(--texte);font:16px/1.55 'General Sans',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background:radial-gradient(900px 520px at 50% -80px,rgba(84,74,250,.32),transparent 70%),linear-gradient(180deg,var(--ink) 0,var(--nuit) 900px) no-repeat,var(--nuit)}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(235,233,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(235,233,255,.03) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(80% 60% at 50% 30%,#000,transparent 85%)}
 a{color:var(--accent)}
 button{font:inherit;color:inherit;cursor:pointer}
 [hidden]{display:none!important}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.page{position:relative;max-width:620px;margin:0 auto;padding:28px 20px calc(48px + env(safe-area-inset-bottom))}
-.ecran{animation:entre .45s var(--ease) both}
-@keyframes entre{from{opacity:0;transform:translateY(14px)}}
-.sort{animation:sort .25s ease both}
-@keyframes sort{to{opacity:0;transform:translateY(-8px)}}
+.page{position:relative;max-width:620px;margin:0 auto;padding:24px 20px calc(48px + env(safe-area-inset-bottom))}
 
-/* titres et étiquettes */
+/* ---------- transitions d'écran ---------- */
+.ecran{animation:entre .55s var(--ease) both}
+@keyframes entre{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
+.ecran.sort{animation:sort .26s ease-in both}
+@keyframes sort{to{opacity:0;transform:translateX(-36px)}}
+
+/* ---------- mots qui montent ---------- */
+.mot{display:inline-block;opacity:0;transform:translateY(16px);filter:blur(6px);animation:mot .6s var(--ease) forwards;animation-delay:calc(var(--d,0ms) + var(--i,0) * 55ms)}
+@keyframes mot{to{opacity:1;transform:none;filter:none}}
+
+/* ---------- objets 3D façon jouet ---------- */
+.ob{position:relative;display:block}
+.ob img{display:block;width:100%;height:auto;filter:drop-shadow(0 14px 16px rgba(0,0,0,.5))}
+.indigo img{filter:hue-rotate(245deg) saturate(1.1) drop-shadow(0 14px 16px rgba(0,0,0,.5))}
+.o-cameleon img{animation:camo 4s ease-in-out infinite 1s}
+@keyframes camo{0%,100%{transform:none}30%{transform:scale(1.04,.96)}55%{transform:translateY(-4px) rotate(-3deg)}}
+.o-poignee img{animation:secoue 2.6s ease-in-out infinite 1s}
+@keyframes secoue{0%,55%,100%{transform:none}62%{transform:translateY(-9px) rotate(-4deg)}69%{transform:translateY(5px) rotate(3deg)}76%{transform:translateY(-7px) rotate(-3deg)}83%{transform:translateY(3px) rotate(2deg)}90%{transform:none}}
+.o-dossiers::after{content:"";position:absolute;left:46%;top:6%;width:30%;height:22%;border-radius:6px;background:linear-gradient(180deg,#fff,#E6E3FF);box-shadow:0 4px 10px rgba(0,0,0,.3);opacity:0;animation:feuille 3s ease-out infinite 1s}
+@keyframes feuille{0%,50%{opacity:0;transform:none}56%{opacity:1}100%{opacity:0;transform:translate(70%,-140%) rotate(70deg)}}
+.o-mobile img{animation:vibre 2.2s ease-in-out infinite 1s}
+@keyframes vibre{0%,50%,100%{transform:none}54%{transform:rotate(-5deg)}58%{transform:rotate(5deg)}62%{transform:rotate(-4deg)}66%{transform:rotate(4deg)}70%{transform:none}}
+.o-mobile .badge{position:absolute;right:-6%;top:-2%;min-width:30%;padding:2px 6px;border-radius:99px;background:#FF4F6B;color:#fff;font:800 clamp(10px,3vw,14px) var(--label);text-align:center;box-shadow:0 4px 12px rgba(255,79,107,.6);animation:pastille 2.2s var(--spring) infinite 1s}
+@keyframes pastille{0%,50%{transform:scale(1)}56%{transform:scale(1.3)}64%{transform:scale(1)}}
+.o-horloge img{animation:sonne 2.4s ease-in-out infinite 1s;transform-origin:50% 70%}
+@keyframes sonne{0%,60%,100%{transform:none}64%{transform:rotate(-9deg)}68%{transform:rotate(9deg)}72%{transform:rotate(-7deg)}76%{transform:rotate(7deg)}80%{transform:rotate(-3deg)}84%{transform:none}}
+.o-graphe img{animation:graphe 4s ease-in-out infinite 1s}
+@keyframes graphe{0%,100%{transform:none}50%{transform:translateY(-6px) rotate(4deg)}}
+.o-cible img{animation:impact 2.6s var(--spring) infinite 1s}
+@keyframes impact{0%,60%,100%{transform:none}64%{transform:scale(.92) translateX(-4px)}72%{transform:scale(1.06)}80%{transform:none}}
+.o-eclair img{animation:zap 2.4s ease-in-out infinite .8s}
+@keyframes zap{0%,62%,100%{transform:none}66%{transform:rotate(-7deg) scale(1.1);filter:drop-shadow(0 0 18px rgba(247,147,30,.95)) brightness(1.25)}70%{transform:rotate(6deg) scale(1.04)}74%{transform:rotate(-4deg) scale(1.12);filter:drop-shadow(0 0 26px rgba(255,200,90,1)) brightness(1.35)}80%{transform:rotate(2deg)}}
+.o-eclair::before,.o-eclair::after{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:#FFD27A;box-shadow:0 0 10px var(--orange);opacity:0;animation:etincelle 2.4s ease-out infinite .8s}
+.o-eclair::before{left:10%;top:30%;--sx:-30px;--sy:-20px}
+.o-eclair::after{right:6%;top:55%;--sx:30px;--sy:14px}
+@keyframes etincelle{0%,64%{opacity:0;transform:none}68%{opacity:1}86%{opacity:0;transform:translate(var(--sx),var(--sy)) scale(.4)}100%{opacity:0}}
+.o-engrenage img{animation:tourne 2.4s linear infinite}
+@keyframes tourne{to{transform:rotate(360deg)}}
+
+/* chute d'un objet à chaque question */
+.chute{position:relative;height:150px;margin:2px 0 6px;display:flex;justify-content:center;align-items:flex-start}
+.chute .ob{height:132px;margin-top:4px;animation:chute .9s cubic-bezier(.3,0,.2,1) both .1s}
+.chute .ob img{height:100%;width:auto}
+@keyframes chute{0%{transform:translateY(-240px) rotate(-14deg);opacity:0}15%{opacity:1}60%{transform:translateY(0) scale(1.08,.86)}75%{transform:translateY(-14px) scale(.96,1.04)}100%{transform:none}}
+.chute .onde{position:absolute;left:50%;bottom:6px;width:70px;height:16px;margin-left:-35px;border-radius:50%;border:3px solid var(--accent);opacity:0;animation:onde .7s ease-out .65s}
+@keyframes onde{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(4.2)}}
+
+/* ---------- titres et étiquettes ---------- */
 .etiq{display:block;text-align:center;font:800 12px var(--label);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
 .pilule{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--ligne);border-radius:99px;background:rgba(84,74,250,.10);font:700 13px var(--label);color:var(--accent)}
 h1,h2{font-family:var(--display);font-weight:400;color:var(--blanc);letter-spacing:-.01em;text-wrap:balance}
-h1{font-size:clamp(34px,8.4vw,52px);line-height:1.04}
-h2{font-size:clamp(25px,6.4vw,34px);line-height:1.1;text-align:center}
-.pave{background:var(--indigo);color:#fff;padding:0 .14em;border-radius:.16em;box-shadow:0 10px 34px rgba(84,74,250,.45);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+h1{font-size:clamp(34px,8.4vw,52px);line-height:1.06}
+h2{font-size:clamp(25px,6.4vw,34px);line-height:1.12;text-align:center}
+.pave{color:#fff;padding:0 .14em;border-radius:.16em;background:linear-gradient(var(--indigo),var(--indigo)) no-repeat left/0% 100%;-webkit-box-decoration-break:clone;box-decoration-break:clone;animation:pave .7s var(--ease) forwards;animation-delay:var(--d,900ms)}
+@keyframes pave{to{background-size:100% 100%;box-shadow:0 10px 34px rgba(84,74,250,.45)}}
 .lv{color:var(--accent)}
 
-/* accueil */
-.intro{text-align:center;padding-top:8px}
-.intro .marque{display:flex;justify-content:center;margin-bottom:28px}
-.intro .marque img{width:56px;height:56px;border-radius:50%;object-fit:cover;background:var(--deep);box-shadow:0 0 0 2px rgba(139,131,255,.35),0 12px 40px rgba(84,74,250,.35)}
-.intro .pilule{margin-bottom:22px}
+/* ---------- accueil ---------- */
+.intro{text-align:center}
+.orbite{position:relative;height:150px;margin:0 auto 6px;max-width:520px}
+.orbite .ob{position:absolute;width:19%;animation:pop .7s var(--spring) both,flotte 4.6s ease-in-out infinite;animation-delay:var(--d),calc(var(--d) + .7s)}
+@keyframes pop{from{opacity:0;transform:scale(.2) translateY(30px)}to{opacity:1;transform:none}}
+@keyframes flotte{0%,100%{transform:translateY(0) rotate(var(--r))}50%{transform:translateY(-10px) rotate(calc(var(--r) * -1))}}
+.orbite .avatar{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;animation:pop .7s var(--spring) both}
+.avatar{display:block}
+.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;box-shadow:0 0 0 3px rgba(139,131,255,.55),0 14px 40px rgba(84,74,250,.5)}
+.avatar::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(139,131,255,.6);animation:halo 2.6s ease-out infinite}
+@keyframes halo{0%{opacity:.9;transform:scale(.92)}100%{opacity:0;transform:scale(1.35)}}
+.intro .pilule{margin:6px 0 20px;animation:mot .6s var(--ease) both .2s}
 .intro h1{margin-bottom:22px}
 .intro .h1b{display:block;margin-top:6px;font-size:.78em}
-.intro .mal{color:var(--brume);font-size:17px;max-width:470px;margin:0 auto 14px}
-.intro .bascule{color:var(--blanc);font-weight:600;font-size:17px;max-width:470px;margin:0 auto 30px}
-.promesses{list-style:none;text-align:left;border:1px solid var(--ligne);background:var(--carte);border-radius:var(--r);padding:20px 22px;margin:0 auto 26px;max-width:480px}
-.promesses li{display:flex;gap:14px;padding:6px 0;color:var(--texte)}
+.intro .mal{color:var(--brume);font-size:17px;max-width:470px;margin:0 auto 14px;animation:mot .7s var(--ease) both 1.1s}
+.intro .bascule{color:var(--blanc);font-weight:600;font-size:17px;max-width:470px;margin:0 auto 28px;animation:mot .7s var(--ease) both 1.25s}
+.promesses{list-style:none;text-align:left;border:1px solid var(--ligne);background:var(--carte);border-radius:var(--r);padding:18px 22px;margin:0 auto 26px;max-width:480px}
+.promesses li{display:flex;gap:14px;padding:7px 0;color:var(--texte);opacity:0;animation:mot .6s var(--ease) forwards;animation-delay:calc(1.4s + var(--i) * 110ms)}
 .promesses li b{color:var(--blanc)}
 .promesses .n{font:800 15px var(--label);color:var(--accent);flex:none;width:14px}
-.promesses .pied{border-top:1px solid var(--ligne);margin-top:12px;padding-top:12px;justify-content:center;color:var(--brume);font-size:14px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 30px;border:0;border-radius:14px;background:var(--indigo);color:#fff;font:800 16px var(--label);letter-spacing:.06em;text-transform:uppercase;box-shadow:0 14px 40px rgba(84,74,250,.45);transition:transform .2s var(--ease),background .2s}
-.btn:active{transform:scale(.98)}
+.promesses .pied{border-top:1px solid var(--ligne);margin-top:10px;padding-top:12px;justify-content:center;color:var(--brume);font-size:14px}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 30px;border:0;border-radius:14px;background:var(--indigo);color:#fff;font:800 16px var(--label);letter-spacing:.06em;text-transform:uppercase;box-shadow:0 14px 40px rgba(84,74,250,.45);transition:transform .2s var(--ease),background .2s;text-decoration:none}
+.btn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);transform:skewX(-18deg);animation:reflet 3.6s ease-in-out infinite 2.2s}
+@keyframes reflet{0%,70%{left:-60%}100%{left:130%}}
+.btn:active{transform:scale(.97)}
 .btn.plein{width:100%}
 .btn.second{background:transparent;border:1px solid var(--ligne);box-shadow:none;color:var(--texte)}
+.btn.second::after{display:none}
 @media (hover:hover){.btn:hover{background:var(--electric)}.btn.second:hover{background:rgba(139,131,255,.08)}}
+.intro .btn{animation:mot .6s var(--ease) both 1.8s}
 .sous-btn{color:var(--brume-2);font-size:13px;margin-top:12px}
-.preuve{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:30px;color:var(--brume);font-size:14px;text-align:left}
-.preuve img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:var(--deep);flex:none}
+.preuve{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:28px;color:var(--brume);font-size:14px;text-align:left}
+.preuve img{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none}
 .preuve b{color:var(--blanc);font-weight:600}
 
-/* quiz */
+/* ---------- quiz ---------- */
 .tete{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;min-height:44px}
 .retour{width:44px;height:44px;border-radius:50%;border:1px solid var(--ligne);background:var(--carte);display:grid;place-items:center;color:var(--texte)}
 .retour svg{width:18px;height:18px}
 .compteur{padding:6px 12px;border:1px solid var(--ligne);border-radius:99px;font:800 12px var(--label);letter-spacing:.12em;color:var(--accent);background:rgba(84,74,250,.10)}
-.segs{display:flex;gap:6px;margin-bottom:30px}
+.segs{display:flex;gap:6px;margin-bottom:8px}
 .segs i{flex:1;height:4px;border-radius:99px;background:rgba(139,131,255,.16);position:relative;overflow:hidden}
-.segs i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--electric),var(--accent));transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.segs i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--electric),var(--accent));transform:scaleX(0);transform-origin:left;transition:transform .6s var(--spring)}
 .segs i.fait::after{transform:scaleX(1)}
-.question h2{margin-bottom:28px}
+.question h2{margin-bottom:24px}
 .options{display:grid;gap:12px}
-.opt{display:flex;align-items:center;gap:14px;width:100%;min-height:58px;padding:14px 18px;text-align:left;border:1px solid var(--ligne);border-radius:14px;background:var(--carte);color:var(--blanc);font-weight:600;font-size:16px;line-height:1.35;opacity:0;animation:opt .4s var(--ease) forwards;transition:border-color .2s,background .2s,transform .2s}
-@keyframes opt{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.opt{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;width:100%;min-height:58px;padding:14px 18px;text-align:left;border:1px solid var(--ligne);border-radius:14px;background:var(--carte);color:var(--blanc);font-weight:600;font-size:16px;line-height:1.35;opacity:0;animation:opt .45s var(--ease) forwards;transition:border-color .2s,background .2s,opacity .25s}
+@keyframes opt{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .opt .rond{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid rgba(139,131,255,.4);display:grid;place-items:center;transition:background .2s,border-color .2s}
-.opt .rond svg{width:13px;height:13px;opacity:0}
-.opt.sel{border-color:var(--indigo);background:linear-gradient(180deg,rgba(84,74,250,.30),rgba(84,74,250,.16));box-shadow:0 0 0 4px rgba(84,74,250,.16)}
+.opt .rond svg{width:13px;height:13px;transform:scale(0);transition:transform .35s var(--spring)}
+.opt.sel{border-color:var(--indigo);background:linear-gradient(180deg,rgba(84,74,250,.30),rgba(84,74,250,.16));box-shadow:0 0 0 4px rgba(84,74,250,.16);animation:opt .45s var(--ease) forwards,choisi .45s var(--spring)}
+@keyframes choisi{50%{transform:scale(1.025)}}
 .opt.sel .rond{background:var(--indigo);border-color:var(--indigo)}
-.opt.sel .rond svg{opacity:1}
-.question.fige .opt:not(.sel){opacity:.45}
+.opt.sel .rond svg{transform:scale(1)}
+.opt .vague{position:absolute;width:12px;height:12px;border-radius:50%;background:rgba(139,131,255,.35);transform:translate(-50%,-50%) scale(0);animation:vague .6s ease-out forwards;pointer-events:none}
+@keyframes vague{to{transform:translate(-50%,-50%) scale(40);opacity:0}}
+.question.fige .opt:not(.sel){opacity:.4}
 @media (hover:hover){.opt:hover{border-color:rgba(139,131,255,.5);background:rgba(139,131,255,.07)}}
 
-/* étape finale */
-.final h2{margin-bottom:22px}
-.rupture{border:1px solid rgba(139,131,255,.35);background:linear-gradient(180deg,rgba(84,74,250,.16),rgba(84,74,250,.06));border-radius:var(--r);padding:20px 22px;margin-bottom:22px}
+/* ---------- étape finale ---------- */
+.final .chute{height:128px}
+.final .chute .ob{height:112px}
+.final h2{margin-bottom:20px}
+.rupture{position:relative;overflow:hidden;border:1px solid rgba(139,131,255,.35);background:linear-gradient(180deg,rgba(84,74,250,.16),rgba(84,74,250,.06));border-radius:var(--r);padding:20px 22px;margin-bottom:22px;animation:mot .7s var(--ease) both .5s}
+.rupture::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(139,131,255,.18),transparent 70%);transform:translateX(-100%);animation:balaye 1.4s ease-out 1.1s}
+@keyframes balaye{to{transform:translateX(100%)}}
 .rupture .k{display:flex;align-items:center;gap:8px;font:800 12px var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
 .rupture .k svg{width:16px;height:16px}
 .rupture strong{display:block;font-size:20px;color:var(--blanc);margin-bottom:6px}
 .rupture p{color:var(--brume)}
-.annonce{text-align:center;color:var(--brume);margin-bottom:24px}
+.annonce{text-align:center;color:var(--brume);margin-bottom:22px;animation:mot .7s var(--ease) both .7s}
 .annonce b{color:var(--blanc)}
-form{display:grid;gap:12px}
+form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
 .champ{display:grid;gap:6px}
 .champ label{font-size:14px;color:var(--brume)}
-.champ input{width:100%;min-height:56px;padding:0 18px;border-radius:14px;border:1px solid var(--ligne);background:rgba(255,255,255,.04);color:var(--blanc);font:16px 'General Sans',system-ui,sans-serif}
-.champ input::placeholder{color:var(--brume-2)}
+.champ input{width:100%;min-height:56px;padding:0 18px;border-radius:14px;border:1px solid var(--ligne);background:rgba(255,255,255,.04);color:var(--blanc);font:16px 'General Sans',system-ui,sans-serif;transition:border-color .2s,box-shadow .2s}
 .champ input:focus{outline:none;border-color:var(--indigo);box-shadow:0 0 0 4px rgba(84,74,250,.2)}
 .champ small{color:var(--brume-2);font-size:13px}
+#suite:not([hidden]){display:grid;gap:12px;animation:mot .5s var(--ease) both}
 .err{color:var(--err);font-size:14px;min-height:1px}
-.legal{color:var(--brume-2);font-size:13px;text-align:center;margin-top:6px}
+.legal{color:var(--brume-2);font-size:13px;text-align:center;margin-top:8px}
 
-/* attente */
-.attente{text-align:center;padding:90px 0}
-.anneau{width:72px;height:72px;margin:0 auto 26px;border-radius:50%;border:4px solid rgba(139,131,255,.18);border-top-color:var(--accent);animation:tour .9s linear infinite}
-@keyframes tour{to{transform:rotate(360deg)}}
-.attente p{font-weight:600;color:var(--blanc)}
+/* ---------- calcul ---------- */
+.attente{text-align:center;padding:40px 0 20px}
+.attente .ob{width:120px;margin:0 auto 26px}
+.attente h2{margin-bottom:22px}
+.etapes{display:grid;gap:12px;max-width:340px;margin:0 auto;text-align:left}
+.etapes div{display:flex;align-items:center;gap:12px;color:var(--brume);opacity:.35;transition:opacity .3s,color .3s}
+.etapes div.on{opacity:1;color:var(--blanc)}
+.etapes i{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid rgba(139,131,255,.4);display:grid;place-items:center;transition:background .3s,border-color .3s}
+.etapes i svg{width:13px;height:13px;transform:scale(0);transition:transform .35s var(--spring)}
+.etapes div.ok i{background:var(--indigo);border-color:var(--indigo)}
+.etapes div.ok i svg{transform:scale(1)}
 
-/* résultat */
-.res .score{display:grid;place-items:center;margin:8px auto 10px;position:relative;width:220px;height:220px}
-.res .score svg{position:absolute;inset:0;transform:rotate(-90deg)}
-.res .score .val{font-family:var(--display);font-size:72px;line-height:1;color:var(--blanc)}
-.res .score .sur{font:800 14px var(--label);color:var(--brume);letter-spacing:.1em;margin-top:6px}
-.res .score .centre{display:grid;place-items:center;text-align:center}
-.bande{text-align:center;font:800 15px var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:26px}
+/* ---------- résultat ---------- */
+.res h2{animation:mot .6s var(--ease) both}
+.res .jauge{display:grid;place-items:center;margin:10px auto 8px;position:relative;width:236px;height:236px}
+.res .jauge svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.res .jauge .centre{display:grid;place-items:center;text-align:center}
+.res .jauge .val{font-family:var(--display);font-size:68px;line-height:1;color:var(--blanc)}
+.res .jauge .val small{font-size:.5em}
+.res .jauge .sur{font:800 12px var(--label);color:var(--brume);letter-spacing:.14em;margin-top:8px;max-width:150px}
+.paillettes i{position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:2px;background:var(--c);opacity:0}
+.paillettes.go i{animation:paillette 1.1s var(--ease) forwards;animation-delay:var(--t)}
+@keyframes paillette{0%{opacity:1;transform:translate(-50%,-50%) rotate(0)}100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) rotate(220deg)}}
+.bande{text-align:center;font:800 15px var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:26px;opacity:0;transition:opacity .5s}
+.bande.on{opacity:1}
 .carte{border:1px solid var(--ligne);background:var(--carte);border-radius:var(--r);padding:22px;margin-bottom:16px}
 .carte h3{font:800 13px var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
 .radar{display:block;width:100%;max-width:440px;margin:0 auto}
+.radar .forme{transform-box:view-box;transform-origin:230px 172px;transform:scale(0);transition:transform 1.1s var(--spring)}
+.radar.go .forme{transform:scale(1)}
+.radar .pt{opacity:0;transition:opacity .4s}
+.radar.go .pt{opacity:1;transition-delay:.7s}
 .axes{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin-top:12px;font-size:14px}
 .axes div{display:flex;justify-content:space-between;gap:8px;color:var(--brume)}
 .axes b{color:var(--blanc)}
-.leviers{display:grid;gap:12px;counter-reset:lev}
-.levier{border:1px solid var(--ligne);background:var(--carte);border-radius:var(--r);padding:20px 22px}
-.levier.un{border-color:rgba(84,74,250,.7);background:linear-gradient(180deg,rgba(84,74,250,.18),rgba(84,74,250,.05))}
-.levier .haut{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.levier .num{flex:none;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--indigo);color:#fff;font:800 15px var(--label)}
-.levier h4{font-size:18px;color:var(--blanc);line-height:1.3}
-.levier .axe{font:800 11px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-.levier p{color:var(--brume);margin-top:6px}
-.levier .preuve-l{color:var(--texte);border-left:3px solid var(--indigo);padding-left:12px;margin-top:12px;font-size:15px}
+.priorites{display:grid;gap:12px}
+.prio{position:relative;border:1px solid var(--ligne);background:var(--carte);border-radius:var(--r);padding:20px 22px;opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.prio.vu{opacity:1;transform:none}
+.prio.un{border-color:rgba(84,74,250,.7);background:linear-gradient(180deg,rgba(84,74,250,.18),rgba(84,74,250,.05))}
+.prio .haut{display:flex;align-items:center;gap:12px;margin-bottom:8px;padding-right:44px}
+.prio .num{flex:none;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--indigo);color:#fff;font:800 15px var(--label);transform:scale(0);transition:transform .45s var(--spring) .25s}
+.prio.vu .num{transform:scale(1)}
+.prio h4{font-size:18px;color:var(--blanc);line-height:1.3}
+.prio .axe{font:800 11px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.prio p{color:var(--brume);margin-top:6px}
+.prio .preuve-l{color:var(--texte);border-left:3px solid var(--indigo);padding-left:12px;margin-top:12px;font-size:15px}
+.prio .ob{position:absolute;right:10px;top:-30px;width:58px;opacity:0;transform:translateY(-30px) rotate(-12deg);transition:opacity .4s,transform .7s var(--spring) .15s}
+.prio.vu .ob{opacity:1;transform:none}
 .objectif{color:var(--texte);text-align:center;margin:18px 0 26px}
 .objectif b{color:var(--blanc)}
 .appel{text-align:center;border:1px solid rgba(139,131,255,.35);background:radial-gradient(80% 90% at 50% 0%,rgba(84,74,250,.30),transparent 75%),var(--carte);border-radius:20px;padding:30px 22px}
-.appel img{width:72px;height:72px;border-radius:50%;object-fit:cover;background:var(--deep);margin:0 auto 14px;display:block;box-shadow:0 0 0 2px rgba(139,131,255,.4)}
+.appel .avatar{position:relative;width:84px;height:84px;margin:0 auto 16px}
 .appel h3{font-family:var(--display);font-weight:400;font-size:24px;color:var(--blanc);margin-bottom:10px;line-height:1.15}
 .appel p{color:var(--brume);margin-bottom:20px}
 .appel .btns{display:grid;gap:10px}
 .pied-page{text-align:center;color:var(--brume-2);font-size:13px;margin-top:28px}
 .pied-page a{color:var(--brume)}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.opt{opacity:1}}
+@media (min-width:700px){.orbite{height:170px}.chute{height:164px}.chute .ob{height:146px}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .mot,.opt,.promesses li,.prio,.prio .ob,.bande{opacity:1!important;transform:none!important;filter:none!important}
+  .pave{background-size:100% 100%}
+  .radar .forme{transform:none}.radar .pt{opacity:1}
+}
 @media print{
   body{background:#fff;color:#111}body::before{display:none}
   .page{max-width:none;padding:0}
-  .appel .btns,.pied-page,.retour{display:none!important}
-  h1,h2,.levier h4,.appel h3,.res .score .val,.axes b{color:#111}
-  .carte,.levier,.appel,.rupture{border-color:#ccc;background:#fff;break-inside:avoid}
-  .levier p,.axes div,.appel p,.res .score .sur{color:#444}
+  .appel .btns,.pied-page,.retour,.ob,.paillettes{display:none!important}
+  h1,h2,.prio h4,.appel h3,.res .jauge .val,.axes b{color:#111}
+  .carte,.prio,.appel,.rupture{border-color:#ccc;background:#fff;break-inside:avoid;opacity:1;transform:none}
+  .prio p,.axes div,.appel p,.res .jauge .sur{color:#444}
 }
 </style>
 </head>
@@ -165,18 +254,32 @@ form{display:grid;gap:12px}
   'use strict';
   const API = 'https://automate-factory.vercel.app/api/audit-lead';
   const CAL = 'https://cal.com/steven-lfrs-persua/decouverte-linkedin';
-  const PHOTO = '../assets/steven.png';
+  const PHOTO = '../assets/steven-profil.webp';
+  const OBJ = {
+    cameleon: { src: '../assets/toy/cameleon.webp' }, poignee: { src: '../assets/toy/poignee.webp' },
+    dossiers: { src: '../assets/toy/dossiers.webp' }, eclair: { src: '../assets/toy/eclair.webp' },
+    mobile: { src: '../assets/3d/mobile.webp', indigo: true, badge: '40' }, horloge: { src: '../assets/3d/horloge.webp', indigo: true },
+    graphe: { src: '../assets/3d/graphe.webp' }, cible: { src: '../assets/3d/cible.webp', indigo: true },
+    engrenage: { src: '../assets/3d/engrenage.webp', indigo: true },
+  };
   const ICO = {
     retour: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>',
     ok: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
     cible: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>',
     fleche: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
   };
+  const echap = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const obj = (nom, style = '') => {
+    const o = OBJ[nom];
+    return `<span class="ob o-${nom}${o.indigo ? ' indigo' : ''}" aria-hidden="true"${style ? ` style="${style}"` : ''}><img src="${o.src}" alt="" decoding="async">${o.badge ? `<span class="badge">${o.badge}</span>` : ''}</span>`;
+  };
+  // découpe un texte en mots qui montent un par un
+  const mots = (txt, d = 0) => echap(txt).split(' ').filter(Boolean).map((m, i) => `<span class="mot" style="--i:${i};--d:${d}ms">${m}</span>`).join(' ');
 
   /* ---------- les 7 questions ---------- */
-  // a = axe mesuré, v = valeur de 1 (fragile) à 4 (solide) ; f = famille de tâches (leviers agents)
+  // a = axe mesuré, v = valeur de 1 (fragile) à 4 (solide) ; f = famille de tâches (pour les agents)
   const Q = [
-    { id: 'profil', theme: 'Profil', titre: ['Quel est votre ', 'contexte', ' ?'], options: [
+    { id: 'profil', theme: 'Profil', objet: 'cameleon', titre: ['Quel est votre', 'contexte', '?'], options: [
       { t: 'Indépendant, je vends ce que je fais', v: 'independant' },
       { t: "Dirigeant d'une équipe de 2 à 10 personnes", v: 'petite' },
       { t: "Dirigeant d'une équipe de plus de 10 personnes", v: 'grande' },
@@ -184,27 +287,27 @@ form{display:grid;gap:12px}
       { t: 'Commercial ou manager commercial', v: 'commercial' },
       { t: 'Autre', v: 'autre' },
     ] },
-    { id: 'vente', theme: 'Vente', a: 'vente', titre: ['Après un bon rendez-vous, qu\'est-ce qui se ', 'passe', ' le plus souvent ?'], options: [
+    { id: 'vente', theme: 'Vente', a: 'vente', objet: 'poignee', titre: ["Après un bon rendez-vous, qu'est-ce qui se", 'passe', 'le plus souvent ?'], options: [
       { t: '"Je vais réfléchir", puis plus de nouvelles', v: 1 },
       { t: "Il doit en parler à quelqu'un, et ça traîne", v: 2 },
       { t: 'Ça bloque sur le prix', v: 2 },
       { t: 'Je ne relance pas, ou trop tard', v: 1.5 },
       { t: 'Je signe la plupart du temps, je veux aller plus loin', v: 4 },
     ] },
-    { id: 'suivi', theme: 'Suivi client', a: 'suivi', titre: ['Vos relances et vos devis en cours, ils ', 'vivent', ' où ?'], options: [
+    { id: 'suivi', theme: 'Suivi client', a: 'suivi', objet: 'dossiers', titre: ['Vos relances et vos devis en cours, ils', 'vivent', 'où ?'], options: [
       { t: "Dans ma tête, et j'en oublie", v: 1 },
       { t: 'Dans mes mails et sur des post-it', v: 1.5 },
       { t: 'Dans un tableau que je ne tiens pas à jour', v: 2 },
       { t: "Dans un CRM, mais c'est moi qui fais tout", v: 3 },
       { t: "C'est carré, tout est suivi", v: 4 },
     ] },
-    { id: 'autonomie', theme: 'Autonomie', a: 'autonomie', titre: ['Si vous coupez votre téléphone une journée, qu\'est-ce qui se ', 'passe', ' ?'], options: [
+    { id: 'autonomie', theme: 'Autonomie', a: 'autonomie', objet: 'mobile', titre: ["Si vous coupez votre téléphone une journée, qu'est-ce qui se", 'passe', '?'], options: [
       { t: "Tout s'arrête, tout passe par moi", v: 1 },
       { t: 'Je retrouve 40 messages et un client mécontent', v: 1.5 },
       { t: 'Ça tourne, mais pas comme je le ferais', v: 2.5 },
       { t: 'Ça tourne bien, chacun sait quoi faire', v: 4 },
     ] },
-    { id: 'temps', theme: 'Temps', a: 'temps', titre: ['À 21 h, qu\'est-ce qui vous ', 'occupe', ' encore ?'], options: [
+    { id: 'temps', theme: 'Temps', a: 'temps', objet: 'horloge', titre: ["À 21 h, qu'est-ce qui vous", 'occupe', 'encore ?'], options: [
       { t: 'Mes mails et mon administratif', v: 1.5, f: 'mails' },
       { t: 'Mes devis, mes factures, mes relances de paiement', v: 1.5, f: 'admin' },
       { t: 'Répondre aux clients et aux avis', v: 1.5, f: 'clients' },
@@ -212,14 +315,14 @@ form{display:grid;gap:12px}
       { t: "L'organisation de l'équipe, les plannings", v: 1.5, f: 'equipe' },
       { t: 'Rien, je coupe à 19 h', v: 4, f: null },
     ] },
-    { id: 'pilotage', theme: 'Pilotage', a: 'pilotage', titre: ["Votre chiffre d'affaires du mois, vous le ", 'connaissez', ' quand ?'], options: [
-      { t: 'Quand le comptable me l\'envoie', v: 1 },
+    { id: 'pilotage', theme: 'Pilotage', a: 'pilotage', objet: 'graphe', titre: ["Votre chiffre d'affaires du mois, vous le", 'connaissez', 'quand ?'], options: [
+      { t: "Quand le comptable me l'envoie", v: 1 },
       { t: 'À peu près, dans ma tête', v: 1.5 },
       { t: 'À la fin du mois, quand je fais les comptes', v: 2 },
       { t: 'En temps réel, quand je veux', v: 4 },
     ] },
-    { id: 'objectif', theme: 'Objectif', titre: ['Dans 6 mois, ce que vous voulez ', 'vraiment', ', c\'est quoi ?'], options: [
-      { t: 'Retrouver le plaisir de vendre', v: 'signer', axe: 'vente' },
+    { id: 'objectif', theme: 'Objectif', objet: 'cible', titre: ['Dans 6 mois, ce que vous voulez', 'vraiment,', "c'est quoi ?"], options: [
+      { t: 'Retrouver le plaisir de vendre', v: 'vendre', axe: 'vente' },
       { t: 'Arrêter de tout porter seul', v: 'porter', axe: 'autonomie' },
       { t: 'Retrouver mes soirées et mes week-ends', v: 'soirees', axe: 'temps' },
       { t: 'Une équipe qui vend aussi bien que moi', v: 'equipe', axe: 'autonomie' },
@@ -227,27 +330,27 @@ form{display:grid;gap:12px}
     ] },
   ];
 
-  /* ---------- les 5 axes : point de rupture et levier ---------- */
+  /* ---------- les 5 axes ---------- */
   const AXES = {
-    vente: { nom: 'Vente', rupture: 'Vos rendez-vous se passent bien, et pourtant ils ne signent pas tous. La décision se perd entre la fin du rendez-vous et votre relance.',
-      levier: 'Un cadre de rendez-vous qui fait décider',
-      quoi: 'On travaille sur vos vrais rendez-vous : le moment où la décision se perd, et ce qu\'il faut dire à ce moment-là. Formation Persua, sur votre terrain.',
+    vente: { nom: 'Vente', objet: 'poignee', rupture: 'Vos rendez-vous se passent bien, et pourtant ils ne signent pas tous. La décision se perd entre la fin du rendez-vous et votre relance.',
+      titre: 'Un cadre de rendez-vous qui fait décider',
+      quoi: "On travaille sur vos vrais rendez-vous : le moment où la décision se perd, et ce qu'il faut dire à ce moment-là. Formation Persua, sur votre terrain.",
       preuve: 'Un closer accompagné est passé de 30 % à 60-65 % de signatures.' },
-    suivi: { nom: 'Suivi client', rupture: 'Vos relances et vos devis vivent dans votre tête. Chaque oubli, c\'est une vente qui part chez un concurrent.',
-      levier: 'Des relances qui partent sans vous',
-      quoi: 'Un agent relance chaque devis à J+4 puis à J+10, dans votre style, et vous prévient sur votre téléphone dès qu\'un prospect répond.',
+    suivi: { nom: 'Suivi client', objet: 'dossiers', rupture: "Vos relances et vos devis vivent dans votre tête. Chaque oubli, c'est une vente qui part chez un concurrent.",
+      titre: 'Des relances qui partent sans vous',
+      quoi: "Un agent relance chaque devis à J+4 puis à J+10, dans votre style, et vous prévient sur votre téléphone dès qu'un prospect répond.",
       preuve: 'Une enseigne de literie : 30 % de clients en plus revenus grâce aux relances.' },
-    autonomie: { nom: 'Autonomie', rupture: 'Tout passe par vous. Le jour où vous vous arrêtez, l\'entreprise s\'arrête avec vous.',
-      levier: 'Une équipe qui sait quoi faire sans vous',
-      quoi: 'On écrit vos process avec vous, on forme l\'équipe à les tenir, et un point hebdo automatique vous remonte ce qui bloque.',
-      preuve: 'Un magasin : +40 % de signatures après la formation de l\'équipe sur le terrain.' },
-    temps: { nom: 'Temps', rupture: 'Vos soirées partent dans des tâches qu\'un agent ferait à votre place, pendant que vous dormez.',
-      levier: 'Vos soirées rendues',
+    autonomie: { nom: 'Autonomie', objet: 'mobile', rupture: "Tout passe par vous. Le jour où vous vous arrêtez, l'entreprise s'arrête avec vous.",
+      titre: 'Une équipe qui sait quoi faire sans vous',
+      quoi: "On écrit vos process avec vous, on forme l'équipe à les tenir, et un point hebdo automatique vous remonte ce qui bloque.",
+      preuve: "Un magasin : +40 % de signatures après la formation de l'équipe sur le terrain." },
+    temps: { nom: 'Temps', objet: 'horloge', rupture: "Vos soirées partent dans des tâches qu'un agent ferait à votre place, pendant que vous dormez.",
+      titre: 'Vos soirées rendues',
       quoi: 'Des agents prennent vos tâches répétitives. Vous gardez la décision, ils font le reste.',
       preuve: 'Un commerce de bouche : toute la gestion du quotidien pilotée depuis une seule app, en place en 3 semaines.' },
-    pilotage: { nom: 'Pilotage', rupture: 'Vous décidez avec un mois de retard : vos chiffres arrivent après les problèmes.',
-      levier: 'Vos chiffres en temps réel',
-      quoi: 'Un tableau de bord du dirigeant : chiffre d\'affaires, marges, avis clients et tâches dans une seule app, à jour chaque jour.',
+    pilotage: { nom: 'Pilotage', objet: 'graphe', rupture: 'Vous décidez avec un mois de retard : vos chiffres arrivent après les problèmes.',
+      titre: 'Vos chiffres en temps réel',
+      quoi: "Un tableau de bord du dirigeant : chiffre d'affaires, marges, avis clients et tâches dans une seule app, à jour chaque jour.",
       preuve: 'Un commerce de bouche : chiffres, avis et tâches réunis dans une seule app, en 3 semaines.' },
   };
   const AGENTS_TEMPS = {
@@ -258,37 +361,40 @@ form{display:grid;gap:12px}
     equipe: "Un agent tient le planning, gère les absences et prépare le point hebdo de l'équipe.",
   };
   const PREUVE_TEMPS = { clients: 'Un commerce de bouche : 40 avis Google en 4 jours, sans que le dirigeant y passe ses soirées.' };
-  const OBJECTIFS = { signer: 'retrouver le plaisir de vendre', porter: 'arrêter de tout porter seul', soirees: 'retrouver vos soirées et vos week-ends', equipe: 'une équipe qui vend aussi bien que vous', chiffres: 'voir vos chiffres et décider vite' };
+  const OBJECTIFS = { vendre: 'retrouver le plaisir de vendre', porter: 'arrêter de tout porter seul', soirees: 'retrouver vos soirées et vos week-ends', equipe: 'une équipe qui vend aussi bien que vous', chiffres: 'voir vos chiffres et décider vite' };
   const ORDRE = ['vente', 'suivi', 'autonomie', 'temps', 'pilotage'];
 
   /* ---------- état ---------- */
-  const S = { i: -1, rep: {}, lead: {}, envoye: false };
+  const S = { rep: {}, lead: {}, envoye: false };
   const app = document.getElementById('app');
-  const echap = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const src = new URLSearchParams(location.search).get('src') || new URLSearchParams(location.search).get('utm_source') || document.referrer || 'direct';
+  const qs = new URLSearchParams(location.search);
+  const src = qs.get('src') || qs.get('utm_source') || document.referrer || 'direct';
+  const calme = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function calcul() {
     const axes = {};
     for (const q of Q) if (q.a) {
-      const o = q.options.find((x) => x.v === S.rep[q.id] || x.t === S.rep[q.id + '_t']);
-      const v = o ? o.v : 2;
-      axes[q.a] = Math.round(12 + 0.84 * ((v - 1) / 3) * 100);
+      const o = q.options.find((x) => x.t === S.rep[q.id + '_t']);
+      axes[q.a] = Math.round(12 + 0.84 * (((o ? o.v : 2) - 1) / 3) * 100);
     }
-    // score de 20 (tout repose sur vous) à 92 (bien piloté) : un dirigeant ne doit jamais lire 7/100
+    // indice de 20 (tout passe par vous) à 92 (elle tourne sans vous)
     const brut = ORDRE.reduce((s, a) => s + (axes[a] - 12) / 0.84, 0) / ORDRE.length;
-    const score = Math.round(20 + 0.72 * brut);
+    const indice = Math.round(20 + 0.72 * brut);
     const objAxe = (Q[6].options.find((o) => o.v === S.rep.objectif) || {}).axe;
-    const tri = [...ORDRE].sort((a, b) => (axes[a] - (a === objAxe ? 25 : 0)) - (axes[b] - (b === objAxe ? 25 : 0)));
+    const poids = (a) => axes[a] - (a === objAxe ? 25 : 0);
+    const priorites = [...ORDRE].sort((a, b) => poids(a) - poids(b)).slice(0, 3);
     const rupture = [...ORDRE].sort((a, b) => axes[a] - axes[b])[0];
-    return { axes, score, rupture, leviers: tri.slice(0, 3) };
+    return { axes, indice, rupture, priorites };
   }
-  const bande = (s) => s < 40 ? 'Tout repose sur vous' : s < 60 ? 'Ça tient, et c\'est vous qui portez' : s < 80 ? 'Solide, avec des fuites' : 'Bien piloté';
+  const bande = (s) => s < 40 ? 'Tout passe encore par vous' : s < 60 ? 'Ça tourne quand vous êtes là' : s < 80 ? 'Le pilote automatique se met en place' : 'Elle tourne sans vous';
 
   /* ---------- navigation (bouton retour du navigateur compris) ---------- */
   function aller(etat, remplacer) {
-    if (remplacer) history.replaceState(etat, '', location.search + '#' + etat.e + (etat.i != null ? etat.i + 1 : ''));
-    else history.pushState(etat, '', location.search + '#' + etat.e + (etat.i != null ? etat.i + 1 : ''));
-    rendre(etat);
+    const url = location.search + '#' + etat.e + (etat.i != null ? etat.i + 1 : '');
+    if (remplacer) history.replaceState(etat, '', url); else history.pushState(etat, '', url);
+    const ecran = app.querySelector('.ecran');
+    if (ecran && !calme && !remplacer) { ecran.classList.add('sort'); setTimeout(() => rendre(etat), 230); }
+    else rendre(etat);
   }
   addEventListener('popstate', (ev) => rendre(ev.state || { e: 'accueil' }));
 
@@ -300,65 +406,72 @@ form{display:grid;gap:12px}
     if (etat.e === 'accueil') return accueil();
     if (etat.e === 'q') return question(etat.i);
     if (etat.e === 'final') return final();
-    if (etat.e === 'resultat') return resultat();
+    return resultat();
   }
 
-  /* ---------- écrans ---------- */
+  /* ---------- accueil ---------- */
   function accueil() {
-    S.i = -1;
     app.innerHTML = `<section class="ecran intro">
-      <div class="marque"><img src="${PHOTO}" alt="Steven Lefrançois" width="56" height="56"></div>
+      <div class="orbite" aria-hidden="true">
+        ${obj('poignee', 'left:2%;top:46px;--d:.15s;--r:-5deg')}${obj('dossiers', 'left:21%;top:2px;--d:.3s;--r:4deg')}
+        <span class="avatar"><img src="${PHOTO}" alt="" width="84" height="84"></span>
+        ${obj('mobile', 'left:63%;top:0;width:14%;--d:.45s;--r:5deg')}${obj('horloge', 'left:80%;top:44px;width:16%;--d:.6s;--r:-4deg')}
+      </div>
       <span class="pilule">Entrepreneurs et dirigeants</span>
-      <h1>Tout passe par vous.<span class="h1b">Même ce qui pourrait tourner <span class="pave">sans vous</span>.</span></h1>
+      <h1>${mots('Tout passe par vous.', 250)}<span class="h1b">${mots('Même ce qui pourrait tourner', 520)} <span class="pave" style="--d:1150ms">${mots('sans vous', 860)}</span>.</span></h1>
       <p class="mal">Les rendez-vous qui finissent en "je vais réfléchir". Les relances qui attendent dans votre tête. Les soirées sur les devis et les mails.</p>
       <p class="bascule">Il vous manque un cadre de vente et un système qui tourne sans vous. On mesure les deux.</p>
       <ol class="promesses">
-        <li><span class="n">1</span><span>Votre <b>P-SCORE sur 100</b>, et l'endroit exact où votre entreprise perd du temps et des ventes.</span></li>
-        <li><span class="n">2</span><span>Vos <b>3 priorités</b> : vente, équipe ou agents IA.</span></li>
-        <li><span class="n">3</span><span>Votre plan, <b>affiché tout de suite</b> et à enregistrer en PDF.</span></li>
-        <li class="pied">7 questions. 2 minutes. Aucune préparation.</li>
+        <li style="--i:0"><span class="n">1</span><span>Votre <b>indice de pilote automatique</b> : la part de votre entreprise qui tourne sans vous.</span></li>
+        <li style="--i:1"><span class="n">2</span><span>Vos <b>3 priorités</b> : vente, équipe ou agents IA.</span></li>
+        <li style="--i:2"><span class="n">3</span><span>Votre plan, <b>affiché tout de suite</b> et à enregistrer en PDF.</span></li>
+        <li style="--i:3" class="pied">7 questions. 2 minutes. Aucune préparation.</li>
       </ol>
-      <button class="btn" id="go">Calculer mon P-SCORE ${ICO.fleche}</button>
+      <button class="btn" id="go">Lancer le test ${ICO.fleche}</button>
       <p class="sous-btn">Gratuit, sans engagement, résultat immédiat.</p>
       <div class="preuve"><img src="${PHOTO}" alt="" width="40" height="40"><span>Par <b>Steven Lefrançois</b>, fondateur de Persua. Plus de 350 commerciaux formés et 50 entreprises accompagnées.</span></div>
     </section>`;
     document.getElementById('go').addEventListener('click', () => aller({ e: 'q', i: 0 }));
   }
 
+  /* ---------- questions ---------- */
   function question(i) {
-    S.i = i;
     const q = Q[i];
-    const choisi = S.rep[q.id];
+    const n0 = q.titre[0].split(' ').length;
     app.innerHTML = `<section class="ecran question">
       <div class="tete">
         ${i > 0 ? `<button class="retour" id="retour" aria-label="Question précédente">${ICO.retour}</button>` : '<span></span>'}
         <span class="compteur">${i} / ${Q.length}</span>
       </div>
       <div class="segs" aria-hidden="true">${Q.map((_, k) => `<i class="${k < i ? 'fait' : ''}"></i>`).join('')}</div>
+      <div class="chute">${obj(q.objet)}<span class="onde"></span></div>
       <span class="etiq">${echap(q.theme)}</span>
-      <h2>${echap(q.titre[0])}<span class="lv">${echap(q.titre[1])}</span>${echap(q.titre[2])}</h2>
-      <div class="options" role="group" aria-label="${echap(q.titre.join(''))}">
-        ${q.options.map((o, k) => `<button class="opt${choisi !== undefined && S.rep[q.id + '_t'] === o.t ? ' sel' : ''}" data-k="${k}" style="animation-delay:${80 + k * 60}ms"><span class="rond">${ICO.ok}</span><span>${echap(o.t)}</span></button>`).join('')}
+      <h2>${mots(q.titre[0], 150)} <span class="lv">${mots(q.titre[1], 150 + n0 * 55)}</span> ${mots(q.titre[2], 150 + (n0 + 1) * 55)}</h2>
+      <div class="options" role="group" aria-label="${echap(q.titre.join(' '))}">
+        ${q.options.map((o, k) => `<button class="opt${S.rep[q.id + '_t'] === o.t ? ' sel' : ''}" data-k="${k}" style="animation-delay:${380 + k * 70}ms"><span class="rond">${ICO.ok}</span><span>${echap(o.t)}</span></button>`).join('')}
       </div>
     </section>`;
     const r = document.getElementById('retour');
     if (r) r.addEventListener('click', () => history.back());
-    requestAnimationFrame(() => { const segs = app.querySelectorAll('.segs i'); if (segs[i]) setTimeout(() => segs[i].classList.add('fait'), 60); });
-    app.querySelectorAll('.opt').forEach((b) => b.addEventListener('click', () => {
+    setTimeout(() => { const s = app.querySelectorAll('.segs i')[i]; if (s) s.classList.add('fait'); }, 120);
+    app.querySelectorAll('.opt').forEach((b) => b.addEventListener('click', (ev) => {
       if (app.querySelector('.question.fige')) return;
       const o = q.options[+b.dataset.k];
       S.rep[q.id] = o.v;
       S.rep[q.id + '_t'] = o.t;
       if (o.f !== undefined) S.rep.famille = o.f;
+      const box = b.getBoundingClientRect(), v = document.createElement('span');
+      v.className = 'vague';
+      v.style.left = (ev.clientX ? ev.clientX - box.left : box.width / 2) + 'px';
+      v.style.top = (ev.clientY ? ev.clientY - box.top : box.height / 2) + 'px';
+      b.append(v);
       b.classList.add('sel');
       app.querySelector('.question').classList.add('fige');
-      setTimeout(() => {
-        app.querySelector('.ecran').classList.add('sort');
-        setTimeout(() => aller(i + 1 < Q.length ? { e: 'q', i: i + 1 } : { e: 'final' }), 220);
-      }, 380);
+      setTimeout(() => aller(i + 1 < Q.length ? { e: 'q', i: i + 1 } : { e: 'final' }), 420);
     }));
   }
 
+  /* ---------- étape finale ---------- */
   function final() {
     const c = calcul(), ax = AXES[c.rupture];
     app.innerHTML = `<section class="ecran final">
@@ -367,18 +480,19 @@ form{display:grid;gap:12px}
         <span class="compteur">Presque fini</span>
       </div>
       <div class="segs" aria-hidden="true">${Q.map(() => '<i class="fait"></i>').join('')}</div>
+      <div class="chute">${obj('eclair')}<span class="onde"></span></div>
       <span class="etiq">Étape finale</span>
-      <h2>Votre <span class="lv">P-SCORE</span><br>est calculé.</h2>
+      <h2>${mots('Votre indice est', 150)} <span class="lv">${mots('calculé.', 370)}</span></h2>
       <div class="rupture">
         <div class="k">${ICO.cible}Votre point de rupture</div>
         <strong>${echap(ax.nom)}</strong>
         <p>${echap(ax.rupture)}</p>
       </div>
-      <p class="annonce">Votre <b>score sur 100</b>, votre radar et vos <b>3 priorités</b> s'affichent sur l'écran suivant, calculés sur vos réponses.</p>
+      <p class="annonce">Votre <b>indice de pilote automatique</b>, votre radar et vos <b>3 priorités</b> s'affichent sur l'écran suivant, calculés sur vos réponses.</p>
       <form id="form" novalidate>
         <div class="champ"><label for="prenom">Votre prénom</label><input id="prenom" name="prenom" autocomplete="given-name" required value="${echap(S.lead.prenom || '')}"></div>
         <div id="suite" hidden>
-          <div class="champ" style="margin-bottom:12px"><label for="email">Votre email professionnel</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required value="${echap(S.lead.email || '')}"></div>
+          <div class="champ"><label for="email">Votre email professionnel</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required value="${echap(S.lead.email || '')}"></div>
           <div class="champ"><label for="tel">Téléphone (facultatif)</label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" value="${echap(S.lead.tel || '')}"><small>Si vous le laissez, Steven vous écrit sur WhatsApp pour en parler.</small></div>
         </div>
         <p class="err" id="err" role="alert"></p>
@@ -388,9 +502,9 @@ form{display:grid;gap:12px}
     </section>`;
     document.getElementById('retour').addEventListener('click', () => history.back());
     const f = document.getElementById('form'), suite = document.getElementById('suite'), err = document.getElementById('err'), btn = document.getElementById('envoi');
-    let etape = 1;
     const prenom = document.getElementById('prenom');
-    setTimeout(() => prenom.focus({ preventScroll: true }), 450);
+    let etape = 1;
+    setTimeout(() => prenom.focus({ preventScroll: true }), 900);
     f.addEventListener('submit', (e) => {
       e.preventDefault();
       err.textContent = '';
@@ -400,7 +514,7 @@ form{display:grid;gap:12px}
       if (etape === 1) {
         etape = 2;
         suite.hidden = false;
-        btn.innerHTML = `Voir mon P-SCORE ${ICO.fleche}`;
+        btn.innerHTML = `Voir mon résultat ${ICO.fleche}`;
         document.getElementById('email').focus();
         return;
       }
@@ -417,9 +531,9 @@ form{display:grid;gap:12px}
   function envoyer(c) {
     const corps = {
       prenom: S.lead.prenom, email: S.lead.email, tel: S.lead.tel,
-      profil: String(S.rep.profil || ''), score: c.score, rupture: AXES[c.rupture].nom, objectif: String(S.rep.objectif || ''),
-      axes: c.axes, top: c.leviers.map((a) => AXES[a].nom), reponses: Object.fromEntries(Q.map((q) => [q.id, S.rep[q.id + '_t'] || ''])),
-      source: 'p-score · ' + src,
+      profil: String(S.rep.profil || ''), score: c.indice, rupture: AXES[c.rupture].nom, objectif: String(S.rep.objectif || ''),
+      axes: c.axes, top: c.priorites.map((a) => AXES[a].nom), reponses: Object.fromEntries(Q.map((q) => [q.id, S.rep[q.id + '_t'] || ''])),
+      source: 'pilote-auto · ' + src,
     };
     const essai = (n) => fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corps), keepalive: true })
       .then((r) => { if (!r.ok && n < 2) setTimeout(() => essai(n + 1), 1500); })
@@ -427,13 +541,20 @@ form{display:grid;gap:12px}
     essai(0);
   }
 
+  /* ---------- calcul ---------- */
   function attente() {
-    app.innerHTML = `<section class="ecran attente"><div class="anneau" aria-hidden="true"></div><p id="phase">On croise vos 7 réponses…</p></section>`;
-    const phases = ['On calcule vos 5 axes…', 'On choisit vos 3 priorités…'];
-    phases.forEach((t, k) => setTimeout(() => { const p = document.getElementById('phase'); if (p) p.textContent = t; }, 900 * (k + 1)));
-    setTimeout(() => aller({ e: 'resultat' }, true), 2700);
+    const etapes = ['On croise vos 7 réponses', 'On mesure ce qui tourne sans vous', 'On choisit vos 3 priorités'];
+    app.innerHTML = `<section class="ecran attente">${obj('engrenage')}<h2>Une seconde, on calcule.</h2>
+      <div class="etapes">${etapes.map((t) => `<div><i>${ICO.ok}</i><span>${t}</span></div>`).join('')}</div></section>`;
+    const lignes = app.querySelectorAll('.etapes div');
+    lignes.forEach((l, k) => {
+      setTimeout(() => l.classList.add('on'), 250 + k * 800);
+      setTimeout(() => l.classList.add('ok'), 800 + k * 800);
+    });
+    setTimeout(() => aller({ e: 'resultat' }, true), calme ? 600 : 3000);
   }
 
+  /* ---------- résultat ---------- */
   function radar(axes) {
     const N = ORDRE.length, cx = 230, cy = 172, R = 112;
     const pt = (k, r) => { const a = -Math.PI / 2 + (k * 2 * Math.PI) / N; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; };
@@ -441,8 +562,8 @@ form{display:grid;gap:12px}
     for (const f of [0.25, 0.5, 0.75, 1]) g += `<polygon points="${ORDRE.map((_, k) => pt(k, R * f).join(',')).join(' ')}" fill="none" stroke="rgba(139,131,255,${f === 1 ? .35 : .15})" stroke-width="1"/>`;
     for (let k = 0; k < N; k++) { const [x, y] = pt(k, R); g += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(139,131,255,.15)"/>`; }
     const poly = ORDRE.map((a, k) => pt(k, R * Math.max(0.06, axes[a] / 100)).join(',')).join(' ');
-    g += `<polygon points="${poly}" fill="rgba(84,74,250,.38)" stroke="#8B83FF" stroke-width="2.5" stroke-linejoin="round"/>`;
-    ORDRE.forEach((a, k) => { const [x, y] = pt(k, R * Math.max(0.06, axes[a] / 100)); g += `<circle cx="${x}" cy="${y}" r="4.5" fill="#fff"/>`; });
+    g += `<g class="forme"><polygon points="${poly}" fill="rgba(84,74,250,.38)" stroke="#8B83FF" stroke-width="2.5" stroke-linejoin="round"/></g>`;
+    ORDRE.forEach((a, k) => { const [x, y] = pt(k, R * Math.max(0.06, axes[a] / 100)); g += `<circle class="pt" cx="${x}" cy="${y}" r="4.5" fill="#fff"/>`; });
     ORDRE.forEach((a, k) => {
       const [x, y] = pt(k, R + 26);
       const ancre = Math.abs(x - cx) < 10 ? 'middle' : x > cx ? 'start' : 'end';
@@ -454,49 +575,68 @@ form{display:grid;gap:12px}
   function resultat() {
     const c = calcul(), p = echap(S.lead.prenom || '');
     const objectif = OBJECTIFS[S.rep.objectif];
-    const leviers = c.leviers.map((a, k) => {
+    const prios = c.priorites.map((a, k) => {
       const ax = AXES[a];
       const quoi = a === 'temps' && AGENTS_TEMPS[S.rep.famille] ? AGENTS_TEMPS[S.rep.famille] : ax.quoi;
       const preuve = a === 'temps' && PREUVE_TEMPS[S.rep.famille] ? PREUVE_TEMPS[S.rep.famille] : ax.preuve;
-      return `<article class="levier${k === 0 ? ' un' : ''}"><div class="haut"><span class="num">${k + 1}</span><div><span class="axe">${echap(ax.nom)} · ${c.axes[a]}/100</span><h4>${echap(ax.levier)}</h4></div></div>
+      return `<article class="prio${k === 0 ? ' un' : ''}">${obj(ax.objet)}<div class="haut"><span class="num">${k + 1}</span><div><span class="axe">${echap(ax.nom)} · ${c.axes[a]}/100</span><h4>${echap(ax.titre)}</h4></div></div>
         <p>${echap(quoi)}</p><p class="preuve-l">${echap(preuve)}</p></article>`;
     }).join('');
-    const notes = `P-SCORE ${c.score}/100 · point de rupture : ${AXES[c.rupture].nom} · leviers : ${c.leviers.map((a) => AXES[a].nom).join(', ')}${objectif ? ' · objectif : ' + objectif : ''}`;
+    const notes = `Pilote automatique ${c.indice} % · point de rupture : ${AXES[c.rupture].nom} · priorités : ${c.priorites.map((a) => AXES[a].nom).join(', ')}${objectif ? ' · objectif : ' + objectif : ''}`;
     const cal = `${CAL}?name=${encodeURIComponent(S.lead.prenom || '')}&email=${encodeURIComponent(S.lead.email || '')}&notes=${encodeURIComponent(notes)}`;
-    const C = 2 * Math.PI * 96;
+    const C = 2 * Math.PI * 100;
+    const couleurs = ['#8B83FF', '#544AFA', '#F7931E', '#FFFFFF', '#B3ACFF'];
+    const paillettes = Array.from({ length: 18 }, (_, k) => {
+      const a = (k / 18) * 2 * Math.PI, d = 120 + (k % 3) * 22;
+      return `<i style="--x:${Math.round(Math.cos(a) * d)}px;--y:${Math.round(Math.sin(a) * d)}px;--c:${couleurs[k % 5]};--t:${(k % 4) * 40}ms"></i>`;
+    }).join('');
     app.innerHTML = `<section class="ecran res">
       <span class="etiq">Votre audit</span>
-      <h2>${p}, votre P-SCORE</h2>
-      <div class="score" aria-label="P-SCORE ${c.score} sur 100">
-        <svg viewBox="0 0 220 220" aria-hidden="true"><circle cx="110" cy="110" r="96" fill="none" stroke="rgba(139,131,255,.16)" stroke-width="14"/><circle id="arc" cx="110" cy="110" r="96" fill="none" stroke="url(#dg)" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" style="transition:stroke-dashoffset 1.6s cubic-bezier(.22,1,.36,1)"/><defs><linearGradient id="dg" x1="0" x2="1"><stop offset="0" stop-color="#4747FD"/><stop offset="1" stop-color="#8B83FF"/></linearGradient></defs></svg>
-        <div class="centre"><span class="val" id="val">0</span><span class="sur">SUR 100</span></div>
+      <h2>${p}, votre entreprise tourne à</h2>
+      <div class="jauge" aria-label="Indice de pilote automatique : ${c.indice} %">
+        <svg viewBox="0 0 236 236" aria-hidden="true"><circle cx="118" cy="118" r="100" fill="none" stroke="rgba(139,131,255,.16)" stroke-width="14"/><circle id="arc" cx="118" cy="118" r="100" fill="none" stroke="url(#dg)" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" style="transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.36,1)"/><defs><linearGradient id="dg" x1="0" x2="1"><stop offset="0" stop-color="#4747FD"/><stop offset="1" stop-color="#8B83FF"/></linearGradient></defs></svg>
+        <div class="paillettes" id="paillettes" aria-hidden="true">${paillettes}</div>
+        <div class="centre"><span class="val"><span id="val">0</span><small> %</small></span><span class="sur">EN PILOTE AUTOMATIQUE</span></div>
       </div>
-      <p class="bande">${echap(bande(c.score))}</p>
+      <p class="bande" id="bande">${echap(bande(c.indice))}</p>
       <div class="carte"><h3>Vos 5 axes</h3>${radar(c.axes)}
         <div class="axes">${ORDRE.map((a) => `<div><span>${AXES[a].nom}</span><b>${c.axes[a]}</b></div>`).join('')}</div></div>
       <div class="rupture"><div class="k">${ICO.cible}Votre point de rupture</div><strong>${echap(AXES[c.rupture].nom)}</strong><p>${echap(AXES[c.rupture].rupture)}</p></div>
-      <div class="carte"><h3>Vos 3 priorités</h3><div class="leviers">${leviers}</div></div>
+      <div class="carte"><h3>Vos 3 priorités</h3><div class="priorites">${prios}</div></div>
       ${objectif ? `<p class="objectif">Vous voulez <b>${echap(objectif)}</b>. Commencez par la priorité 1 : c'est elle qui vous en rapproche le plus vite.</p>` : ''}
       <div class="appel">
-        <img src="${PHOTO}" alt="Steven Lefrançois" width="72" height="72">
-        <h3>On regarde votre P-SCORE ensemble ?</h3>
+        <span class="avatar"><img src="${PHOTO}" alt="Steven Lefrançois" width="84" height="84"></span>
+        <h3>On regarde votre résultat ensemble ?</h3>
         <p>45 minutes avec Steven, offertes. On valide vos 3 priorités, dans quel ordre les traiter, et ce que ça coûte. Si ça ne vaut pas le coup pour vous, il vous le dit.</p>
         <div class="btns"><a class="btn plein" href="${cal}" target="_blank" rel="noopener">Réserver mon appel ${ICO.fleche}</a><button class="btn second plein" id="pdf">Enregistrer mon plan en PDF</button></div>
       </div>
       <p class="pied-page">Persua · Steven Lefrançois · <a href="../confidentialite.html">Confidentialité</a></p>
     </section>`;
     document.getElementById('pdf').addEventListener('click', () => print());
-    requestAnimationFrame(() => setTimeout(() => {
-      const arc = document.getElementById('arc');
-      if (arc) arc.style.strokeDashoffset = String(C * (1 - c.score / 100));
-      const val = document.getElementById('val'), t0 = performance.now();
-      const pas = (t) => { const k = Math.min(1, (t - t0) / 1500); val.textContent = String(Math.round(c.score * (1 - Math.pow(1 - k, 3)))); if (k < 1) requestAnimationFrame(pas); };
+    const arc = document.getElementById('arc'), val = document.getElementById('val');
+    const duree = calme ? 0 : 1600;
+    setTimeout(() => {
+      arc.style.strokeDashoffset = String(C * (1 - c.indice / 100));
+      const t0 = performance.now();
+      const pas = (t) => {
+        const k = duree ? Math.min(1, (t - t0) / duree) : 1;
+        val.textContent = String(Math.round(c.indice * (1 - Math.pow(1 - k, 3))));
+        if (k < 1) requestAnimationFrame(pas);
+        else { document.getElementById('paillettes').classList.add('go'); document.getElementById('bande').classList.add('on'); }
+      };
       requestAnimationFrame(pas);
-    }, 150));
+    }, 250);
+    // radar et priorités : animés quand ils arrivent à l'écran
+    const io = new IntersectionObserver((entrees) => entrees.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add(e.target.classList.contains('radar') ? 'go' : 'vu');
+      io.unobserve(e.target);
+    }), { threshold: 0.25 });
+    app.querySelectorAll('.radar, .prio').forEach((n, k) => { if (n.classList.contains('prio')) n.style.transitionDelay = (k % 3) * 120 + 'ms'; io.observe(n); });
   }
 
   rendre({ e: 'accueil' });
-  history.replaceState({ e: 'accueil' }, '', location.search + location.hash.replace(/.*/, ''));
+  history.replaceState({ e: 'accueil' }, '', location.search);
 })();
 </script>
 </body>
