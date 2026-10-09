@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>P-SCORE · Votre audit vente et IA offert</title>
+<meta name="description" content="7 questions, 2 minutes. Votre P-SCORE sur 100, l'endroit où votre entreprise perd du temps et des ventes, et vos 3 leviers : vente, équipe ou agents IA.">
+<meta property="og:title" content="P-SCORE · Votre audit vente et IA offert">
+<meta property="og:description" content="7 questions, 2 minutes. Votre score sur 100 et vos 3 leviers prioritaires.">
+<meta name="theme-color" content="#0A0A14">
+<link rel="icon" href="../assets/steven.png">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Chivo:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --indigo:#544AFA; --electric:#4747FD; --accent:#8B83FF; --deep:#13133A; --ink:#0A0A14; --nuit:#06060F;
+  --blanc:#FFFFFF; --texte:#ECEBF7; --brume:#A9A5C9; --brume-2:#8B87AD; --ligne:rgba(139,131,255,.18); --carte:rgba(255,255,255,.035);
+  --ok:#3DD68C; --err:#FF8A8A; --r:16px;
+  --display:'Archivo Black','Arial Black',system-ui,sans-serif; --label:'Chivo',system-ui,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;background:var(--nuit)}
+body{min-height:100vh;min-height:100svh;color:var(--texte);font:16px/1.55 'General Sans',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;
+  background:radial-gradient(900px 520px at 50% -80px,rgba(84,74,250,.30),transparent 70%),linear-gradient(180deg,var(--ink) 0,var(--nuit) 900px) no-repeat,var(--nuit)}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(235,233,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(235,233,255,.03) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(80% 60% at 50% 30%,#000,transparent 85%)}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;cursor:pointer}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.page{position:relative;max-width:620px;margin:0 auto;padding:28px 20px calc(48px + env(safe-area-inset-bottom))}
+.ecran{animation:entre .45s var(--ease) both}
+@keyframes entre{from{opacity:0;transform:translateY(14px)}}
+.sort{animation:sort .25s ease both}
+@keyframes sort{to{opacity:0;transform:translateY(-8px)}}
+
+/* titres et étiquettes */
+.etiq{display:block;text-align:center;font:800 12px var(--label);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.pilule{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--ligne);border-radius:99px;background:rgba(84,74,250,.10);font:700 13px var(--label);color:var(--accent)}
+h1,h2{font-family:var(--display);font-weight:400;color:var(--blanc);letter-spacing:-.01em;text-wrap:balance}
+h1{font-size:clamp(34px,8.4vw,52px);line-height:1.04}
+h2{font-size:clamp(25px,6.4vw,34px);line-height:1.1;text-align:center}
+.pave{background:var(--indigo);color:#fff;padding:0 .14em;border-radius:.16em;box-shadow:0 10px 34px rgba(84,74,250,.45);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.lv{color:var(--accent)}
+
+/* accueil */
+.intro{text-align:center;padding-top:8px}
+.intro .marque{display:flex;justify-content:center;margin-bottom:28px}
+.intro .marque img{width:56px;height:56px;border-radius:50%;object-fit:cover;background:var(--deep);box-shadow:0 0 0 2px rgba(139,131,255,.35),0 12px 40px rgba(84,74,250,.35)}
+.intro .pilule{margin-bottom:22px}
+.intro h1{margin-bottom:22px}
+.intro .h1b{display:block;margin-top:6px;font-size:.78em}
+.intro .mal{color:var(--brume);font-size:17px;max-width:470px;margin:0 auto 14px}
+.intro .bascule{color:var(--blanc);font-weight:600;font-size:17px;max-width:470px;margin:0 auto 30px}
+.promesses{list-style:none;text-align:left;border:1px solid var(--ligne);background:var(--carte);border-radius:var(--r);padding:20px 22px;margin:0 auto 26px;max-width:480px}
+.promesses li{display:flex;gap:14px;padding:6px 0;color:var(--texte)}
+.promesses li b{color:var(--blanc)}
+.promesses .n{font:800 15px var(--label);color:var(--accent);flex:none;width:14px}
+.promesses .pied{border-top:1px solid var(--ligne);margin-top:12px;padding-top:12px;justify-content:center;color:var(--brume);font-size:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 30px;border:0;border-radius:14px;background:var(--indigo);color:#fff;font:800 16px var(--label);letter-spacing:.06em;text-transform:uppercase;box-shadow:0 14px 40px rgba(84,74,250,.45);transition:transform .2s var(--ease),background .2s}
+.btn:active{transform:scale(.98)}
+.btn.plein{width:100%}
+.btn.second{background:transparent;border:1px solid var(--ligne);box-shadow:none;color:var(--texte)}
+@media (hover:hover){.btn:hover{background:var(--electric)}.btn.second:hover{background:rgba(139,131,255,.08)}}
+.sous-btn{color:var(--brume-2);font-size:13px;margin-top:12px}
+.preuve{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:30px;color:var(--brume);font-size:14px;text-align:left}
+.preuve img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:var(--deep);flex:none}
+.preuve b{color:var(--blanc);font-weight:600}
+
+/* quiz */
+.tete{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;min-height:44px}
+.retour{width:44px;height:44px;border-radius:50%;border:1px solid var(--ligne);background:var(--carte);display:grid;place-items:center;color:var(--texte)}
+.retour svg{width:18px;height:18px}
+.compteur{padding:6px 12px;border:1px solid var(--ligne);border-radius:99px;font:800 12px var(--label);letter-spacing:.12em;color:var(--accent);background:rgba(84,74,250,.10)}
+.segs{display:flex;gap:6px;margin-bottom:30px}
+.segs i{flex:1;height:4px;border-radius:99px;background:rgba(139,131,255,.16);position:relative;overflow:hidden}
+.segs i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--electric),var(--accent));transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.segs i.fait::after{transform:scaleX(1)}
+.question h2{margin-bottom:28px}
+.options{display:grid;gap:12px}
+.opt{display:flex;align-items:center;gap:14px;width:100%;min-height:58px;padding:14px 18px;text-align:left;border:1px solid var(--ligne);border-radius:14px;background:var(--carte);color:var(--blanc);font-weight:600;font-size:16px;line-height:1.35;opacity:0;animation:opt .4s var(--ease) forwards;transition:border-color .2s,background .2s,transform .2s}
+@keyframes opt{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.opt .rond{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid rgba(139,131,255,.4);display:grid;place-items:center;transition:background .2s,border-color .2s}
+.opt .rond svg{width:13px;height:13px;opacity:0}
+.opt.sel{border-color:var(--indigo);background:linear-gradient(180deg,rgba(84,74,250,.30),rgba(84,74,250,.16));box-shadow:0 0 0 4px rgba(84,74,250,.16)}
+.opt.sel .rond{background:var(--indigo);border-color:var(--indigo)}
+.opt.sel .rond svg{opacity:1}
+.question.fige .opt:not(.sel){opacity:.45}
+@media (hover:hover){.opt:hover{border-color:rgba(139,131,255,.5);background:rgba(139,131,255,.07)}}
+
+/* étape finale */
+.final h2{margin-bottom:22px}
+.rupture{border:1px solid rgba(139,131,255,.35);background:linear-gradient(180deg,rgba(84,74,250,.16),rgba(84,74,250,.06));border-radius:var(--r);padding:20px 22px;margin-bottom:22px}
+.rupture .k{display:flex;align-items:center;gap:8px;font:800 12px var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.rupture .k svg{width:16px;height:16px}
+.rupture strong{display:block;font-size:20px;color:var(--blanc);margin-bottom:6px}
+.rupture p{color:var(--brume)}
+.annonce{text-align:center;color:var(--brume);margin-bottom:24px}
+.annonce b{color:var(--blanc)}
+form{display:grid;gap:12px}
+.champ{display:grid;gap:6px}
+.champ label{font-size:14px;color:var(--brume)}
+.champ input{width:100%;min-height:56px;padding:0 18px;border-radius:14px;border:1px solid var(--ligne);background:rgba(255,255,255,.04);color:var(--blanc);font:16px 'General Sans',system-ui,sans-serif}
+.champ input::placeholder{color:var(--brume-2)}
+.champ input:focus{outline:none;border-color:var(--indigo);box-shadow:0 0 0 4px rgba(84,74,250,.2)}
+.champ small{color:var(--brume-2);font-size:13px}
+.err{color:var(--err);font-size:14px;min-height:1px}
+.legal{color:var(--brume-2);font-size:13px;text-align:center;margin-top:6px}
+
+/* attente */
+.attente{text-align:center;padding:90px 0}
+.anneau{width:72px;height:72px;margin:0 auto 26px;border-radius:50%;border:4px solid rgba(139,131,255,.18);border-top-color:var(--accent);animation:tour .9s linear infinite}
+@keyframes tour{to{transform:rotate(360deg)}}
+.attente p{font-weight:600;color:var(--blanc)}
+
+/* résultat */
+.res .score{display:grid;place-items:center;margin:8px auto 10px;position:relative;width:220px;height:220px}
+.res .score svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.res .score .val{font-family:var(--display);font-size:72px;line-height:1;color:var(--blanc)}
+.res .score .sur{font:800 14px var(--label);color:var(--brume);letter-spacing:.1em;margin-top:6px}
+.res .score .centre{display:grid;place-items:center;text-align:center}
+.bande{text-align:center;font:800 15px var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:26px}
+.carte{border:1px solid var(--ligne);background:var(--carte);border-radius:var(--r);padding:22px;margin-bottom:16px}
+.carte h3{font:800 13px var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.radar{display:block;width:100%;max-width:440px;margin:0 auto}
+.axes{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin-top:12px;font-size:14px}
+.axes div{display:flex;justify-content:space-between;gap:8px;color:var(--brume)}
+.axes b{color:var(--blanc)}
+.leviers{display:grid;gap:12px;counter-reset:lev}
+.levier{border:1px solid var(--ligne);background:var(--carte);border-radius:var(--r);padding:20px 22px}
+.levier.un{border-color:rgba(84,74,250,.7);background:linear-gradient(180deg,rgba(84,74,250,.18),rgba(84,74,250,.05))}
+.levier .haut{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.levier .num{flex:none;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--indigo);color:#fff;font:800 15px var(--label)}
+.levier h4{font-size:18px;color:var(--blanc);line-height:1.3}
+.levier .axe{font:800 11px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.levier p{color:var(--brume);margin-top:6px}
+.levier .preuve-l{color:var(--texte);border-left:3px solid var(--indigo);padding-left:12px;margin-top:12px;font-size:15px}
+.objectif{color:var(--texte);text-align:center;margin:18px 0 26px}
+.objectif b{color:var(--blanc)}
+.appel{text-align:center;border:1px solid rgba(139,131,255,.35);background:radial-gradient(80% 90% at 50% 0%,rgba(84,74,250,.30),transparent 75%),var(--carte);border-radius:20px;padding:30px 22px}
+.appel img{width:72px;height:72px;border-radius:50%;object-fit:cover;background:var(--deep);margin:0 auto 14px;display:block;box-shadow:0 0 0 2px rgba(139,131,255,.4)}
+.appel h3{font-family:var(--display);font-weight:400;font-size:24px;color:var(--blanc);margin-bottom:10px;line-height:1.15}
+.appel p{color:var(--brume);margin-bottom:20px}
+.appel .btns{display:grid;gap:10px}
+.pied-page{text-align:center;color:var(--brume-2);font-size:13px;margin-top:28px}
+.pied-page a{color:var(--brume)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.opt{opacity:1}}
+@media print{
+  body{background:#fff;color:#111}body::before{display:none}
+  .page{max-width:none;padding:0}
+  .appel .btns,.pied-page,.retour{display:none!important}
+  h1,h2,.levier h4,.appel h3,.res .score .val,.axes b{color:#111}
+  .carte,.levier,.appel,.rupture{border-color:#ccc;background:#fff;break-inside:avoid}
+  .levier p,.axes div,.appel p,.res .score .sur{color:#444}
+}
+</style>
+</head>
+<body>
+<main class="page" id="app" aria-live="polite"></main>
+<script>
+(() => {
+  'use strict';
+  const API = 'https://automate-factory.vercel.app/api/audit-lead';
+  const CAL = 'https://cal.com/steven-lfrs-persua/decouverte-linkedin';
+  const PHOTO = '../assets/steven.png';
+  const ICO = {
+    retour: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>',
+    ok: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+    cible: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>',
+    fleche: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  };
+
+  /* ---------- les 7 questions ---------- */
+  // a = axe mesuré, v = valeur de 1 (fragile) à 4 (solide) ; f = famille de tâches (leviers agents)
+  const Q = [
+    { id: 'profil', theme: 'Profil', titre: ['Quel est votre ', 'contexte', ' ?'], options: [
+      { t: 'Indépendant, je vends ce que je fais', v: 'independant' },
+      { t: "Dirigeant d'une équipe de 2 à 10 personnes", v: 'petite' },
+      { t: "Dirigeant d'une équipe de plus de 10 personnes", v: 'grande' },
+      { t: 'Associé ou co-gérant', v: 'associe' },
+      { t: 'Commercial ou manager commercial', v: 'commercial' },
+      { t: 'Autre', v: 'autre' },
+    ] },
+    { id: 'vente', theme: 'Vente', a: 'vente', titre: ['Après un bon rendez-vous, qu\'est-ce qui se ', 'passe', ' le plus souvent ?'], options: [
+      { t: '"Je vais réfléchir", puis plus de nouvelles', v: 1 },
+      { t: "Il doit en parler à quelqu'un, et ça traîne", v: 2 },
+      { t: 'Ça bloque sur le prix', v: 2 },
+      { t: 'Je ne relance pas, ou trop tard', v: 1.5 },
+      { t: 'Je signe la plupart du temps, je veux aller plus loin', v: 4 },
+    ] },
+    { id: 'suivi', theme: 'Suivi client', a: 'suivi', titre: ['Vos relances et vos devis en cours, ils ', 'vivent', ' où ?'], options: [
+      { t: "Dans ma tête, et j'en oublie", v: 1 },
+      { t: 'Dans mes mails et sur des post-it', v: 1.5 },
+      { t: 'Dans un tableau que je ne tiens pas à jour', v: 2 },
+      { t: "Dans un CRM, mais c'est moi qui fais tout", v: 3 },
+      { t: "C'est carré, tout est suivi", v: 4 },
+    ] },
+    { id: 'autonomie', theme: 'Autonomie', a: 'autonomie', titre: ['Si vous coupez votre téléphone une journée, qu\'est-ce qui se ', 'passe', ' ?'], options: [
+      { t: "Tout s'arrête, tout passe par moi", v: 1 },
+      { t: 'Je retrouve 40 messages et un client mécontent', v: 1.5 },
+      { t: 'Ça tourne, mais pas comme je le ferais', v: 2.5 },
+      { t: 'Ça tourne bien, chacun sait quoi faire', v: 4 },
+    ] },
+    { id: 'temps', theme: 'Temps', a: 'temps', titre: ['À 21 h, qu\'est-ce qui vous ', 'occupe', ' encore ?'], options: [
+      { t: 'Mes mails et mon administratif', v: 1.5, f: 'mails' },
+      { t: 'Mes devis, mes factures, mes relances de paiement', v: 1.5, f: 'admin' },
+      { t: 'Répondre aux clients et aux avis', v: 1.5, f: 'clients' },
+      { t: 'Trouver des prospects, publier sur les réseaux', v: 1.5, f: 'prospection' },
+      { t: "L'organisation de l'équipe, les plannings", v: 1.5, f: 'equipe' },
+      { t: 'Rien, je coupe à 19 h', v: 4, f: null },
+    ] },
+    { id: 'pilotage', theme: 'Pilotage', a: 'pilotage', titre: ["Votre chiffre d'affaires du mois, vous le ", 'connaissez', ' quand ?'], options: [
+      { t: 'Quand le comptable me l\'envoie', v: 1 },
+      { t: 'À peu près, dans ma tête', v: 1.5 },
+      { t: 'À la fin du mois, quand je fais les comptes', v: 2 },
+      { t: 'En temps réel, quand je veux', v: 4 },
+    ] },
+    { id: 'objectif', theme: 'Objectif', titre: ['Dans 6 mois, ce que vous voulez ', 'vraiment', ', c\'est quoi ?'], options: [
+      { t: 'Signer plus, sans forcer', v: 'signer', axe: 'vente' },
+      { t: 'Arrêter de tout porter seul', v: 'porter', axe: 'autonomie' },
+      { t: 'Retrouver mes soirées et mes week-ends', v: 'soirees', axe: 'temps' },
+      { t: 'Une équipe qui vend aussi bien que moi', v: 'equipe', axe: 'autonomie' },
+      { t: 'Voir mes chiffres et décider vite', v: 'chiffres', axe: 'pilotage' },
+    ] },
+  ];
+
+  /* ---------- les 5 axes : point de rupture et levier ---------- */
+  const AXES = {
+    vente: { nom: 'Vente', rupture: 'Vos rendez-vous se passent bien, et pourtant ils ne signent pas tous. La décision se perd entre la fin du rendez-vous et votre relance.',
+      levier: 'Un cadre de rendez-vous qui fait décider',
+      quoi: 'On travaille sur vos vrais rendez-vous : le moment où la décision se perd, et ce qu\'il faut dire à ce moment-là. Formation Persua, sur votre terrain.',
+      preuve: 'Un closer accompagné est passé de 30 % à 60-65 % de signatures.' },
+    suivi: { nom: 'Suivi client', rupture: 'Vos relances et vos devis vivent dans votre tête. Chaque oubli, c\'est une vente qui part chez un concurrent.',
+      levier: 'Des relances qui partent sans vous',
+      quoi: 'Un agent relance chaque devis à J+4 puis à J+10, dans votre style, et vous prévient sur votre téléphone dès qu\'un prospect répond.',
+      preuve: 'Une enseigne de literie : 30 % de clients en plus revenus grâce aux relances.' },
+    autonomie: { nom: 'Autonomie', rupture: 'Tout passe par vous. Le jour où vous vous arrêtez, l\'entreprise s\'arrête avec vous.',
+      levier: 'Une équipe qui sait quoi faire sans vous',
+      quoi: 'On écrit vos process avec vous, on forme l\'équipe à les tenir, et un point hebdo automatique vous remonte ce qui bloque.',
+      preuve: 'Un magasin : +40 % de signatures après la formation de l\'équipe sur le terrain.' },
+    temps: { nom: 'Temps', rupture: 'Vos soirées partent dans des tâches qu\'un agent ferait à votre place, pendant que vous dormez.',
+      levier: 'Vos soirées rendues',
+      quoi: 'Des agents prennent vos tâches répétitives. Vous gardez la décision, ils font le reste.',
+      preuve: 'Un commerce de bouche : toute la gestion du quotidien pilotée depuis une seule app, en place en 3 semaines.' },
+    pilotage: { nom: 'Pilotage', rupture: 'Vous décidez avec un mois de retard : vos chiffres arrivent après les problèmes.',
+      levier: 'Vos chiffres en temps réel',
+      quoi: 'Un tableau de bord du dirigeant : chiffre d\'affaires, marges, avis clients et tâches dans une seule app, à jour chaque jour.',
+      preuve: 'Un commerce de bouche : chiffres, avis et tâches réunis dans une seule app, en 3 semaines.' },
+  };
+  const AGENTS_TEMPS = {
+    mails: 'Un agent trie vos mails chaque matin, remonte les 5 qui comptent et prépare les réponses.',
+    admin: 'Un agent rapproche vos factures de votre banque et relance les impayés à votre place.',
+    clients: 'Un agent répond aux avis Google et demande un avis après chaque prestation.',
+    prospection: 'Un agent repère les nouveaux prospects, prépare une fiche avant chaque rendez-vous et alimente vos réseaux.',
+    equipe: "Un agent tient le planning, gère les absences et prépare le point hebdo de l'équipe.",
+  };
+  const PREUVE_TEMPS = { clients: 'Un commerce de bouche : 40 avis Google en 4 jours, sans que le dirigeant y passe ses soirées.' };
+  const OBJECTIFS = { signer: 'signer plus, sans forcer', porter: 'arrêter de tout porter seul', soirees: 'retrouver vos soirées et vos week-ends', equipe: 'une équipe qui vend aussi bien que vous', chiffres: 'voir vos chiffres et décider vite' };
+  const ORDRE = ['vente', 'suivi', 'autonomie', 'temps', 'pilotage'];
+
+  /* ---------- état ---------- */
+  const S = { i: -1, rep: {}, lead: {}, envoye: false };
+  const app = document.getElementById('app');
+  const echap = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const src = new URLSearchParams(location.search).get('src') || new URLSearchParams(location.search).get('utm_source') || document.referrer || 'direct';
+
+  function calcul() {
+    const axes = {};
+    for (const q of Q) if (q.a) {
+      const o = q.options.find((x) => x.v === S.rep[q.id] || x.t === S.rep[q.id + '_t']);
+      const v = o ? o.v : 2;
+      axes[q.a] = Math.round(12 + 0.84 * ((v - 1) / 3) * 100);
+    }
+    // score de 20 (tout repose sur vous) à 92 (bien piloté) : un dirigeant ne doit jamais lire 7/100
+    const brut = ORDRE.reduce((s, a) => s + (axes[a] - 12) / 0.84, 0) / ORDRE.length;
+    const score = Math.round(20 + 0.72 * brut);
+    const objAxe = (Q[6].options.find((o) => o.v === S.rep.objectif) || {}).axe;
+    const tri = [...ORDRE].sort((a, b) => (axes[a] - (a === objAxe ? 25 : 0)) - (axes[b] - (b === objAxe ? 25 : 0)));
+    const rupture = [...ORDRE].sort((a, b) => axes[a] - axes[b])[0];
+    return { axes, score, rupture, leviers: tri.slice(0, 3) };
+  }
+  const bande = (s) => s < 40 ? 'Tout repose sur vous' : s < 60 ? 'Ça tient, et c\'est vous qui portez' : s < 80 ? 'Solide, avec des fuites' : 'Bien piloté';
+
+  /* ---------- navigation (bouton retour du navigateur compris) ---------- */
+  function aller(etat, remplacer) {
+    if (remplacer) history.replaceState(etat, '', location.search + '#' + etat.e + (etat.i != null ? etat.i + 1 : ''));
+    else history.pushState(etat, '', location.search + '#' + etat.e + (etat.i != null ? etat.i + 1 : ''));
+    rendre(etat);
+  }
+  addEventListener('popstate', (ev) => rendre(ev.state || { e: 'accueil' }));
+
+  function rendre(etat) {
+    scrollTo({ top: 0 });
+    if (etat.e === 'q' && etat.i > 0 && S.rep[Q[etat.i - 1].id] === undefined) etat = { e: 'q', i: 0 };
+    if ((etat.e === 'final' || etat.e === 'resultat') && S.rep.objectif === undefined) etat = { e: 'accueil' };
+    if (etat.e === 'resultat' && !S.envoye) etat = { e: 'final' };
+    if (etat.e === 'accueil') return accueil();
+    if (etat.e === 'q') return question(etat.i);
+    if (etat.e === 'final') return final();
+    if (etat.e === 'resultat') return resultat();
+  }
+
+  /* ---------- écrans ---------- */
+  function accueil() {
+    S.i = -1;
+    app.innerHTML = `<section class="ecran intro">
+      <div class="marque"><img src="${PHOTO}" alt="Steven Lefrançois" width="56" height="56"></div>
+      <span class="pilule">Entrepreneurs et dirigeants</span>
+      <h1>Tout passe par vous.<span class="h1b">Même ce qui pourrait tourner <span class="pave">sans vous</span>.</span></h1>
+      <p class="mal">Les rendez-vous qui finissent en "je vais réfléchir". Les relances qui attendent dans votre tête. Les soirées sur les devis et les mails.</p>
+      <p class="bascule">Il vous manque un cadre de vente et un système qui tourne sans vous. On mesure les deux.</p>
+      <ol class="promesses">
+        <li><span class="n">1</span><span>Votre <b>P-SCORE sur 100</b>, et l'endroit exact où votre entreprise perd du temps et des ventes.</span></li>
+        <li><span class="n">2</span><span>Vos <b>3 leviers</b> prioritaires : vente, équipe ou agents IA.</span></li>
+        <li><span class="n">3</span><span>Votre plan, <b>affiché tout de suite</b> et à enregistrer en PDF.</span></li>
+        <li class="pied">7 questions. 2 minutes. Aucune préparation.</li>
+      </ol>
+      <button class="btn" id="go">Calculer mon P-SCORE ${ICO.fleche}</button>
+      <p class="sous-btn">Gratuit, sans engagement, résultat immédiat.</p>
+      <div class="preuve"><img src="${PHOTO}" alt="" width="40" height="40"><span>Par <b>Steven Lefrançois</b>, fondateur de Persua. Plus de 350 commerciaux formés et 50 entreprises accompagnées.</span></div>
+    </section>`;
+    document.getElementById('go').addEventListener('click', () => aller({ e: 'q', i: 0 }));
+  }
+
+  function question(i) {
+    S.i = i;
+    const q = Q[i];
+    const choisi = S.rep[q.id];
+    app.innerHTML = `<section class="ecran question">
+      <div class="tete">
+        ${i > 0 ? `<button class="retour" id="retour" aria-label="Question précédente">${ICO.retour}</button>` : '<span></span>'}
+        <span class="compteur">${i} / ${Q.length}</span>
+      </div>
+      <div class="segs" aria-hidden="true">${Q.map((_, k) => `<i class="${k < i ? 'fait' : ''}"></i>`).join('')}</div>
+      <span class="etiq">${echap(q.theme)}</span>
+      <h2>${echap(q.titre[0])}<span class="lv">${echap(q.titre[1])}</span>${echap(q.titre[2])}</h2>
+      <div class="options" role="group" aria-label="${echap(q.titre.join(''))}">
+        ${q.options.map((o, k) => `<button class="opt${choisi !== undefined && S.rep[q.id + '_t'] === o.t ? ' sel' : ''}" data-k="${k}" style="animation-delay:${80 + k * 60}ms"><span class="rond">${ICO.ok}</span><span>${echap(o.t)}</span></button>`).join('')}
+      </div>
+    </section>`;
+    const r = document.getElementById('retour');
+    if (r) r.addEventListener('click', () => history.back());
+    requestAnimationFrame(() => { const segs = app.querySelectorAll('.segs i'); if (segs[i]) setTimeout(() => segs[i].classList.add('fait'), 60); });
+    app.querySelectorAll('.opt').forEach((b) => b.addEventListener('click', () => {
+      if (app.querySelector('.question.fige')) return;
+      const o = q.options[+b.dataset.k];
+      S.rep[q.id] = o.v;
+      S.rep[q.id + '_t'] = o.t;
+      if (o.f !== undefined) S.rep.famille = o.f;
+      b.classList.add('sel');
+      app.querySelector('.question').classList.add('fige');
+      setTimeout(() => {
+        app.querySelector('.ecran').classList.add('sort');
+        setTimeout(() => aller(i + 1 < Q.length ? { e: 'q', i: i + 1 } : { e: 'final' }), 220);
+      }, 380);
+    }));
+  }
+
+  function final() {
+    const c = calcul(), ax = AXES[c.rupture];
+    app.innerHTML = `<section class="ecran final">
+      <div class="tete">
+        <button class="retour" id="retour" aria-label="Question précédente">${ICO.retour}</button>
+        <span class="compteur">Presque fini</span>
+      </div>
+      <div class="segs" aria-hidden="true">${Q.map(() => '<i class="fait"></i>').join('')}</div>
+      <span class="etiq">Étape finale</span>
+      <h2>Votre <span class="lv">P-SCORE</span><br>est calculé.</h2>
+      <div class="rupture">
+        <div class="k">${ICO.cible}Votre point de rupture</div>
+        <strong>${echap(ax.nom)}</strong>
+        <p>${echap(ax.rupture)}</p>
+      </div>
+      <p class="annonce">Votre <b>score sur 100</b>, votre radar et vos <b>3 leviers</b> s'affichent sur l'écran suivant, calculés sur vos réponses.</p>
+      <form id="form" novalidate>
+        <div class="champ"><label for="prenom">Votre prénom</label><input id="prenom" name="prenom" autocomplete="given-name" required value="${echap(S.lead.prenom || '')}"></div>
+        <div id="suite" hidden>
+          <div class="champ" style="margin-bottom:12px"><label for="email">Votre email professionnel</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required value="${echap(S.lead.email || '')}"></div>
+          <div class="champ"><label for="tel">Téléphone (facultatif)</label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" value="${echap(S.lead.tel || '')}"><small>Si vous le laissez, Steven vous écrit sur WhatsApp pour en parler.</small></div>
+        </div>
+        <p class="err" id="err" role="alert"></p>
+        <button class="btn plein" id="envoi" type="submit">Continuer ${ICO.fleche}</button>
+      </form>
+      <p class="legal">Vos réponses servent uniquement à votre audit. Elles ne sont ni revendues ni partagées. <a href="../confidentialite.html">Confidentialité</a></p>
+    </section>`;
+    document.getElementById('retour').addEventListener('click', () => history.back());
+    const f = document.getElementById('form'), suite = document.getElementById('suite'), err = document.getElementById('err'), btn = document.getElementById('envoi');
+    let etape = 1;
+    const prenom = document.getElementById('prenom');
+    setTimeout(() => prenom.focus({ preventScroll: true }), 450);
+    f.addEventListener('submit', (e) => {
+      e.preventDefault();
+      err.textContent = '';
+      const p = prenom.value.trim();
+      if (!p) { err.textContent = 'Votre prénom, pour personnaliser votre audit.'; prenom.focus(); return; }
+      S.lead.prenom = p;
+      if (etape === 1) {
+        etape = 2;
+        suite.hidden = false;
+        btn.innerHTML = `Voir mon P-SCORE ${ICO.fleche}`;
+        document.getElementById('email').focus();
+        return;
+      }
+      const em = document.getElementById('email').value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { err.textContent = 'Cet email ne semble pas valide : vérifiez-le pour recevoir votre audit.'; document.getElementById('email').focus(); return; }
+      S.lead.email = em;
+      S.lead.tel = document.getElementById('tel').value.trim();
+      envoyer(c);
+      S.envoye = true;
+      attente();
+    });
+  }
+
+  function envoyer(c) {
+    const corps = {
+      prenom: S.lead.prenom, email: S.lead.email, tel: S.lead.tel,
+      profil: String(S.rep.profil || ''), score: c.score, rupture: AXES[c.rupture].nom, objectif: String(S.rep.objectif || ''),
+      axes: c.axes, top: c.leviers.map((a) => AXES[a].nom), reponses: Object.fromEntries(Q.map((q) => [q.id, S.rep[q.id + '_t'] || ''])),
+      source: 'p-score · ' + src,
+    };
+    const essai = (n) => fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corps), keepalive: true })
+      .then((r) => { if (!r.ok && n < 2) setTimeout(() => essai(n + 1), 1500); })
+      .catch(() => { if (n < 2) setTimeout(() => essai(n + 1), 1500); });
+    essai(0);
+  }
+
+  function attente() {
+    app.innerHTML = `<section class="ecran attente"><div class="anneau" aria-hidden="true"></div><p id="phase">On croise vos 7 réponses…</p></section>`;
+    const phases = ['On calcule vos 5 axes…', 'On choisit vos 3 leviers…'];
+    phases.forEach((t, k) => setTimeout(() => { const p = document.getElementById('phase'); if (p) p.textContent = t; }, 900 * (k + 1)));
+    setTimeout(() => aller({ e: 'resultat' }, true), 2700);
+  }
+
+  function radar(axes) {
+    const N = ORDRE.length, cx = 230, cy = 172, R = 112;
+    const pt = (k, r) => { const a = -Math.PI / 2 + (k * 2 * Math.PI) / N; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; };
+    let g = '';
+    for (const f of [0.25, 0.5, 0.75, 1]) g += `<polygon points="${ORDRE.map((_, k) => pt(k, R * f).join(',')).join(' ')}" fill="none" stroke="rgba(139,131,255,${f === 1 ? .35 : .15})" stroke-width="1"/>`;
+    for (let k = 0; k < N; k++) { const [x, y] = pt(k, R); g += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(139,131,255,.15)"/>`; }
+    const poly = ORDRE.map((a, k) => pt(k, R * Math.max(0.06, axes[a] / 100)).join(',')).join(' ');
+    g += `<polygon points="${poly}" fill="rgba(84,74,250,.38)" stroke="#8B83FF" stroke-width="2.5" stroke-linejoin="round"/>`;
+    ORDRE.forEach((a, k) => { const [x, y] = pt(k, R * Math.max(0.06, axes[a] / 100)); g += `<circle cx="${x}" cy="${y}" r="4.5" fill="#fff"/>`; });
+    ORDRE.forEach((a, k) => {
+      const [x, y] = pt(k, R + 26);
+      const ancre = Math.abs(x - cx) < 10 ? 'middle' : x > cx ? 'start' : 'end';
+      g += `<text x="${x}" y="${y + 5}" text-anchor="${ancre}" fill="#ECEBF7" font-family="Chivo, system-ui" font-weight="800" font-size="17">${AXES[a].nom}</text>`;
+    });
+    return `<svg class="radar" viewBox="0 0 460 340" role="img" aria-label="Radar de vos 5 axes">${g}</svg>`;
+  }
+
+  function resultat() {
+    const c = calcul(), p = echap(S.lead.prenom || '');
+    const objectif = OBJECTIFS[S.rep.objectif];
+    const leviers = c.leviers.map((a, k) => {
+      const ax = AXES[a];
+      const quoi = a === 'temps' && AGENTS_TEMPS[S.rep.famille] ? AGENTS_TEMPS[S.rep.famille] : ax.quoi;
+      const preuve = a === 'temps' && PREUVE_TEMPS[S.rep.famille] ? PREUVE_TEMPS[S.rep.famille] : ax.preuve;
+      return `<article class="levier${k === 0 ? ' un' : ''}"><div class="haut"><span class="num">${k + 1}</span><div><span class="axe">${echap(ax.nom)} · ${c.axes[a]}/100</span><h4>${echap(ax.levier)}</h4></div></div>
+        <p>${echap(quoi)}</p><p class="preuve-l">${echap(preuve)}</p></article>`;
+    }).join('');
+    const notes = `P-SCORE ${c.score}/100 · point de rupture : ${AXES[c.rupture].nom} · leviers : ${c.leviers.map((a) => AXES[a].nom).join(', ')}${objectif ? ' · objectif : ' + objectif : ''}`;
+    const cal = `${CAL}?name=${encodeURIComponent(S.lead.prenom || '')}&email=${encodeURIComponent(S.lead.email || '')}&notes=${encodeURIComponent(notes)}`;
+    const C = 2 * Math.PI * 96;
+    app.innerHTML = `<section class="ecran res">
+      <span class="etiq">Votre audit</span>
+      <h2>${p}, votre P-SCORE</h2>
+      <div class="score" aria-label="P-SCORE ${c.score} sur 100">
+        <svg viewBox="0 0 220 220" aria-hidden="true"><circle cx="110" cy="110" r="96" fill="none" stroke="rgba(139,131,255,.16)" stroke-width="14"/><circle id="arc" cx="110" cy="110" r="96" fill="none" stroke="url(#dg)" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" style="transition:stroke-dashoffset 1.6s cubic-bezier(.22,1,.36,1)"/><defs><linearGradient id="dg" x1="0" x2="1"><stop offset="0" stop-color="#4747FD"/><stop offset="1" stop-color="#8B83FF"/></linearGradient></defs></svg>
+        <div class="centre"><span class="val" id="val">0</span><span class="sur">SUR 100</span></div>
+      </div>
+      <p class="bande">${echap(bande(c.score))}</p>
+      <div class="carte"><h3>Vos 5 axes</h3>${radar(c.axes)}
+        <div class="axes">${ORDRE.map((a) => `<div><span>${AXES[a].nom}</span><b>${c.axes[a]}</b></div>`).join('')}</div></div>
+      <div class="rupture"><div class="k">${ICO.cible}Votre point de rupture</div><strong>${echap(AXES[c.rupture].nom)}</strong><p>${echap(AXES[c.rupture].rupture)}</p></div>
+      <div class="carte"><h3>Vos 3 leviers</h3><div class="leviers">${leviers}</div></div>
+      ${objectif ? `<p class="objectif">Vous voulez <b>${echap(objectif)}</b>. Commencez par le levier 1 : c'est celui qui vous en rapproche le plus vite.</p>` : ''}
+      <div class="appel">
+        <img src="${PHOTO}" alt="Steven Lefrançois" width="72" height="72">
+        <h3>On regarde votre P-SCORE ensemble ?</h3>
+        <p>45 minutes avec Steven, offertes. On valide vos 3 leviers, dans quel ordre les poser, et ce que ça coûte. Si ça ne vaut pas le coup pour vous, il vous le dit.</p>
+        <div class="btns"><a class="btn plein" href="${cal}" target="_blank" rel="noopener">Réserver mon appel ${ICO.fleche}</a><button class="btn second plein" id="pdf">Enregistrer mon plan en PDF</button></div>
+      </div>
+      <p class="pied-page">Persua · Steven Lefrançois · <a href="../confidentialite.html">Confidentialité</a></p>
+    </section>`;
+    document.getElementById('pdf').addEventListener('click', () => print());
+    requestAnimationFrame(() => setTimeout(() => {
+      const arc = document.getElementById('arc');
+      if (arc) arc.style.strokeDashoffset = String(C * (1 - c.score / 100));
+      const val = document.getElementById('val'), t0 = performance.now();
+      const pas = (t) => { const k = Math.min(1, (t - t0) / 1500); val.textContent = String(Math.round(c.score * (1 - Math.pow(1 - k, 3)))); if (k < 1) requestAnimationFrame(pas); };
+      requestAnimationFrame(pas);
+    }, 150));
+  }
+
+  rendre({ e: 'accueil' });
+  history.replaceState({ e: 'accueil' }, '', location.search + location.hash.replace(/.*/, ''));
+})();
+</script>
+</body>
+</html>
