@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pilote automatique · Votre audit vente et IA offert</title>
-<meta name="description" content="7 questions, 2 minutes. La part de votre entreprise qui tourne sans vous, l'endroit où elle perd du temps et des ventes, et vos 3 priorités : vente, équipe ou agents IA.">
+<meta name="description" content="9 questions, 2 minutes. Votre métier, vous le maîtrisez les yeux fermés. Votre vente, pas encore ? Votre profil se dessine en direct : ce qui tient déjà, ce qui lâche en premier, et vos 3 priorités.">
 <meta property="og:title" content="Pilote automatique · Votre audit vente et IA offert">
-<meta property="og:description" content="7 questions, 2 minutes. Votre entreprise tourne-t-elle sans vous ? Votre résultat et vos 3 priorités, tout de suite.">
+<meta property="og:description" content="9 questions, 2 minutes. Votre profil de vente se dessine en direct : ce qui tient déjà tout seul, ce qui lâche en premier, et vos 3 priorités.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://diagnostic.persua-neurovente.com/audit/">
-<meta property="og:image" content="https://diagnostic.persua-neurovente.com/assets/og-pilote-automatique.jpg">
+<meta property="og:image" content="https://diagnostic.persua-neurovente.com/assets/og-pilote-automatique-2.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
 <meta name="twitter:card" content="summary_large_image">
@@ -29,126 +29,122 @@
   --display:'Archivo Black','Arial Black',system-ui,sans-serif; --label:'Chivo',system-ui,sans-serif;
   --ease:cubic-bezier(.22,1,.36,1); --spring:cubic-bezier(.34,1.56,.64,1);
 }
+@property --h{syntax:'<length>';inherits:true;initial-value:170px}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;background:var(--nuit)}
 body{min-height:100vh;min-height:100svh;color:var(--texte);font:16px/1.55 'General Sans',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;
-  background:radial-gradient(900px 520px at 50% -80px,rgba(84,74,250,.32),transparent 70%),linear-gradient(180deg,var(--ink) 0,var(--nuit) 900px) no-repeat,var(--nuit)}
+  background:radial-gradient(900px 520px at 50% -80px,rgba(84,74,250,.30),transparent 70%),linear-gradient(180deg,var(--ink) 0,var(--nuit) 900px) no-repeat,var(--nuit)}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(235,233,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(235,233,255,.03) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(80% 60% at 50% 30%,#000,transparent 85%)}
 a{color:var(--accent)}
 button{font:inherit;color:inherit;cursor:pointer}
 [hidden]{display:none!important}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.page{position:relative;max-width:620px;margin:0 auto;padding:24px 20px calc(48px + env(safe-area-inset-bottom))}
+.page{position:relative;max-width:620px;margin:0 auto;padding:16px 20px calc(48px + env(safe-area-inset-bottom))}
+.nw{white-space:nowrap}
 
 /* ---------- transitions d'écran ---------- */
-.ecran{animation:entre .55s var(--ease) both}
-@keyframes entre{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
-.ecran.sort{animation:sort .26s ease-in both}
-@keyframes sort{to{opacity:0;transform:translateX(-36px)}}
+.ecran{animation:entre .5s var(--ease) both}
+@keyframes entre{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:none}}
+.ecran.sort{animation:sort .24s ease-in both}
+@keyframes sort{to{opacity:0;transform:translateX(-32px)}}
 
 /* ---------- mots qui montent ---------- */
-.mot{display:inline-block;opacity:0;transform:translateY(16px);filter:blur(6px);animation:mot .6s var(--ease) forwards;animation-delay:calc(var(--d,0ms) + var(--i,0) * 55ms)}
+.mot{display:inline-block;opacity:0;transform:translateY(14px);filter:blur(5px);animation:mot .55s var(--ease) forwards;animation-delay:calc(var(--d,0ms) + var(--i,0) * 50ms)}
 @keyframes mot{to{opacity:1;transform:none;filter:none}}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
 
-/* ---------- objets 3D façon jouet ---------- */
-.ob{position:relative;display:block}
-.ob img{display:block;width:100%;height:auto;filter:drop-shadow(0 14px 16px rgba(0,0,0,.5))}
-.indigo img{filter:hue-rotate(245deg) saturate(1.1) drop-shadow(0 14px 16px rgba(0,0,0,.5))}
-.o-cameleon img{animation:camo 4s ease-in-out infinite 1s}
-@keyframes camo{0%,100%{transform:none}30%{transform:scale(1.04,.96)}55%{transform:translateY(-4px) rotate(-3deg)}}
-.o-poignee img{animation:secoue 2.6s ease-in-out infinite 1s}
-@keyframes secoue{0%,55%,100%{transform:none}62%{transform:translateY(-9px) rotate(-4deg)}69%{transform:translateY(5px) rotate(3deg)}76%{transform:translateY(-7px) rotate(-3deg)}83%{transform:translateY(3px) rotate(2deg)}90%{transform:none}}
-.o-dossiers::after{content:"";position:absolute;left:46%;top:6%;width:30%;height:22%;border-radius:6px;background:linear-gradient(180deg,#fff,#E6E3FF);box-shadow:0 4px 10px rgba(0,0,0,.3);opacity:0;animation:feuille 3s ease-out infinite 1s}
-@keyframes feuille{0%,50%{opacity:0;transform:none}56%{opacity:1}100%{opacity:0;transform:translate(70%,-140%) rotate(70deg)}}
-.o-mobile img{animation:vibre 2.2s ease-in-out infinite 1s}
-@keyframes vibre{0%,50%,100%{transform:none}54%{transform:rotate(-5deg)}58%{transform:rotate(5deg)}62%{transform:rotate(-4deg)}66%{transform:rotate(4deg)}70%{transform:none}}
-.o-mobile .badge{position:absolute;right:-6%;top:-2%;min-width:30%;padding:2px 6px;border-radius:99px;background:#FF4F6B;color:#fff;font:800 clamp(10px,3vw,14px) var(--label);text-align:center;box-shadow:0 4px 12px rgba(255,79,107,.6);animation:pastille 2.2s var(--spring) infinite 1s}
-@keyframes pastille{0%,50%{transform:scale(1)}56%{transform:scale(1.3)}64%{transform:scale(1)}}
-.o-horloge img{animation:sonne 2.4s ease-in-out infinite 1s;transform-origin:50% 70%}
-@keyframes sonne{0%,60%,100%{transform:none}64%{transform:rotate(-9deg)}68%{transform:rotate(9deg)}72%{transform:rotate(-7deg)}76%{transform:rotate(7deg)}80%{transform:rotate(-3deg)}84%{transform:none}}
-.o-graphe img{animation:graphe 4s ease-in-out infinite 1s}
-@keyframes graphe{0%,100%{transform:none}50%{transform:translateY(-6px) rotate(4deg)}}
-.o-cible img{animation:impact 2.6s var(--spring) infinite 1s}
-@keyframes impact{0%,60%,100%{transform:none}64%{transform:scale(.92) translateX(-4px)}72%{transform:scale(1.06)}80%{transform:none}}
-.o-eclair img{animation:zap 2.4s ease-in-out infinite .8s}
-@keyframes zap{0%,62%,100%{transform:none}66%{transform:rotate(-7deg) scale(1.1);filter:drop-shadow(0 0 18px rgba(247,147,30,.95)) brightness(1.25)}70%{transform:rotate(6deg) scale(1.04)}74%{transform:rotate(-4deg) scale(1.12);filter:drop-shadow(0 0 26px rgba(255,200,90,1)) brightness(1.35)}80%{transform:rotate(2deg)}}
-.o-eclair::before,.o-eclair::after{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:#FFD27A;box-shadow:0 0 10px var(--orange);opacity:0;animation:etincelle 2.4s ease-out infinite .8s}
-.o-eclair::before{left:10%;top:30%;--sx:-30px;--sy:-20px}
-.o-eclair::after{right:6%;top:55%;--sx:30px;--sy:14px}
-@keyframes etincelle{0%,64%{opacity:0;transform:none}68%{opacity:1}86%{opacity:0;transform:translate(var(--sx),var(--sy)) scale(.4)}100%{opacity:0}}
-.o-engrenage img{animation:tourne 2.4s linear infinite}
-@keyframes tourne{to{transform:rotate(360deg)}}
+/* ---------- barre du haut (retour, progression, compteur) ---------- */
+.barre{display:flex;align-items:center;gap:12px;min-height:44px;margin-bottom:4px}
+.retour{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--ligne);background:var(--carte);display:grid;place-items:center;color:var(--texte)}
+.retour svg{width:18px;height:18px}
+.segs{flex:1;display:flex;gap:4px}
+.segs i{flex:1;height:4px;border-radius:99px;background:rgba(139,131,255,.16);position:relative;overflow:hidden}
+.segs i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--electric),var(--accent));transform:scaleX(0);transform-origin:left;transition:transform .6s var(--spring)}
+.segs i.fait::after{transform:scaleX(1)}
+.compteur{flex:none;padding:6px 12px;border:1px solid var(--ligne);border-radius:99px;font:800 12px var(--label);letter-spacing:.12em;color:var(--accent);background:rgba(84,74,250,.10)}
 
-/* chute d'un objet à chaque question */
-.chute{position:relative;height:150px;margin:2px 0 6px;display:flex;justify-content:center;align-items:flex-start}
-.chute .ob{height:132px;margin-top:4px;animation:chute .9s cubic-bezier(.3,0,.2,1) both .1s}
-.chute .ob img{height:100%;width:auto}
-@keyframes chute{0%{transform:translateY(-240px) rotate(-14deg);opacity:0}15%{opacity:1}60%{transform:translateY(0) scale(1.08,.86)}75%{transform:translateY(-14px) scale(.96,1.04)}100%{transform:none}}
-.chute .onde{position:absolute;left:50%;bottom:6px;width:70px;height:16px;margin-left:-35px;border-radius:50%;border:3px solid var(--accent);opacity:0;animation:onde .7s ease-out .65s}
-@keyframes onde{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(4.2)}}
+/* ---------- le radar qui se dessine en direct ---------- */
+.tableau{--h:clamp(124px,21svh,186px);transition:--h .6s var(--ease)}
+.tableau[data-mode="intro"]{--h:clamp(150px,27svh,210px)}
+.tableau[data-mode="calcul"]{--h:clamp(150px,26svh,214px)}
+.radar-boite{position:relative;height:var(--h);margin:12px auto 0}
+.radar-boite svg{position:absolute;left:50%;top:0;width:var(--h);height:var(--h);transform:translateX(-50%);overflow:visible}
+.lab{position:absolute;left:calc(50% + var(--x) * (var(--h) * .42 + 10px));top:calc(50% + var(--y) * (var(--h) * .42 + 10px));font:800 11px/1 var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--brume-2);white-space:nowrap;opacity:.5;transition:color .4s,opacity .4s}
+.lab.on{opacity:1;color:var(--texte)}
+.lab.flash{animation:flash 1s var(--ease)}
+@keyframes flash{0%{color:#fff;text-shadow:0 0 16px rgba(139,131,255,1)}100%{text-shadow:0 0 0 transparent}}
+.lab.rupt{opacity:1;color:var(--orange)}
+.r-grille{fill:none;stroke:rgba(139,131,255,.13);stroke-width:1}
+.r-grille.bord{stroke:rgba(139,131,255,.30)}
+.r-rayon{stroke:rgba(139,131,255,.12);stroke-width:1}
+.r-forme{stroke:#8B83FF;stroke-width:2;stroke-linejoin:round}
+.r-halo{fill:none;stroke:rgba(84,74,250,.75);stroke-width:7;stroke-linejoin:round}
+.r-pt{fill:#fff;stroke:var(--indigo);stroke-width:2;opacity:0;transition:opacity .3s}
+.r-pt.on{opacity:1}
+.r-pt.rupt{fill:var(--orange);stroke:var(--orange)}
+.r-onde{fill:none;stroke:var(--accent);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center}
+.r-onde.go{animation:onde .9s ease-out}
+.r-onde.rupt{stroke:var(--orange);animation:onde 1.7s ease-out infinite}
+@keyframes onde{0%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(4.6)}}
+.r-centre{fill:var(--accent);opacity:0;transition:opacity .4s}
+.vide .r-centre{opacity:.9;animation:centre 1.6s ease-in-out infinite}
+@keyframes centre{50%{opacity:.2}}
+.r-balai{opacity:0;transform-box:view-box;transform-origin:100px 100px;transition:opacity .3s}
+.scan .r-balai{opacity:1;animation:balai 1.5s linear infinite}
+@keyframes balai{to{transform:rotate(360deg)}}
+.puces{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;min-height:27px;margin:14px 0 4px}
+.tableau[data-mode="intro"] .puces,.tableau[data-mode="final"] .puces,.tableau[data-mode="calcul"] .puces{display:none}
+.puce{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:99px;border:1px solid var(--ligne);background:rgba(84,74,250,.10);font:800 11px/1.3 var(--label);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.puce i{font-style:normal;color:var(--brume-2)}
+.puce.neuf{animation:pop .5s var(--spring) both}
+.puces .aide{font-size:13px;color:var(--brume-2);align-self:center}
 
 /* ---------- titres et étiquettes ---------- */
-.etiq{display:block;text-align:center;font:800 12px var(--label);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.etiq{display:block;text-align:center;font:800 12px var(--label);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
 .pilule{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--ligne);border-radius:99px;background:rgba(84,74,250,.10);font:700 13px var(--label);color:var(--accent)}
 h1,h2{font-family:var(--display);font-weight:400;color:var(--blanc);letter-spacing:-.01em;text-wrap:balance}
-h1{font-size:clamp(34px,8.4vw,52px);line-height:1.06}
-h2{font-size:clamp(25px,6.4vw,34px);line-height:1.12;text-align:center}
+h1{font-size:clamp(29px,7.4vw,46px);line-height:1.08}
+h2{font-size:clamp(23px,6vw,31px);line-height:1.15;text-align:center}
 .pave{color:#fff;padding:0 .14em;border-radius:.16em;background:linear-gradient(var(--indigo),var(--indigo)) no-repeat left/0% 100%;-webkit-box-decoration-break:clone;box-decoration-break:clone;animation:pave .7s var(--ease) forwards;animation-delay:var(--d,900ms)}
 @keyframes pave{to{background-size:100% 100%;box-shadow:0 10px 34px rgba(84,74,250,.45)}}
 .lv{color:var(--accent)}
 
 /* ---------- accueil ---------- */
-.intro{text-align:center}
-.orbite{position:relative;height:150px;margin:0 auto 6px;max-width:520px}
-.orbite .ob{position:absolute;width:19%;animation:pop .7s var(--spring) both,flotte 4.6s ease-in-out infinite;animation-delay:var(--d),calc(var(--d) + .7s)}
-@keyframes pop{from{opacity:0;transform:scale(.2) translateY(30px)}to{opacity:1;transform:none}}
-@keyframes flotte{0%,100%{transform:translateY(0) rotate(var(--r))}50%{transform:translateY(-10px) rotate(calc(var(--r) * -1))}}
-.orbite .avatar{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;animation:pop .7s var(--spring) both}
-.avatar{display:block}
-.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;box-shadow:0 0 0 3px rgba(139,131,255,.55),0 14px 40px rgba(84,74,250,.5)}
-.avatar::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(139,131,255,.6);animation:halo 2.6s ease-out infinite}
-@keyframes halo{0%{opacity:.9;transform:scale(.92)}100%{opacity:0;transform:scale(1.35)}}
-.intro .pilule{margin:6px 0 20px;animation:mot .6s var(--ease) both .2s}
-.intro h1{margin-bottom:22px}
-.intro .h1b{display:block;margin-top:6px;font-size:.78em}
-.intro .mal{color:var(--brume);font-size:17px;max-width:470px;margin:0 auto 14px;animation:mot .7s var(--ease) both 1.1s}
-.intro .bascule{color:var(--blanc);font-weight:600;font-size:17px;max-width:470px;margin:0 auto 28px;animation:mot .7s var(--ease) both 1.25s}
+.intro{text-align:center;padding-top:6px}
+.intro .pilule{margin:4px 0 18px;animation:mot .6s var(--ease) both .2s}
+.intro h1{margin-bottom:20px}
+.intro .h1b{display:block;margin-top:8px}
+.intro .mal{color:var(--brume);font-size:17px;max-width:480px;margin:0 auto 14px;animation:mot .7s var(--ease) both 1.2s}
+.intro .bascule{color:var(--blanc);font-weight:600;font-size:17px;max-width:480px;margin:0 auto 26px;animation:mot .7s var(--ease) both 1.35s}
 .promesses{list-style:none;text-align:left;border:1px solid var(--ligne);background:var(--carte);border-radius:var(--r);padding:18px 22px;margin:0 auto 26px;max-width:480px}
-.promesses li{display:flex;gap:14px;padding:7px 0;color:var(--texte);opacity:0;animation:mot .6s var(--ease) forwards;animation-delay:calc(1.4s + var(--i) * 110ms)}
+.promesses li{display:flex;gap:14px;padding:7px 0;color:var(--texte);opacity:0;animation:mot .6s var(--ease) forwards;animation-delay:calc(1.5s + var(--i) * 110ms)}
 .promesses li b{color:var(--blanc)}
 .promesses .n{font:800 15px var(--label);color:var(--accent);flex:none;width:14px}
 .promesses .pied{border-top:1px solid var(--ligne);margin-top:10px;padding-top:12px;justify-content:center;color:var(--brume);font-size:14px}
 .btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 30px;border:0;border-radius:14px;background:var(--indigo);color:#fff;font:800 16px var(--label);letter-spacing:.06em;text-transform:uppercase;box-shadow:0 14px 40px rgba(84,74,250,.45);transition:transform .2s var(--ease),background .2s;text-decoration:none}
-.btn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);transform:skewX(-18deg);animation:reflet 3.6s ease-in-out infinite 2.2s}
+.btn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.26),transparent);transform:skewX(-18deg);animation:reflet 3.6s ease-in-out infinite 2.4s}
 @keyframes reflet{0%,70%{left:-60%}100%{left:130%}}
 .btn:active{transform:scale(.97)}
 .btn.plein{width:100%}
 .btn.second{background:transparent;border:1px solid var(--ligne);box-shadow:none;color:var(--texte)}
 .btn.second::after{display:none}
 @media (hover:hover){.btn:hover{background:var(--electric)}.btn.second:hover{background:rgba(139,131,255,.08)}}
-.intro .btn{animation:mot .6s var(--ease) both 1.8s}
+.intro .btn{animation:mot .6s var(--ease) both 1.9s}
 .sous-btn{color:var(--brume-2);font-size:13px;margin-top:12px}
 .preuve{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:28px;color:var(--brume);font-size:14px;text-align:left}
-.preuve img{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none}
+.preuve img{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none;box-shadow:0 0 0 2px rgba(139,131,255,.5)}
 .preuve b{color:var(--blanc);font-weight:600}
 
-/* ---------- quiz ---------- */
-.tete{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;min-height:44px}
-.retour{width:44px;height:44px;border-radius:50%;border:1px solid var(--ligne);background:var(--carte);display:grid;place-items:center;color:var(--texte)}
-.retour svg{width:18px;height:18px}
-.compteur{padding:6px 12px;border:1px solid var(--ligne);border-radius:99px;font:800 12px var(--label);letter-spacing:.12em;color:var(--accent);background:rgba(84,74,250,.10)}
-.segs{display:flex;gap:6px;margin-bottom:8px}
-.segs i{flex:1;height:4px;border-radius:99px;background:rgba(139,131,255,.16);position:relative;overflow:hidden}
-.segs i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--electric),var(--accent));transform:scaleX(0);transform-origin:left;transition:transform .6s var(--spring)}
-.segs i.fait::after{transform:scaleX(1)}
-.question h2{margin-bottom:24px}
-.options{display:grid;gap:12px}
-.opt{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;width:100%;min-height:58px;padding:14px 18px;text-align:left;border:1px solid var(--ligne);border-radius:14px;background:var(--carte);color:var(--blanc);font-weight:600;font-size:16px;line-height:1.35;opacity:0;animation:opt .45s var(--ease) forwards;transition:border-color .2s,background .2s,opacity .25s}
+/* ---------- questions ---------- */
+.question{padding-top:6px}
+.question h2{margin-bottom:18px}
+.options{display:grid;gap:10px}
+.opt{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;width:100%;min-height:54px;padding:12px 18px;text-align:left;border:1px solid var(--ligne);border-radius:14px;background:var(--carte);color:var(--blanc);font-weight:600;font-size:16px;line-height:1.35;opacity:0;animation:opt .45s var(--ease) forwards;transition:border-color .2s,background .2s,opacity .25s}
 @keyframes opt{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .opt .rond{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid rgba(139,131,255,.4);display:grid;place-items:center;transition:background .2s,border-color .2s}
 .opt .rond svg{width:13px;height:13px;transform:scale(0);transition:transform .35s var(--spring)}
 .opt.sel{border-color:var(--indigo);background:linear-gradient(180deg,rgba(84,74,250,.30),rgba(84,74,250,.16));box-shadow:0 0 0 4px rgba(84,74,250,.16);animation:opt .45s var(--ease) forwards,choisi .45s var(--spring)}
-@keyframes choisi{50%{transform:scale(1.025)}}
+@keyframes choisi{50%{transform:scale(1.02)}}
 .opt.sel .rond{background:var(--indigo);border-color:var(--indigo)}
 .opt.sel .rond svg{transform:scale(1)}
 .opt .vague{position:absolute;width:12px;height:12px;border-radius:50%;background:rgba(139,131,255,.35);transform:translate(-50%,-50%) scale(0);animation:vague .6s ease-out forwards;pointer-events:none}
@@ -157,17 +153,16 @@ h2{font-size:clamp(25px,6.4vw,34px);line-height:1.12;text-align:center}
 @media (hover:hover){.opt:hover{border-color:rgba(139,131,255,.5);background:rgba(139,131,255,.07)}}
 
 /* ---------- étape finale ---------- */
-.final .chute{height:128px}
-.final .chute .ob{height:112px}
-.final h2{margin-bottom:20px}
-.rupture{position:relative;overflow:hidden;border:1px solid rgba(139,131,255,.35);background:linear-gradient(180deg,rgba(84,74,250,.16),rgba(84,74,250,.06));border-radius:var(--r);padding:20px 22px;margin-bottom:22px;animation:mot .7s var(--ease) both .5s}
-.rupture::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(139,131,255,.18),transparent 70%);transform:translateX(-100%);animation:balaye 1.4s ease-out 1.1s}
+.final{padding-top:4px}
+.final h2{margin-bottom:18px}
+.rupture{position:relative;overflow:hidden;border:1px solid rgba(247,147,30,.45);background:linear-gradient(180deg,rgba(247,147,30,.12),rgba(247,147,30,.03));border-radius:var(--r);padding:18px 22px;margin-bottom:22px;animation:mot .7s var(--ease) both .5s}
+.rupture::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(247,147,30,.16),transparent 70%);transform:translateX(-100%);animation:balaye 1.4s ease-out 1.1s}
 @keyframes balaye{to{transform:translateX(100%)}}
-.rupture .k{display:flex;align-items:center;gap:8px;font:800 12px var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.rupture .k{display:flex;align-items:center;gap:8px;font:800 12px var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
 .rupture .k svg{width:16px;height:16px}
 .rupture strong{display:block;font-size:20px;color:var(--blanc);margin-bottom:6px}
 .rupture p{color:var(--brume)}
-.annonce{text-align:center;color:var(--brume);margin-bottom:22px;animation:mot .7s var(--ease) both .7s}
+.annonce{text-align:center;color:var(--brume);margin-bottom:20px;animation:mot .7s var(--ease) both .7s}
 .annonce b{color:var(--blanc)}
 form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
 .champ{display:grid;gap:6px}
@@ -180,8 +175,7 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
 .legal{color:var(--brume-2);font-size:13px;text-align:center;margin-top:8px}
 
 /* ---------- calcul ---------- */
-.attente{text-align:center;padding:40px 0 20px}
-.attente .ob{width:120px;margin:0 auto 26px}
+.attente{text-align:center;padding:10px 0 20px}
 .attente h2{margin-bottom:22px}
 .etapes{display:grid;gap:12px;max-width:340px;margin:0 auto;text-align:left}
 .etapes div{display:flex;align-items:center;gap:12px;color:var(--brume);opacity:.35;transition:opacity .3s,color .3s}
@@ -192,6 +186,7 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
 .etapes div.ok i svg{transform:scale(1)}
 
 /* ---------- résultat ---------- */
+.res{padding-top:10px}
 .res h2{animation:mot .6s var(--ease) both}
 .res .jauge{display:grid;place-items:center;margin:10px auto 8px;position:relative;width:236px;height:236px}
 .res .jauge svg{position:absolute;inset:0;transform:rotate(-90deg)}
@@ -199,216 +194,378 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
 .res .jauge .val{font-family:var(--display);font-size:68px;line-height:1;color:var(--blanc)}
 .res .jauge .val small{font-size:.5em}
 .res .jauge .sur{font:800 12px var(--label);color:var(--brume);letter-spacing:.14em;margin-top:8px;max-width:150px}
-.paillettes i{position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:2px;background:var(--c);opacity:0}
-.paillettes.go i{animation:paillette 1.1s var(--ease) forwards;animation-delay:var(--t)}
-@keyframes paillette{0%{opacity:1;transform:translate(-50%,-50%) rotate(0)}100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) rotate(220deg)}}
 .bande{text-align:center;font:800 15px var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:26px;opacity:0;transition:opacity .5s}
 .bande.on{opacity:1}
 .carte{border:1px solid var(--ligne);background:var(--carte);border-radius:var(--r);padding:22px;margin-bottom:16px}
-.carte h3{font:800 13px var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
-.radar{display:block;width:100%;max-width:440px;margin:0 auto}
-.radar .forme{transform-box:view-box;transform-origin:230px 172px;transform:scale(0);transition:transform 1.1s var(--spring)}
-.radar.go .forme{transform:scale(1)}
-.radar .pt{opacity:0;transition:opacity .4s}
-.radar.go .pt{opacity:1;transition-delay:.7s}
-.axes{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin-top:12px;font-size:14px}
+.carte h3{font:800 13px var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.radar-res{--h:clamp(170px,46vw,230px);margin-bottom:28px}
+.axes{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:14px}
 .axes div{display:flex;justify-content:space-between;gap:8px;color:var(--brume)}
 .axes b{color:var(--blanc)}
-.priorites{display:grid;gap:12px}
+.axes .rupt span,.axes .rupt b{color:var(--orange)}
+.priorites{display:grid;gap:12px;margin-top:10px}
 .prio{position:relative;border:1px solid var(--ligne);background:var(--carte);border-radius:var(--r);padding:20px 22px;opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
 .prio.vu{opacity:1;transform:none}
 .prio.un{border-color:rgba(84,74,250,.7);background:linear-gradient(180deg,rgba(84,74,250,.18),rgba(84,74,250,.05))}
-.prio .haut{display:flex;align-items:center;gap:12px;margin-bottom:8px;padding-right:44px}
+.prio .haut{display:flex;align-items:center;gap:12px;margin-bottom:10px}
 .prio .num{flex:none;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--indigo);color:#fff;font:800 15px var(--label);transform:scale(0);transition:transform .45s var(--spring) .25s}
 .prio.vu .num{transform:scale(1)}
 .prio h4{font-size:18px;color:var(--blanc);line-height:1.3}
 .prio .axe{font:800 11px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-.prio p{color:var(--brume);margin-top:6px}
+.prio p{color:var(--brume);margin-top:8px}
+.prio .geste{color:var(--texte)}
+.prio .geste b{color:var(--blanc)}
 .prio .preuve-l{color:var(--texte);border-left:3px solid var(--indigo);padding-left:12px;margin-top:12px;font-size:15px}
-.prio .ob{position:absolute;right:10px;top:-30px;width:58px;opacity:0;transform:translateY(-30px) rotate(-12deg);transition:opacity .4s,transform .7s var(--spring) .15s}
-.prio.vu .ob{opacity:1;transform:none}
 .objectif{color:var(--texte);text-align:center;margin:18px 0 26px}
 .objectif b{color:var(--blanc)}
 .appel{text-align:center;border:1px solid rgba(139,131,255,.35);background:radial-gradient(80% 90% at 50% 0%,rgba(84,74,250,.30),transparent 75%),var(--carte);border-radius:20px;padding:30px 22px}
-.appel .avatar{position:relative;width:84px;height:84px;margin:0 auto 16px}
+.appel .avatar{position:relative;display:block;width:84px;height:84px;margin:0 auto 16px}
+.appel .avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;box-shadow:0 0 0 3px rgba(139,131,255,.55),0 14px 40px rgba(84,74,250,.5)}
+.appel .avatar::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(139,131,255,.6);animation:halo 2.6s ease-out infinite}
+@keyframes halo{0%{opacity:.9;transform:scale(.92)}100%{opacity:0;transform:scale(1.35)}}
 .appel h3{font-family:var(--display);font-weight:400;font-size:24px;color:var(--blanc);margin-bottom:10px;line-height:1.15}
 .appel p{color:var(--brume);margin-bottom:20px}
 .appel .btns{display:grid;gap:10px}
 .pied-page{text-align:center;color:var(--brume-2);font-size:13px;margin-top:28px}
 .pied-page a{color:var(--brume)}
-@media (min-width:700px){.orbite{height:170px}.chute{height:164px}.chute .ob{height:146px}}
+@media (min-width:700px){.page{padding-top:24px}}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
-  .mot,.opt,.promesses li,.prio,.prio .ob,.bande{opacity:1!important;transform:none!important;filter:none!important}
+  .mot,.opt,.promesses li,.prio,.bande,.rupture,.annonce,form{opacity:1!important;transform:none!important;filter:none!important}
   .pave{background-size:100% 100%}
-  .radar .forme{transform:none}.radar .pt{opacity:1}
 }
 @media print{
   body{background:#fff;color:#111}body::before{display:none}
   .page{max-width:none;padding:0}
-  .appel .btns,.pied-page,.retour,.ob,.paillettes{display:none!important}
-  h1,h2,.prio h4,.appel h3,.res .jauge .val,.axes b{color:#111}
+  .barre,.tableau,.appel .btns,.pied-page{display:none!important}
+  h1,h2,.prio h4,.appel h3,.res .jauge .val,.axes b,.prio .geste b{color:#111}
   .carte,.prio,.appel,.rupture{border-color:#ccc;background:#fff;break-inside:avoid;opacity:1;transform:none}
-  .prio p,.axes div,.appel p,.res .jauge .sur{color:#444}
+  .prio p,.axes div,.appel p,.res .jauge .sur,.rupture p{color:#444}
+  .lab{color:#444;opacity:1}
 }
 </style>
 </head>
 <body>
-<main class="page" id="app" aria-live="polite"></main>
+<main class="page">
+  <div class="barre" id="barre" hidden>
+    <button class="retour" id="retour" type="button" aria-label="Question précédente"></button>
+    <div class="segs" id="segs" aria-hidden="true"></div>
+    <span class="compteur" id="compteur"></span>
+  </div>
+  <div class="tableau" id="tableau" aria-hidden="true">
+    <div id="radar"></div>
+    <div class="puces" id="puces"></div>
+  </div>
+  <div id="app" aria-live="polite"></div>
+</main>
 <script>
 (() => {
   'use strict';
   const API = 'https://automate-factory.vercel.app/api/audit-lead';
   const CAL = 'https://cal.com/steven-lfrs-persua/decouverte-linkedin';
   const PHOTO = '../assets/steven-profil.webp';
-  const OBJ = {
-    cameleon: { src: '../assets/toy/cameleon.webp' }, poignee: { src: '../assets/toy/poignee.webp' },
-    dossiers: { src: '../assets/toy/dossiers.webp' }, eclair: { src: '../assets/toy/eclair.webp' },
-    mobile: { src: '../assets/3d/mobile.webp', indigo: true, badge: '40' }, horloge: { src: '../assets/3d/horloge.webp', indigo: true },
-    graphe: { src: '../assets/3d/graphe.webp' }, cible: { src: '../assets/3d/cible.webp', indigo: true },
-    engrenage: { src: '../assets/3d/engrenage.webp', indigo: true },
-  };
   const ICO = {
     retour: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>',
     ok: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
     cible: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>',
     fleche: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
   };
+  const NB = ' ', FIN = ' '; // espace insécable, espace fine avant ? ! :
   const echap = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const obj = (nom, style = '') => {
-    const o = OBJ[nom];
-    return `<span class="ob o-${nom}${o.indigo ? ' indigo' : ''}" aria-hidden="true"${style ? ` style="${style}"` : ''}><img src="${o.src}" alt="" decoding="async">${o.badge ? `<span class="badge">${o.badge}</span>` : ''}</span>`;
-  };
   // découpe un texte en mots qui montent un par un
   const mots = (txt, d = 0) => echap(txt).split(' ').filter(Boolean).map((m, i) => `<span class="mot" style="--i:${i};--d:${d}ms">${m}</span>`).join(' ');
+  // titre de question : le mot entre accolades passe en lavande
+  function titreHTML(t, d0 = 120) {
+    const m = t.match(/^(.*?)\{(.+?)\}(.*)$/);
+    if (!m) return mots(t, d0);
+    let [, avant, hl, apres] = m, ponct = '';
+    const p = apres.match(/^\s*([?!:;]+|[,.…]+)(.*)$/);
+    if (p) { ponct = (/^[?!:;]/.test(p[1]) ? FIN : '') + p[1]; apres = p[2]; }
+    const n0 = avant.split(' ').filter(Boolean).length, n1 = hl.split(' ').length;
+    return `${mots(avant, d0)} <span class="nw"><span class="lv">${mots(hl, d0 + n0 * 50)}</span>${ponct ? `<span class="mot" style="--d:${d0 + (n0 + n1) * 50}ms">${echap(ponct)}</span>` : ''}</span> ${mots(apres, d0 + (n0 + n1 + 1) * 50)}`;
+  }
 
-  /* ---------- les 7 questions ---------- */
-  // a = axe mesuré, v = valeur de 1 (fragile) à 4 (solide) ; f = famille de tâches (pour les agents)
-  const Q = [
-    { id: 'profil', theme: 'Profil', objet: 'cameleon', titre: ['Quel est votre', 'contexte', '?'], options: [
-      { t: 'Indépendant, je vends ce que je fais', v: 'independant' },
-      { t: "Dirigeant d'une équipe de 2 à 10 personnes", v: 'petite' },
-      { t: "Dirigeant d'une équipe de plus de 10 personnes", v: 'grande' },
-      { t: 'Associé ou co-gérant', v: 'associe' },
-      { t: 'Commercial ou manager commercial', v: 'commercial' },
-      { t: 'Autre', v: 'autre' },
-    ] },
-    { id: 'vente', theme: 'Vente', a: 'vente', objet: 'poignee', titre: ["Après un bon rendez-vous, qu'est-ce qui se", 'passe', 'le plus souvent ?'], options: [
-      { t: '"Je vais réfléchir", puis plus de nouvelles', v: 1 },
-      { t: "Il doit en parler à quelqu'un, et ça traîne", v: 2 },
-      { t: 'Ça bloque sur le prix', v: 2 },
-      { t: 'Je ne relance pas, ou trop tard', v: 1.5 },
-      { t: 'Je signe la plupart du temps, je veux aller plus loin', v: 4 },
-    ] },
-    { id: 'suivi', theme: 'Suivi client', a: 'suivi', objet: 'dossiers', titre: ['Vos relances et vos devis en cours, ils', 'vivent', 'où ?'], options: [
-      { t: "Dans ma tête, et j'en oublie", v: 1 },
-      { t: 'Dans mes mails et sur des post-it', v: 1.5 },
-      { t: 'Dans un tableau que je ne tiens pas à jour', v: 2 },
-      { t: "Dans un CRM, mais c'est moi qui fais tout", v: 3 },
-      { t: "C'est carré, tout est suivi", v: 4 },
-    ] },
-    { id: 'autonomie', theme: 'Autonomie', a: 'autonomie', objet: 'mobile', titre: ["Si vous coupez votre téléphone une journée, qu'est-ce qui se", 'passe', '?'], options: [
-      { t: "Tout s'arrête, tout passe par moi", v: 1 },
-      { t: 'Je retrouve 40 messages et un client mécontent', v: 1.5 },
-      { t: 'Ça tourne, mais pas comme je le ferais', v: 2.5 },
-      { t: 'Ça tourne bien, chacun sait quoi faire', v: 4 },
-    ] },
-    { id: 'temps', theme: 'Temps', a: 'temps', objet: 'horloge', titre: ["À 21 h, qu'est-ce qui vous", 'occupe', 'encore ?'], options: [
-      { t: 'Mes mails et mon administratif', v: 1.5, f: 'mails' },
-      { t: 'Mes devis, mes factures, mes relances de paiement', v: 1.5, f: 'admin' },
-      { t: 'Répondre aux clients et aux avis', v: 1.5, f: 'clients' },
-      { t: 'Trouver des prospects, publier sur les réseaux', v: 1.5, f: 'prospection' },
-      { t: "L'organisation de l'équipe, les plannings", v: 1.5, f: 'equipe' },
-      { t: 'Rien, je coupe à 19 h', v: 4, f: null },
-    ] },
-    { id: 'pilotage', theme: 'Pilotage', a: 'pilotage', objet: 'graphe', titre: ["Votre chiffre d'affaires du mois, vous le", 'connaissez', 'quand ?'], options: [
-      { t: "Quand le comptable me l'envoie", v: 1 },
-      { t: 'À peu près, dans ma tête', v: 1.5 },
-      { t: 'À la fin du mois, quand je fais les comptes', v: 2 },
-      { t: 'En temps réel, quand je veux', v: 4 },
-    ] },
-    { id: 'objectif', theme: 'Objectif', objet: 'cible', titre: ['Dans 6 mois, ce que vous voulez', 'vraiment,', "c'est quoi ?"], options: [
-      { t: 'Retrouver le plaisir de vendre', v: 'vendre', axe: 'vente' },
-      { t: 'Arrêter de tout porter seul', v: 'porter', axe: 'autonomie' },
-      { t: 'Retrouver mes soirées et mes week-ends', v: 'soirees', axe: 'temps' },
-      { t: 'Une équipe qui vend aussi bien que moi', v: 'equipe', axe: 'autonomie' },
-      { t: 'Voir mes chiffres et décider vite', v: 'chiffres', axe: 'pilotage' },
-    ] },
-  ];
-
-  /* ---------- les 5 axes ---------- */
+  /* ---------- les 5 axes, dans l'ordre du radar (en partant du haut, sens horaire) ---------- */
+  const ORDRE = ['assurance', 'methode', 'suivi', 'action', 'systeme'];
   const AXES = {
-    vente: { nom: 'Vente', objet: 'poignee', rupture: 'Vos rendez-vous se passent bien, et pourtant ils ne signent pas tous. La décision se perd entre la fin du rendez-vous et votre relance.',
-      titre: 'Un cadre de rendez-vous qui fait décider',
-      quoi: "On travaille sur vos vrais rendez-vous : le moment où la décision se perd, et ce qu'il faut dire à ce moment-là. Formation Persua, sur votre terrain.",
-      preuve: 'Un closer accompagné est passé de 30 % à 60-65 % de signatures.' },
-    suivi: { nom: 'Suivi client', objet: 'dossiers', rupture: "Vos relances et vos devis vivent dans votre tête. Chaque oubli, c'est une vente qui part chez un concurrent.",
-      titre: 'Des relances qui partent sans vous',
-      quoi: "Un agent relance chaque devis à J+4 puis à J+10, dans votre style, et vous prévient sur votre téléphone dès qu'un prospect répond.",
-      preuve: 'Une enseigne de literie : 30 % de clients en plus revenus grâce aux relances.' },
-    autonomie: { nom: 'Autonomie', objet: 'mobile', rupture: "Tout passe par vous. Le jour où vous vous arrêtez, l'entreprise s'arrête avec vous.",
-      titre: 'Une équipe qui sait quoi faire sans vous',
-      quoi: "On écrit vos process avec vous, on forme l'équipe à les tenir, et un point hebdo automatique vous remonte ce qui bloque.",
-      preuve: "Un magasin : +40 % de signatures après la formation de l'équipe sur le terrain." },
-    temps: { nom: 'Temps', objet: 'horloge', rupture: "Vos soirées partent dans des tâches qu'un agent ferait à votre place, pendant que vous dormez.",
-      titre: 'Vos soirées rendues',
-      quoi: 'Des agents prennent vos tâches répétitives. Vous gardez la décision, ils font le reste.',
-      preuve: 'Un commerce de bouche : toute la gestion du quotidien pilotée depuis une seule app, en place en 3 semaines.' },
-    pilotage: { nom: 'Pilotage', objet: 'graphe', rupture: 'Vous décidez avec un mois de retard : vos chiffres arrivent après les problèmes.',
-      titre: 'Vos chiffres en temps réel',
-      quoi: "Un tableau de bord du dirigeant : chiffre d'affaires, marges, avis clients et tâches dans une seule app, à jour chaque jour.",
-      preuve: 'Un commerce de bouche : chiffres, avis et tâches réunis dans une seule app, en 3 semaines.' },
+    assurance: { nom: 'Assurance',
+      rupture: "La peur arrive avant l'appel, et c'est elle qui décide : vous repoussez, vous écourtez, vous n'osez pas proposer. Et en rendez-vous, c'est le plus calme des deux qui mène.",
+      titre: 'Un rituel avant chaque appel',
+      geste: "avant chaque appel, écrivez la première question que vous allez poser, et ouvrez avec elle. Savoir par où commencer fait déjà baisser la peur.",
+      suite: "Avec Steven, vous travaillez cette peur sur vos vrais rendez-vous, jusqu'à y reprendre du plaisir.",
+      preuve: `Un closer qui plafonnait à 30${NB}% de signatures est monté à 60-65${NB}%.` },
+    methode: { nom: 'Méthode',
+      rupture: "Vous connaissez votre métier par cœur, alors en rendez-vous, vous l'expliquez. Le prospect repart avec toutes les infos, et sans décision.",
+      titre: 'Un cadre de rendez-vous, étape par étape',
+      geste: "dans votre prochain rendez-vous, posez trois questions sur sa situation avant de dire un mot de votre offre.",
+      suite: "Ensuite, le cadre complet : ouvrir, questionner, reformuler, annoncer votre prix, conclure. Steven le cale sur vos propres rendez-vous.",
+      preuve: `Avec ce cadre, Steven signe 67 à 82${NB}% de ses rendez-vous.` },
+    suivi: { nom: 'Suivi',
+      rupture: "Les “ça m'intéresse” s'éteignent entre deux contacts. Sans relance datée, chaque silence finit en non.",
+      titre: 'Une date de relance pour chaque “je vais réfléchir”',
+      geste: "listez les personnes qui vous ont dit “ça m'intéresse” ce mois-ci, et donnez à chacune une date de relance.",
+      suite: "Ensuite, un agent autonome relance à votre place, dans vos mots, et vous prévient dès qu'on vous répond.",
+      preuve: `Une enseigne de literie : +30${NB}% de clients revenus grâce aux relances.` },
+    action: { nom: 'Action',
+      rupture: "Vous savez quoi faire. Mais votre prospection suit votre envie du jour, et les semaines sans envie, rien ne rentre.",
+      titre: 'Un créneau fixe, tenu même sans envie',
+      geste: "bloquez deux créneaux de 45 minutes pour trouver des clients, et tenez-les comme un rendez-vous client.",
+      suite: "Le plus dur, c'est de tenir dans la durée : Steven vous suit chaque semaine, surtout quand l'envie lâche.",
+      preuve: `Un coach sportif bloqué par la peur de vendre : un peu plus de 5${FIN}000${NB}€ encaissés en 4 mois.` },
+    systeme: { nom: 'Système',
+      rupture: "Vos prospects, vos relances et vos rendez-vous vivent dans votre tête. Le jour où vous levez le pied, tout s'arrête avec vous.",
+      titre: 'Sortir votre vente de votre tête',
+      geste: "notez sur une seule page vos prospects en cours et la prochaine action pour chacun.",
+      suite: "Ensuite, un agent autonome tient cette liste à jour, vous dit chaque matin qui rappeler et prépare vos rendez-vous.",
+      preuve: "Un commerce de bouche : l'accueil repensé, 40 avis Google en 4 jours.",
+      // le dirigeant : sa douleur, c'est « j'ai tout dans ma tête » et plus de place pour écouter
+      d: { rupture: "Tout est dans votre tête, et l'équipe attend vos réponses. Résultat : il ne vous reste plus de place pour écouter vos clients.",
+        titre: 'Une équipe qui sait quoi faire sans vous',
+        geste: "écrivez les 5 questions qu'on vous pose le plus, avec votre réponse type pour chacune.",
+        suite: "Ensuite, vos process sont posés avec l'équipe, et des agents autonomes vous remontent chaque semaine ce qui bloque, dans une seule app." } },
   };
-  const AGENTS_TEMPS = {
-    mails: 'Un agent trie vos mails chaque matin, remonte les 5 qui comptent et prépare les réponses.',
-    admin: 'Un agent rapproche vos factures de votre banque et relance les impayés à votre place.',
-    clients: 'Un agent répond aux avis Google et demande un avis après chaque prestation.',
-    prospection: 'Un agent repère les nouveaux prospects, prépare une fiche avant chaque rendez-vous et alimente vos réseaux.',
-    equipe: "Un agent tient le planning, gère les absences et prépare le point hebdo de l'équipe.",
+
+  /* ---------- les 9 questions ---------- */
+  // a = axe mesuré, v = valeur de 1 (fragile) à 4 (solide) ; d = variante pour le dirigeant
+  const Q = [
+    { id: 'profil', theme: 'Votre profil', titre: "Aujourd'hui, vous vendez {quoi} ?", options: [
+      { t: 'Mon accompagnement : coach, consultant, thérapeute ou formateur', v: 'accompagnement', court: 'Coach, consultant' },
+      { t: 'Mon savoir-faire : indépendant, artisan ou freelance', v: 'independant', court: 'Indépendant' },
+      { t: 'Je dirige une équipe, et je vends encore moi-même', v: 'dirigeant', court: 'Dirigeant' },
+      { t: "L'offre d'une entreprise : commercial ou closer", v: 'commercial', court: 'Commercial' },
+    ] },
+    { id: 'avant', theme: "Avant l'appel", a: 'assurance', titre: 'Juste avant un appel ou un rendez-vous de vente, vous {ressentez} quoi ?', options: [
+      { t: "L'envie d'y aller", v: 4 },
+      { t: 'Un petit stress, qui passe en parlant', v: 3 },
+      { t: 'La boule au ventre, et parfois je repousse', v: 1.5 },
+      { t: "La peur. J'évite tant que je peux", v: 1 },
+    ] },
+    { id: 'parole', theme: 'En rendez-vous', a: 'methode', titre: 'En rendez-vous, qui {parle} le plus ?', options: [
+      { t: "L'autre : je pose des questions et j'écoute", v: 4 },
+      { t: 'Moitié-moitié', v: 3 },
+      { t: 'Moi : je présente mon offre en détail', v: 1.5 },
+      { t: "Ça dépend des jours, j'improvise", v: 1 },
+    ] },
+    { id: 'signature', theme: 'Vos signatures', a: 'methode', titre: "Sur 10 personnes qui vous disent “ça m'intéresse”, combien deviennent {clients} ?", options: [
+      { t: '7 ou plus', v: 4 },
+      { t: '4 à 6', v: 3 },
+      { t: '1 à 3', v: 1.5 },
+      { t: 'Je ne sais pas, je ne compte pas', v: 1.5 },
+    ] },
+    { id: 'reflechir', theme: 'Après le rendez-vous', a: 'suivi', titre: 'On vous dit “je vais réfléchir”. {Ensuite} ?', options: [
+      { t: 'Une relance est déjà prévue, avec une date', v: 4 },
+      { t: "Je relance quand j'y pense", v: 2 },
+      { t: "J'attends qu'on revienne vers moi", v: 1.5 },
+      { t: 'Rien. Et en général, on ne revient pas', v: 1 },
+    ] },
+    { id: 'prospection', theme: 'Trouver des clients', a: 'action', titre: 'Trouver de nouveaux clients, chez vous, ça se passe {quand} ?', options: [
+      { t: 'Sur un créneau fixe chaque semaine, envie ou pas', v: 4 },
+      { t: 'Par vagues, quand le chiffre baisse', v: 2 },
+      { t: "J'attends le bouche-à-oreille", v: 1.5 },
+      { t: "Je sais quoi faire, mais je n'en ai pas envie", v: 1 },
+    ] },
+    { id: 'tete', theme: 'Votre organisation', a: 'systeme', titre: 'Vos prospects, vos relances, vos rendez-vous : tout ça {vit} où ?', options: [
+      { t: 'Dans un outil qui me dit qui rappeler', v: 4 },
+      { t: 'Dans un tableau, plus ou moins à jour', v: 2.5 },
+      { t: 'Dans mes mails et mes messages', v: 1.5 },
+      { t: 'Dans ma tête', v: 1 },
+    ] },
+    { id: 'absence', theme: 'Pilote automatique', a: 'systeme', titre: 'Si vous vous arrêtez {deux semaines}, votre vente…', options: [
+      { t: 'Continue : relances et rendez-vous tournent sans moi', v: 4 },
+      { t: 'Ralentit, mais rien ne se perd', v: 3 },
+      { t: "S'arrête, et je repars de zéro au retour", v: 1.5 },
+      { t: "Impossible, je ne peux pas m'arrêter", v: 1 },
+    ], d: { titre: 'Si vous partez {deux semaines}, votre équipe…', options: [
+      { t: 'Vend et suit les clients sans moi', v: 4 },
+      { t: "Avance, mais m'appelle tous les jours", v: 2 },
+      { t: 'Attend mon retour pour décider', v: 1.5 },
+      { t: 'Je ne pars pas : sans moi, rien ne bouge', v: 1 },
+    ] } },
+    // la ligne de partage du portrait ICP : il demande un cadre (formation) ou il veut que ça tourne sans lui (système, agents)
+    { id: 'cap', theme: 'Votre cap', titre: "Dans 6 mois, ce que vous voulez {vraiment}, c'est…", options: [
+      { t: 'Retrouver le plaisir de vendre', v: 'plaisir', axe: 'assurance', piste: 'cadre', court: 'le plaisir de vendre' },
+      { t: 'Un cadre clair : savoir quoi faire, étape par étape', v: 'cadre', axe: 'methode', piste: 'cadre', court: 'un cadre clair' },
+      { t: 'Des revenus réguliers, tous les mois', v: 'revenus', axe: 'action', piste: 'cadre', court: 'des revenus réguliers' },
+      { t: 'Que ça tourne sans que tout passe par moi', v: 'tourne', axe: 'systeme', piste: 'systeme', court: 'que ça tourne sans vous' },
+    ], d: { options: [
+      { t: 'Retrouver le plaisir de vendre', v: 'plaisir', axe: 'assurance', piste: 'cadre', court: 'le plaisir de vendre' },
+      { t: 'Une équipe qui vend avec le même cadre que moi', v: 'equipe', axe: 'methode', piste: 'cadre', court: 'une équipe qui vend avec votre cadre' },
+      { t: 'Du temps pour écouter mes clients et mon équipe', v: 'ecoute', axe: 'systeme', piste: 'systeme', court: 'du temps pour écouter' },
+      { t: 'Que ça tourne sans que tout passe par moi', v: 'tourne', axe: 'systeme', piste: 'systeme', court: 'que ça tourne sans vous' },
+    ] } },
+  ];
+  const Q_CAP = Q[Q.length - 1];
+  const PISTES = {
+    cadre: { h: 'On pose votre cadre ensemble ?', p: "45 minutes avec Steven, offertes. Vous repartez avec vos priorités dans l'ordre et le premier geste de la semaine. S'il n'a rien à vous apporter, il vous le dit.", note: 'demande un cadre' },
+    systeme: { h: 'On regarde ce qui peut tourner sans vous ?', p: "45 minutes avec Steven, offertes. Vous repartez avec ce qui peut passer en pilote automatique chez vous, et dans quel ordre. S'il n'a rien à vous apporter, il vous le dit.", note: 'veut que ça tourne sans lui' },
   };
-  const PREUVE_TEMPS = { clients: 'Un commerce de bouche : 40 avis Google en 4 jours, sans que le dirigeant y passe ses soirées.' };
-  const OBJECTIFS = { vendre: 'retrouver le plaisir de vendre', porter: 'arrêter de tout porter seul', soirees: 'retrouver vos soirées et vos week-ends', equipe: 'une équipe qui vend aussi bien que vous', chiffres: 'voir vos chiffres et décider vite' };
-  const ORDRE = ['vente', 'suivi', 'autonomie', 'temps', 'pilotage'];
 
   /* ---------- état ---------- */
-  const S = { rep: {}, lead: {}, envoye: false };
-  const app = document.getElementById('app');
+  const S = { choix: {}, lead: {}, envoye: false };
+  const $ = (s) => document.querySelector(s);
+  const app = $('#app'), barre = $('#barre'), tableau = $('#tableau'), puces = $('#puces');
   const qs = new URLSearchParams(location.search);
   const src = qs.get('src') || qs.get('utm_source') || document.referrer || 'direct';
   const calme = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  $('#retour').innerHTML = ICO.retour;
+  $('#retour').addEventListener('click', () => history.back());
 
+  const choisi = (q) => { const k = S.choix[q.id]; return k == null ? undefined : variante(q).options[k]; };
+  const estD = () => (choisi(Q[0]) || {}).v === 'dirigeant';
+  const variante = (q) => (q.d && estD() ? { ...q, ...q.d } : q);
+  const contenu = (a) => (AXES[a].d && estD() ? { ...AXES[a], ...AXES[a].d } : AXES[a]);
+  const axeVal = (v) => Math.round(12 + 0.84 * ((v - 1) / 3) * 100);
+
+  // valeurs des axes déjà renseignés (null tant qu'aucune question de l'axe n'a de réponse)
+  function axesActuels() {
+    const acc = {};
+    for (const q of Q) if (q.a) { const o = choisi(q); if (o) (acc[q.a] = acc[q.a] || []).push(o.v); }
+    const out = {};
+    for (const a of ORDRE) out[a] = acc[a] ? axeVal(acc[a].reduce((s, v) => s + v, 0) / acc[a].length) : null;
+    return out;
+  }
   function calcul() {
-    const axes = {};
-    for (const q of Q) if (q.a) {
-      const o = q.options.find((x) => x.t === S.rep[q.id + '_t']);
-      axes[q.a] = Math.round(12 + 0.84 * (((o ? o.v : 2) - 1) / 3) * 100);
-    }
-    // indice de 20 (tout passe par vous) à 92 (elle tourne sans vous)
+    const axes = axesActuels();
+    for (const a of ORDRE) if (axes[a] == null) axes[a] = axeVal(2);
+    // indice de 20 (tout repose sur vous) à 92 (votre vente tient sans vous pousser)
     const brut = ORDRE.reduce((s, a) => s + (axes[a] - 12) / 0.84, 0) / ORDRE.length;
     const indice = Math.round(20 + 0.72 * brut);
-    const objAxe = (Q[6].options.find((o) => o.v === S.rep.objectif) || {}).axe;
-    const poids = (a) => axes[a] - (a === objAxe ? 25 : 0);
+    const cap = choisi(Q_CAP);
+    const poids = (a) => axes[a] - (cap && a === cap.axe ? 25 : 0);
     const priorites = [...ORDRE].sort((a, b) => poids(a) - poids(b)).slice(0, 3);
     const rupture = [...ORDRE].sort((a, b) => axes[a] - axes[b])[0];
-    return { axes, indice, rupture, priorites };
+    const piste = cap ? cap.piste : estD() ? 'systeme' : 'cadre';
+    return { axes, indice, rupture, priorites, piste, cap };
   }
-  const bande = (s) => s < 40 ? 'Tout passe encore par vous' : s < 60 ? 'Ça tourne quand vous êtes là' : s < 80 ? 'Le pilote automatique se met en place' : 'Elle tourne sans vous';
+  const bande = (s) => s < 40 ? 'Tout repose encore sur vous' : s < 60 ? 'Ça tient quand vous êtes à fond' : s < 80 ? 'Votre pilote automatique se met en place' : 'Votre vente tient même les jours sans envie';
+
+  /* ---------- le radar ---------- */
+  let nRadar = 0;
+  function creerRadar(hote) {
+    const id = 'r' + ++nRadar, N = ORDRE.length, C = 100, R = 84;
+    const ang = (k) => -Math.PI / 2 + (k * 2 * Math.PI) / N;
+    const pt = (k, f) => [C + R * f * Math.cos(ang(k)), C + R * f * Math.sin(ang(k))];
+    const poly = (fs) => fs.map((f, k) => pt(k, f).map((n) => n.toFixed(1)).join(',')).join(' ');
+    const [bx, by] = pt(0, 1), [ex, ey] = [C + R * Math.cos(-Math.PI / 2 + 0.62), C + R * Math.sin(-Math.PI / 2 + 0.62)];
+    let g = `<defs><radialGradient id="${id}g"><stop offset="0" stop-color="#8B83FF" stop-opacity=".6"/><stop offset="1" stop-color="#544AFA" stop-opacity=".3"/></radialGradient>
+      <filter id="${id}f" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5"/></filter></defs>`;
+    for (const f of [0.25, 0.5, 0.75, 1]) g += `<polygon class="r-grille${f === 1 ? ' bord' : ''}" points="${poly(Array(N).fill(f))}"/>`;
+    for (let k = 0; k < N; k++) { const [x, y] = pt(k, 1); g += `<line class="r-rayon" x1="${C}" y1="${C}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}"/>`; }
+    g += `<g class="r-balai"><path d="M${C},${C} L${bx.toFixed(1)},${by.toFixed(1)} A${R},${R} 0 0,1 ${ex.toFixed(1)},${ey.toFixed(1)} Z" fill="rgba(139,131,255,.16)"/><line x1="${C}" y1="${C}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" stroke="#8B83FF" stroke-width="1.5"/></g>`;
+    g += `<polygon class="r-halo" filter="url(#${id}f)" points="${poly(Array(N).fill(0))}"/><polygon class="r-forme" fill="url(#${id}g)" points="${poly(Array(N).fill(0))}"/>`;
+    g += `<circle class="r-centre" cx="${C}" cy="${C}" r="3.2"/>`;
+    for (let k = 0; k < N; k++) g += `<circle class="r-onde" r="4" cx="${C}" cy="${C}"/><circle class="r-pt" r="3.8" cx="${C}" cy="${C}"/>`;
+    const ANCRES = ['translate(-50%,-125%)', 'translate(2px,-50%)', 'translate(-12%,20%)', 'translate(-88%,20%)', 'translate(calc(-100% - 2px),-50%)'];
+    hote.innerHTML = `<div class="radar-boite"><svg viewBox="0 0 200 200" aria-hidden="true">${g}</svg>${ORDRE.map((a, k) =>
+      `<span class="lab" style="--x:${Math.cos(ang(k)).toFixed(3)};--y:${Math.sin(ang(k)).toFixed(3)};transform:${ANCRES[k]}">${AXES[a].nom}</span>`).join('')}</div>`;
+    const svg = hote.querySelector('svg'), forme = svg.querySelector('.r-forme'), halo = svg.querySelector('.r-halo');
+    const pts = [...svg.querySelectorAll('.r-pt')], ondes = [...svg.querySelectorAll('.r-onde')], labs = [...hote.querySelectorAll('.lab')];
+    let cur = Array(N).fill(0), cible = cur.slice(), raf = 0, demoT = 0;
+    const dessiner = (fs) => {
+      const p = poly(fs);
+      forme.setAttribute('points', p); halo.setAttribute('points', p);
+      fs.forEach((f, k) => { const [x, y] = pt(k, f); pts[k].setAttribute('cx', x.toFixed(1)); pts[k].setAttribute('cy', y.toFixed(1)); });
+    };
+    const ressort = (x) => 1 + 2.55 * Math.pow(x - 1, 3) + 1.55 * Math.pow(x - 1, 2);
+    function animer(vers, duree = 900) {
+      cancelAnimationFrame(raf);
+      cible = vers.slice();
+      if (calme) { cur = vers.slice(); dessiner(cur); return; }
+      const de = cur.slice(), t0 = performance.now();
+      const pas = (t) => {
+        const x = Math.min(1, (t - t0) / duree), e = ressort(x);
+        cur = de.map((d, k) => d + (vers[k] - d) * e);
+        dessiner(cur);
+        if (x < 1) raf = requestAnimationFrame(pas);
+      };
+      raf = requestAnimationFrame(pas);
+    }
+    const stopDemo = () => { clearTimeout(demoT); demoT = 0; };
+    return {
+      // vals : { axe: 0..100 ou null } ; les axes qui viennent de changer s'allument et lancent une onde
+      maj(vals, { onde = false } = {}) {
+        stopDemo();
+        const vers = ORDRE.map((a) => (vals[a] == null ? 0 : 0.22 + 0.78 * vals[a] / 100));
+        ORDRE.forEach((a, k) => {
+          const on = vals[a] != null;
+          labs[k].classList.toggle('on', on);
+          pts[k].classList.toggle('on', on);
+          if (onde && on && Math.abs(vers[k] - cible[k]) > 0.004 && !calme) {
+            const [x, y] = pt(k, vers[k]);
+            ondes[k].setAttribute('cx', x.toFixed(1)); ondes[k].setAttribute('cy', y.toFixed(1));
+            ondes[k].classList.remove('go'); labs[k].classList.remove('flash');
+            void labs[k].offsetWidth;
+            labs[k].classList.add('flash');
+            setTimeout(() => ondes[k].classList.add('go'), 320);
+          }
+        });
+        svg.classList.toggle('vide', vers.every((f) => f === 0));
+        if (vers.some((f, k) => Math.abs(f - cible[k]) > 0.004)) animer(vers);
+      },
+      // accueil : le radar respire entre plusieurs profils
+      demo() {
+        stopDemo();
+        const formes = [[0.78, 0.5, 0.66, 0.38, 0.7], [0.48, 0.84, 0.42, 0.72, 0.55], [0.66, 0.62, 0.84, 0.56, 0.4], [0.55, 0.4, 0.5, 0.86, 0.66]];
+        labs.forEach((l) => l.classList.add('on')); pts.forEach((p) => p.classList.add('on'));
+        svg.classList.remove('vide');
+        let i = 0;
+        const tour = () => { animer(formes[i++ % formes.length], 1500); demoT = setTimeout(tour, calme ? 1e9 : 2600); };
+        tour();
+      },
+      scan(on) { svg.classList.toggle('scan', on); },
+      rupture(axe) {
+        ORDRE.forEach((a, k) => {
+          const r = a === axe;
+          labs[k].classList.toggle('rupt', r); pts[k].classList.toggle('rupt', r);
+          if (r) { ondes[k].setAttribute('cx', pts[k].getAttribute('cx')); ondes[k].setAttribute('cy', pts[k].getAttribute('cy')); }
+          ondes[k].classList.toggle('rupt', r);
+        });
+      },
+    };
+  }
+  const radar = creerRadar($('#radar'));
+
+  // les pastilles sous le radar : le profil, puis le cap
+  let pucesAvant = '';
+  function majPuces() {
+    const p = choisi(Q[0]), cap = choisi(Q_CAP);
+    const cle = (p ? p.v : '') + '|' + (cap ? cap.v : '');
+    if (cle === pucesAvant) return;
+    const [p0, c0] = pucesAvant.split('|');
+    pucesAvant = cle;
+    if (!p && !cap) { puces.innerHTML = '<span class="aide">Votre profil se dessine ici, réponse après réponse.</span>'; return; }
+    puces.innerHTML = (p ? `<span class="puce${p.v !== p0 ? ' neuf' : ''}"><i>Profil</i>${echap(p.court)}</span>` : '')
+      + (cap ? `<span class="puce${cap.v !== c0 ? ' neuf' : ''}"><i>Cap</i>${echap(cap.court)}</span>` : '');
+  }
+  function modeTableau(m) {
+    tableau.hidden = !m;
+    if (m) tableau.dataset.mode = m;
+  }
+  function majBarre(i, texte) {
+    barre.hidden = false;
+    const segs = $('#segs');
+    if (segs.children.length !== Q.length) segs.innerHTML = Q.map(() => '<i></i>').join('');
+    [...segs.children].forEach((s, k) => s.classList.toggle('fait', k < i));
+    setTimeout(() => [...segs.children].forEach((s, k) => s.classList.toggle('fait', k <= i)), 120);
+    $('#compteur').textContent = texte;
+  }
 
   /* ---------- navigation (bouton retour du navigateur compris) ---------- */
   function aller(etat, remplacer) {
     const url = location.search + '#' + etat.e + (etat.i != null ? etat.i + 1 : '');
     if (remplacer) history.replaceState(etat, '', url); else history.pushState(etat, '', url);
     const ecran = app.querySelector('.ecran');
-    if (ecran && !calme && !remplacer) { ecran.classList.add('sort'); setTimeout(() => rendre(etat), 230); }
+    if (ecran && !calme && !remplacer) { ecran.classList.add('sort'); setTimeout(() => rendre(etat), 220); }
     else rendre(etat);
   }
   addEventListener('popstate', (ev) => rendre(ev.state || { e: 'accueil' }));
 
   function rendre(etat) {
     scrollTo({ top: 0 });
-    if (etat.e === 'q' && etat.i > 0 && S.rep[Q[etat.i - 1].id] === undefined) etat = { e: 'q', i: 0 };
-    if ((etat.e === 'final' || etat.e === 'resultat') && S.rep.objectif === undefined) etat = { e: 'accueil' };
+    if (etat.e === 'q' && etat.i > 0 && S.choix[Q[etat.i - 1].id] === undefined) etat = { e: 'q', i: 0 };
+    if ((etat.e === 'final' || etat.e === 'resultat') && S.choix.cap === undefined) etat = { e: 'accueil' };
     if (etat.e === 'resultat' && !S.envoye) etat = { e: 'final' };
+    radar.scan(false);
     if (etat.e === 'accueil') return accueil();
     if (etat.e === 'q') return question(etat.i);
     if (etat.e === 'final') return final();
@@ -417,88 +574,82 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
 
   /* ---------- accueil ---------- */
   function accueil() {
+    barre.hidden = true;
+    modeTableau('intro');
+    radar.rupture(null);
+    radar.demo();
     app.innerHTML = `<section class="ecran intro">
-      <div class="orbite" aria-hidden="true">
-        ${obj('poignee', 'left:2%;top:46px;--d:.15s;--r:-5deg')}${obj('dossiers', 'left:21%;top:2px;--d:.3s;--r:4deg')}
-        <span class="avatar"><img src="${PHOTO}" alt="" width="84" height="84"></span>
-        ${obj('mobile', 'left:63%;top:0;width:14%;--d:.45s;--r:5deg')}${obj('horloge', 'left:80%;top:44px;width:16%;--d:.6s;--r:-4deg')}
-      </div>
-      <span class="pilule">Entrepreneurs et dirigeants</span>
-      <h1>${mots('Tout passe par vous.', 250)}<span class="h1b">${mots('Même ce qui pourrait tourner', 520)} <span class="pave" style="--d:1150ms">${mots('sans vous', 860)}</span>.</span></h1>
-      <p class="mal">Les rendez-vous qui finissent en "je vais réfléchir". Les relances qui attendent dans votre tête. Les soirées sur les devis et les mails.</p>
-      <p class="bascule">Il vous manque un cadre de vente et un système qui tourne sans vous. On mesure les deux.</p>
+      <span class="pilule">Indépendants · coachs · dirigeants</span>
+      <h1>${mots('Votre métier, vous le maîtrisez les yeux fermés.', 250)}<span class="h1b">${mots('Votre vente,', 700)} <span class="pave" style="--d:1150ms">${mots('pas encore', 820)}</span>.</span></h1>
+      <p class="mal">La boule au ventre avant d'appeler. Le “je sais pas me vendre” qui revient. Les “ça m'intéresse” qui disparaissent. Les semaines sans envie, où rien n'avance.</p>
+      <p class="bascule">C'est normal : on vous a appris votre métier, pas à le vendre. Ce test mesure ce qui tient déjà tout seul dans votre vente, et ce qui lâche en premier.</p>
       <ol class="promesses">
-        <li style="--i:0"><span class="n">1</span><span>Votre <b>indice de pilote automatique</b> : la part de votre entreprise qui tourne sans vous.</span></li>
-        <li style="--i:1"><span class="n">2</span><span>Vos <b>3 priorités</b> : vente, équipe ou agents IA.</span></li>
-        <li style="--i:2"><span class="n">3</span><span>Votre plan, <b>affiché tout de suite</b> et à enregistrer en PDF.</span></li>
-        <li style="--i:3" class="pied">7 questions. 2 minutes. Aucune préparation.</li>
+        <li style="--i:0"><span class="n">1</span><span>Votre <b>indice de pilote automatique</b> : la part de votre vente qui tient sans dépendre de votre énergie du jour.</span></li>
+        <li style="--i:1"><span class="n">2</span><span>Votre <b>point de rupture</b> : l'endroit précis où vos ventes se perdent.</span></li>
+        <li style="--i:2"><span class="n">3</span><span>Vos <b>3 priorités</b>, chacune avec un geste à faire dès cette semaine.</span></li>
+        <li style="--i:3" class="pied">9 questions. 2 minutes. Votre profil se dessine en direct.</li>
       </ol>
-      <button class="btn" id="go">Lancer le test ${ICO.fleche}</button>
+      <button class="btn" id="go" type="button">Lancer le test ${ICO.fleche}</button>
       <p class="sous-btn">Gratuit, sans engagement, résultat immédiat.</p>
-      <div class="preuve"><img src="${PHOTO}" alt="" width="40" height="40"><span>Par <b>Steven Lefrançois</b>, fondateur de Persua. Plus de 350 commerciaux formés et 50 entreprises accompagnées.</span></div>
+      <div class="preuve"><img src="${PHOTO}" alt="" width="46" height="46"><span>Par <b>Steven Lefrançois</b>, fondateur de Persua. Plus de 350 commerciaux formés, 50 entreprises accompagnées, 5,0 sur 20 avis Google.</span></div>
     </section>`;
-    document.getElementById('go').addEventListener('click', () => aller({ e: 'q', i: 0 }));
+    $('#go').addEventListener('click', () => aller({ e: 'q', i: 0 }));
   }
 
   /* ---------- questions ---------- */
   function question(i) {
-    const q = Q[i];
-    const n0 = q.titre[0].split(' ').length;
+    const q = variante(Q[i]), dejaK = S.choix[q.id];
+    majBarre(i, `${i + 1} / ${Q.length}`);
+    modeTableau('quiz');
+    radar.rupture(null);
+    radar.maj(axesActuels());
+    majPuces();
     app.innerHTML = `<section class="ecran question">
-      <div class="tete">
-        ${i > 0 ? `<button class="retour" id="retour" aria-label="Question précédente">${ICO.retour}</button>` : '<span></span>'}
-        <span class="compteur">${i} / ${Q.length}</span>
-      </div>
-      <div class="segs" aria-hidden="true">${Q.map((_, k) => `<i class="${k < i ? 'fait' : ''}"></i>`).join('')}</div>
-      <div class="chute">${obj(q.objet)}<span class="onde"></span></div>
       <span class="etiq">${echap(q.theme)}</span>
-      <h2>${mots(q.titre[0], 150)} <span class="lv">${mots(q.titre[1], 150 + n0 * 55)}</span> ${mots(q.titre[2], 150 + (n0 + 1) * 55)}</h2>
-      <div class="options" role="group" aria-label="${echap(q.titre.join(' '))}">
-        ${q.options.map((o, k) => `<button class="opt${S.rep[q.id + '_t'] === o.t ? ' sel' : ''}" data-k="${k}" style="animation-delay:${380 + k * 70}ms"><span class="rond">${ICO.ok}</span><span>${echap(o.t)}</span></button>`).join('')}
+      <h2>${titreHTML(q.titre)}</h2>
+      <div class="options" role="group" aria-label="${echap(q.titre.replace(/[{}]/g, ''))}">
+        ${q.options.map((o, k) => `<button class="opt${dejaK === k ? ' sel' : ''}" type="button" data-k="${k}" style="animation-delay:${320 + k * 65}ms"><span class="rond">${ICO.ok}</span><span>${echap(o.t)}</span></button>`).join('')}
       </div>
     </section>`;
-    const r = document.getElementById('retour');
-    if (r) r.addEventListener('click', () => history.back());
-    setTimeout(() => { const s = app.querySelectorAll('.segs i')[i]; if (s) s.classList.add('fait'); }, 120);
     app.querySelectorAll('.opt').forEach((b) => b.addEventListener('click', (ev) => {
       if (app.querySelector('.question.fige')) return;
-      const o = q.options[+b.dataset.k];
-      S.rep[q.id] = o.v;
-      S.rep[q.id + '_t'] = o.t;
-      if (o.f !== undefined) S.rep.famille = o.f;
+      S.choix[q.id] = +b.dataset.k;
       const box = b.getBoundingClientRect(), v = document.createElement('span');
       v.className = 'vague';
       v.style.left = (ev.clientX ? ev.clientX - box.left : box.width / 2) + 'px';
       v.style.top = (ev.clientY ? ev.clientY - box.top : box.height / 2) + 'px';
       b.append(v);
+      app.querySelectorAll('.opt.sel').forEach((x) => x !== b && x.classList.remove('sel'));
       b.classList.add('sel');
       app.querySelector('.question').classList.add('fige');
-      setTimeout(() => aller(i + 1 < Q.length ? { e: 'q', i: i + 1 } : { e: 'final' }), 420);
+      // le radar se dessine tout de suite, la question suivante arrive pendant qu'il bouge
+      radar.maj(axesActuels(), { onde: true });
+      majPuces();
+      setTimeout(() => aller(i + 1 < Q.length ? { e: 'q', i: i + 1 } : { e: 'final' }), calme ? 250 : 620);
     }));
   }
 
   /* ---------- étape finale ---------- */
   function final() {
-    const c = calcul(), ax = AXES[c.rupture];
+    const c = calcul(), ax = contenu(c.rupture);
+    majBarre(Q.length, 'Presque fini');
+    modeTableau('final');
+    radar.maj(c.axes);
+    majPuces();
+    setTimeout(() => { if (app.querySelector('.final')) radar.rupture(c.rupture); }, calme ? 0 : 700);
     app.innerHTML = `<section class="ecran final">
-      <div class="tete">
-        <button class="retour" id="retour" aria-label="Question précédente">${ICO.retour}</button>
-        <span class="compteur">Presque fini</span>
-      </div>
-      <div class="segs" aria-hidden="true">${Q.map(() => '<i class="fait"></i>').join('')}</div>
-      <div class="chute">${obj('eclair')}<span class="onde"></span></div>
-      <span class="etiq">Étape finale</span>
-      <h2>${mots('Votre indice est', 150)} <span class="lv">${mots('calculé.', 370)}</span></h2>
+      <span class="etiq">Votre profil est dessiné</span>
+      <h2>${titreHTML('Voici où vos ventes {se perdent}.', 120)}</h2>
       <div class="rupture">
         <div class="k">${ICO.cible}Votre point de rupture</div>
         <strong>${echap(ax.nom)}</strong>
         <p>${echap(ax.rupture)}</p>
       </div>
-      <p class="annonce">Votre <b>indice de pilote automatique</b>, votre radar et vos <b>3 priorités</b> s'affichent sur l'écran suivant, calculés sur vos réponses.</p>
+      <p class="annonce">Votre <b>indice de pilote automatique</b> et vos <b>3 priorités</b>, chacune avec un geste pour cette semaine, s'affichent juste après.</p>
       <form id="form" novalidate>
         <div class="champ"><label for="prenom">Votre prénom</label><input id="prenom" name="prenom" autocomplete="given-name" required value="${echap(S.lead.prenom || '')}"></div>
         <div id="suite" hidden>
-          <div class="champ"><label for="email">Votre email professionnel</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required value="${echap(S.lead.email || '')}"></div>
+          <div class="champ"><label for="email">Votre email</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required value="${echap(S.lead.email || '')}"></div>
           <div class="champ"><label for="tel">Téléphone (facultatif)</label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" value="${echap(S.lead.tel || '')}"><small>Si vous le laissez, Steven vous écrit sur WhatsApp pour en parler.</small></div>
         </div>
         <p class="err" id="err" role="alert"></p>
@@ -506,11 +657,8 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
       </form>
       <p class="legal">Vos réponses servent uniquement à votre audit. Elles ne sont ni revendues ni partagées. <a href="../confidentialite.html">Confidentialité</a></p>
     </section>`;
-    document.getElementById('retour').addEventListener('click', () => history.back());
-    const f = document.getElementById('form'), suite = document.getElementById('suite'), err = document.getElementById('err'), btn = document.getElementById('envoi');
-    const prenom = document.getElementById('prenom');
+    const f = $('#form'), suite = $('#suite'), err = $('#err'), btn = $('#envoi'), prenom = $('#prenom');
     let etape = 1;
-    setTimeout(() => prenom.focus({ preventScroll: true }), 900);
     f.addEventListener('submit', (e) => {
       e.preventDefault();
       err.textContent = '';
@@ -521,13 +669,13 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
         etape = 2;
         suite.hidden = false;
         btn.innerHTML = `Voir mon résultat ${ICO.fleche}`;
-        document.getElementById('email').focus();
+        $('#email').focus();
         return;
       }
-      const em = document.getElementById('email').value.trim();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { err.textContent = 'Cet email ne semble pas valide : vérifiez-le pour recevoir votre audit.'; document.getElementById('email').focus(); return; }
+      const em = $('#email').value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { err.textContent = 'Cet email ne semble pas valide : vérifiez-le pour recevoir votre audit.'; $('#email').focus(); return; }
       S.lead.email = em;
-      S.lead.tel = document.getElementById('tel').value.trim();
+      S.lead.tel = $('#tel').value.trim();
       envoyer(c);
       S.envoye = true;
       attente();
@@ -535,10 +683,13 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
   }
 
   function envoyer(c) {
+    const prof = choisi(Q[0]);
     const corps = {
       prenom: S.lead.prenom, email: S.lead.email, tel: S.lead.tel,
-      profil: String(S.rep.profil || ''), score: c.indice, rupture: AXES[c.rupture].nom, objectif: String(S.rep.objectif || ''),
-      axes: c.axes, top: c.priorites.map((a) => AXES[a].nom), reponses: Object.fromEntries(Q.map((q) => [q.id, S.rep[q.id + '_t'] || ''])),
+      profil: prof ? prof.v : '', score: c.indice, rupture: AXES[c.rupture].nom,
+      objectif: c.cap ? c.cap.court : '', piste: PISTES[c.piste].note,
+      axes: c.axes, top: c.priorites.map((a) => AXES[a].nom),
+      reponses: { ...Object.fromEntries(Q.map((q) => [q.id, (choisi(q) || {}).t || ''])), piste: c.piste },
       source: 'pilote-auto · ' + src,
     };
     const essai = (n) => fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corps), keepalive: true })
@@ -549,11 +700,14 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
 
   /* ---------- calcul ---------- */
   function attente() {
-    const etapes = ['On croise vos 7 réponses', 'On mesure ce qui tourne sans vous', 'On choisit vos 3 priorités'];
-    app.innerHTML = `<section class="ecran attente">${obj('engrenage')}<h2>Une seconde, on calcule.</h2>
+    barre.hidden = true;
+    modeTableau('calcul');
+    radar.rupture(null);
+    radar.scan(true);
+    const etapes = [`On croise vos ${Q.length} réponses`, 'On repère où vos ventes se perdent', 'On classe vos 3 priorités'];
+    app.innerHTML = `<section class="ecran attente"><h2>Une seconde, on calcule.</h2>
       <div class="etapes">${etapes.map((t) => `<div><i>${ICO.ok}</i><span>${t}</span></div>`).join('')}</div></section>`;
-    const lignes = app.querySelectorAll('.etapes div');
-    lignes.forEach((l, k) => {
+    app.querySelectorAll('.etapes div').forEach((l, k) => {
       setTimeout(() => l.classList.add('on'), 250 + k * 800);
       setTimeout(() => l.classList.add('ok'), 800 + k * 800);
     });
@@ -561,65 +715,42 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
   }
 
   /* ---------- résultat ---------- */
-  function radar(axes) {
-    const N = ORDRE.length, cx = 230, cy = 172, R = 112;
-    const pt = (k, r) => { const a = -Math.PI / 2 + (k * 2 * Math.PI) / N; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; };
-    let g = '';
-    for (const f of [0.25, 0.5, 0.75, 1]) g += `<polygon points="${ORDRE.map((_, k) => pt(k, R * f).join(',')).join(' ')}" fill="none" stroke="rgba(139,131,255,${f === 1 ? .35 : .15})" stroke-width="1"/>`;
-    for (let k = 0; k < N; k++) { const [x, y] = pt(k, R); g += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(139,131,255,.15)"/>`; }
-    const poly = ORDRE.map((a, k) => pt(k, R * Math.max(0.06, axes[a] / 100)).join(',')).join(' ');
-    g += `<g class="forme"><polygon points="${poly}" fill="rgba(84,74,250,.38)" stroke="#8B83FF" stroke-width="2.5" stroke-linejoin="round"/></g>`;
-    ORDRE.forEach((a, k) => { const [x, y] = pt(k, R * Math.max(0.06, axes[a] / 100)); g += `<circle class="pt" cx="${x}" cy="${y}" r="4.5" fill="#fff"/>`; });
-    ORDRE.forEach((a, k) => {
-      const [x, y] = pt(k, R + 26);
-      const ancre = Math.abs(x - cx) < 10 ? 'middle' : x > cx ? 'start' : 'end';
-      g += `<text x="${x}" y="${y + 5}" text-anchor="${ancre}" fill="#ECEBF7" font-family="Chivo, system-ui" font-weight="800" font-size="17">${AXES[a].nom}</text>`;
-    });
-    return `<svg class="radar" viewBox="0 0 460 340" role="img" aria-label="Radar de vos 5 axes">${g}</svg>`;
-  }
-
   function resultat() {
-    const c = calcul(), p = echap(S.lead.prenom || '');
-    const objectif = OBJECTIFS[S.rep.objectif];
+    barre.hidden = true;
+    modeTableau(null);
+    const c = calcul(), p = echap(S.lead.prenom || ''), prof = choisi(Q[0]), piste = PISTES[c.piste];
     const prios = c.priorites.map((a, k) => {
-      const ax = AXES[a];
-      const quoi = a === 'temps' && AGENTS_TEMPS[S.rep.famille] ? AGENTS_TEMPS[S.rep.famille] : ax.quoi;
-      const preuve = a === 'temps' && PREUVE_TEMPS[S.rep.famille] ? PREUVE_TEMPS[S.rep.famille] : ax.preuve;
-      return `<article class="prio${k === 0 ? ' un' : ''}">${obj(ax.objet)}<div class="haut"><span class="num">${k + 1}</span><div><span class="axe">${echap(ax.nom)} · ${c.axes[a]}/100</span><h4>${echap(ax.titre)}</h4></div></div>
-        <p>${echap(quoi)}</p><p class="preuve-l">${echap(preuve)}</p></article>`;
+      const ax = contenu(a);
+      return `<article class="prio${k === 0 ? ' un' : ''}"><div class="haut"><span class="num">${k + 1}</span><div><span class="axe">${echap(ax.nom)} · ${c.axes[a]}/100</span><h4>${echap(ax.titre)}</h4></div></div>
+        <p class="geste"><b>Cette semaine :</b> ${echap(ax.geste)}</p><p>${echap(ax.suite)}</p><p class="preuve-l">${echap(ax.preuve)}</p></article>`;
     }).join('');
-    const notes = `Pilote automatique ${c.indice} % · point de rupture : ${AXES[c.rupture].nom} · priorités : ${c.priorites.map((a) => AXES[a].nom).join(', ')}${objectif ? ' · objectif : ' + objectif : ''}`;
+    const notes = `Pilote automatique ${c.indice} % · profil : ${prof ? prof.court : '?'} · point de rupture : ${AXES[c.rupture].nom} · priorités : ${c.priorites.map((a) => AXES[a].nom).join(', ')}${c.cap ? ' · cap : ' + c.cap.court : ''} · ${piste.note}`;
     const cal = `${CAL}?name=${encodeURIComponent(S.lead.prenom || '')}&email=${encodeURIComponent(S.lead.email || '')}&notes=${encodeURIComponent(notes)}`;
     const C = 2 * Math.PI * 100;
-    const couleurs = ['#8B83FF', '#544AFA', '#F7931E', '#FFFFFF', '#B3ACFF'];
-    const paillettes = Array.from({ length: 18 }, (_, k) => {
-      const a = (k / 18) * 2 * Math.PI, d = 120 + (k % 3) * 22;
-      return `<i style="--x:${Math.round(Math.cos(a) * d)}px;--y:${Math.round(Math.sin(a) * d)}px;--c:${couleurs[k % 5]};--t:${(k % 4) * 40}ms"></i>`;
-    }).join('');
     app.innerHTML = `<section class="ecran res">
       <span class="etiq">Votre audit</span>
-      <h2>${p}, votre entreprise tourne à</h2>
+      <h2>${p ? p + ', votre' : 'Votre'} vente tourne à</h2>
       <div class="jauge" aria-label="Indice de pilote automatique : ${c.indice} %">
         <svg viewBox="0 0 236 236" aria-hidden="true"><circle cx="118" cy="118" r="100" fill="none" stroke="rgba(139,131,255,.16)" stroke-width="14"/><circle id="arc" cx="118" cy="118" r="100" fill="none" stroke="url(#dg)" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" style="transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.36,1)"/><defs><linearGradient id="dg" x1="0" x2="1"><stop offset="0" stop-color="#4747FD"/><stop offset="1" stop-color="#8B83FF"/></linearGradient></defs></svg>
-        <div class="paillettes" id="paillettes" aria-hidden="true">${paillettes}</div>
-        <div class="centre"><span class="val"><span id="val">0</span><small> %</small></span><span class="sur">EN PILOTE AUTOMATIQUE</span></div>
+        <div class="centre"><span class="val"><span id="val">0</span><small>${NB}%</small></span><span class="sur">EN PILOTE AUTOMATIQUE</span></div>
       </div>
       <p class="bande" id="bande">${echap(bande(c.indice))}</p>
-      <div class="carte"><h3>Vos 5 axes</h3>${radar(c.axes)}
-        <div class="axes">${ORDRE.map((a) => `<div><span>${AXES[a].nom}</span><b>${c.axes[a]}</b></div>`).join('')}</div></div>
-      <div class="rupture"><div class="k">${ICO.cible}Votre point de rupture</div><strong>${echap(AXES[c.rupture].nom)}</strong><p>${echap(AXES[c.rupture].rupture)}</p></div>
+      <div class="carte"><h3>Votre profil de vente</h3><div class="radar-res" id="radar-res"></div>
+        <div class="axes">${ORDRE.map((a) => `<div${a === c.rupture ? ' class="rupt"' : ''}><span>${AXES[a].nom}</span><b>${c.axes[a]}</b></div>`).join('')}</div></div>
+      <div class="rupture"><div class="k">${ICO.cible}Votre point de rupture</div><strong>${echap(AXES[c.rupture].nom)}</strong><p>${echap(contenu(c.rupture).rupture)}</p></div>
       <div class="carte"><h3>Vos 3 priorités</h3><div class="priorites">${prios}</div></div>
-      ${objectif ? `<p class="objectif">Vous voulez <b>${echap(objectif)}</b>. Commencez par la priorité 1 : c'est elle qui vous en rapproche le plus vite.</p>` : ''}
+      ${c.cap ? `<p class="objectif">Votre cap : <b>${echap(c.cap.court)}</b>. Commencez par la priorité 1 : c'est elle qui vous en rapproche le plus vite.</p>` : ''}
       <div class="appel">
         <span class="avatar"><img src="${PHOTO}" alt="Steven Lefrançois" width="84" height="84"></span>
-        <h3>On regarde votre résultat ensemble ?</h3>
-        <p>45 minutes avec Steven, offertes. On valide vos 3 priorités, dans quel ordre les traiter, et ce que ça coûte. Si ça ne vaut pas le coup pour vous, il vous le dit.</p>
-        <div class="btns"><a class="btn plein" href="${cal}" target="_blank" rel="noopener">Réserver mon appel ${ICO.fleche}</a><button class="btn second plein" id="pdf">Enregistrer mon plan en PDF</button></div>
+        <h3>${echap(piste.h)}</h3>
+        <p>${echap(piste.p)}</p>
+        <div class="btns"><a class="btn plein" href="${cal}" target="_blank" rel="noopener">Réserver mon appel ${ICO.fleche}</a><button class="btn second plein" id="pdf" type="button">Enregistrer mon plan en PDF</button></div>
       </div>
       <p class="pied-page">Persua · Steven Lefrançois · <a href="../confidentialite.html">Confidentialité</a></p>
     </section>`;
-    document.getElementById('pdf').addEventListener('click', () => print());
-    const arc = document.getElementById('arc'), val = document.getElementById('val');
+    $('#pdf').addEventListener('click', () => print());
+    const radarRes = creerRadar($('#radar-res'));
+    const arc = $('#arc'), val = $('#val');
     const duree = calme ? 0 : 1600;
     setTimeout(() => {
       arc.style.strokeDashoffset = String(C * (1 - c.indice / 100));
@@ -628,17 +759,19 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
         const k = duree ? Math.min(1, (t - t0) / duree) : 1;
         val.textContent = String(Math.round(c.indice * (1 - Math.pow(1 - k, 3))));
         if (k < 1) requestAnimationFrame(pas);
-        else { document.getElementById('paillettes').classList.add('go'); document.getElementById('bande').classList.add('on'); }
+        else $('#bande').classList.add('on');
       };
       requestAnimationFrame(pas);
     }, 250);
     // radar et priorités : animés quand ils arrivent à l'écran
     const io = new IntersectionObserver((entrees) => entrees.forEach((e) => {
       if (!e.isIntersecting) return;
-      e.target.classList.add(e.target.classList.contains('radar') ? 'go' : 'vu');
+      if (e.target.id === 'radar-res') { radarRes.maj(c.axes, { onde: true }); setTimeout(() => radarRes.rupture(c.rupture), calme ? 0 : 900); }
+      else e.target.classList.add('vu');
       io.unobserve(e.target);
     }), { threshold: 0.25 });
-    app.querySelectorAll('.radar, .prio').forEach((n, k) => { if (n.classList.contains('prio')) n.style.transitionDelay = (k % 3) * 120 + 'ms'; io.observe(n); });
+    io.observe($('#radar-res'));
+    app.querySelectorAll('.prio').forEach((n, k) => { n.style.transitionDelay = (k % 3) * 120 + 'ms'; io.observe(n); });
   }
 
   rendre({ e: 'accueil' });
