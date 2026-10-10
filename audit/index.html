@@ -1111,8 +1111,8 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
     history.replaceState(etat, '', location.search);
     if (ecranDemande === 'calcul') attente(); else rendre(etat);
     // voir=prio|appel|bande|cap|radar : fait défiler l'aperçu jusqu'au bloc modifié
-    const cible = { prio: '.priorites', appel: '.appel', bande: '#bande', cap: '.objectif', radar: '#radar-res', rupture: '.rupture' }[qs.get('voir')];
-    if (cible) setTimeout(() => { const n = document.querySelector(cible); if (n) n.scrollIntoView({ block: 'center' }); }, 60);
+    const cible = { prio: '.prio', appel: '.appel', bande: '#bande', cap: '.objectif', radar: '.radar-res', rupture: '.rupture' }[qs.get('voir')];
+    if (cible) setTimeout(() => { const n = document.querySelector(cible); if (n) { n.scrollIntoView({ block: ['prio', 'radar'].includes(qs.get('voir')) ? 'start' : 'center' }); if (['prio', 'radar'].includes(qs.get('voir'))) scrollBy(0, -16); } }, 60);
   } else {
     rendre({ e: 'accueil' });
     history.replaceState({ e: 'accueil' }, '', location.search);
