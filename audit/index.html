@@ -1024,6 +1024,7 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
       setTimeout(() => l.classList.add('on'), 250 + k * 800);
       setTimeout(() => l.classList.add('ok'), 800 + k * 800);
     });
+    if (APERCU && qs.has('reste')) return; // l'aperçu du Studio garde l'écran de calcul affiché
     setTimeout(() => aller({ e: 'resultat' }, true), calme ? 600 : 3000);
   }
 
@@ -1092,14 +1093,26 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
   const ecranDemande = APERCU ? qs.get('ecran') : null;
   if (ecranDemande && ecranDemande !== 'accueil') {
     const p0 = Math.min(Q_PROFIL.options.length - 1, Math.max(0, +(qs.get('profil') || 0)));
+    const faible = qs.get('faible'), pisteV = qs.get('piste'); // faible=suivi : cet axe devient le point de rupture ; piste=systeme : la piste de l'appel
     const parcours = [p0, 1, 2, 2, 3, 1, 3, 2, 0];
-    const jusque = (n) => Q.slice(0, n).forEach((q, k) => { S.choix[q.id] = q === Q_PROFIL ? p0 : Math.min(parcours[k] ?? 0, variante(q).options.length - 1); });
+    const choixPour = (q, k) => {
+      if (q === Q_PROFIL) return p0;
+      const opts = variante(q).options;
+      if (q === Q_CAP && pisteV) { const i = opts.findIndex((o) => o.piste === pisteV); if (i >= 0) return i; }
+      if (q === Q_CAP && faible) return 0;
+      if (faible && q.a) { const vals = opts.map((o) => o.v); return vals.indexOf(q.a === faible ? Math.min(...vals) : Math.max(...vals)); }
+      return Math.min(parcours[k] ?? 0, opts.length - 1);
+    };
+    const jusque = (n) => Q.slice(0, n).forEach((q, k) => { S.choix[q.id] = choixPour(q, k); });
     const m = ecranDemande.match(/^q(\d+)$/);
     let etat = { e: 'final' };
     if (m) { const i = Math.min(Q.length, Math.max(1, +m[1])) - 1; jusque(i); etat = { e: 'q', i }; }
     else { jusque(Q.length); if (ecranDemande !== 'final') { S.lead.prenom = 'Prénom'; S.envoye = true; etat = { e: 'resultat' }; } }
     history.replaceState(etat, '', location.search);
     if (ecranDemande === 'calcul') attente(); else rendre(etat);
+    // voir=prio|appel|bande|cap|radar : fait défiler l'aperçu jusqu'au bloc modifié
+    const cible = { prio: '.priorites', appel: '.appel', bande: '#bande', cap: '.objectif', radar: '#radar-res', rupture: '.rupture' }[qs.get('voir')];
+    if (cible) setTimeout(() => { const n = document.querySelector(cible); if (n) n.scrollIntoView({ block: 'center' }); }, 60);
   } else {
     rendre({ e: 'accueil' });
     history.replaceState({ e: 'accueil' }, '', location.search);
