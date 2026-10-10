@@ -234,6 +234,9 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
   .mot,.opt,.promesses li,.prio,.bande,.rupture,.annonce,form{opacity:1!important;transform:none!important;filter:none!important}
   .pave{background-size:100% 100%}
 }
+.vite *,.vite *::before,.vite *::after{animation:none!important;transition:none!important}
+.vite .mot,.vite .opt,.vite .promesses li,.vite .prio,.vite .bande,.vite .rupture,.vite .annonce,.vite form{opacity:1!important;transform:none!important;filter:none!important}
+.vite .pave{background-size:100% 100%}
 @media print{
   body{background:#fff;color:#111}body::before{display:none}
   .page{max-width:none;padding:0}
@@ -258,9 +261,421 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
   </div>
   <div id="app" aria-live="polite"></div>
 </main>
+<script type="application/json" id="contenu">
+{
+ "_aide": "Textes du test Pilote automatique. {mot} = mot en couleur dans un titre ; **gras** ; {n} = nombre de questions ; {prenom} et {cap} sont remplis automatiquement. Les valeurs v, axe et piste règlent le calcul : ne pas les modifier ici.",
+ "accueil": {
+  "pilule": "Indépendants · coachs · dirigeants",
+  "titre": "Votre métier, vous le maîtrisez les yeux fermés.",
+  "titre2": "Votre vente,",
+  "pave": "pas encore",
+  "titre_fin": ".",
+  "mal": "La boule au ventre avant d'appeler. Le “je sais pas me vendre” qui revient. Les “ça m'intéresse” qui disparaissent. Les semaines sans envie, où rien n'avance.",
+  "bascule": "C'est normal : on vous a appris votre métier, pas à le vendre. Ce test mesure ce qui tient déjà tout seul dans votre vente, et ce qui lâche en premier.",
+  "promesses": [
+   "Votre **indice de pilote automatique** : la part de votre vente qui tient sans dépendre de votre énergie du jour.",
+   "Votre **point de rupture** : l'endroit précis où vos ventes se perdent.",
+   "Vos **3 priorités**, chacune avec un geste à faire dès cette semaine."
+  ],
+  "pied": "{n} questions. 2 minutes. Votre profil se dessine en direct.",
+  "bouton": "Lancer le test",
+  "sous_bouton": "Gratuit, sans engagement, résultat immédiat.",
+  "preuve": "Par **Steven Lefrançois**, fondateur de Persua. Plus de 350 commerciaux formés, 50 entreprises accompagnées, 5,0 sur 20 avis Google."
+ },
+ "questions": [
+  {
+   "id": "profil",
+   "theme": "Votre profil",
+   "titre": "Aujourd'hui, vous vendez {quoi} ?",
+   "options": [
+    {
+     "t": "Mon accompagnement : coach, consultant, thérapeute ou formateur",
+     "v": "accompagnement",
+     "court": "Coach, consultant"
+    },
+    {
+     "t": "Mon savoir-faire : indépendant, artisan ou freelance",
+     "v": "independant",
+     "court": "Indépendant"
+    },
+    {
+     "t": "Je dirige une équipe, et je vends encore moi-même",
+     "v": "dirigeant",
+     "court": "Dirigeant"
+    },
+    {
+     "t": "L'offre d'une entreprise : commercial ou closer",
+     "v": "commercial",
+     "court": "Commercial"
+    }
+   ]
+  },
+  {
+   "id": "avant",
+   "theme": "Avant l'appel",
+   "a": "assurance",
+   "titre": "Juste avant un appel ou un rendez-vous de vente, vous {ressentez} quoi ?",
+   "options": [
+    {
+     "t": "L'envie d'y aller",
+     "v": 4
+    },
+    {
+     "t": "Un petit stress, qui passe en parlant",
+     "v": 3
+    },
+    {
+     "t": "La boule au ventre, et parfois je repousse",
+     "v": 1.5
+    },
+    {
+     "t": "La peur. J'évite tant que je peux",
+     "v": 1
+    }
+   ]
+  },
+  {
+   "id": "parole",
+   "theme": "En rendez-vous",
+   "a": "methode",
+   "titre": "En rendez-vous, qui {parle} le plus ?",
+   "options": [
+    {
+     "t": "L'autre : je pose des questions et j'écoute",
+     "v": 4
+    },
+    {
+     "t": "Moitié-moitié",
+     "v": 3
+    },
+    {
+     "t": "Moi : je présente mon offre en détail",
+     "v": 1.5
+    },
+    {
+     "t": "Ça dépend des jours, j'improvise",
+     "v": 1
+    }
+   ]
+  },
+  {
+   "id": "signature",
+   "theme": "Vos signatures",
+   "a": "methode",
+   "titre": "Sur 10 personnes qui vous disent “ça m'intéresse”, combien deviennent {clients} ?",
+   "options": [
+    {
+     "t": "7 ou plus",
+     "v": 4
+    },
+    {
+     "t": "4 à 6",
+     "v": 3
+    },
+    {
+     "t": "1 à 3",
+     "v": 1.5
+    },
+    {
+     "t": "Je ne sais pas, je ne compte pas",
+     "v": 1.5
+    }
+   ]
+  },
+  {
+   "id": "reflechir",
+   "theme": "Après le rendez-vous",
+   "a": "suivi",
+   "titre": "On vous dit “je vais réfléchir”. {Ensuite} ?",
+   "options": [
+    {
+     "t": "Une relance est déjà prévue, avec une date",
+     "v": 4
+    },
+    {
+     "t": "Je relance quand j'y pense",
+     "v": 2
+    },
+    {
+     "t": "J'attends qu'on revienne vers moi",
+     "v": 1.5
+    },
+    {
+     "t": "Rien. Et en général, on ne revient pas",
+     "v": 1
+    }
+   ]
+  },
+  {
+   "id": "prospection",
+   "theme": "Trouver des clients",
+   "a": "action",
+   "titre": "Trouver de nouveaux clients, chez vous, ça se passe {quand} ?",
+   "options": [
+    {
+     "t": "Sur un créneau fixe chaque semaine, envie ou pas",
+     "v": 4
+    },
+    {
+     "t": "Par vagues, quand le chiffre baisse",
+     "v": 2
+    },
+    {
+     "t": "J'attends le bouche-à-oreille",
+     "v": 1.5
+    },
+    {
+     "t": "Je sais quoi faire, mais je n'en ai pas envie",
+     "v": 1
+    }
+   ]
+  },
+  {
+   "id": "tete",
+   "theme": "Votre organisation",
+   "a": "systeme",
+   "titre": "Vos prospects, vos relances, vos rendez-vous : tout ça {vit} où ?",
+   "options": [
+    {
+     "t": "Dans un outil qui me dit qui rappeler",
+     "v": 4
+    },
+    {
+     "t": "Dans un tableau, plus ou moins à jour",
+     "v": 2.5
+    },
+    {
+     "t": "Dans mes mails et mes messages",
+     "v": 1.5
+    },
+    {
+     "t": "Dans ma tête",
+     "v": 1
+    }
+   ]
+  },
+  {
+   "id": "absence",
+   "theme": "Pilote automatique",
+   "a": "systeme",
+   "titre": "Si vous vous arrêtez {deux semaines}, votre vente…",
+   "options": [
+    {
+     "t": "Continue : relances et rendez-vous tournent sans moi",
+     "v": 4
+    },
+    {
+     "t": "Ralentit, mais rien ne se perd",
+     "v": 3
+    },
+    {
+     "t": "S'arrête, et je repars de zéro au retour",
+     "v": 1.5
+    },
+    {
+     "t": "Impossible, je ne peux pas m'arrêter",
+     "v": 1
+    }
+   ],
+   "d": {
+    "titre": "Si vous partez {deux semaines}, votre équipe…",
+    "options": [
+     {
+      "t": "Vend et suit les clients sans moi",
+      "v": 4
+     },
+     {
+      "t": "Avance, mais m'appelle tous les jours",
+      "v": 2
+     },
+     {
+      "t": "Attend mon retour pour décider",
+      "v": 1.5
+     },
+     {
+      "t": "Je ne pars pas : sans moi, rien ne bouge",
+      "v": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "cap",
+   "theme": "Votre cap",
+   "titre": "Dans 6 mois, ce que vous voulez {vraiment}, c'est…",
+   "options": [
+    {
+     "t": "Retrouver le plaisir de vendre",
+     "v": "plaisir",
+     "axe": "assurance",
+     "piste": "cadre",
+     "court": "le plaisir de vendre"
+    },
+    {
+     "t": "Un cadre clair : savoir quoi faire, étape par étape",
+     "v": "cadre",
+     "axe": "methode",
+     "piste": "cadre",
+     "court": "un cadre clair"
+    },
+    {
+     "t": "Des revenus réguliers, tous les mois",
+     "v": "revenus",
+     "axe": "action",
+     "piste": "cadre",
+     "court": "des revenus réguliers"
+    },
+    {
+     "t": "Que ça tourne sans que tout passe par moi",
+     "v": "tourne",
+     "axe": "systeme",
+     "piste": "systeme",
+     "court": "que ça tourne sans vous"
+    }
+   ],
+   "d": {
+    "options": [
+     {
+      "t": "Retrouver le plaisir de vendre",
+      "v": "plaisir",
+      "axe": "assurance",
+      "piste": "cadre",
+      "court": "le plaisir de vendre"
+     },
+     {
+      "t": "Une équipe qui vend avec le même cadre que moi",
+      "v": "equipe",
+      "axe": "methode",
+      "piste": "cadre",
+      "court": "une équipe qui vend avec votre cadre"
+     },
+     {
+      "t": "Du temps pour écouter mes clients et mon équipe",
+      "v": "ecoute",
+      "axe": "systeme",
+      "piste": "systeme",
+      "court": "du temps pour écouter"
+     },
+     {
+      "t": "Que ça tourne sans que tout passe par moi",
+      "v": "tourne",
+      "axe": "systeme",
+      "piste": "systeme",
+      "court": "que ça tourne sans vous"
+     }
+    ]
+   }
+  }
+ ],
+ "axes": {
+  "assurance": {
+   "nom": "Assurance",
+   "rupture": "La peur arrive avant l'appel, et c'est elle qui décide : vous repoussez, vous écourtez, vous n'osez pas proposer. Et en rendez-vous, c'est le plus calme des deux qui mène.",
+   "titre": "Un rituel avant chaque appel",
+   "geste": "avant chaque appel, écrivez la première question que vous allez poser, et ouvrez avec elle. Savoir par où commencer fait déjà baisser la peur.",
+   "suite": "Avec Steven, vous travaillez cette peur sur vos vrais rendez-vous, jusqu'à y reprendre du plaisir.",
+   "preuve": "Un closer qui plafonnait à 30 % de signatures est monté à 60-65 %."
+  },
+  "methode": {
+   "nom": "Méthode",
+   "rupture": "Vous connaissez votre métier par cœur, alors en rendez-vous, vous l'expliquez. Le prospect repart avec toutes les infos, et sans décision.",
+   "titre": "Un cadre de rendez-vous, étape par étape",
+   "geste": "dans votre prochain rendez-vous, posez trois questions sur sa situation avant de dire un mot de votre offre.",
+   "suite": "Ensuite, le cadre complet : ouvrir, questionner, reformuler, annoncer votre prix, conclure. Steven le cale sur vos propres rendez-vous.",
+   "preuve": "Avec ce cadre, Steven signe 67 à 82 % de ses rendez-vous."
+  },
+  "suivi": {
+   "nom": "Suivi",
+   "rupture": "Les “ça m'intéresse” s'éteignent entre deux contacts. Sans relance datée, chaque silence finit en non.",
+   "titre": "Une date de relance pour chaque “je vais réfléchir”",
+   "geste": "listez les personnes qui vous ont dit “ça m'intéresse” ce mois-ci, et donnez à chacune une date de relance.",
+   "suite": "Ensuite, un agent autonome relance à votre place, dans vos mots, et vous prévient dès qu'on vous répond.",
+   "preuve": "Une enseigne de literie : +30 % de clients revenus grâce aux relances."
+  },
+  "action": {
+   "nom": "Action",
+   "rupture": "Vous savez quoi faire. Mais votre prospection suit votre envie du jour, et les semaines sans envie, rien ne rentre.",
+   "titre": "Un créneau fixe, tenu même sans envie",
+   "geste": "bloquez deux créneaux de 45 minutes pour trouver des clients, et tenez-les comme un rendez-vous client.",
+   "suite": "Le plus dur, c'est de tenir dans la durée : Steven vous suit chaque semaine, surtout quand l'envie lâche.",
+   "preuve": "Un coach sportif bloqué par la peur de vendre : un peu plus de 5 000 € encaissés en 4 mois."
+  },
+  "systeme": {
+   "nom": "Système",
+   "rupture": "Vos prospects, vos relances et vos rendez-vous vivent dans votre tête. Le jour où vous levez le pied, tout s'arrête avec vous.",
+   "titre": "Sortir votre vente de votre tête",
+   "geste": "notez sur une seule page vos prospects en cours et la prochaine action pour chacun.",
+   "suite": "Ensuite, un agent autonome tient cette liste à jour, vous dit chaque matin qui rappeler et prépare vos rendez-vous.",
+   "preuve": "Un commerce de bouche : l'accueil repensé, 40 avis Google en 4 jours.",
+   "d": {
+    "rupture": "Tout est dans votre tête, et l'équipe attend vos réponses. Résultat : il ne vous reste plus de place pour écouter vos clients.",
+    "titre": "Une équipe qui sait quoi faire sans vous",
+    "geste": "écrivez les 5 questions qu'on vous pose le plus, avec votre réponse type pour chacune.",
+    "suite": "Ensuite, vos process sont posés avec l'équipe, et des agents autonomes vous remontent chaque semaine ce qui bloque, dans une seule app."
+   }
+  }
+ },
+ "pistes": {
+  "cadre": {
+   "h": "On pose votre cadre ensemble ?",
+   "p": "45 minutes avec Steven, offertes. Vous repartez avec vos priorités dans l'ordre et le premier geste de la semaine. S'il n'a rien à vous apporter, il vous le dit.",
+   "note": "demande un cadre"
+  },
+  "systeme": {
+   "h": "On regarde ce qui peut tourner sans vous ?",
+   "p": "45 minutes avec Steven, offertes. Vous repartez avec ce qui peut passer en pilote automatique chez vous, et dans quel ordre. S'il n'a rien à vous apporter, il vous le dit.",
+   "note": "veut que ça tourne sans lui"
+  }
+ },
+ "bandes": [
+  "Tout repose encore sur vous",
+  "Ça tient quand vous êtes à fond",
+  "Votre pilote automatique se met en place",
+  "Votre vente tient même les jours sans envie"
+ ],
+ "ecrans": {
+  "radar_aide": "Votre profil se dessine ici, réponse après réponse.",
+  "puce_profil": "Profil",
+  "puce_cap": "Cap",
+  "presque_fini": "Presque fini",
+  "final_etiquette": "Votre profil est dessiné",
+  "final_titre": "Voici où vos ventes {se perdent}.",
+  "rupture_label": "Votre point de rupture",
+  "final_annonce": "Votre **indice de pilote automatique** et vos **3 priorités**, chacune avec un geste pour cette semaine, s'affichent juste après.",
+  "champ_prenom": "Votre prénom",
+  "champ_email": "Votre email",
+  "champ_tel": "Téléphone (facultatif)",
+  "tel_aide": "Si vous le laissez, Steven vous écrit sur WhatsApp pour en parler.",
+  "bouton_continuer": "Continuer",
+  "bouton_resultat": "Voir mon résultat",
+  "err_prenom": "Votre prénom, pour personnaliser votre audit.",
+  "err_email": "Cet email ne semble pas valide : vérifiez-le pour recevoir votre audit.",
+  "legal": "Vos réponses servent uniquement à votre audit. Elles ne sont ni revendues ni partagées.",
+  "lien_confidentialite": "Confidentialité",
+  "calcul_titre": "Une seconde, on calcule.",
+  "calcul_etapes": [
+   "On croise vos {n} réponses",
+   "On repère où vos ventes se perdent",
+   "On classe vos 3 priorités"
+  ],
+  "res_etiquette": "Votre audit",
+  "res_titre": "{prenom}, votre vente tourne à",
+  "res_titre_sans": "Votre vente tourne à",
+  "res_jauge": "EN PILOTE AUTOMATIQUE",
+  "res_profil": "Votre profil de vente",
+  "res_priorites": "Vos 3 priorités",
+  "res_geste": "Cette semaine :",
+  "res_cap": "Votre cap : **{cap}**. Commencez par la priorité 1 : c'est elle qui vous en rapproche le plus vite.",
+  "res_bouton_appel": "Réserver mon appel",
+  "res_bouton_pdf": "Enregistrer mon plan en PDF"
+ }
+}
+</script>
 <script>
 (() => {
   'use strict';
+  // Les textes viennent du bloc « contenu » ci-dessus : on les modifie depuis le Studio (éditeur du test), pas ici.
+  const T = JSON.parse(document.getElementById('contenu').textContent);
   const API = 'https://automate-factory.vercel.app/api/audit-lead';
   const CAL = 'https://cal.com/steven-lfrs-persua/decouverte-linkedin';
   const PHOTO = '../assets/steven-profil.webp';
@@ -270,13 +685,24 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
     cible: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>',
     fleche: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
   };
-  const NB = ' ', FIN = ' '; // espace insécable, espace fine avant ? ! :
-  const echap = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  // découpe un texte en mots qui montent un par un
+  const qs = new URLSearchParams(location.search);
+  const APERCU = qs.has('apercu'); // aperçu du Studio : rien n'est envoyé, on peut ouvrir directement un écran
+  const calme = matchMedia('(prefers-reduced-motion: reduce)').matches || (APERCU && qs.has('vite'));
+  if (APERCU && qs.has('vite')) document.documentElement.classList.add('vite');
+  const src = APERCU ? 'apercu' : qs.get('src') || qs.get('utm_source') || document.referrer || 'direct';
+
+  /* ---------- texte : typographie française, gras, mots qui montent ---------- */
+  const NB = ' ', FIN = ' ';
+  const typo = (s) => String(s ?? '')
+    .replace(/[   ]+([?!;])/g, FIN + '$1').replace(/[   ]+:/g, NB + ':')
+    .replace(/(\d)[  ]+(%|€)/g, '$1' + NB + '$2').replace(/(\d)[   ](\d{3})(?!\d)/g, '$1' + FIN + '$2');
+  const echap = (s) => typo(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const riche = (s) => echap(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+  const remplir = (s, v) => String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m));
   const mots = (txt, d = 0) => echap(txt).split(' ').filter(Boolean).map((m, i) => `<span class="mot" style="--i:${i};--d:${d}ms">${m}</span>`).join(' ');
-  // titre de question : le mot entre accolades passe en lavande
+  // titre : le mot entre accolades passe en lavande
   function titreHTML(t, d0 = 120) {
-    const m = t.match(/^(.*?)\{(.+?)\}(.*)$/);
+    const m = String(t).match(/^(.*?)\{(.+?)\}(.*)$/);
     if (!m) return mots(t, d0);
     let [, avant, hl, apres] = m, ponct = '';
     const p = apres.match(/^\s*([?!:;]+|[,.…]+)(.*)$/);
@@ -285,133 +711,21 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
     return `${mots(avant, d0)} <span class="nw"><span class="lv">${mots(hl, d0 + n0 * 50)}</span>${ponct ? `<span class="mot" style="--d:${d0 + (n0 + n1) * 50}ms">${echap(ponct)}</span>` : ''}</span> ${mots(apres, d0 + (n0 + n1 + 1) * 50)}`;
   }
 
-  /* ---------- les 5 axes, dans l'ordre du radar (en partant du haut, sens horaire) ---------- */
+  /* ---------- contenu ---------- */
+  // les 5 axes dans l'ordre du radar (en partant du haut, sens horaire)
   const ORDRE = ['assurance', 'methode', 'suivi', 'action', 'systeme'];
-  const AXES = {
-    assurance: { nom: 'Assurance',
-      rupture: "La peur arrive avant l'appel, et c'est elle qui décide : vous repoussez, vous écourtez, vous n'osez pas proposer. Et en rendez-vous, c'est le plus calme des deux qui mène.",
-      titre: 'Un rituel avant chaque appel',
-      geste: "avant chaque appel, écrivez la première question que vous allez poser, et ouvrez avec elle. Savoir par où commencer fait déjà baisser la peur.",
-      suite: "Avec Steven, vous travaillez cette peur sur vos vrais rendez-vous, jusqu'à y reprendre du plaisir.",
-      preuve: `Un closer qui plafonnait à 30${NB}% de signatures est monté à 60-65${NB}%.` },
-    methode: { nom: 'Méthode',
-      rupture: "Vous connaissez votre métier par cœur, alors en rendez-vous, vous l'expliquez. Le prospect repart avec toutes les infos, et sans décision.",
-      titre: 'Un cadre de rendez-vous, étape par étape',
-      geste: "dans votre prochain rendez-vous, posez trois questions sur sa situation avant de dire un mot de votre offre.",
-      suite: "Ensuite, le cadre complet : ouvrir, questionner, reformuler, annoncer votre prix, conclure. Steven le cale sur vos propres rendez-vous.",
-      preuve: `Avec ce cadre, Steven signe 67 à 82${NB}% de ses rendez-vous.` },
-    suivi: { nom: 'Suivi',
-      rupture: "Les “ça m'intéresse” s'éteignent entre deux contacts. Sans relance datée, chaque silence finit en non.",
-      titre: 'Une date de relance pour chaque “je vais réfléchir”',
-      geste: "listez les personnes qui vous ont dit “ça m'intéresse” ce mois-ci, et donnez à chacune une date de relance.",
-      suite: "Ensuite, un agent autonome relance à votre place, dans vos mots, et vous prévient dès qu'on vous répond.",
-      preuve: `Une enseigne de literie : +30${NB}% de clients revenus grâce aux relances.` },
-    action: { nom: 'Action',
-      rupture: "Vous savez quoi faire. Mais votre prospection suit votre envie du jour, et les semaines sans envie, rien ne rentre.",
-      titre: 'Un créneau fixe, tenu même sans envie',
-      geste: "bloquez deux créneaux de 45 minutes pour trouver des clients, et tenez-les comme un rendez-vous client.",
-      suite: "Le plus dur, c'est de tenir dans la durée : Steven vous suit chaque semaine, surtout quand l'envie lâche.",
-      preuve: `Un coach sportif bloqué par la peur de vendre : un peu plus de 5${FIN}000${NB}€ encaissés en 4 mois.` },
-    systeme: { nom: 'Système',
-      rupture: "Vos prospects, vos relances et vos rendez-vous vivent dans votre tête. Le jour où vous levez le pied, tout s'arrête avec vous.",
-      titre: 'Sortir votre vente de votre tête',
-      geste: "notez sur une seule page vos prospects en cours et la prochaine action pour chacun.",
-      suite: "Ensuite, un agent autonome tient cette liste à jour, vous dit chaque matin qui rappeler et prépare vos rendez-vous.",
-      preuve: "Un commerce de bouche : l'accueil repensé, 40 avis Google en 4 jours.",
-      // le dirigeant : sa douleur, c'est « j'ai tout dans ma tête » et plus de place pour écouter
-      d: { rupture: "Tout est dans votre tête, et l'équipe attend vos réponses. Résultat : il ne vous reste plus de place pour écouter vos clients.",
-        titre: 'Une équipe qui sait quoi faire sans vous',
-        geste: "écrivez les 5 questions qu'on vous pose le plus, avec votre réponse type pour chacune.",
-        suite: "Ensuite, vos process sont posés avec l'équipe, et des agents autonomes vous remontent chaque semaine ce qui bloque, dans une seule app." } },
-  };
-
-  /* ---------- les 9 questions ---------- */
-  // a = axe mesuré, v = valeur de 1 (fragile) à 4 (solide) ; d = variante pour le dirigeant
-  const Q = [
-    { id: 'profil', theme: 'Votre profil', titre: "Aujourd'hui, vous vendez {quoi} ?", options: [
-      { t: 'Mon accompagnement : coach, consultant, thérapeute ou formateur', v: 'accompagnement', court: 'Coach, consultant' },
-      { t: 'Mon savoir-faire : indépendant, artisan ou freelance', v: 'independant', court: 'Indépendant' },
-      { t: 'Je dirige une équipe, et je vends encore moi-même', v: 'dirigeant', court: 'Dirigeant' },
-      { t: "L'offre d'une entreprise : commercial ou closer", v: 'commercial', court: 'Commercial' },
-    ] },
-    { id: 'avant', theme: "Avant l'appel", a: 'assurance', titre: 'Juste avant un appel ou un rendez-vous de vente, vous {ressentez} quoi ?', options: [
-      { t: "L'envie d'y aller", v: 4 },
-      { t: 'Un petit stress, qui passe en parlant', v: 3 },
-      { t: 'La boule au ventre, et parfois je repousse', v: 1.5 },
-      { t: "La peur. J'évite tant que je peux", v: 1 },
-    ] },
-    { id: 'parole', theme: 'En rendez-vous', a: 'methode', titre: 'En rendez-vous, qui {parle} le plus ?', options: [
-      { t: "L'autre : je pose des questions et j'écoute", v: 4 },
-      { t: 'Moitié-moitié', v: 3 },
-      { t: 'Moi : je présente mon offre en détail', v: 1.5 },
-      { t: "Ça dépend des jours, j'improvise", v: 1 },
-    ] },
-    { id: 'signature', theme: 'Vos signatures', a: 'methode', titre: "Sur 10 personnes qui vous disent “ça m'intéresse”, combien deviennent {clients} ?", options: [
-      { t: '7 ou plus', v: 4 },
-      { t: '4 à 6', v: 3 },
-      { t: '1 à 3', v: 1.5 },
-      { t: 'Je ne sais pas, je ne compte pas', v: 1.5 },
-    ] },
-    { id: 'reflechir', theme: 'Après le rendez-vous', a: 'suivi', titre: 'On vous dit “je vais réfléchir”. {Ensuite} ?', options: [
-      { t: 'Une relance est déjà prévue, avec une date', v: 4 },
-      { t: "Je relance quand j'y pense", v: 2 },
-      { t: "J'attends qu'on revienne vers moi", v: 1.5 },
-      { t: 'Rien. Et en général, on ne revient pas', v: 1 },
-    ] },
-    { id: 'prospection', theme: 'Trouver des clients', a: 'action', titre: 'Trouver de nouveaux clients, chez vous, ça se passe {quand} ?', options: [
-      { t: 'Sur un créneau fixe chaque semaine, envie ou pas', v: 4 },
-      { t: 'Par vagues, quand le chiffre baisse', v: 2 },
-      { t: "J'attends le bouche-à-oreille", v: 1.5 },
-      { t: "Je sais quoi faire, mais je n'en ai pas envie", v: 1 },
-    ] },
-    { id: 'tete', theme: 'Votre organisation', a: 'systeme', titre: 'Vos prospects, vos relances, vos rendez-vous : tout ça {vit} où ?', options: [
-      { t: 'Dans un outil qui me dit qui rappeler', v: 4 },
-      { t: 'Dans un tableau, plus ou moins à jour', v: 2.5 },
-      { t: 'Dans mes mails et mes messages', v: 1.5 },
-      { t: 'Dans ma tête', v: 1 },
-    ] },
-    { id: 'absence', theme: 'Pilote automatique', a: 'systeme', titre: 'Si vous vous arrêtez {deux semaines}, votre vente…', options: [
-      { t: 'Continue : relances et rendez-vous tournent sans moi', v: 4 },
-      { t: 'Ralentit, mais rien ne se perd', v: 3 },
-      { t: "S'arrête, et je repars de zéro au retour", v: 1.5 },
-      { t: "Impossible, je ne peux pas m'arrêter", v: 1 },
-    ], d: { titre: 'Si vous partez {deux semaines}, votre équipe…', options: [
-      { t: 'Vend et suit les clients sans moi', v: 4 },
-      { t: "Avance, mais m'appelle tous les jours", v: 2 },
-      { t: 'Attend mon retour pour décider', v: 1.5 },
-      { t: 'Je ne pars pas : sans moi, rien ne bouge', v: 1 },
-    ] } },
-    // la ligne de partage du portrait ICP : il demande un cadre (formation) ou il veut que ça tourne sans lui (système, agents)
-    { id: 'cap', theme: 'Votre cap', titre: "Dans 6 mois, ce que vous voulez {vraiment}, c'est…", options: [
-      { t: 'Retrouver le plaisir de vendre', v: 'plaisir', axe: 'assurance', piste: 'cadre', court: 'le plaisir de vendre' },
-      { t: 'Un cadre clair : savoir quoi faire, étape par étape', v: 'cadre', axe: 'methode', piste: 'cadre', court: 'un cadre clair' },
-      { t: 'Des revenus réguliers, tous les mois', v: 'revenus', axe: 'action', piste: 'cadre', court: 'des revenus réguliers' },
-      { t: 'Que ça tourne sans que tout passe par moi', v: 'tourne', axe: 'systeme', piste: 'systeme', court: 'que ça tourne sans vous' },
-    ], d: { options: [
-      { t: 'Retrouver le plaisir de vendre', v: 'plaisir', axe: 'assurance', piste: 'cadre', court: 'le plaisir de vendre' },
-      { t: 'Une équipe qui vend avec le même cadre que moi', v: 'equipe', axe: 'methode', piste: 'cadre', court: 'une équipe qui vend avec votre cadre' },
-      { t: 'Du temps pour écouter mes clients et mon équipe', v: 'ecoute', axe: 'systeme', piste: 'systeme', court: 'du temps pour écouter' },
-      { t: 'Que ça tourne sans que tout passe par moi', v: 'tourne', axe: 'systeme', piste: 'systeme', court: 'que ça tourne sans vous' },
-    ] } },
-  ];
-  const Q_CAP = Q[Q.length - 1];
-  const PISTES = {
-    cadre: { h: 'On pose votre cadre ensemble ?', p: "45 minutes avec Steven, offertes. Vous repartez avec vos priorités dans l'ordre et le premier geste de la semaine. S'il n'a rien à vous apporter, il vous le dit.", note: 'demande un cadre' },
-    systeme: { h: 'On regarde ce qui peut tourner sans vous ?', p: "45 minutes avec Steven, offertes. Vous repartez avec ce qui peut passer en pilote automatique chez vous, et dans quel ordre. S'il n'a rien à vous apporter, il vous le dit.", note: 'veut que ça tourne sans lui' },
-  };
+  const AXES = T.axes, Q = T.questions, PISTES = T.pistes, A = T.accueil, E = T.ecrans;
+  const Q_PROFIL = Q.find((q) => q.id === 'profil'), Q_CAP = Q.find((q) => q.id === 'cap');
 
   /* ---------- état ---------- */
   const S = { choix: {}, lead: {}, envoye: false };
   const $ = (s) => document.querySelector(s);
   const app = $('#app'), barre = $('#barre'), tableau = $('#tableau'), puces = $('#puces');
-  const qs = new URLSearchParams(location.search);
-  const src = qs.get('src') || qs.get('utm_source') || document.referrer || 'direct';
-  const calme = matchMedia('(prefers-reduced-motion: reduce)').matches;
   $('#retour').innerHTML = ICO.retour;
   $('#retour').addEventListener('click', () => history.back());
 
   const choisi = (q) => { const k = S.choix[q.id]; return k == null ? undefined : variante(q).options[k]; };
-  const estD = () => (choisi(Q[0]) || {}).v === 'dirigeant';
+  const estD = () => (choisi(Q_PROFIL) || {}).v === 'dirigeant';
   const variante = (q) => (q.d && estD() ? { ...q, ...q.d } : q);
   const contenu = (a) => (AXES[a].d && estD() ? { ...AXES[a], ...AXES[a].d } : AXES[a]);
   const axeVal = (v) => Math.round(12 + 0.84 * ((v - 1) / 3) * 100);
@@ -437,7 +751,7 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
     const piste = cap ? cap.piste : estD() ? 'systeme' : 'cadre';
     return { axes, indice, rupture, priorites, piste, cap };
   }
-  const bande = (s) => s < 40 ? 'Tout repose encore sur vous' : s < 60 ? 'Ça tient quand vous êtes à fond' : s < 80 ? 'Votre pilote automatique se met en place' : 'Votre vente tient même les jours sans envie';
+  const bande = (s) => T.bandes[s < 40 ? 0 : s < 60 ? 1 : s < 80 ? 2 : 3];
 
   /* ---------- le radar ---------- */
   let nRadar = 0;
@@ -457,7 +771,7 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
     for (let k = 0; k < N; k++) g += `<circle class="r-onde" r="4" cx="${C}" cy="${C}"/><circle class="r-pt" r="3.8" cx="${C}" cy="${C}"/>`;
     const ANCRES = ['translate(-50%,-125%)', 'translate(2px,-50%)', 'translate(-12%,20%)', 'translate(-88%,20%)', 'translate(calc(-100% - 2px),-50%)'];
     hote.innerHTML = `<div class="radar-boite"><svg viewBox="0 0 200 200" aria-hidden="true">${g}</svg>${ORDRE.map((a, k) =>
-      `<span class="lab" style="--x:${Math.cos(ang(k)).toFixed(3)};--y:${Math.sin(ang(k)).toFixed(3)};transform:${ANCRES[k]}">${AXES[a].nom}</span>`).join('')}</div>`;
+      `<span class="lab" style="--x:${Math.cos(ang(k)).toFixed(3)};--y:${Math.sin(ang(k)).toFixed(3)};transform:${ANCRES[k]}">${echap(AXES[a].nom)}</span>`).join('')}</div>`;
     const svg = hote.querySelector('svg'), forme = svg.querySelector('.r-forme'), halo = svg.querySelector('.r-halo');
     const pts = [...svg.querySelectorAll('.r-pt')], ondes = [...svg.querySelectorAll('.r-onde')], labs = [...hote.querySelectorAll('.lab')];
     let cur = Array(N).fill(0), cible = cur.slice(), raf = 0, demoT = 0;
@@ -528,14 +842,14 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
   // les pastilles sous le radar : le profil, puis le cap
   let pucesAvant = '';
   function majPuces() {
-    const p = choisi(Q[0]), cap = choisi(Q_CAP);
+    const p = choisi(Q_PROFIL), cap = choisi(Q_CAP);
     const cle = (p ? p.v : '') + '|' + (cap ? cap.v : '');
     if (cle === pucesAvant) return;
     const [p0, c0] = pucesAvant.split('|');
     pucesAvant = cle;
-    if (!p && !cap) { puces.innerHTML = '<span class="aide">Votre profil se dessine ici, réponse après réponse.</span>'; return; }
-    puces.innerHTML = (p ? `<span class="puce${p.v !== p0 ? ' neuf' : ''}"><i>Profil</i>${echap(p.court)}</span>` : '')
-      + (cap ? `<span class="puce${cap.v !== c0 ? ' neuf' : ''}"><i>Cap</i>${echap(cap.court)}</span>` : '');
+    if (!p && !cap) { puces.innerHTML = `<span class="aide">${echap(E.radar_aide)}</span>`; return; }
+    puces.innerHTML = (p ? `<span class="puce${p.v !== p0 ? ' neuf' : ''}"><i>${echap(E.puce_profil)}</i>${echap(p.court)}</span>` : '')
+      + (cap ? `<span class="puce${cap.v !== c0 ? ' neuf' : ''}"><i>${echap(E.puce_cap)}</i>${echap(cap.court)}</span>` : '');
   }
   function modeTableau(m) {
     tableau.hidden = !m;
@@ -563,7 +877,7 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
   function rendre(etat) {
     scrollTo({ top: 0 });
     if (etat.e === 'q' && etat.i > 0 && S.choix[Q[etat.i - 1].id] === undefined) etat = { e: 'q', i: 0 };
-    if ((etat.e === 'final' || etat.e === 'resultat') && S.choix.cap === undefined) etat = { e: 'accueil' };
+    if ((etat.e === 'final' || etat.e === 'resultat') && S.choix[Q_CAP.id] === undefined) etat = { e: 'accueil' };
     if (etat.e === 'resultat' && !S.envoye) etat = { e: 'final' };
     radar.scan(false);
     if (etat.e === 'accueil') return accueil();
@@ -578,20 +892,19 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
     modeTableau('intro');
     radar.rupture(null);
     radar.demo();
+    const n = A.promesses.length;
     app.innerHTML = `<section class="ecran intro">
-      <span class="pilule">Indépendants · coachs · dirigeants</span>
-      <h1>${mots('Votre métier, vous le maîtrisez les yeux fermés.', 250)}<span class="h1b">${mots('Votre vente,', 700)} <span class="pave" style="--d:1150ms">${mots('pas encore', 820)}</span>.</span></h1>
-      <p class="mal">La boule au ventre avant d'appeler. Le “je sais pas me vendre” qui revient. Les “ça m'intéresse” qui disparaissent. Les semaines sans envie, où rien n'avance.</p>
-      <p class="bascule">C'est normal : on vous a appris votre métier, pas à le vendre. Ce test mesure ce qui tient déjà tout seul dans votre vente, et ce qui lâche en premier.</p>
+      <span class="pilule">${echap(A.pilule)}</span>
+      <h1>${mots(A.titre, 250)}<span class="h1b">${mots(A.titre2, 700)} <span class="pave" style="--d:1150ms">${mots(A.pave, 820)}</span>${echap(A.titre_fin)}</span></h1>
+      <p class="mal">${riche(A.mal)}</p>
+      <p class="bascule">${riche(A.bascule)}</p>
       <ol class="promesses">
-        <li style="--i:0"><span class="n">1</span><span>Votre <b>indice de pilote automatique</b> : la part de votre vente qui tient sans dépendre de votre énergie du jour.</span></li>
-        <li style="--i:1"><span class="n">2</span><span>Votre <b>point de rupture</b> : l'endroit précis où vos ventes se perdent.</span></li>
-        <li style="--i:2"><span class="n">3</span><span>Vos <b>3 priorités</b>, chacune avec un geste à faire dès cette semaine.</span></li>
-        <li style="--i:3" class="pied">9 questions. 2 minutes. Votre profil se dessine en direct.</li>
+        ${A.promesses.map((p, k) => `<li style="--i:${k}"><span class="n">${k + 1}</span><span>${riche(p)}</span></li>`).join('')}
+        <li style="--i:${n}" class="pied">${riche(remplir(A.pied, { n: Q.length }))}</li>
       </ol>
-      <button class="btn" id="go" type="button">Lancer le test ${ICO.fleche}</button>
-      <p class="sous-btn">Gratuit, sans engagement, résultat immédiat.</p>
-      <div class="preuve"><img src="${PHOTO}" alt="" width="46" height="46"><span>Par <b>Steven Lefrançois</b>, fondateur de Persua. Plus de 350 commerciaux formés, 50 entreprises accompagnées, 5,0 sur 20 avis Google.</span></div>
+      <button class="btn" id="go" type="button">${echap(A.bouton)} ${ICO.fleche}</button>
+      <p class="sous-btn">${riche(A.sous_bouton)}</p>
+      <div class="preuve"><img src="${PHOTO}" alt="" width="46" height="46"><span>${riche(A.preuve)}</span></div>
     </section>`;
     $('#go').addEventListener('click', () => aller({ e: 'q', i: 0 }));
   }
@@ -632,30 +945,30 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
   /* ---------- étape finale ---------- */
   function final() {
     const c = calcul(), ax = contenu(c.rupture);
-    majBarre(Q.length, 'Presque fini');
+    majBarre(Q.length, E.presque_fini);
     modeTableau('final');
     radar.maj(c.axes);
     majPuces();
     setTimeout(() => { if (app.querySelector('.final')) radar.rupture(c.rupture); }, calme ? 0 : 700);
     app.innerHTML = `<section class="ecran final">
-      <span class="etiq">Votre profil est dessiné</span>
-      <h2>${titreHTML('Voici où vos ventes {se perdent}.', 120)}</h2>
+      <span class="etiq">${echap(E.final_etiquette)}</span>
+      <h2>${titreHTML(E.final_titre, 120)}</h2>
       <div class="rupture">
-        <div class="k">${ICO.cible}Votre point de rupture</div>
+        <div class="k">${ICO.cible}${echap(E.rupture_label)}</div>
         <strong>${echap(ax.nom)}</strong>
         <p>${echap(ax.rupture)}</p>
       </div>
-      <p class="annonce">Votre <b>indice de pilote automatique</b> et vos <b>3 priorités</b>, chacune avec un geste pour cette semaine, s'affichent juste après.</p>
+      <p class="annonce">${riche(E.final_annonce)}</p>
       <form id="form" novalidate>
-        <div class="champ"><label for="prenom">Votre prénom</label><input id="prenom" name="prenom" autocomplete="given-name" required value="${echap(S.lead.prenom || '')}"></div>
+        <div class="champ"><label for="prenom">${echap(E.champ_prenom)}</label><input id="prenom" name="prenom" autocomplete="given-name" required value="${echap(S.lead.prenom || '')}"></div>
         <div id="suite" hidden>
-          <div class="champ"><label for="email">Votre email</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required value="${echap(S.lead.email || '')}"></div>
-          <div class="champ"><label for="tel">Téléphone (facultatif)</label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" value="${echap(S.lead.tel || '')}"><small>Si vous le laissez, Steven vous écrit sur WhatsApp pour en parler.</small></div>
+          <div class="champ"><label for="email">${echap(E.champ_email)}</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required value="${echap(S.lead.email || '')}"></div>
+          <div class="champ"><label for="tel">${echap(E.champ_tel)}</label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" value="${echap(S.lead.tel || '')}"><small>${echap(E.tel_aide)}</small></div>
         </div>
         <p class="err" id="err" role="alert"></p>
-        <button class="btn plein" id="envoi" type="submit">Continuer ${ICO.fleche}</button>
+        <button class="btn plein" id="envoi" type="submit">${echap(E.bouton_continuer)} ${ICO.fleche}</button>
       </form>
-      <p class="legal">Vos réponses servent uniquement à votre audit. Elles ne sont ni revendues ni partagées. <a href="../confidentialite.html">Confidentialité</a></p>
+      <p class="legal">${echap(E.legal)} <a href="../confidentialite.html">${echap(E.lien_confidentialite)}</a></p>
     </section>`;
     const f = $('#form'), suite = $('#suite'), err = $('#err'), btn = $('#envoi'), prenom = $('#prenom');
     let etape = 1;
@@ -663,17 +976,17 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
       e.preventDefault();
       err.textContent = '';
       const p = prenom.value.trim();
-      if (!p) { err.textContent = 'Votre prénom, pour personnaliser votre audit.'; prenom.focus(); return; }
+      if (!p) { err.textContent = typo(E.err_prenom); prenom.focus(); return; }
       S.lead.prenom = p;
       if (etape === 1) {
         etape = 2;
         suite.hidden = false;
-        btn.innerHTML = `Voir mon résultat ${ICO.fleche}`;
+        btn.innerHTML = `${echap(E.bouton_resultat)} ${ICO.fleche}`;
         $('#email').focus();
         return;
       }
       const em = $('#email').value.trim();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { err.textContent = 'Cet email ne semble pas valide : vérifiez-le pour recevoir votre audit.'; $('#email').focus(); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { err.textContent = typo(E.err_email); $('#email').focus(); return; }
       S.lead.email = em;
       S.lead.tel = $('#tel').value.trim();
       envoyer(c);
@@ -683,7 +996,7 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
   }
 
   function envoyer(c) {
-    const prof = choisi(Q[0]);
+    const prof = choisi(Q_PROFIL);
     const corps = {
       prenom: S.lead.prenom, email: S.lead.email, tel: S.lead.tel,
       profil: prof ? prof.v : '', score: c.indice, rupture: AXES[c.rupture].nom,
@@ -692,6 +1005,7 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
       reponses: { ...Object.fromEntries(Q.map((q) => [q.id, (choisi(q) || {}).t || ''])), piste: c.piste },
       source: 'pilote-auto · ' + src,
     };
+    if (APERCU) { console.info('Aperçu du Studio : rien n\'est envoyé', corps); return; }
     const essai = (n) => fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corps), keepalive: true })
       .then((r) => { if (!r.ok && n < 2) setTimeout(() => essai(n + 1), 1500); })
       .catch(() => { if (n < 2) setTimeout(() => essai(n + 1), 1500); });
@@ -704,9 +1018,8 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
     modeTableau('calcul');
     radar.rupture(null);
     radar.scan(true);
-    const etapes = [`On croise vos ${Q.length} réponses`, 'On repère où vos ventes se perdent', 'On classe vos 3 priorités'];
-    app.innerHTML = `<section class="ecran attente"><h2>Une seconde, on calcule.</h2>
-      <div class="etapes">${etapes.map((t) => `<div><i>${ICO.ok}</i><span>${t}</span></div>`).join('')}</div></section>`;
+    app.innerHTML = `<section class="ecran attente"><h2>${echap(E.calcul_titre)}</h2>
+      <div class="etapes">${E.calcul_etapes.map((t) => `<div><i>${ICO.ok}</i><span>${echap(remplir(t, { n: Q.length }))}</span></div>`).join('')}</div></section>`;
     app.querySelectorAll('.etapes div').forEach((l, k) => {
       setTimeout(() => l.classList.add('on'), 250 + k * 800);
       setTimeout(() => l.classList.add('ok'), 800 + k * 800);
@@ -718,35 +1031,35 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
   function resultat() {
     barre.hidden = true;
     modeTableau(null);
-    const c = calcul(), p = echap(S.lead.prenom || ''), prof = choisi(Q[0]), piste = PISTES[c.piste];
+    const c = calcul(), prof = choisi(Q_PROFIL), piste = PISTES[c.piste];
     const prios = c.priorites.map((a, k) => {
       const ax = contenu(a);
       return `<article class="prio${k === 0 ? ' un' : ''}"><div class="haut"><span class="num">${k + 1}</span><div><span class="axe">${echap(ax.nom)} · ${c.axes[a]}/100</span><h4>${echap(ax.titre)}</h4></div></div>
-        <p class="geste"><b>Cette semaine :</b> ${echap(ax.geste)}</p><p>${echap(ax.suite)}</p><p class="preuve-l">${echap(ax.preuve)}</p></article>`;
+        <p class="geste"><b>${echap(E.res_geste)}</b> ${echap(ax.geste)}</p><p>${echap(ax.suite)}</p><p class="preuve-l">${echap(ax.preuve)}</p></article>`;
     }).join('');
     const notes = `Pilote automatique ${c.indice} % · profil : ${prof ? prof.court : '?'} · point de rupture : ${AXES[c.rupture].nom} · priorités : ${c.priorites.map((a) => AXES[a].nom).join(', ')}${c.cap ? ' · cap : ' + c.cap.court : ''} · ${piste.note}`;
     const cal = `${CAL}?name=${encodeURIComponent(S.lead.prenom || '')}&email=${encodeURIComponent(S.lead.email || '')}&notes=${encodeURIComponent(notes)}`;
     const C = 2 * Math.PI * 100;
     app.innerHTML = `<section class="ecran res">
-      <span class="etiq">Votre audit</span>
-      <h2>${p ? p + ', votre' : 'Votre'} vente tourne à</h2>
-      <div class="jauge" aria-label="Indice de pilote automatique : ${c.indice} %">
+      <span class="etiq">${echap(E.res_etiquette)}</span>
+      <h2>${echap(S.lead.prenom ? remplir(E.res_titre, { prenom: S.lead.prenom }) : E.res_titre_sans)}</h2>
+      <div class="jauge" aria-label="${echap(E.res_jauge)} : ${c.indice} %">
         <svg viewBox="0 0 236 236" aria-hidden="true"><circle cx="118" cy="118" r="100" fill="none" stroke="rgba(139,131,255,.16)" stroke-width="14"/><circle id="arc" cx="118" cy="118" r="100" fill="none" stroke="url(#dg)" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" style="transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.36,1)"/><defs><linearGradient id="dg" x1="0" x2="1"><stop offset="0" stop-color="#4747FD"/><stop offset="1" stop-color="#8B83FF"/></linearGradient></defs></svg>
-        <div class="centre"><span class="val"><span id="val">0</span><small>${NB}%</small></span><span class="sur">EN PILOTE AUTOMATIQUE</span></div>
+        <div class="centre"><span class="val"><span id="val">0</span><small>${NB}%</small></span><span class="sur">${echap(E.res_jauge)}</span></div>
       </div>
       <p class="bande" id="bande">${echap(bande(c.indice))}</p>
-      <div class="carte"><h3>Votre profil de vente</h3><div class="radar-res" id="radar-res"></div>
-        <div class="axes">${ORDRE.map((a) => `<div${a === c.rupture ? ' class="rupt"' : ''}><span>${AXES[a].nom}</span><b>${c.axes[a]}</b></div>`).join('')}</div></div>
-      <div class="rupture"><div class="k">${ICO.cible}Votre point de rupture</div><strong>${echap(AXES[c.rupture].nom)}</strong><p>${echap(contenu(c.rupture).rupture)}</p></div>
-      <div class="carte"><h3>Vos 3 priorités</h3><div class="priorites">${prios}</div></div>
-      ${c.cap ? `<p class="objectif">Votre cap : <b>${echap(c.cap.court)}</b>. Commencez par la priorité 1 : c'est elle qui vous en rapproche le plus vite.</p>` : ''}
+      <div class="carte"><h3>${echap(E.res_profil)}</h3><div class="radar-res" id="radar-res"></div>
+        <div class="axes">${ORDRE.map((a) => `<div${a === c.rupture ? ' class="rupt"' : ''}><span>${echap(AXES[a].nom)}</span><b>${c.axes[a]}</b></div>`).join('')}</div></div>
+      <div class="rupture"><div class="k">${ICO.cible}${echap(E.rupture_label)}</div><strong>${echap(AXES[c.rupture].nom)}</strong><p>${echap(contenu(c.rupture).rupture)}</p></div>
+      <div class="carte"><h3>${echap(E.res_priorites)}</h3><div class="priorites">${prios}</div></div>
+      ${c.cap ? `<p class="objectif">${riche(remplir(E.res_cap, { cap: c.cap.court }))}</p>` : ''}
       <div class="appel">
         <span class="avatar"><img src="${PHOTO}" alt="Steven Lefrançois" width="84" height="84"></span>
         <h3>${echap(piste.h)}</h3>
         <p>${echap(piste.p)}</p>
-        <div class="btns"><a class="btn plein" href="${cal}" target="_blank" rel="noopener">Réserver mon appel ${ICO.fleche}</a><button class="btn second plein" id="pdf" type="button">Enregistrer mon plan en PDF</button></div>
+        <div class="btns"><a class="btn plein" href="${cal}" target="_blank" rel="noopener">${echap(E.res_bouton_appel)} ${ICO.fleche}</a><button class="btn second plein" id="pdf" type="button">${echap(E.res_bouton_pdf)}</button></div>
       </div>
-      <p class="pied-page">Persua · Steven Lefrançois · <a href="../confidentialite.html">Confidentialité</a></p>
+      <p class="pied-page">Persua · Steven Lefrançois · <a href="../confidentialite.html">${echap(E.lien_confidentialite)}</a></p>
     </section>`;
     $('#pdf').addEventListener('click', () => print());
     const radarRes = creerRadar($('#radar-res'));
@@ -774,8 +1087,23 @@ form{display:grid;gap:12px;animation:mot .7s var(--ease) both .85s}
     app.querySelectorAll('.prio').forEach((n, k) => { n.style.transitionDelay = (k % 3) * 120 + 'ms'; io.observe(n); });
   }
 
-  rendre({ e: 'accueil' });
-  history.replaceState({ e: 'accueil' }, '', location.search);
+  /* ---------- démarrage ---------- */
+  // Aperçu du Studio : ?apercu&ecran=q3|final|calcul|resultat&profil=2 ouvre directement l'écran, réponses pré-remplies
+  const ecranDemande = APERCU ? qs.get('ecran') : null;
+  if (ecranDemande && ecranDemande !== 'accueil') {
+    const p0 = Math.min(Q_PROFIL.options.length - 1, Math.max(0, +(qs.get('profil') || 0)));
+    const parcours = [p0, 1, 2, 2, 3, 1, 3, 2, 0];
+    const jusque = (n) => Q.slice(0, n).forEach((q, k) => { S.choix[q.id] = q === Q_PROFIL ? p0 : Math.min(parcours[k] ?? 0, variante(q).options.length - 1); });
+    const m = ecranDemande.match(/^q(\d+)$/);
+    let etat = { e: 'final' };
+    if (m) { const i = Math.min(Q.length, Math.max(1, +m[1])) - 1; jusque(i); etat = { e: 'q', i }; }
+    else { jusque(Q.length); if (ecranDemande !== 'final') { S.lead.prenom = 'Prénom'; S.envoye = true; etat = { e: 'resultat' }; } }
+    history.replaceState(etat, '', location.search);
+    if (ecranDemande === 'calcul') attente(); else rendre(etat);
+  } else {
+    rendre({ e: 'accueil' });
+    history.replaceState({ e: 'accueil' }, '', location.search);
+  }
 })();
 </script>
 </body>
