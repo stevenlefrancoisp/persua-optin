@@ -211,13 +211,22 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
   <script src="quiz_data.js"></script>
   <script src="audit_data.js"></script>
   <script>
-  /* ====== Webhook Make (lead → systeme.io + Notion + WhatsApp). Tiré 1× à la capture. Vide = test sans envoi. ====== */
-  const LEAD_WEBHOOK  = 'https://hook.eu2.make.com/l27k4pclyo9u4xjtbgdmt5ibhrpe2fc6';
-  /* ====== Fin d'audit : 2e alerte avec score /100 (même scénario Make). Sert aussi de base à l'app-sync Phase 2. ====== */
-  const SCORE_WEBHOOK = 'https://hook.eu2.make.com/l27k4pclyo9u4xjtbgdmt5ibhrpe2fc6';
-  /* ====== Tracking funnel (F1 audit) : pings view / start / cta_click, sans données perso.
-     Même webhook que les leads, le routeur Make (ajouté 18/08) route sur `stage` : lead|complete → chaîne systeme.io, le reste → data store « Funnel diagnostic, tracking ». ====== */
-  const TRACK_WEBHOOK = 'https://hook.eu2.make.com/l27k4pclyo9u4xjtbgdmt5ibhrpe2fc6';
+  /* ====== Envois du funnel : passent par le relais serveur automate-factory (api/diag-lead), qui transmet au scénario Make
+     « artère leads » (routeur sur `stage` : lead|complete → systeme.io, view|start|cta_click → data store tracking).
+     L'URL du webhook Make n'est plus dans la page publique (variable MAKE_DIAG_WEBHOOK côté Vercel). ====== */
+  const RELAY = 'https://automate-factory.vercel.app/api/diag-lead';
+  const LEAD_WEBHOOK  = RELAY;
+  const SCORE_WEBHOOK = RELAY;
+  const TRACK_WEBHOOK = RELAY;
+  /* ====== Turnstile Cloudflare (anti-robot) : VIDE = désactivé. Pour l'activer : clé de site ici + TURNSTILE_SECRET sur Vercel. ====== */
+  const TURNSTILE_SITEKEY = '';
+  let tsToken = '';
+  if (TURNSTILE_SITEKEY) {
+    window.onTsLoad = function(){ try{ const d=document.createElement('div'); d.style.cssText='position:fixed;bottom:0;right:0;z-index:5'; document.body.appendChild(d);
+      window._tsId = turnstile.render(d,{sitekey:TURNSTILE_SITEKEY, appearance:'interaction-only', callback:function(t){tsToken=t;}, 'expired-callback':function(){tsToken='';}}); }catch(e){} };
+    const sc=document.createElement('script'); sc.src='https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTsLoad&render=explicit'; sc.async=true; document.head.appendChild(sc);
+  }
+  function withCaptcha(o){ if(!TURNSTILE_SITEKEY) return o; const c=Object.assign({}, o, {cf_turnstile: tsToken}); tsToken=''; try{ turnstile.reset(window._tsId); }catch(e){} return c; }
   /* ========================================================================================================= */
 
   (function(){
@@ -371,6 +380,7 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
       h += '</div>';
       h += '<div class="wa-note">'+WA+'<span>Et après ? <b>Je t\'écris personnellement sur WhatsApp dans la journée</b>, en 2 lignes, pour voir si mon approche peut vraiment t\'aider. <b>Sans blabla, sans pression</b>. Tu me dis stop quand tu veux.</span></div>';
       h += '<form id="leadform" novalidate>';
+      h += '<div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label for="f-site">Site web</label><input id="f-site" name="site_web" type="text" tabindex="-1" autocomplete="off"></div>';
       h += '<div class="field" id="w-prenom"><label for="f-prenom">Prénom</label><input id="f-prenom" type="text" autocomplete="given-name" placeholder="Ton prénom"><div class="ferr">Ton prénom, s\'il te plaît.</div></div>';
       h += '<div class="field" id="w-email"><label for="f-email">Email</label><input id="f-email" type="email" inputmode="email" autocomplete="email" placeholder="ton@email.com"><div class="ferr">Un email valide pour t\'envoyer ton rapport (exemple : prenom@gmail.com).</div></div>';
       h += '<div class="field" id="w-tel"><label for="f-tel">Téléphone (WhatsApp)</label><input id="f-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="06 12 34 56 78"><div class="ferr">Un numéro valide (c\'est là que je t\'écris sur WhatsApp).</div></div>';
@@ -414,7 +424,7 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
         };
         try{ localStorage.setItem('persua_audit_lead', JSON.stringify(lead)); }catch(e){}
         // Lead sécurisé : on tire le webhook en tâche de fond, sans faire attendre l'utilisateur.
-        if(LEAD_WEBHOOK){ try{ fetch(LEAD_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)}).catch(()=>{}); }catch(e){} }
+        if(LEAD_WEBHOOK){ try{ fetch(LEAD_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(withCaptcha(F('f-site').value ? Object.assign({site_web:F('f-site').value}, lead) : lead)),keepalive:true}).catch(()=>{}); }catch(e){} }
         renderReveal2();
       });
     }
@@ -485,7 +495,7 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
       });
       try{ localStorage.setItem('persua_audit_lead', JSON.stringify(lead)); }catch(e){}
       // Phase 2 (enrichissement score, sans email) : inactif tant que SCORE_WEBHOOK est vide.
-      if(SCORE_WEBHOOK){ try{ fetch(SCORE_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)}).catch(()=>{}); }catch(e){} }
+      if(SCORE_WEBHOOK){ try{ fetch(SCORE_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(withCaptcha(lead)),keepalive:true}).catch(()=>{}); }catch(e){} }
       renderWaiting();
     }
 
