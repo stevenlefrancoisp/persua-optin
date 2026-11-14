@@ -227,6 +227,19 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
     const sc=document.createElement('script'); sc.src='https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTsLoad&render=explicit'; sc.async=true; document.head.appendChild(sc);
   }
   function withCaptcha(o){ if(!TURNSTILE_SITEKEY) return o; const c=Object.assign({}, o, {cf_turnstile: tsToken}); tsToken=''; try{ turnstile.reset(window._tsId); }catch(e){} return c; }
+  /* ====== La marque du post (14/11/2026). Un lien posé dans un post arrive avec ?utm_source=linkedin&utm_content=<slug du post>.
+     On la garde le temps de la visite et on la joint au lead : c'est ce qui dit quel post a amené qui. Valeurs nettoyées
+     (minuscules, chiffres, point, tiret, tiret bas ; 80 caractères au plus). Sans marque dans l'adresse, rien ne change. ====== */
+  const MARQUE = (function(){
+    const net = v => String(v || '').toLowerCase().replace(/[^a-z0-9._-]/g, '').slice(0, 80);
+    let m = {};
+    try{ const q = new URLSearchParams(location.search); ['utm_source','utm_medium','utm_content'].forEach(k => { const v = net(q.get(k)); if(v) m[k] = v; }); }catch(e){}
+    try{
+      if(Object.keys(m).length) sessionStorage.setItem('persua_marque', JSON.stringify(m));
+      else m = JSON.parse(sessionStorage.getItem('persua_marque') || '{}') || {};
+    }catch(e){}
+    return m;
+  })();
   /* ========================================================================================================= */
 
   (function(){
@@ -414,14 +427,14 @@ footer p{color:var(--mist); font-size:12px; max-width:640px; margin:0 auto; line
         if(bad){ err.textContent=bad; const first=card.querySelector('.field.bad input')||F('f-rgpd'); first.focus({preventScroll:false}); return; }
         err.textContent='';
         const metier = QUIZ.getMetier(quizAns);
-        const lead = {
+        const lead = Object.assign({}, MARQUE, {
           prenom, nom, email, tel,
           profil: prof.titre,
           metier: metier.label,
           objection_reine: metier.reine,
           source: 'diagnostic_persua',
           stage: 'lead'
-        };
+        });
         try{ localStorage.setItem('persua_audit_lead', JSON.stringify(lead)); }catch(e){}
         // Lead sécurisé : on tire le webhook en tâche de fond, sans faire attendre l'utilisateur.
         if(LEAD_WEBHOOK){ try{ fetch(LEAD_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(withCaptcha(F('f-site').value ? Object.assign({site_web:F('f-site').value}, lead) : lead)),keepalive:true}).catch(()=>{}); }catch(e){} }
